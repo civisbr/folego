@@ -40,4 +40,6 @@ Primeira versão, novembro de 2026. **Não há desempenho epidemiológico real a
 
 ## Verificação da primeira entrega
 
-Executados localmente: 17 testes pytest aprovados; 8 testes Playwright aprovados (quatro cenários em desktop e celular), incluindo navegação, filtros, downloads, resposta a falhas, verificação axe de acessibilidade e renderização efetiva dos polígonos do mapa. Ruff, formatação e build de produção aprovados. Auditoria npm sem vulnerabilidades conhecidas na instalação verificada. A inspeção visual e as capturas em `docs/dashboard*.png` registram o resultado. Esses controles não substituem teste com usuários nem validação epidemiológica.
+Executados localmente: 20 testes pytest aprovados; 8 testes Playwright aprovados (quatro cenários em desktop e celular), incluindo navegação, filtros, downloads, resposta a falhas, verificação axe de acessibilidade e renderização efetiva dos polígonos do mapa. Ruff, formatação e build de produção aprovados. Auditoria npm sem vulnerabilidades conhecidas na instalação verificada. A inspeção visual e as capturas em `docs/dashboard*.png` registram o resultado. Esses controles não substituem teste com usuários nem validação epidemiológica.
+
+A primeira execução remota aprovou os jobs Python, web e deploy. A auditoria online adicional encontrou timeout de conexão ao IBGE no runner; o tratamento distingue fonte indisponível (`degraded`, sem confirmação de atualização) de erro de validação (`failed`), preservando a versão pública anterior.

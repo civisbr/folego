@@ -23,7 +23,11 @@ def cached_download(url: str, destination: Path, *, refresh=False, sensitive=Fal
                 while chunk := source.read(1024 * 1024):
                     output.write(chunk)
         else:
-            with httpx.Client(timeout=120, follow_redirects=True) as client:
+            with httpx.Client(
+                timeout=httpx.Timeout(120, connect=15),
+                transport=httpx.HTTPTransport(retries=2),
+                follow_redirects=True,
+            ) as client:
                 with client.stream("GET", url) as response:
                     response.raise_for_status()
                     with temporary.open("wb") as output:

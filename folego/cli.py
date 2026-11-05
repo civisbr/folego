@@ -11,6 +11,7 @@ def main():
     territory = commands.add_parser("territory", help="Atualizar correspondência nacional oficial")
     territory.add_argument("--allow-incomplete", action="store_true")
     territory.add_argument("--refresh", action="store_true")
+    commands.add_parser("audit-territory", help="Auditar snapshot e disponibilidade das fontes")
     commands.add_parser("demo", help="Regerar somente dados sintéticos do painel")
     commands.add_parser("geography", help="Gerar malha pública por região de saúde")
     sih = commands.add_parser("sih", help="Baixar uma competência SIH/SUS")
@@ -31,7 +32,11 @@ def main():
     forecast.add_argument("--issued-on", required=True)
     forecast.add_argument("--output", type=Path, default=Path("data/marts/research-forecast.json"))
     args = parser.parse_args()
-    if args.command == "forecast":
+    if args.command == "audit-territory":
+        from .ingest.audit import audit_territory
+
+        print(json.dumps(audit_territory(), ensure_ascii=False, indent=2))
+    elif args.command == "forecast":
         from datetime import date
 
         from .pipeline import forecast_files

@@ -12,3 +12,5 @@ Downloads devem ser idempotentes, cacheados em `data/raw/` e rastreáveis. Não 
 Mudanças de fonte, malha ou regionalização exigem conferência de cobertura e proveniência. Não associe municípios ausentes por semelhança de nome. Complementos documentados ficam em `folego/resources/territory-overrides.json`, com ato oficial e vigência. Para séries anteriores, use correspondências compatíveis com o ano; o snapshot atual não resolve automaticamente alterações históricas.
 
 Na publicação, preserve a identificação de demonstração até cumprir os critérios em `docs/validation.md`. Não use valores sintéticos em análises epidemiológicas. Publicações observadas devem ter grupos disjuntos, sem subtotais sobrepostos, e suprimir contagens menores que 5 e medidas financeiras relacionadas.
+
+A identidade dos commits deste projeto é `CivisBR <compact.chipmunk.sqpx@mask.me>`, tanto para autor quanto para committer. Configure-a localmente neste repositório; não use o nome pessoal do proprietário. Commits de bots mantêm a identidade do bot.
