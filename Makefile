@@ -1,4 +1,4 @@
-.PHONY: setup test lint check demo territory serve web-build
+.PHONY: setup test lint check demo territory serve web-build web-lint
 setup:
 	uv sync --frozen
 	npm --prefix web ci
@@ -9,9 +9,11 @@ test:
 lint:
 	uv run ruff check .
 	uv run ruff format --check .
+
+web-lint:
 	npm --prefix web run lint
 
-check: lint test web-build
+check: lint test web-lint web-build
 
 demo:
 	uv run folego demo
