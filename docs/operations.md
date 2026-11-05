@@ -8,7 +8,7 @@ Downloads comuns são atômicos, cacheados e acompanhados de URL, SHA-256 e inst
 
 ## Credenciais e fontes
 
-- SIH: FTP público DATASUS; a conversão DBC usa `uv sync --extra sih`, que pode exigir bibliotecas nativas do PySUS. O download nacional histórico é volumoso; comece por competência/UF e faça inventário dos arquivos.
+- SIH: FTP público DATASUS; a conversão DBC usa o leitor `pyreaddbc` mantido pelo projeto PySUS, sem a dependência transitiva de DuckDB < 2, instalado com `uv sync --extra sih`, que pode exigir bibliotecas nativas do leitor pyreaddbc. O download nacional histórico é volumoso; comece por competência/UF e faça inventário dos arquivos.
 - FIRMS: `FIRMS_MAP_KEY` no ambiente. A chave não entra no manifesto; o adaptador não deve ser chamado com logging de URLs sensíveis. O modo implementado usa VIIRS SNPP NRT; arquivos históricos precisam de ingestão própria.
 - CAMS: configure o cliente `cdsapi` para o ADS, aceite os termos do dataset e exporte a requisição pela interface oficial. Use `uv sync --extra climate`. API e nomes de parâmetros podem mudar; o código recebe o JSON oficial, sem inventar parâmetros ou substituir silenciosamente variáveis.
 - ERA5: conta CDS, termos aceitos e requisição oficial. ERA5 é reanálise histórica; previsões operacionais exigem outro produto meteorológico e seu arquivo de rodadas.

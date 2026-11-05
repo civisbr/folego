@@ -31,7 +31,7 @@ O Fôlego está sendo construído para estimar o excesso de internações respir
 
 ### Executar localmente
 
-Pré-requisitos: [uv](https://docs.astral.sh/uv/), Python 3.12, Node.js 22 ou superior e Make.
+Pré-requisitos: [uv](https://docs.astral.sh/uv/), Python 3.12, Node.js 22.12 ou superior e Make.
 
 ```sh
 git clone https://github.com/civisbr/folego.git

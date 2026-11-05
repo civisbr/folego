@@ -48,10 +48,10 @@ class ConfounderDesign:
         if self.origin is None:
             raise ValueError("Fit confounders before predicting")
         data["trend"] = (dates - self.origin).dt.days / 365.25
-        data["weekday"] = dates.dt.dayofweek
+        data["weekday"] = dates.dt.day_of_week
         for h in (1, 2, 3):
-            data[f"sin{h}"] = np.sin(2 * np.pi * h * dates.dt.dayofyear / 365.25)
-            data[f"cos{h}"] = np.cos(2 * np.pi * h * dates.dt.dayofyear / 365.25)
+            data[f"sin{h}"] = np.sin(2 * np.pi * h * dates.dt.day_of_year / 365.25)
+            data[f"cos{h}"] = np.cos(2 * np.pi * h * dates.dt.day_of_year / 365.25)
         # Fixed wide boundaries keep forecasts valid; knots are learned on past data.
         formula = (
             "0 + bs(temperature, df=4, lower_bound=-30, upper_bound=60)"

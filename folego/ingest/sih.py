@@ -20,10 +20,16 @@ def download_sih(state: str, year: int, month: int, root=Path("data")) -> Path:
 def convert_sih(source: Path, destination: Path) -> Path:
     if destination.exists():
         return destination
-    # PySUS is optional: heavy native DBC decompression dependencies stay out of core.
-    from pysus.utilities.readdbc import read_dbc
+    # Use the maintained standalone PySUS reader without its DuckDB <2 dependency.
+    from tempfile import TemporaryDirectory
 
-    frame = pl.from_pandas(read_dbc(str(source), encoding="latin-1"))
+    from dbfread import DBF
+    from pyreaddbc import dbc2dbf
+
+    with TemporaryDirectory(prefix="folego-dbf-") as directory:
+        dbf = Path(directory) / "admissions.dbf"
+        dbc2dbf(str(source), str(dbf))
+        frame = pl.from_dicts(list(DBF(str(dbf), encoding="latin-1")))
     required = [
         "MUNIC_RES",
         "DT_INTER",

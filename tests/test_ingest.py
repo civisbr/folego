@@ -1,5 +1,6 @@
 import hashlib
 import json
+from pathlib import Path
 
 import httpx
 import pytest
@@ -46,3 +47,39 @@ def test_explicit_cams_units():
     assert pm25_to_micrograms(2e-8, "kg m**-3") == 20
     with pytest.raises(ValueError):
         pm25_to_micrograms(20, "unknown")
+
+
+def test_sih_converter_validates_fields_and_caches_parquet(tmp_path, monkeypatch):
+    import polars as pl
+
+    dbfread = pytest.importorskip("dbfread")
+    pyreaddbc = pytest.importorskip("pyreaddbc")
+
+    from folego.ingest.sih import convert_sih
+
+    calls = []
+
+    def decompress(source, output):
+        calls.append(source)
+        Path(output).write_bytes(b"dbf")
+
+    row = {
+        "MUNIC_RES": "355030",
+        "DT_INTER": "20240101",
+        "DIAG_PRINC": "J450",
+        "IDADE": 70,
+        "COD_IDADE": 4,
+        "VAL_TOT": 1500.0,
+        "N_AIH": "1",
+        "IDENT": "1",
+        "EXTRA": "private",
+    }
+    monkeypatch.setattr(pyreaddbc, "dbc2dbf", decompress)
+    monkeypatch.setattr(dbfread, "DBF", lambda *args, **kwargs: iter([row]))
+    output = tmp_path / "staging" / "sih.parquet"
+    convert_sih(tmp_path / "raw.dbc", output)
+    convert_sih(tmp_path / "raw.dbc", output)
+    frame = pl.read_parquet(output)
+    assert calls == [str(tmp_path / "raw.dbc")]
+    assert frame.height == 1 and "EXTRA" not in frame.columns
+    assert frame["DIAG_PRINC"][0] == "J450"

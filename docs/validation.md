@@ -40,6 +40,14 @@ Primeira versão, novembro de 2026. **Não há desempenho epidemiológico real a
 
 ## Verificação da primeira entrega
 
-Executados localmente: 20 testes pytest aprovados; 8 testes Playwright aprovados (quatro cenários em desktop e celular), incluindo navegação, filtros, downloads, resposta a falhas, verificação axe de acessibilidade e renderização efetiva dos polígonos do mapa. Ruff, formatação e build de produção aprovados. Auditoria npm sem vulnerabilidades conhecidas na instalação verificada. A inspeção visual e as capturas em `docs/dashboard*.png` registram o resultado. Esses controles não substituem teste com usuários nem validação epidemiológica.
+Executados localmente: 22 testes pytest aprovados (com a opção `sih`); 8 testes Playwright aprovados (quatro cenários em desktop e celular), incluindo navegação, filtros, downloads, resposta a falhas, verificação axe de acessibilidade e renderização efetiva dos polígonos do mapa. Ruff, formatação e build de produção aprovados. Auditoria npm sem vulnerabilidades conhecidas na instalação verificada. A inspeção visual e as capturas em `docs/dashboard*.png` registram o resultado. Esses controles não substituem teste com usuários nem validação epidemiológica.
 
 A primeira execução remota aprovou os jobs Python, web e deploy. A auditoria online adicional encontrou timeout de conexão ao IBGE no runner; o tratamento distingue fonte indisponível (`degraded`, sem confirmação de atualização) de erro de validação (`failed`), preservando a versão pública anterior.
+
+## Atualização das dependências solicitada na revisão
+
+PRs Dependabot #1–#9 integrados: DuckDB 2.0.0, PyArrow 26.0.1, statsmodels 0.15.0 e Vite 8.3.5, além das cinco revisões de GitHub Actions. Os lockfiles foram conciliados e reinstalados. O PySUS completo exige DuckDB < 2; a conversão DBC passou a usar diretamente `pyreaddbc` 2.0.4 e `dbfread`, sem forçar downgrade do PySUS ou do DuckDB. O leitor nativo foi exercitado com o arquivo público de teste `sids.dbc` do projeto AlertaDengue/pyreaddbc (100 registros), armazenado apenas em `data/raw/reader-validation/`.
+
+O conjunto atualizado passou por testes de efeito conhecido, previsão completa, conversão/cache SIH e interoperabilidade Arrow → Parquet → DuckDB persistente. Os oito cenários de navegador também passaram com Vite 8. As APIs usadas foram confrontadas com as [notas de statsmodels](https://www.statsmodels.org/stable/release/index.html), a [migração DuckDB 2](https://duckdb.org/docs/2.0/operations_manual/migration), as [notas Arrow 26](https://arrow.apache.org/blog/2026/10/08/26.0.0-release/) e a [migração Vite 8](https://vite.dev/guide/migration).
+
+A conciliação final também atualizou pandas para 3.1.1 e as dependências transitivas liberadas pela retirada do PySUS completo. Os acessores de calendário do pandas foram adaptados aos nomes atuais, removendo avisos de depreciação sem alterar o desenho do modelo.
