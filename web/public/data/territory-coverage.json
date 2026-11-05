@@ -1,0 +1,22 @@
+{
+  "ibge_municipalities": 5571,
+  "matched": 5571,
+  "coverage": 1.0,
+  "unmapped": [],
+  "sources": [
+    "https://servicodados.ibge.gov.br/api/v1/localidades/municipios",
+    "https://apidadosabertos.saude.gov.br/macrorregiao-e-regiao-de-saude/municipio"
+  ],
+  "overrides": [
+    {
+      "municipality_code": "510183",
+      "codigo_regiao_saude": "51014",
+      "regiao_saude": "TELES PIRES",
+      "effective_from": "2025-01-01",
+      "source": "https://www.saude.mt.gov.br/storage/files/jlxe9jkkPp4k6viKKrRmoz1EGsHuGqETtZfc5cfA.pdf",
+      "reference": "Resolução CIB/MT nº 507, de 2 de outubro de 2025",
+      "reason": "Boa Esperança do Norte consta no IBGE, mas ainda não na API nacional de regionalização consultada em 2026-11-04. Não imputar população de 2022."
+    }
+  ],
+  "snapshot_date": "2026-11-04"
+}

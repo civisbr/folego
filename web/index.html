@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#173f28" />
+    <meta
+      name="description"
+      content="Fôlego: observatório aberto de fumaça e saúde. Explore o impacto esperado das queimadas nas internações respiratórias e nos valores pagos pelo SUS."
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <title>Fôlego — Observatório de fumaça e saúde</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Pular para o conteúdo</a>
+    <header class="site-header">
+      <a class="brand" href="#painel" aria-label="Fôlego — início"
+        ><img src="./assets/logo.png" alt="Fôlego" width="224" height="77"
+      /></a>
+      <span class="brand-caption"
+        >Ciência aberta.<br />Saúde com antecedência.</span
+      >
+      <nav aria-label="Navegação principal">
+        <a href="#painel">Painel</a><a href="#como-funciona">Como funciona</a
+        ><a href="#dados">Dados abertos</a><a href="#sobre">Sobre</a>
+      </nav>
+      <a class="button primary header-cta" href="#dados"
+        >Explorar dados <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main id="main" tabindex="-1">
+      <section id="dashboard" aria-labelledby="page-title">
+        <div class="eyebrow">OBSERVATÓRIO DE FUMAÇA E SAÚDE</div>
+        <div class="hero-title">
+          <h1 id="page-title">Antecipe o impacto da fumaça no SUS.</h1>
+          <span class="demo-badge"
+            ><span class="status-dot"></span>Demonstração · dados
+            ilustrativos</span
+          >
+        </div>
+        <p class="intro">
+          Previsão de internações respiratórias e valores pagos pelo SUS nos
+          próximos 5 dias.
+        </p>
+        <div class="filters" role="search" aria-label="Filtrar painel">
+          <label class="search-field"
+            ><span id="search-icon" aria-hidden="true"></span
+            ><span class="sr-only">Buscar município ou região de saúde</span
+            ><input
+              type="search"
+              id="search"
+              placeholder="Buscar município ou região de saúde"
+              autocomplete="off"
+              aria-controls="search-results" />
+            <div id="search-results" class="search-results" hidden></div
+          ></label>
+          <label
+            ><span class="sr-only">Estado</span
+            ><select id="state" aria-label="Estado">
+              <option value="">Brasil</option>
+            </select></label
+          >
+          <label
+            ><span class="sr-only">Faixa etária</span
+            ><select id="age" aria-label="Faixa etária">
+              <option value="">Todas as idades</option>
+              <option value="0-4">Crianças · 0 a 4 anos</option>
+              <option value="5-14">Crianças · 5 a 14 anos</option>
+              <option value="15-59">Adultos · 15 a 59 anos</option>
+              <option value="60+">Idosos · 60 anos ou mais</option>
+            </select></label
+          >
+          <label
+            ><span class="sr-only">Horizonte da previsão</span
+            ><select id="horizon" aria-label="Horizonte da previsão">
+              <option value="5">Próximos 5 dias</option>
+              <option value="3">Próximos 3 dias</option>
+              <option value="1">Próximo dia</option>
+            </select></label
+          >
+        </div>
+        <div class="snapshot">
+          <span id="snapshot-label">Carregando demonstração…</span
+          ><button id="reset" class="text-button" hidden>
+            Limpar filtros ↺
+          </button>
+        </div>
+        <div class="metrics" aria-live="polite">
+          <article class="metric">
+            <span class="metric-icon" id="lungs-icon" aria-hidden="true"></span>
+            <div>
+              <h2>Internações adicionais previstas</h2>
+              <strong id="total-excess">—</strong>
+              <p id="total-interval">Faixa ilustrativa</p>
+            </div>
+          </article>
+          <article class="metric">
+            <span class="metric-icon" id="coins-icon" aria-hidden="true"></span>
+            <div>
+              <h2>Pagamento adicional estimado</h2>
+              <strong id="total-payment">—</strong>
+              <p>Valores de AIH · não representa o custo real</p>
+            </div>
+          </article>
+          <article class="metric">
+            <span
+              class="metric-icon warning"
+              id="alert-icon"
+              aria-hidden="true"
+            ></span>
+            <div>
+              <h2>Regiões em alerta</h2>
+              <strong id="total-alerts">—</strong>
+              <p id="total-regions">regiões na demonstração</p>
+            </div>
+          </article>
+        </div>
+        <div class="dashboard-grid">
+          <section class="panel map-panel" aria-labelledby="map-title">
+            <div class="panel-heading">
+              <h2 id="map-title">Onde a fumaça pode pressionar o SUS</h2>
+              <div class="segmented" role="group" aria-label="Camada do mapa">
+                <button class="active" id="health-layer" aria-pressed="true">
+                  Impacto na saúde</button
+                ><button id="pm-layer" aria-pressed="false">PM2,5</button>
+              </div>
+            </div>
+            <div class="map-wrap">
+              <div
+                id="map"
+                role="region"
+                aria-label="Mapa das regiões de saúde do Brasil. Use a lista de regiões abaixo como alternativa ao mapa."
+              ></div>
+              <div class="map-note">
+                Cenário ilustrativo<br /><b id="map-date"
+                  >5 dias de antecedência</b
+                >
+              </div>
+              <div class="map-legend" id="map-legend">
+                <span><i class="normal"></i>Normal</span
+                ><span><i class="attention"></i>Atenção</span
+                ><span><i class="alert"></i>Alerta</span
+                ><span><i class="emergency"></i>Emergência</span>
+              </div>
+            </div>
+            <div class="map-bottom">
+              <span>Malha: IBGE · regionalização: Ministério da Saúde</span
+              ><button id="show-table" class="text-button">
+                Ver lista de regiões <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </section>
+          <section
+            class="panel detail-panel"
+            aria-labelledby="region-title"
+            aria-live="polite"
+          >
+            <div class="detail-heading">
+              <div>
+                <span class="eyebrow small">REGIÃO SELECIONADA</span>
+                <h2 id="region-title">Carregando…</h2>
+              </div>
+              <span class="alert-badge" id="region-level">—</span>
+            </div>
+            <p id="region-subtitle" class="region-subtitle">
+              Selecione uma região no mapa
+            </p>
+            <div class="detail-metrics">
+              <div>
+                <strong id="region-excess">—</strong
+                ><span>internações adicionais<br />previstas</span
+                ><small id="region-interval"></small>
+              </div>
+              <div>
+                <strong id="region-payment">—</strong
+                ><span>Pagamento adicional<br />estimado</span
+                ><small id="region-pm25"></small>
+              </div>
+            </div>
+            <h3>
+              Previsão de internações
+              <span id="chart-horizon">(próximos 5 dias)</span>
+            </h3>
+            <div id="chart" class="chart"></div>
+            <div class="chart-legend">
+              <span><i class="line-key"></i>Estimativa</span
+              ><span><i class="area-key"></i>Faixa ilustrativa</span>
+            </div>
+            <p class="detail-note">
+              Exemplo de leitura para planejamento. As faixas e os níveis de
+              alerta ainda não foram calibrados.
+            </p>
+            <button class="detail-link text-button" id="region-details">
+              Ver detalhes da região <span aria-hidden="true">→</span>
+            </button>
+          </section>
+        </div>
+        <div class="notice">
+          <span class="notice-symbol" aria-hidden="true">ⓘ</span>
+          <p>
+            <b>Um painel em construção, com transparência desde o início.</b> Os
+            números são sintéticos e servem para explorar a ferramenta. Nenhuma
+            previsão operacional foi publicada.
+          </p>
+          <a href="#como-funciona">Entenda a metodologia →</a>
+        </div>
+        <section
+          class="region-list"
+          id="region-list"
+          hidden
+          aria-labelledby="list-title"
+        >
+          <div class="panel-heading">
+            <h2 id="list-title">Regiões de saúde</h2>
+            <button id="hide-table" class="text-button">Fechar lista ×</button>
+          </div>
+          <p>
+            Selecione uma região para ver o detalhamento. Todos os valores
+            abaixo são ilustrativos.
+          </p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Região / UF</th>
+                  <th scope="col">Nível ilustrativo</th>
+                  <th scope="col">Internações adicionais</th>
+                  <th scope="col">Pagamento (R$)</th>
+                </tr>
+              </thead>
+              <tbody id="regions-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+      <section id="content-page" class="content-page" hidden></section>
+      <div id="error" class="error" role="alert" hidden></div>
+    </main>
+    <footer class="site-footer">
+      <p>
+        Previsões com incerteza. Estimativas populacionais para apoiar o
+        planejamento.
+      </p>
+      <p class="source-links">
+        <a href="https://datasus.saude.gov.br/">DATASUS</a> ·
+        <a href="https://atmosphere.copernicus.eu/">Copernicus/CAMS</a> ·
+        <a href="https://firms.modaps.eosdis.nasa.gov/">NASA FIRMS</a> ·
+        <a href="https://www.ibge.gov.br/">IBGE</a>
+      </p>
+      <div>
+        <a href="#como-funciona">Metodologia</a><a href="#dados">API pública</a
+        ><a href="#dados">Baixar dados</a>
+      </div>
+    </footer>
+    <div class="colophon" role="region" aria-label="Créditos">
+      <span
+        >Uma iniciativa <a href="https://github.com/civisbr">civisbr</a> ·
+        Código aberto, interesse público.</span
+      ><a href="https://github.com/civisbr/folego">Contribua no GitHub ↗</a>
+    </div>
+    <dialog id="region-dialog" aria-labelledby="dialog-title">
+      <button
+        id="close-dialog"
+        class="dialog-close"
+        aria-label="Fechar detalhes"
+      >
+        ×</button
+      ><span class="eyebrow">DADOS ILUSTRATIVOS</span>
+      <h2 id="dialog-title">Detalhes da região</h2>
+      <div id="dialog-content"></div>
+    </dialog>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

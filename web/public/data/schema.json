@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fôlego demonstration forecast",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "mode",
+    "forecast_start",
+    "rows",
+    "disclaimer"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "mode": {
+      "const": "demonstration"
+    },
+    "forecast_start": {
+      "type": "string",
+      "format": "date"
+    },
+    "disclaimer": {
+      "type": "string"
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "health_region_code",
+          "age_group",
+          "day",
+          "excess",
+          "lower",
+          "upper",
+          "payment",
+          "pm25",
+          "baseline"
+        ],
+        "properties": {
+          "health_region_code": {
+            "type": "string",
+            "pattern": "^[0-9]{5}$"
+          },
+          "age_group": {
+            "enum": [
+              "0-4",
+              "5-14",
+              "15-59",
+              "60+"
+            ]
+          },
+          "day": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4
+          },
+          "excess": {
+            "type": "number",
+            "minimum": 0
+          },
+          "lower": {
+            "type": "number",
+            "minimum": 0
+          },
+          "upper": {
+            "type": "number",
+            "minimum": 0
+          },
+          "payment": {
+            "type": "number",
+            "minimum": 0
+          },
+          "pm25": {
+            "type": "number",
+            "minimum": 0
+          },
+          "baseline": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}

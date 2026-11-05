@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "mode": "demonstration",
+  "snapshot_date": "2026-11-04",
+  "license": "CC-BY-4.0",
+  "territory": {
+    "ibge_municipalities": 5571,
+    "matched": 5571,
+    "coverage": 1.0,
+    "unmapped": [],
+    "sources": [
+      "https://servicodados.ibge.gov.br/api/v1/localidades/municipios",
+      "https://apidadosabertos.saude.gov.br/macrorregiao-e-regiao-de-saude/municipio"
+    ],
+    "overrides": [
+      {
+        "municipality_code": "510183",
+        "codigo_regiao_saude": "51014",
+        "regiao_saude": "TELES PIRES",
+        "effective_from": "2025-01-01",
+        "source": "https://www.saude.mt.gov.br/storage/files/jlxe9jkkPp4k6viKKrRmoz1EGsHuGqETtZfc5cfA.pdf",
+        "reference": "Resolução CIB/MT nº 507, de 2 de outubro de 2025",
+        "reason": "Boa Esperança do Norte consta no IBGE, mas ainda não na API nacional de regionalização consultada em 2026-11-04. Não imputar população de 2022."
+      }
+    ],
+    "snapshot_date": "2026-11-04"
+  },
+  "geometry": {
+    "source": "https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo%2Bjson&qualidade=minima&intrarregiao=municipio",
+    "municipal_polygons": 5570,
+    "health_regions": 439,
+    "note": "Malha simplificada da API IBGE, anterior à criação de Boa Esperança do Norte. O território novo e os municípios de origem pertencem a Teles Pires; não há polígono municipal independente neste snapshot."
+  },
+  "sources": {
+    "sih": "https://datasus.saude.gov.br/",
+    "cams": "https://ads.atmosphere.copernicus.eu/",
+    "firms": "https://firms.modaps.eosdis.nasa.gov/",
+    "ibge": "https://servicodados.ibge.gov.br/api/docs/localidades"
+  },
+  "health_data": "Synthetic fixtures, not derived from patients or a calibrated model."
+}
