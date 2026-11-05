@@ -16,7 +16,7 @@ dependencies = [
     "pyarrow>=19,<24",
     "scipy>=1.15,<2",
     "shapely>=2,<3",
-    "statsmodels>=0.14,<0.15",
+    "statsmodels>=0.14,<0.16",
 ]
 
 [project.optional-dependencies]
