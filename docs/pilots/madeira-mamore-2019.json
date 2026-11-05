@@ -1,0 +1,2929 @@
+{
+  "generated_at": "2026-11-05T12:11:22.829346+00:00",
+  "name": "madeira-mamore-2019",
+  "mode": "observed_research",
+  "health_region_code": "11004",
+  "health_region": "MADEIRA-MAMORE",
+  "processing_year": 2019,
+  "municipalities": [
+    {
+      "municipality_code": "110010",
+      "municipality": "Guajará-Mirim",
+      "state": "RO"
+    },
+    {
+      "municipality_code": "110020",
+      "municipality": "Porto Velho",
+      "state": "RO"
+    },
+    {
+      "municipality_code": "110033",
+      "municipality": "Nova Mamoré",
+      "state": "RO"
+    },
+    {
+      "municipality_code": "110080",
+      "municipality": "Candeias do Jamari",
+      "state": "RO"
+    },
+    {
+      "municipality_code": "110110",
+      "municipality": "Itapuã do Oeste",
+      "state": "RO"
+    }
+  ],
+  "territory_sha256": "e4c49d7a8eb5c9ebe908ddf448fcdcb31c2dc09b4f401b832162ab7726044de1",
+  "territory_historical_consistency": "pending",
+  "files_expected": 324,
+  "files_processed": 324,
+  "file_states": [
+    "AC",
+    "AL",
+    "AP",
+    "AM",
+    "BA",
+    "CE",
+    "DF",
+    "ES",
+    "GO",
+    "MA",
+    "MT",
+    "MS",
+    "MG",
+    "PA",
+    "PB",
+    "PR",
+    "PE",
+    "PI",
+    "RJ",
+    "RN",
+    "RS",
+    "RO",
+    "RR",
+    "SC",
+    "SP",
+    "SE",
+    "TO"
+  ],
+  "national_file_coverage": true,
+  "source_bytes": 925404772,
+  "scanned_records": 12356283,
+  "clinical_cohort_complete": false,
+  "zero_filled": false,
+  "payment_basis": "VAL_TOT nominal; not inflation-adjusted; no smoke attribution",
+  "model_ready": false,
+  "tabnet": {
+    "status": "compared",
+    "accepted": true,
+    "criterion": "relative error < 1% annually and in every month",
+    "total_observed": 2677,
+    "total_reference": 2677,
+    "annual_relative_error": 0.0,
+    "months": [
+      {
+        "month": 1,
+        "observed": 184,
+        "reference": 184,
+        "relative_error": 0.0
+      },
+      {
+        "month": 2,
+        "observed": 193,
+        "reference": 193,
+        "relative_error": 0.0
+      },
+      {
+        "month": 3,
+        "observed": 238,
+        "reference": 238,
+        "relative_error": 0.0
+      },
+      {
+        "month": 4,
+        "observed": 235,
+        "reference": 235,
+        "relative_error": 0.0
+      },
+      {
+        "month": 5,
+        "observed": 261,
+        "reference": 261,
+        "relative_error": 0.0
+      },
+      {
+        "month": 6,
+        "observed": 243,
+        "reference": 243,
+        "relative_error": 0.0
+      },
+      {
+        "month": 7,
+        "observed": 239,
+        "reference": 239,
+        "relative_error": 0.0
+      },
+      {
+        "month": 8,
+        "observed": 269,
+        "reference": 269,
+        "relative_error": 0.0
+      },
+      {
+        "month": 9,
+        "observed": 237,
+        "reference": 237,
+        "relative_error": 0.0
+      },
+      {
+        "month": 10,
+        "observed": 213,
+        "reference": 213,
+        "relative_error": 0.0
+      },
+      {
+        "month": 11,
+        "observed": 195,
+        "reference": 195,
+        "relative_error": 0.0
+      },
+      {
+        "month": 12,
+        "observed": 170,
+        "reference": 170,
+        "relative_error": 0.0
+      }
+    ],
+    "source": {
+      "year": 2019,
+      "state": "RO",
+      "municipality_codes": [
+        "110010",
+        "110020",
+        "110033",
+        "110080",
+        "110110"
+      ],
+      "period_basis": "processing_competence",
+      "outcome": "J00-J99",
+      "metric": "Internações",
+      "form_url": "https://tabnet.datasus.gov.br/cgi/deftohtm.exe?sih/cnv/nrro.def",
+      "url": "https://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nrro.def",
+      "fields": [
+        [
+          "Linha",
+          "Ano/mês_processamento"
+        ],
+        [
+          "Coluna",
+          "--Não-Ativa--"
+        ],
+        [
+          "Incremento",
+          "Internações"
+        ],
+        [
+          "Arquivos",
+          "nrro1901.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1902.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1903.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1904.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1905.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1906.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1907.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1908.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1909.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1910.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1911.dbf"
+        ],
+        [
+          "Arquivos",
+          "nrro1912.dbf"
+        ],
+        [
+          "SMunicípio",
+          "11"
+        ],
+        [
+          "SMunicípio",
+          "18"
+        ],
+        [
+          "SMunicípio",
+          "25"
+        ],
+        [
+          "SMunicípio",
+          "33"
+        ],
+        [
+          "SMunicípio",
+          "38"
+        ],
+        [
+          "SRegião_de_Saúde_(CIR)",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SMacrorregião_de_Saúde",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SDivisão_administ_estadual",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SMicrorregião_IBGE",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SRegião_Metropolitana_-_RIDE",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SEstabelecimento",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SCaráter_atendimento",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SRegime",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SCapítulo_CID-10",
+          "10"
+        ],
+        [
+          "SLista_Morb__CID-10",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SFaixa_Etária_1",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SFaixa_Etária_2",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SSexo",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "SCor/raça",
+          "TODAS_AS_CATEGORIAS__"
+        ],
+        [
+          "zeradas",
+          "exibirlz"
+        ],
+        [
+          "formato",
+          "table"
+        ],
+        [
+          "mostre",
+          "Mostra"
+        ]
+      ],
+      "retrieved_at": "2026-11-05T04:01:12.246556+00:00",
+      "sha256": "ddf044980f52675d757c86fd4806e7f4d18e98f166f2be0f14e93158125415c1"
+    }
+  },
+  "selected_residence_records": 40247,
+  "normal_respiratory_processing_records": 2677,
+  "normal_respiratory_outside_residence_state": 45,
+  "quality": {
+    "ambiguous_identifiers_require_review": false,
+    "invalid_admission_dates_require_review": false,
+    "invalid_age_units_require_review": false,
+    "continuations_excluded": true,
+    "individual_identifiers_published": false
+  },
+  "source_files": [
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1901.dbc",
+      "source_bytes": 237472,
+      "source_sha256": "64f443f59ca4c9d82f1c5ef858930ad9b5bc0cccdec5cc526962573f8e89a043"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1902.dbc",
+      "source_bytes": 211561,
+      "source_sha256": "0cc2249ef8a828628a6d2d6b1c636b900b950288713fa82ec0ccb47be5828529"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1903.dbc",
+      "source_bytes": 272116,
+      "source_sha256": "a3344d722c7d2a39424c8fc3ac3398c838a025923ddca43629126b6744a107a3"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1904.dbc",
+      "source_bytes": 214706,
+      "source_sha256": "d7b3f632a9ab7ccf1326fdba4823aabe36ee962e114ed8f40ae31b810345f01b"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1905.dbc",
+      "source_bytes": 263969,
+      "source_sha256": "f76dcf9b1d7b14b069c0c7a4368a53e12fcae56540f5055517c639fb9ce699cc"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1906.dbc",
+      "source_bytes": 299466,
+      "source_sha256": "ca4eb627d15781c6d642e8d8c07dcb80ff5752224c92f6b9e6b2e93186ea45f8"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1907.dbc",
+      "source_bytes": 307471,
+      "source_sha256": "2d9900bb8686edebd97e1f5257f247094c879a4e2f3f812cd3d730593ba560e2"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1908.dbc",
+      "source_bytes": 275677,
+      "source_sha256": "91dfcab34319d782ba478e6305c0fbbeac8f6c59fe19ad0c454112521746b702"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1909.dbc",
+      "source_bytes": 281545,
+      "source_sha256": "a405fbcc6501decd4f1c3a9b32f18e25395bfcb835c726004eda9c4e0af4ff1e"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1910.dbc",
+      "source_bytes": 303796,
+      "source_sha256": "e86591aa17d41354727b983be2fb7bf3ffb6d7a937ae87d00e375c40400a4c03"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1911.dbc",
+      "source_bytes": 269646,
+      "source_sha256": "d38e2b2c62f446a45f4de16f439f47a3d055a98305e52b0b443e0f97d11db8f0"
+    },
+    {
+      "state": "AC",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAC1912.dbc",
+      "source_bytes": 259541,
+      "source_sha256": "5165d5967c93ae8d93695fdd45ff81a334fc503e62d390e74fe624e70b4a5830"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1901.dbc",
+      "source_bytes": 990721,
+      "source_sha256": "b1a07b1cc4a9acb521c235f2fb3782c9bc7cecc88caa02c6cae8fa2184549511"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1902.dbc",
+      "source_bytes": 988087,
+      "source_sha256": "ecb2631a0f35b63c221bd53db8aa0ca4213e1cd8f29e984143c3539a70f0edf5"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1903.dbc",
+      "source_bytes": 1022031,
+      "source_sha256": "fe43c12242c9ff66e16791eb082a187dd82cd5d09c52614d891f99068129e744"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1904.dbc",
+      "source_bytes": 1015508,
+      "source_sha256": "20beed9b19063004c6582a50b35da7c9ea310d62fd43438aebc52aa05b1a7269"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1905.dbc",
+      "source_bytes": 1043437,
+      "source_sha256": "9ec06eac0664d69207d11ef4702c650c690f2919765f6f50630c3e485e76171e"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1906.dbc",
+      "source_bytes": 1092844,
+      "source_sha256": "f514b3156ff406c726e5c550a04b2a4dd342e89cb9624cceafacf7bf93b71b31"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1907.dbc",
+      "source_bytes": 1157426,
+      "source_sha256": "ffedf6394394c424069eb35d27d1aad0c0f8cd98f823c12bec313fe7f445c403"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1908.dbc",
+      "source_bytes": 1103351,
+      "source_sha256": "7e6082b2af54cf033750ef6087e7cd3c7e13f72a089f45854a4f04c4df654c02"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1909.dbc",
+      "source_bytes": 1076527,
+      "source_sha256": "7f1e30ab9666223be8594d9827c33f3e6836001b252a493d976f7700217a8c86"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1910.dbc",
+      "source_bytes": 1127380,
+      "source_sha256": "b3be52495236abddf671c46190f026822ae5e4d51438076553ebea50d8c6ca15"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1911.dbc",
+      "source_bytes": 1074017,
+      "source_sha256": "a07a7faf1d04d35e5edbac1e68fa80f8dd44bb510fd7df718754bede06ca8e9c"
+    },
+    {
+      "state": "AL",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAL1912.dbc",
+      "source_bytes": 1040164,
+      "source_sha256": "8535b5faa79ed1312a64158a8848f01c3ac2aa818d19dff9fa611bdbf1de3dba"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1901.dbc",
+      "source_bytes": 249513,
+      "source_sha256": "0a7508fb83250a2df7a2e9b380daf80d8f4082ad7a075047692c7b49fcaa0a25"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1902.dbc",
+      "source_bytes": 233486,
+      "source_sha256": "325ec89e24096d01a750724816b2e5b3a942d3b4cce5cb362467d84ed71926e0"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1903.dbc",
+      "source_bytes": 235741,
+      "source_sha256": "261d08a90c057bb9225d35e021a890ab2020fa8dfa0c9bcee241b148eaeb3e96"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1904.dbc",
+      "source_bytes": 234560,
+      "source_sha256": "13f6891d845ee5f5bec6aed7eb5e94ddd7d72afce7f9e78ad7d1ac6ac21377c3"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1905.dbc",
+      "source_bytes": 243468,
+      "source_sha256": "ad7c77af1782eb4e3369de62a3b5ff504971af4f6da1e043fb05b13a88f3787a"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1906.dbc",
+      "source_bytes": 215323,
+      "source_sha256": "967714bd1ca7dd9552f26a5c04a66e908cc1ab3f03ceeab1f8a837cc4cd02bc7"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1907.dbc",
+      "source_bytes": 227408,
+      "source_sha256": "96e22916267f5b65994150c657689b813b4df2461936ce72d5a5906e4559521f"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1908.dbc",
+      "source_bytes": 239172,
+      "source_sha256": "00563a758ab2d2b766c83ca0d3d3f5234a576d96eb531318456ce329da94c3f6"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1909.dbc",
+      "source_bytes": 226647,
+      "source_sha256": "a98c958f1ba656dea44f52a9478f7bc86c5a71b5b969442e7ab8c3e7bfb47342"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1910.dbc",
+      "source_bytes": 225745,
+      "source_sha256": "749e271ca5ea8d73ae656836dc6d3154b6953afc5ecf11e5969a0bf6895c8323"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1911.dbc",
+      "source_bytes": 220713,
+      "source_sha256": "a0395d52c7f9598bad4355f67de46e4777c351987775d936367dafd622b22407"
+    },
+    {
+      "state": "AP",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAP1912.dbc",
+      "source_bytes": 214621,
+      "source_sha256": "9293733650e247fa45efe86e5ec6d78702a12c7ec9775039dfd594a2c24dee3a"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1901.dbc",
+      "source_bytes": 1197264,
+      "source_sha256": "049f5528cf17ed71751b2e803b8dbf8cdbbdd1c1f48aca84807901f3ca93f42d"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1902.dbc",
+      "source_bytes": 1052865,
+      "source_sha256": "dcde85c1fb497bf7ed9d440949e8496af7a91536294a67bd280733052e32f37c"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1903.dbc",
+      "source_bytes": 1153875,
+      "source_sha256": "fabafb426cc07045dda92166d0c70d0f3b384ea91ba3edb334acb4ba1c938ed7"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1904.dbc",
+      "source_bytes": 1098779,
+      "source_sha256": "18b1ca6cde2759283080ecb7724d4db1cf2bec3477f755565a22134f0fbcfd02"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1905.dbc",
+      "source_bytes": 1178225,
+      "source_sha256": "e0c49f2bc7138f089aad580bacf01cf8df934a58a49f9c0c4eea45cba7f7c853"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1906.dbc",
+      "source_bytes": 1091662,
+      "source_sha256": "aaea0a0f9c0332a4b38dfb47468e9391874d60a04b0f3bc9806a95bbb0e1927d"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1907.dbc",
+      "source_bytes": 1155934,
+      "source_sha256": "a72b0f9322fdc9c1b12b397eff36dc93d4c1b0eeeb1a73be6f87401e3dc8c8b4"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1908.dbc",
+      "source_bytes": 1096912,
+      "source_sha256": "8c053035eb1dae48e34ff3a2b237d62eb38432c471604e7917cb9c0c909c0bd8"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1909.dbc",
+      "source_bytes": 1157090,
+      "source_sha256": "7d49fe426f5a2eba1aee6248303ae2b62873ea1cbc5fe244e508d35092857dc4"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1910.dbc",
+      "source_bytes": 1146737,
+      "source_sha256": "392d5bf23400696759828a149c651af74ac3d945f2d90c917bc563b807235ae2"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1911.dbc",
+      "source_bytes": 1125081,
+      "source_sha256": "c379c60249fcc062f4b4c63dcdbd3d1f9d493c6aac367872aa0b1d8db9ed85db"
+    },
+    {
+      "state": "AM",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDAM1912.dbc",
+      "source_bytes": 1051825,
+      "source_sha256": "baa6869d1322b59a6f8538c60e64431d7eb1d2c45217029a224ac47c168772b3"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1901.dbc",
+      "source_bytes": 4845209,
+      "source_sha256": "36c7bad659c0578931a22ac8b7cd8bce64cc9a5d126f1b461651643406b1f53b"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1902.dbc",
+      "source_bytes": 4546257,
+      "source_sha256": "e566b71da90fb270b387f124d4d296c05261a7952c56c3dec1a63d21166058d2"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1903.dbc",
+      "source_bytes": 4905249,
+      "source_sha256": "fe80592c7d295ad2ee925829eeb8ea580bd9ff50b5163db35f85fdb1385556a6"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1904.dbc",
+      "source_bytes": 5118961,
+      "source_sha256": "54c32dd14710956a77da02094b42afb0de7c7c6414791351b1a34e4e9927bdd7"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1905.dbc",
+      "source_bytes": 5249442,
+      "source_sha256": "8284c49a150b1f7771970108ad1c6dc6313f6374523c70db619b6a559faa2413"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1906.dbc",
+      "source_bytes": 4967288,
+      "source_sha256": "2eec9436d0d2cc2139623e39d9f6029b48a3daa1c9af4e17f4704a81ebc4fc13"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1907.dbc",
+      "source_bytes": 5365693,
+      "source_sha256": "c1d1f6de0c6c5aae560f269d62fbaf0854301cf0a03989cc2a1dafe0f7799fd2"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1908.dbc",
+      "source_bytes": 5558190,
+      "source_sha256": "616538fc9737e24424fd682ef352cf43016fcf188b22ab655dc07dad1df89e6e"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1909.dbc",
+      "source_bytes": 5243249,
+      "source_sha256": "af771b21c852aba232ee9c12d000675f01c062a17a5659ac4cacf8a7e7ced205"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1910.dbc",
+      "source_bytes": 5311688,
+      "source_sha256": "5a2ed3714ae93b4d76810014f69ddb4be35c5e79e4a3db3763f15306021ebc84"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1911.dbc",
+      "source_bytes": 5147678,
+      "source_sha256": "2549b419e6c50e1f52d853b82dff8a31cde11fc6c577fa1937ab0850e29e21c2"
+    },
+    {
+      "state": "BA",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDBA1912.dbc",
+      "source_bytes": 4871102,
+      "source_sha256": "67090770f7fc789c55da97c4bc86644b1df7bbb9932c623e681084b96f6ced32"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1901.dbc",
+      "source_bytes": 3171480,
+      "source_sha256": "922dc4692b8a3869d35a186730750c87d516f2408a15b19ad378e3dcecac6be4"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1902.dbc",
+      "source_bytes": 2979173,
+      "source_sha256": "af5df6b2990ea64770b36b9d09a5b74b473ffdae6dfa9f58a6136d78146c3516"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1903.dbc",
+      "source_bytes": 3069359,
+      "source_sha256": "47e126eb0ba1bc5085b7272809a3ce806fe59a31ad4e9a4c56cf77260b46ff21"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1904.dbc",
+      "source_bytes": 3128745,
+      "source_sha256": "c905f9b06cffca66f622fe9bf11a41e7a5e9e988c3a422e1bb5d5401d2986609"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1905.dbc",
+      "source_bytes": 3228138,
+      "source_sha256": "9110314ead8f940c047a270416928e1c1a31717d5a118d76a51a7f1f0ec916a8"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1906.dbc",
+      "source_bytes": 3125456,
+      "source_sha256": "4d770d3dc76e3adab0ee4757ea2f15b715ebed6d57a59f1e40bc1536f92afaec"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1907.dbc",
+      "source_bytes": 3169982,
+      "source_sha256": "3a657d5e3ab9d45183e9a33b6a4ce83e99c691f33862e21aa559413b5642f79b"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1908.dbc",
+      "source_bytes": 3226247,
+      "source_sha256": "d27313149636b17da5bc5e962465aa4efe305efbc4e572f444a0354541027a5e"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1909.dbc",
+      "source_bytes": 3223054,
+      "source_sha256": "fe3e8c20c1000efcaa1a1d6e90d063615a537ce1b1d22314ee5973f0d2db667a"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1910.dbc",
+      "source_bytes": 3241186,
+      "source_sha256": "bc3991ac6a976ca6782b19fa55090e06ada7ebe3a29e8480cdcdb9c5ac310de4"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1911.dbc",
+      "source_bytes": 3091943,
+      "source_sha256": "2423c0fd81825e8150c7cd9a6c7e57ce4d991965dece7b7d2f67bedf343b390a"
+    },
+    {
+      "state": "CE",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDCE1912.dbc",
+      "source_bytes": 3128788,
+      "source_sha256": "ce02fb027b821948718d9b07b1f164254dc6256dd1d05548d50d9e25d12c2a70"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1901.dbc",
+      "source_bytes": 1412511,
+      "source_sha256": "af3f7954da35c3250fa6e5f3458f1461f15f2b19ccb8b09fa0a820e2c2dc9e5c"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1902.dbc",
+      "source_bytes": 1404942,
+      "source_sha256": "3c1fce442eeebe9513352acd1506c02554d851d412de42f776b1c546bca84734"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1903.dbc",
+      "source_bytes": 1648754,
+      "source_sha256": "2952ccc18a353a54c7f2019759766a9ec11f82fb794657912f1b910ef6c9aa06"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1904.dbc",
+      "source_bytes": 1490911,
+      "source_sha256": "d92d70563701b385c12ad7ad0a571bd8e5307356e7453404a1eb623498d43384"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1905.dbc",
+      "source_bytes": 1570637,
+      "source_sha256": "12c5c3afe3b142b36f0a3ccc6a8af107c0d6a9192fe5360db29a3d1fef592241"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1906.dbc",
+      "source_bytes": 1462276,
+      "source_sha256": "697f19f8947263fc195a1fe7e11cadbb705d69fa920749340f64d2fe185354b9"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1907.dbc",
+      "source_bytes": 1561755,
+      "source_sha256": "0becbb89d42b6b8eef1f6195ff6fd94a646a6a3db63eb788e47801de2206eb0d"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1908.dbc",
+      "source_bytes": 1729657,
+      "source_sha256": "60f5f28c201a1e4e72598195bdf3b034ded897882327aea7be9344739af95cfc"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1909.dbc",
+      "source_bytes": 1399331,
+      "source_sha256": "90d133e910356034ed8afa5b6319de8a71e42c231927681392582d4d53d64de8"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1910.dbc",
+      "source_bytes": 1416855,
+      "source_sha256": "7e53511053f1b4d3b93a741e3b7d7bfe513820955a01a3b8c37b2b544d0d150c"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1911.dbc",
+      "source_bytes": 1354192,
+      "source_sha256": "9e32deb59e45a17751c4ce3daf42d425800f53fb7b97724b58def73e1c5a98a0"
+    },
+    {
+      "state": "DF",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDDF1912.dbc",
+      "source_bytes": 1400299,
+      "source_sha256": "1248ac149c1644c3f22a9ffed835ebc7080458ab9121bf56066056fbbec68b52"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1901.dbc",
+      "source_bytes": 1511828,
+      "source_sha256": "1155e254aee559a4ff35afc70996735502e6741c765fdc840d602f2ab4841c6f"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1902.dbc",
+      "source_bytes": 1450666,
+      "source_sha256": "95c214eef04db951906d5b7dbc502347580feabd96be9d1e2c4d0b0fa9228074"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1903.dbc",
+      "source_bytes": 1450720,
+      "source_sha256": "4979c58d5c822286b9c7817b879ddd96797423c7d824e63fa5d959b0f54821c1"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1904.dbc",
+      "source_bytes": 1464351,
+      "source_sha256": "6b1a8085b8a199a0520181750c60b40dc60425a4bf7dd6d63ead3038bf4f3128"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1905.dbc",
+      "source_bytes": 1571871,
+      "source_sha256": "b7c4f9c49803a3f5e725f425da2428cb21763f8ff8db16767be1be5bbbb63fd5"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1906.dbc",
+      "source_bytes": 1513693,
+      "source_sha256": "8f73d82547212be73b11802d18cd6cef2c0244675a5f7b11ac3b59c001230af1"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1907.dbc",
+      "source_bytes": 1696777,
+      "source_sha256": "a9aaa053c033013d245ad165eb380226bcdba8e0a7ffb5384ede0e8e864b2553"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1908.dbc",
+      "source_bytes": 1683036,
+      "source_sha256": "53295f239228789d4f49a0ee3258319a3922411b43de8c2a4e8583aa10e61690"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1909.dbc",
+      "source_bytes": 1627304,
+      "source_sha256": "d8f9c8f26b19bf55c14dd2479cfaa0ab929db7e2c8575afc340ad05db4427b46"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1910.dbc",
+      "source_bytes": 1710113,
+      "source_sha256": "a41faeaed80ff6e2ef391ff30d21a610bab3fe4a171161c5d20b8212ecdf9f4d"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1911.dbc",
+      "source_bytes": 1574652,
+      "source_sha256": "3646caf18231aad249cf1f99db7ad68ae77e28cc398416d4224aea4f857c377b"
+    },
+    {
+      "state": "ES",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDES1912.dbc",
+      "source_bytes": 1651620,
+      "source_sha256": "95b62e3bd978f544c993db87b82841fa869a70e2423d87ee7af83c0c29bd7620"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1901.dbc",
+      "source_bytes": 2008525,
+      "source_sha256": "39436fd741bfcbf53da01d214633aa685c1f53a3a96dc32f3c7e7d8449fdb1e7"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1902.dbc",
+      "source_bytes": 1952742,
+      "source_sha256": "31e008d7343a9f16cca95f8a50a6d58249213a946e3886779098dad345d9f45e"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1903.dbc",
+      "source_bytes": 2070097,
+      "source_sha256": "454de5b1d9a084379b14b06a7ee8a796675f1d6662e102707acc7d2f41784ded"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1904.dbc",
+      "source_bytes": 2118944,
+      "source_sha256": "dbf9a4f50bdeb143e766f6704d0bba7a4299422c7c4ca78699af0d0fa38f4253"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1905.dbc",
+      "source_bytes": 2206116,
+      "source_sha256": "20784e8ae75cdf9af5b964086ff5385cb552876e9e99c3380b703c83a3c15c74"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1906.dbc",
+      "source_bytes": 2130621,
+      "source_sha256": "8bb689aa515b2865ecec00482a71c1f449e42dd4dee6f18b7bdb76ce3a58251c"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1907.dbc",
+      "source_bytes": 2199711,
+      "source_sha256": "4ba7a1020384d3ef7f8325893f4780aed872589066ce4ca9de9b648bef7e5b89"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1908.dbc",
+      "source_bytes": 2240215,
+      "source_sha256": "3aa839ae3ea545b53700502dc2245886b3086ee157f5cb1a4b72d6a93f207435"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1909.dbc",
+      "source_bytes": 2198889,
+      "source_sha256": "f67b1cfb04fa005e367e6fa5c998748ad9922e1f3f7b05d12053c5fd7759dc6a"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1910.dbc",
+      "source_bytes": 2275910,
+      "source_sha256": "988bc166d496ff2a364a109a0444ec8bd4117229ea6c43c76aa1f82167e8cdaa"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1911.dbc",
+      "source_bytes": 2169558,
+      "source_sha256": "3ee7bd17248f135bc46419d046dea1f1bd9041fc2969dd4a029540fa58c25e4f"
+    },
+    {
+      "state": "GO",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDGO1912.dbc",
+      "source_bytes": 2129295,
+      "source_sha256": "7a9e7db4d4e8e3127efb552bf2ebadb94bc24adff736a3b2b4e20902aa7e912c"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1901.dbc",
+      "source_bytes": 2597075,
+      "source_sha256": "00b5085ce3baa4d3f535bce96e93295d1f8814cb95644cdd5ae7b7239e2757d1"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1902.dbc",
+      "source_bytes": 2445197,
+      "source_sha256": "7d8a603f09bf69e65522217f749edae0337fb9d581f9425dc238eb334c0dcccc"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1903.dbc",
+      "source_bytes": 2639953,
+      "source_sha256": "27d460cf856f41cda994f18509c2ff1690b447f535c5774c1b7e4fa8aa0e33fb"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1904.dbc",
+      "source_bytes": 2635120,
+      "source_sha256": "cbd5cab03d111569ad14f7034c83fb7c033f35e5ad16012bd3954369af0096aa"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1905.dbc",
+      "source_bytes": 2716996,
+      "source_sha256": "90d0e53b80ce9002683132534ffa913823383332f0c66f77a86f72187e5bc394"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1906.dbc",
+      "source_bytes": 2561873,
+      "source_sha256": "91be34fc2f1c4e4f052ada2e9073251405a0ad4c516db3cdef71603ed2eec2d2"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1907.dbc",
+      "source_bytes": 2583471,
+      "source_sha256": "38211c7ce7fd266199dbf397c86d54bd36ad583093ddcb9a85d7b9728b4b6196"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1908.dbc",
+      "source_bytes": 2613153,
+      "source_sha256": "a4ca4cab866ab0033a260f353bfa9241c8f5365cc4bdc719bbb0b3f9ced2b964"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1909.dbc",
+      "source_bytes": 2581532,
+      "source_sha256": "5b2eb1082e7c0d0c85ea9b1342292f3af2c1c69d8c601a8c0c520dad222deb9f"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1910.dbc",
+      "source_bytes": 2631087,
+      "source_sha256": "8175582ab6c795ecac9c6e4b78c2448de69f3b80f758317ecfce1c58cad0ebbb"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1911.dbc",
+      "source_bytes": 2527235,
+      "source_sha256": "5d5950d70f8c1e4a037d2180b883b8ffdf8694c7855e57fee3d8479267ca9a92"
+    },
+    {
+      "state": "MA",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMA1912.dbc",
+      "source_bytes": 2444195,
+      "source_sha256": "ad4bb91087aac60ed23dfc5ab0fdf7396981910d0ad8055c35ffa50e8894cc59"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1901.dbc",
+      "source_bytes": 1090225,
+      "source_sha256": "6c603fe5f3024860366ca4c159f8abcfc137e4d9ee66463ff07c0feeab2dbef6"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1902.dbc",
+      "source_bytes": 1087010,
+      "source_sha256": "fca960a336b428e9209d369aa8002872a59047c6e7c0c0f2054066fe134b8fd0"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1903.dbc",
+      "source_bytes": 1194915,
+      "source_sha256": "93ca67bf478217c50030e9a5d6d6e528c3e2ba67ba0c5df1b6bd518687848bdd"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1904.dbc",
+      "source_bytes": 1172179,
+      "source_sha256": "f1d4100d8d30b40a3672116b189a9fb4d716932ee907d20a2308e45e9bd10bcd"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1905.dbc",
+      "source_bytes": 1244427,
+      "source_sha256": "0f2bc0423ab478a53bc2deca1220b3abe60bdfc2d909889a827b9234b0e110dd"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1906.dbc",
+      "source_bytes": 1193452,
+      "source_sha256": "238ce4285985c564bc4a57bff7a53ca39c28ab8dca9ec6e2c38f9f49c4ec8dde"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1907.dbc",
+      "source_bytes": 1209838,
+      "source_sha256": "5dcdaefb957aa66605220d1c7b86b31b0bebfc4dbd96713647a6c21cfaaec203"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1908.dbc",
+      "source_bytes": 1279338,
+      "source_sha256": "461d29bc27667d289e6833c29996223f2f649521bf67a529cadf1e1b5298a3ec"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1909.dbc",
+      "source_bytes": 1200611,
+      "source_sha256": "db8e218c8b3c9ab9d659a8291ce3b02e50020bcea05a1bd267d37c5e59b32569"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1910.dbc",
+      "source_bytes": 1259674,
+      "source_sha256": "b1ef3e24a247d7e51f94f5c3d717b63ed1acd636841b392007d5374af202326d"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1911.dbc",
+      "source_bytes": 1193688,
+      "source_sha256": "77874224e98a7aca64504820f2aa09af45667565e50c9137c65a5945173949b2"
+    },
+    {
+      "state": "MT",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMT1912.dbc",
+      "source_bytes": 1155878,
+      "source_sha256": "754d03e4d5382072ef96083b9f34f3de679ccecf7bd25e7833d366797122312a"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1901.dbc",
+      "source_bytes": 1104749,
+      "source_sha256": "676d1cc923b235860e6b748490e871309c1499f875a6558ea12c3a223afff104"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1902.dbc",
+      "source_bytes": 1113529,
+      "source_sha256": "1a3155b5d34d2285b651c4f41323b067b0febb9c8ea9ece044df71e17b10ab71"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1903.dbc",
+      "source_bytes": 1055539,
+      "source_sha256": "8d127f157f78e332369a42cda28a8446a3266bd66779af58f7f46248a70dbfb2"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1904.dbc",
+      "source_bytes": 1150699,
+      "source_sha256": "bde4ea36a41e8d20fbaa4eb2f7c503c6819eb9dae74c8ae3e2ea8d403f8b403f"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1905.dbc",
+      "source_bytes": 1147603,
+      "source_sha256": "e591a7a45335db24e667bfbc662bd47033f7afb07f3e235903cb27dbf9ab4ed5"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1906.dbc",
+      "source_bytes": 1155037,
+      "source_sha256": "7637753f267faf654e6ebdce4087e403ebbf4a43c45212dc898281895bde4848"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1907.dbc",
+      "source_bytes": 1207872,
+      "source_sha256": "1e9a92dbb425ded4504407df91cc57b4bcf42300f79c67fd8e154316847bf432"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1908.dbc",
+      "source_bytes": 1198240,
+      "source_sha256": "fed75ac8199830b2730d19a171946308873ed397a5d00863ef86e6960d51fb40"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1909.dbc",
+      "source_bytes": 1159377,
+      "source_sha256": "ee6eccf0147907b8dd10c0c8e7f52e9804b00b152870de26a730120a9f3e9b3c"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1910.dbc",
+      "source_bytes": 1182722,
+      "source_sha256": "1c4ac95813bae08e60e81acb16135b8f788ac2173af0acf584febec38443fa6c"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1911.dbc",
+      "source_bytes": 1096425,
+      "source_sha256": "dcc0e1a1b970a6e4d60b5b4a80aa2c8e462b133dd5d7243ccde3d661db4be8b5"
+    },
+    {
+      "state": "MS",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMS1912.dbc",
+      "source_bytes": 1103919,
+      "source_sha256": "15072d31562b86f2e5b4e3ebb6dc209fc4d0f303b4febad148b78b939135ef02"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1901.dbc",
+      "source_bytes": 8129221,
+      "source_sha256": "e4dbb398c0bba5f52afa9ac008ad3c9308559d097b10c6b4dbe7b77ec6b00e54"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1902.dbc",
+      "source_bytes": 7937663,
+      "source_sha256": "086e7b86a6b096e5e8e78b24ba4124354a44ef728243ca11c11d38fb6b4408ed"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1903.dbc",
+      "source_bytes": 8238795,
+      "source_sha256": "e95c455e645f850758692a560045d2517d9f538140b69537fc6b2ee12d93bff8"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1904.dbc",
+      "source_bytes": 8447889,
+      "source_sha256": "75596d64c2dfb984e14d4af01c11bf27bd3e067cb0a3e19e65ee5c7eb5f10095"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1905.dbc",
+      "source_bytes": 8953424,
+      "source_sha256": "1ea1dd5ffced978192319a03ce54aca8f40a915fe0185c2f0da926585f655c22"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1906.dbc",
+      "source_bytes": 8409544,
+      "source_sha256": "725d5697ccb1087c7424f68ef2e3514ad09f753517c4957bd85c175a30de27f3"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1907.dbc",
+      "source_bytes": 8741245,
+      "source_sha256": "e73defd60137507bacb525ef0b0694856c4b25082b585782c1e938a3713c1e2e"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1908.dbc",
+      "source_bytes": 8695371,
+      "source_sha256": "c647d2bccdfe6437cc7c1804b564651b2e35b7d3cefae718f6183234f4429483"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1909.dbc",
+      "source_bytes": 8448691,
+      "source_sha256": "b9da939ea116205ff60547ecc3e60bfc03f3d5f05074c1a7a4e8ae49754a9f77"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1910.dbc",
+      "source_bytes": 8775401,
+      "source_sha256": "a990287a036198f1e8fd89e6edfb977af5bb90797eea460eab3c5b8972c6f003"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1911.dbc",
+      "source_bytes": 8231101,
+      "source_sha256": "3e9942e389e4e07b8309d2f69bdf793ec67b8bd9ca8f03a99d8c85215020cafa"
+    },
+    {
+      "state": "MG",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDMG1912.dbc",
+      "source_bytes": 8095747,
+      "source_sha256": "e7e7a3b2e1abd1f4e2bb6f5bd7ba40dc4bdbe2642f2a4004cdb19ff3639c27a6"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1901.dbc",
+      "source_bytes": 2545834,
+      "source_sha256": "daafa621ac038265a25e751fd35603f837d84dc7e51709f645ec32b192bf6f9e"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1902.dbc",
+      "source_bytes": 2645026,
+      "source_sha256": "dd91e20b13601f2942d06892d3dd3ee56167a03394dc373c6eed668ee8a3068f"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1903.dbc",
+      "source_bytes": 2682051,
+      "source_sha256": "b963ec8e9208ee570da0140ffa8b37c3c7c2fee4d7e83c31a24f22571ea82509"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1904.dbc",
+      "source_bytes": 2774583,
+      "source_sha256": "7723157c4d2bceee21715af3a595b720f22bd279b6a744386de05ca6c372103e"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1905.dbc",
+      "source_bytes": 2800771,
+      "source_sha256": "6e373d3158ed341ac7293d2bcfcf86731091a53003b8b12ac7366aadf67fa8f8"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1906.dbc",
+      "source_bytes": 2759366,
+      "source_sha256": "e985a0b0c01f30acd4103ebc1c1726c1655b2d3b762fc5f693b434442b607e7b"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1907.dbc",
+      "source_bytes": 2487243,
+      "source_sha256": "69468049901a36a8aa5e17b5638d096a975b493792879b827f3a0c8a7f02f474"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1908.dbc",
+      "source_bytes": 2569430,
+      "source_sha256": "4b5ea3d00aa91eab26d099897fa8e593a542e0aa0130fcdb0e0bbb340117aee3"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1909.dbc",
+      "source_bytes": 2721048,
+      "source_sha256": "6c8f0b8e2788b3a8de71864f3d459788cbb4af72a6ae0e9257598310473a8978"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1910.dbc",
+      "source_bytes": 2800807,
+      "source_sha256": "43f0a89c39d70b9fada9a7ebc4f3f030fa17eb991263435b55d3dd085b3d758e"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1911.dbc",
+      "source_bytes": 2771694,
+      "source_sha256": "903194450f8ba29c140c11f8a3c11ab6d3a4c180bffc924f5de3b85d7d0b938e"
+    },
+    {
+      "state": "PA",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPA1912.dbc",
+      "source_bytes": 2748985,
+      "source_sha256": "f82f33cf3946bb4471578c37362666c1824878be8afe3f5a186455e2743c0861"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1901.dbc",
+      "source_bytes": 1107110,
+      "source_sha256": "2bbac7ece5e384fcea8789af267a334a8edf4ef5d611b253d8920b73581ea4b9"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1902.dbc",
+      "source_bytes": 1034536,
+      "source_sha256": "05f86be9b9ec3deb4992b80a01820be34e31440241f17012721a7a9abd17de40"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1903.dbc",
+      "source_bytes": 1174951,
+      "source_sha256": "481cd0808fa9671f35df3f773d1a28cd6fb961e1b96d9a4d543559b2b5cd39e9"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1904.dbc",
+      "source_bytes": 1140646,
+      "source_sha256": "23565e2f9a2290e59619584bf535d96c0d34ffb097e1c6a41a80d867ad603a4e"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1905.dbc",
+      "source_bytes": 1272948,
+      "source_sha256": "9433fa99aa158feff4205fdedd4c0c03dddac92a32f88e69cf1ebf6e139d2e1b"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1906.dbc",
+      "source_bytes": 1189415,
+      "source_sha256": "c586bde8ae75eca8bd151df1faed75baa43e6103da578f044f57675218094464"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1907.dbc",
+      "source_bytes": 1205076,
+      "source_sha256": "53ac11b4f83a54a003a754e6b5d8334f664b31b80295a5835949d5027653b41d"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1908.dbc",
+      "source_bytes": 1215777,
+      "source_sha256": "2eafafe3e0d820f2df8b473b53157c5db6e4ca890acc6c0dcada45bbacf3a3f0"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1909.dbc",
+      "source_bytes": 1219499,
+      "source_sha256": "7d6be0b863b363056ceeb1468ddef4e7b81b855d80eeb8e6e8ddf2154e112af4"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1910.dbc",
+      "source_bytes": 1151065,
+      "source_sha256": "077069d1da9ce540181861244aa87defe167c8dd14ecfdb7230da5e8e7313d36"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1911.dbc",
+      "source_bytes": 1166962,
+      "source_sha256": "9f5fa18af49eec7c168ea3ffb6134936fe0f23628d9b339fe4f3fdcfaeab2339"
+    },
+    {
+      "state": "PB",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPB1912.dbc",
+      "source_bytes": 1117245,
+      "source_sha256": "01725e516416d93f4d0184360d0a2ba3c0228094026df5d9419a0ea3f7fe3ccf"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1901.dbc",
+      "source_bytes": 5596316,
+      "source_sha256": "4d7a9aa177f0795f2d15b96bf2502862281a7937e6cac0a63b7bf7361191b1ff"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1902.dbc",
+      "source_bytes": 5508326,
+      "source_sha256": "eced65f8ca0f701ef697e42e3ef77d14e35a0d8bd1287c22c641467bbece4981"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1903.dbc",
+      "source_bytes": 5609343,
+      "source_sha256": "0788de36719d9cf618d2e455e8c5402bfd935f81e1faf722d932a5e0358b675b"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1904.dbc",
+      "source_bytes": 5597502,
+      "source_sha256": "ad4b80b9d233379ddbbcb16913daf938ec76fe03473097cfee3580e3d9707cc6"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1905.dbc",
+      "source_bytes": 5879248,
+      "source_sha256": "591b52e67b333e6d0cb629bb96aa1740180d4ed5cc63143523e4bb9eaa6913e5"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1906.dbc",
+      "source_bytes": 5676496,
+      "source_sha256": "984b7926b39f3f2810e6ccf318b3ea119c1502471dc24a1566ed5f1970f419d7"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1907.dbc",
+      "source_bytes": 5789361,
+      "source_sha256": "b7f9c4eb0ad0c31f3a9d41d7be8f9896d366a5d9ed8f098fc748156882e78b21"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1908.dbc",
+      "source_bytes": 5728401,
+      "source_sha256": "2157b63c681d4cbfb45c72545dba50e99d0dffe2be4e59d14c2c065d1e04d21c"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1909.dbc",
+      "source_bytes": 5799493,
+      "source_sha256": "0491b8b6e86d7e8b995028f5441782f827231e273422776a723186088dc2dce4"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1910.dbc",
+      "source_bytes": 5892254,
+      "source_sha256": "e2296377366ddef1b95e69e9c541a29bfc0f09bf10beccee23185018120b2103"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1911.dbc",
+      "source_bytes": 5776001,
+      "source_sha256": "b15c1223cd4966a6b9fb922d69e4e18c96e90e149e937640490af1df4ff43e1e"
+    },
+    {
+      "state": "PR",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPR1912.dbc",
+      "source_bytes": 5515020,
+      "source_sha256": "45064a50ef2ebe394e8aa197e8c20ec1c9474bb404d1f0f86cdd13be3acbd578"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1901.dbc",
+      "source_bytes": 3359062,
+      "source_sha256": "811a5b01e83f5cf46711c8d57954377d3d7f536f492db6f31836d4d210a4b9fa"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1902.dbc",
+      "source_bytes": 3269197,
+      "source_sha256": "d40063c3f41da625b6df6092927f981aad0469acaebf78afa5af25252a827825"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1903.dbc",
+      "source_bytes": 3430374,
+      "source_sha256": "9b89e1cf091ea91df409032fa512d34226cf3eda530d6087fe9f2bab4e627e09"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1904.dbc",
+      "source_bytes": 3561315,
+      "source_sha256": "b7f6b83ef0686f45ff72d2317914735304d67bb5a52ff533f518e51447e14a38"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1905.dbc",
+      "source_bytes": 3743502,
+      "source_sha256": "2ead057835d87f2f590d4d5c7b2011a7c08fd435a1e09dbe5f408439eb299b0d"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1906.dbc",
+      "source_bytes": 3605442,
+      "source_sha256": "1a1b68c4c2104462cf92ad82bb62949ff1d907e2209d089e34df74ebca28fb27"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1907.dbc",
+      "source_bytes": 3693540,
+      "source_sha256": "a9a18623b8cb68eb3f9028121d4e5b620c594bb6d71cefa299662d54d03134d1"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1908.dbc",
+      "source_bytes": 3726876,
+      "source_sha256": "028239aa0722295ea1adb7a1cec19f423fa470dc9e41648ab866cf299c708ad5"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1909.dbc",
+      "source_bytes": 3586221,
+      "source_sha256": "82109f4e14ebc3cb566e0c1d2712fa9b58a25b4cab671331cb4be12734f11078"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1910.dbc",
+      "source_bytes": 3773386,
+      "source_sha256": "e9a55cda0cb7c5127c91c2b27ecfba611532d0582c6a98752a77fb97241bdd82"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1911.dbc",
+      "source_bytes": 3657947,
+      "source_sha256": "6041a895686f31fabccfd673c2c86bad0e6bddaca2633f9478e843f67221839a"
+    },
+    {
+      "state": "PE",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPE1912.dbc",
+      "source_bytes": 3520982,
+      "source_sha256": "f289a2ce7f66efe40e8f204d64ee5a03028f93faebf7383017cad8d70297801c"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1901.dbc",
+      "source_bytes": 1246904,
+      "source_sha256": "ac7fea624fbc4b8676cd6e11f855852ffe7eb5c7b4a5e5fdeaf425b89924c84c"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1902.dbc",
+      "source_bytes": 1204229,
+      "source_sha256": "01f8e76f28192e2450bf7645bdacefd62f1b4ab70dc77e36902964cb12ccc736"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1903.dbc",
+      "source_bytes": 1272112,
+      "source_sha256": "1b94346cccd1deb4741d2c81e8d1d781ce1275f60f0949f325acefbf03c6f191"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1904.dbc",
+      "source_bytes": 1268160,
+      "source_sha256": "3fdce7964745243625723f44171a01ab67ad5d6ecfdab6e2e94fae5a97b8a4fd"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1905.dbc",
+      "source_bytes": 1328887,
+      "source_sha256": "67c6b16f02ea2bbff438d2eaa7285d0b13cbd334329520c1669481c3793284a0"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1906.dbc",
+      "source_bytes": 1345033,
+      "source_sha256": "ac97c23734a248e1937b083e7b27dfb4190c06bf5745d996338df704b9806ae2"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1907.dbc",
+      "source_bytes": 1319827,
+      "source_sha256": "7bb2bfe700c3550ce5bd03deac431626ca72b63b8373e23d005bd928a880fcd3"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1908.dbc",
+      "source_bytes": 1361102,
+      "source_sha256": "0d973fe9329541f5624c6acb319d60c57dbd76418d9cfba790c98135be09af29"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1909.dbc",
+      "source_bytes": 1354502,
+      "source_sha256": "fb1e00a05aaca9a5acb29e7c3ea3bc824661b2ed6f07935f932b5a68136443f5"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1910.dbc",
+      "source_bytes": 1420033,
+      "source_sha256": "6d1afb4f6e851a3ac0b3afcae2ec8c2458a323ed0f92148d47cb4b275afaaffa"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1911.dbc",
+      "source_bytes": 1357219,
+      "source_sha256": "7dbd9527251a8c1a93e300a518999d570ee811f73e8032af48f48c8fd6970b52"
+    },
+    {
+      "state": "PI",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDPI1912.dbc",
+      "source_bytes": 1331396,
+      "source_sha256": "9b14a80d796f8723d11cf699c3307615801f6a158ef14dedb4fde8f72f372e93"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1901.dbc",
+      "source_bytes": 4818081,
+      "source_sha256": "1db0910522445f7eabcbce6c3f9101e9c8e89d58c3e3d1599193b77c25b952e7"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1902.dbc",
+      "source_bytes": 4457945,
+      "source_sha256": "7f660df1398c2f623fca97242f61299354ab59671ab31e270093295b7cb02cbb"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1903.dbc",
+      "source_bytes": 4528828,
+      "source_sha256": "d56d4f1681acca2e81fd06f3d79ec0767ea51204015e0d4a61fa4b19ef03092b"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1904.dbc",
+      "source_bytes": 4591714,
+      "source_sha256": "7f7b9e07b8c05feeb9d27a83579babe8bdc343a0cae7071caec7c30361761ab0"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1905.dbc",
+      "source_bytes": 5062410,
+      "source_sha256": "77be2ce1f6ec245c110166e107ec2d10508271e719b34bdb69a9ca3379699660"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1906.dbc",
+      "source_bytes": 4830218,
+      "source_sha256": "16c5ceee5972edb13ef1fc29a6ffd2cb2230f4409637d42d9fb91e1a8eaf8942"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1907.dbc",
+      "source_bytes": 5087912,
+      "source_sha256": "6dc6308e9fd512d84816e7fab1e3b21290fd034ff251d8fc161c575e04f21b3b"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1908.dbc",
+      "source_bytes": 5142182,
+      "source_sha256": "e5e4222f0c8359d465aab9445fc810a58694d85629034bd4c4c428692ebeb362"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1909.dbc",
+      "source_bytes": 4926155,
+      "source_sha256": "dd80cc5784d202e534dc685110386917cc34ddbf329a5683722c63515cc4ef7e"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1910.dbc",
+      "source_bytes": 5060073,
+      "source_sha256": "92f6c03a1d228d0ad14ac679d8182e7d266410b292b80fecd95587b7b721f6f7"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1911.dbc",
+      "source_bytes": 4811206,
+      "source_sha256": "4c2beb7976450aa39ebb31b9a63da7d85b282eddefc786d7dd5a0e584242f1d1"
+    },
+    {
+      "state": "RJ",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRJ1912.dbc",
+      "source_bytes": 4531228,
+      "source_sha256": "22bb2a3c0ac57cd1d9593651db97055a3e6cb45f5feddb355f3311f1d490253d"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1901.dbc",
+      "source_bytes": 1113459,
+      "source_sha256": "bc2265baa18000250d745a5009387dc2f747c705308e11883c8c5ca536a0b7bf"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1902.dbc",
+      "source_bytes": 1040842,
+      "source_sha256": "77118ce4e4412d3971b16a8b819275c89aba1318b3e8ee12dbe02eb9bb15adad"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1903.dbc",
+      "source_bytes": 1124247,
+      "source_sha256": "e6a035349ece470e4c6ff41b3a49ee014529941bf481bc3650669553c57fc102"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1904.dbc",
+      "source_bytes": 1104343,
+      "source_sha256": "1dd344f5753a901bc795147d810bd244fc126d7b206d2c1812be633490c2ce87"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1905.dbc",
+      "source_bytes": 1219582,
+      "source_sha256": "cbbec3e93832047f499a63a1099ec29cbd9b996f8a25582e45e09c628f62dbf2"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1906.dbc",
+      "source_bytes": 1126552,
+      "source_sha256": "37c33493ed32c8455adabc2e9b2eb648686a04b905f7193e5f609d88d1eabc8f"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1907.dbc",
+      "source_bytes": 1164231,
+      "source_sha256": "b910d6904a1c7381a33bc97e045e651ff1f621a411904da9b96cc2f4c3604168"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1908.dbc",
+      "source_bytes": 1214973,
+      "source_sha256": "ecdb80cb110c1efadd8915aaad3d517081e8dacb3726723dd6725981086c99de"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1909.dbc",
+      "source_bytes": 1136935,
+      "source_sha256": "dc1215cf59277c8b0fbeb0f51eb77e0fb12277553cf422969a6765247bcb7358"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1910.dbc",
+      "source_bytes": 1127805,
+      "source_sha256": "8d88cab760c957888e38a27cf40489a000a1785539f260b3ef07c921d023a57d"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1911.dbc",
+      "source_bytes": 1119852,
+      "source_sha256": "08328ab920e088081d460eb3874724c179f58ba92e214e49f6fad2bc6b8feb79"
+    },
+    {
+      "state": "RN",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRN1912.dbc",
+      "source_bytes": 1083243,
+      "source_sha256": "14ddafedc7ca29cde4646cbb22fbd3c447087c2c4547ed0ce3be17ce067fce67"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1901.dbc",
+      "source_bytes": 4687767,
+      "source_sha256": "73f6fde0b3c986afeb475600f17690c55ba4f02385eab0dde46c0b89ebde8701"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1902.dbc",
+      "source_bytes": 4657978,
+      "source_sha256": "315441573356381d77a10a3d20c850f86612424b58eac77f732e19b029ef1f8f"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1903.dbc",
+      "source_bytes": 4659084,
+      "source_sha256": "f5f695f87d5379a415fda07889f19520de8565c225c00e9786a9652194587772"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1904.dbc",
+      "source_bytes": 4861112,
+      "source_sha256": "4487b4dd9510d9b74cc100762e3722a54dbbdeb39a4ad209b8e59b9be9a312af"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1905.dbc",
+      "source_bytes": 5146934,
+      "source_sha256": "1c23e873c5e54867301c6095207f317f07a0730c9302bc9e5bdb49824ccfb87a"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1906.dbc",
+      "source_bytes": 5075139,
+      "source_sha256": "e6ca5455ddc40fcf93fb5dd11d1ada00d686c8edab889fb9f888e6864b667250"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1907.dbc",
+      "source_bytes": 5286285,
+      "source_sha256": "45b2c88cc64b6ee26538b3e15960ae247e32878606943b8cdd94bd72d6c03f50"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1908.dbc",
+      "source_bytes": 5302409,
+      "source_sha256": "cc1ad29042709e80dd652c10753cad883965acf6d601d6c2dbc6a43f68250ee4"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1909.dbc",
+      "source_bytes": 5133999,
+      "source_sha256": "33e7b7aae719e9221a5b0f883df4bc93247163d02d6f057fc7d1ba0461142e27"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1910.dbc",
+      "source_bytes": 5424851,
+      "source_sha256": "4f19d706cfa391ba0cb4832d62e8cf045c93d35e094f43858de8ebede883d39d"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1911.dbc",
+      "source_bytes": 4955496,
+      "source_sha256": "12be07a2bed3d1d96148946396cc782bbe71b846a28590a5b23450124b4c0aeb"
+    },
+    {
+      "state": "RS",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRS1912.dbc",
+      "source_bytes": 4844189,
+      "source_sha256": "c8aa563be814fa0a4ea8b211ffb89dadbc51c62c4d56567b9338ba74bbcd03e0"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1901.dbc",
+      "source_bytes": 683283,
+      "source_sha256": "2d5eb7114b3e262a0a0eb8e908f589176b5804d5da58bab9cb5fb9c19398fc2c"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1902.dbc",
+      "source_bytes": 673675,
+      "source_sha256": "72f59f02ed35f42c946a31166c259b9263f4fd7f2b89027478b28c64248b513f"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1903.dbc",
+      "source_bytes": 680883,
+      "source_sha256": "eddbaca7538abee6a8468f51d44d1234fda07bbf45e0c9be04bec81c0a8d9955"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1904.dbc",
+      "source_bytes": 746105,
+      "source_sha256": "e79ef8c91e4f309b28549b623486e1b2a1ca3f143881ac8e0e8f80a7e75e06a7"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1905.dbc",
+      "source_bytes": 774732,
+      "source_sha256": "64a3d1afb07b3f2881df0653fb1a7da9d6afc17120cc83fba4f1031695007702"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1906.dbc",
+      "source_bytes": 716017,
+      "source_sha256": "b31fa2fc548e675d66eca289cd064b1d4d4b049c9f4aac599f8db0cf0c9723ed"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1907.dbc",
+      "source_bytes": 760437,
+      "source_sha256": "be1f4d29d418164bfdb57e3e2d7fe047ef601d35ab822509e9e4e1b7bf24714c"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1908.dbc",
+      "source_bytes": 720809,
+      "source_sha256": "90ca5bda4fc4be4a3f9d33b4886d6cdee044beda5be21d7b0c7a0c646a7eb3ae"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1909.dbc",
+      "source_bytes": 713545,
+      "source_sha256": "51cc0e0c3a78dccb18a67562e738aeb3e6531f6889b04a5316bb0e9ee64de86d"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1910.dbc",
+      "source_bytes": 713462,
+      "source_sha256": "672eb2ecf58eba802a56f32dcd4629fc88f59815f8f2803ac2be3da2d4dcd6b7"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1911.dbc",
+      "source_bytes": 725562,
+      "source_sha256": "b908b8b4decab7ab0f9b417ce8dc66daf28c25d5611f3ed883fb522f8f448137"
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRO1912.dbc",
+      "source_bytes": 673292,
+      "source_sha256": "3c844315f35e70a9aed535ff8888ed9b0da890662e1cac36763fa4e1c0b07b06"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1901.dbc",
+      "source_bytes": 244880,
+      "source_sha256": "1f66588a4d840f1fbc14c736e2c850df74e9717db5e7a036c959b5c666b0b0c2"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1902.dbc",
+      "source_bytes": 232850,
+      "source_sha256": "2d9846b1e8f880103e25354f859ef1fe00e99105c3e62d3098b216d1c0d79259"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1903.dbc",
+      "source_bytes": 215112,
+      "source_sha256": "8e186c42950989f50466fb52884a486bb60a6b4f4f8dac1c89a4ba20857c27ab"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1904.dbc",
+      "source_bytes": 242333,
+      "source_sha256": "d55048a62382297570793d2b0a3900b5dd34fe0e03e011b5668d561e675208ce"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1905.dbc",
+      "source_bytes": 228096,
+      "source_sha256": "267063a283314c4bff91659a767a05ae5ad06bb7a0fb89e29e95ff8cb66a387d"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1906.dbc",
+      "source_bytes": 265018,
+      "source_sha256": "1979937cc6237e6816dc71c900ab8c87b65af52ceb595a14a7bfe0e74f40e85d"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1907.dbc",
+      "source_bytes": 322787,
+      "source_sha256": "70d89a939ee279e4f1be6bdfb72a1850304e066043efb9f5adf4a0ccc9af529d"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1908.dbc",
+      "source_bytes": 365249,
+      "source_sha256": "fe2025237a7711d89ac46784c6bbba7bf9f3fdd6818880bc9f622125b9d96098"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1909.dbc",
+      "source_bytes": 330282,
+      "source_sha256": "c19f59d7895aa5cca5181d26dd84aa1fe3ea9c81354a04fd0a0e8dba0a4a665d"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1910.dbc",
+      "source_bytes": 328429,
+      "source_sha256": "da3c1fe2a7f1f9fbf20a5333dddc7f7deaeaf715a6e8ce8bf38f0919bee38c73"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1911.dbc",
+      "source_bytes": 311397,
+      "source_sha256": "40679160fae6ac7ca864f1ffbeab3bada3066bb3405e5db41300d43ebe9ae675"
+    },
+    {
+      "state": "RR",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDRR1912.dbc",
+      "source_bytes": 293338,
+      "source_sha256": "d372490ad6bd7d34b6edaf3fad2a24648fa47773b41e93edcde4af7a97b9401a"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1901.dbc",
+      "source_bytes": 3199017,
+      "source_sha256": "26bbbbe8900f2906cd79adf6b3e755b22702abde150796d97ac0a59402f81d7a"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1902.dbc",
+      "source_bytes": 3047100,
+      "source_sha256": "439f524c227045b7be6640849786be7aab029ad412ad0d233cfae3920bbede90"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1903.dbc",
+      "source_bytes": 3085876,
+      "source_sha256": "77242eb99da9b4dbfcabc9290df7bc58c935c3ce84f64df2fa913feef732822e"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1904.dbc",
+      "source_bytes": 3156916,
+      "source_sha256": "f9ff14196264abd44f753785240d78d38ffe83bd92c879e96ad9f93e857d8c4f"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1905.dbc",
+      "source_bytes": 3406007,
+      "source_sha256": "83293478ea718bd1e732493240f99214bbaf475e8bb3b52fff7c2fdb93210528"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1906.dbc",
+      "source_bytes": 3319735,
+      "source_sha256": "fd24ae65e7ebe45e9c46f6e009b5ad071fb561534560f24ca5fad54647a344f1"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1907.dbc",
+      "source_bytes": 3466302,
+      "source_sha256": "b0a07637a64a1a60c6f8684e02f4dcd103b74f70c1c5d47d4e0ed32d33eeff0d"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1908.dbc",
+      "source_bytes": 3465426,
+      "source_sha256": "38a6aa7baf34d597738eb710337897178173219f3e2621e7aa009a3a70b94447"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1909.dbc",
+      "source_bytes": 3403690,
+      "source_sha256": "1451a5877ee369f20b666c9a5ce84dc42e79ba4e50d68c5d43253f6e05e86096"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1910.dbc",
+      "source_bytes": 3498764,
+      "source_sha256": "138c860c25cc48ec4510fe21ec60f20656530ccbb2da3d70d55edcac8599fdbb"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1911.dbc",
+      "source_bytes": 3362380,
+      "source_sha256": "f96e31bdad5ab05e40e59084142dfa99559820a34a0c53f15b2d61dcfead5d09"
+    },
+    {
+      "state": "SC",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSC1912.dbc",
+      "source_bytes": 3180922,
+      "source_sha256": "7618b3dc23493d17817ffc055ecf805cbbfc82b91bc31258775ec9b92bce41ca"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1901.dbc",
+      "source_bytes": 16345865,
+      "source_sha256": "194c0db89a021b4a5f9ff23d7909a83850c5d6587e447bd024a695a0730fe3dc"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1902.dbc",
+      "source_bytes": 15690982,
+      "source_sha256": "4653fb8f96fefacfb3a47f8f7fc1b1d1591c56be0c9800fbe0fcddf82dc254a0"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1903.dbc",
+      "source_bytes": 16685059,
+      "source_sha256": "9ed7569e5aec029c6622b0eb83dd907a381b9e2e3ebec433fcc7ee7efe754dfe"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1904.dbc",
+      "source_bytes": 17014473,
+      "source_sha256": "f74cda429d96ee93d842d1bc4575c7ed96b156708e7059d215774137eaba60d8"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1905.dbc",
+      "source_bytes": 17552055,
+      "source_sha256": "2c54b329b6db09f54b8920b7dee0804adbce5c7a6efc1aa32ab51f8360698375"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1906.dbc",
+      "source_bytes": 16862741,
+      "source_sha256": "021a13fb9a92d9687dc444b0a8956e70fbba285b9b8536941bb41d673525d200"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1907.dbc",
+      "source_bytes": 17140862,
+      "source_sha256": "005216242b408255689bd6c2da3738cb86bfef3d190ff2ba72dfdae5acdcc25a"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1908.dbc",
+      "source_bytes": 17555424,
+      "source_sha256": "22b4bcbf0a47ae37b0430ab701da32fc1f4f9c19b0a52e8edb473e97f6455232"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1909.dbc",
+      "source_bytes": 17121808,
+      "source_sha256": "4dbac4b2cfe4a5dda4586145d4915a6ed9c84d144c03ea1bfb31bdc8143eef8f"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1910.dbc",
+      "source_bytes": 17760862,
+      "source_sha256": "75a9cd4eb33cf2d8a4213925ee0aefa75bb720d6cc46c0075093f7cfa780187a"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1911.dbc",
+      "source_bytes": 16528229,
+      "source_sha256": "ccbb98247d0e9d3fb08d45908acc2d6826aa385b5637bb10cb9aec611642afe1"
+    },
+    {
+      "state": "SP",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSP1912.dbc",
+      "source_bytes": 16055457,
+      "source_sha256": "8a973b9a72e5948d433d3ae59c4fcf5db7984f5e33fc131beab97682cdb72e92"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1901.dbc",
+      "source_bytes": 575614,
+      "source_sha256": "d26245cd18f30b23b7b0310ba7a65d023e5ce94c42b9bab32c1a7b294e802bc8"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1902.dbc",
+      "source_bytes": 521332,
+      "source_sha256": "a439211f48e28f99ffa0bb27e05ad00d24dd1a38899cc8cd178ca26b06274c3e"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1903.dbc",
+      "source_bytes": 514770,
+      "source_sha256": "d3e6f9e6ffe2492393a454153c8e7c36524eec40f771aa77f0c8e5d0da5b1c6f"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1904.dbc",
+      "source_bytes": 588351,
+      "source_sha256": "00734eff9f93c352d136a68a4bebd3a123314a87b68f3d81cff5b264f4aad9fb"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1905.dbc",
+      "source_bytes": 633045,
+      "source_sha256": "a6fb0ac89aaf9e7063eff5eaf1ef49ba8574c9266e2680a32fcc45eccd8b2104"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1906.dbc",
+      "source_bytes": 564125,
+      "source_sha256": "e95fb5bfbaa5edd85b632025feb1520473e089d061e5dd89a33f68f6cb7fce9e"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1907.dbc",
+      "source_bytes": 581814,
+      "source_sha256": "b4f935d3db105dc9cc06abcc0321b2fa1d017b809f9531afbe895e43344a6ec3"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1908.dbc",
+      "source_bytes": 577352,
+      "source_sha256": "b63cbd9aa85cf78f578b71b256ceb1f3798d7a51bcb5ce69ea8876a47371a007"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1909.dbc",
+      "source_bytes": 570207,
+      "source_sha256": "60de5b1945dd8c93034b21aa9e7e50c0ec68caa70fc05c4207396243c40c22b0"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1910.dbc",
+      "source_bytes": 587122,
+      "source_sha256": "d6c7f35cd12709fc06f88fbad015f3ae772d4ff9394cc446b23d1af6d65e629f"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1911.dbc",
+      "source_bytes": 580977,
+      "source_sha256": "fb4357286db6e165b267430d5742417bc589d100c66b816cb19d4f53aa2e4601"
+    },
+    {
+      "state": "SE",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDSE1912.dbc",
+      "source_bytes": 525818,
+      "source_sha256": "9037913bec293fea520f8cbf5852e18838d63040aaf123048d3f949025255556"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 1,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1901.dbc",
+      "source_bytes": 449162,
+      "source_sha256": "128ae9e20f0aae3b08f4ca4dc8da7b9a87a5495fd55032e0b0e24a5dcc7ca08b"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 2,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1902.dbc",
+      "source_bytes": 479861,
+      "source_sha256": "cbae7ea45bf85bf841775e387f6108bb3bf04befe67342da7d99e378b50e3e3e"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 3,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1903.dbc",
+      "source_bytes": 481427,
+      "source_sha256": "7c959fda8c282cb95db390407826a87b20f40857b379a27327bca0b36cbb12d3"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 4,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1904.dbc",
+      "source_bytes": 492298,
+      "source_sha256": "0fac6b729232a1171d132caff6e1fd0bfef90f1de171be1825d5eba5583d6b13"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 5,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1905.dbc",
+      "source_bytes": 517771,
+      "source_sha256": "9d9466f8bbdfa18d79663eba33a05280ffb8bc3431c9149241e12d8b433578c7"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 6,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1906.dbc",
+      "source_bytes": 467983,
+      "source_sha256": "eaa49840546e0920eb415200b9f3896a419351e1ed9e1a77a7309cd146392d74"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 7,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1907.dbc",
+      "source_bytes": 527913,
+      "source_sha256": "b22e9f8de2e87b213d0b7f6dcbb89a6d05e24f3b0bb5372cb0536f72653b7353"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 8,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1908.dbc",
+      "source_bytes": 570242,
+      "source_sha256": "5d908f86dd177f1b75b86a6e1adcc8e6de38c777d9e5bbd63cfba0d5fbb45e83"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 9,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1909.dbc",
+      "source_bytes": 629806,
+      "source_sha256": "2226b194a993a3e4d00701fcbdb896bcbebab23061de79587986c29d8317fddf"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 10,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1910.dbc",
+      "source_bytes": 569525,
+      "source_sha256": "08bce159199e7dac1967582164bdf430bf0391ad6c6bdeded80f0f7f55208ab9"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 11,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1911.dbc",
+      "source_bytes": 500113,
+      "source_sha256": "521f08f9558481f25dd993ca0dc03e578e95b3baa4685b380b7485596d7fecfb"
+    },
+    {
+      "state": "TO",
+      "year": 2019,
+      "month": 12,
+      "source_url": "ftp://ftp.datasus.gov.br/dissemin/publicos/SIHSUS/200801_/Dados/RDTO1912.dbc",
+      "source_bytes": 552322,
+      "source_sha256": "297896bc49611143c1071c628bd56f3e8debf4fdd53c8712640dc86720919918"
+    }
+  ]
+}

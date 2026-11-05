@@ -8,6 +8,9 @@ Downloads comuns são atômicos, cacheados e acompanhados de URL, SHA-256 e inst
 
 ## Credenciais e fontes
 
+Para criar a conta ADS e salvar a chave fora do Git, siga [o guia de configuração Copernicus](copernicus-setup.md). O comando `uv run folego configure-ads` recebe a chave com entrada oculta e cria `~/.cdsapirc` com permissão `600`, sem sobrescrever configuração existente.
+
+
 - SIH: FTP público DATASUS; a conversão DBC usa o leitor `pyreaddbc` mantido pelo projeto PySUS, sem a dependência transitiva de DuckDB < 2, instalado com `uv sync --extra sih`, que pode exigir bibliotecas nativas do leitor pyreaddbc. O download nacional histórico é volumoso; comece por competência/UF e faça inventário dos arquivos.
 - FIRMS: `FIRMS_MAP_KEY` no ambiente. A chave não entra no manifesto; o adaptador não deve ser chamado com logging de URLs sensíveis. O modo implementado usa VIIRS SNPP NRT; arquivos históricos precisam de ingestão própria.
 - CAMS: configure o cliente `cdsapi` para o ADS, aceite os termos do dataset e exporte a requisição pela interface oficial. Use `uv sync --extra climate`. API e nomes de parâmetros podem mudar; o código recebe o JSON oficial, sem inventar parâmetros ou substituir silenciosamente variáveis.
@@ -53,3 +56,18 @@ Saída em `data/marts/research-forecast.json`: `mode=research`, `validated=false
 O Vite gera `web/dist`, servido no GitHub Pages. Caminhos relativos permitem hospedar sob `/folego/`. Dados públicos ficam em `web/public/data` e o build os copia sem transformação. MapLibre e PMTiles são dependências travadas; a malha atual é GeoJSON local, sem serviços de tiles ou contas externas.
 
 `folego export arquivo.parquet` publica somente o esquema agregado permitido, um desfecho por arquivo e idades disjuntas. Não combine resultados com totais que revelem células suprimidas. Os microdados jamais devem ir ao diretório público. O site atual aceita somente o contrato de demonstração, de propósito; adicionar publicação real exige cumprir os critérios científicos e adaptar o contrato de forma auditável.
+
+## Piloto SIH real e conferência no TabNet
+
+```sh
+uv run --extra sih folego pilot --config configs/pilots/madeira-mamore-2019.json \
+  --require-tabnet --publish-report docs/pilots/madeira-mamore-2019.md
+```
+
+O comando consulta os 12 meses de processamento das 27 UFs, mantendo o recorte **por residência** nos cinco municípios. Não limite a coleta à UF de residência: em 2019, isso perderia 45 das 2.677 internações respiratórias do piloto. O volume bruto comprimido é aproximadamente 883 MiB. Há reserva mínima de disco para descompressão e cache por SHA-256 da fonte, lista de municípios e versão do leitor. A projeção usa os metadados DBF do `dbfread` e filtra o município antes de decodificar/reter os demais campos; não materializa todas as colunas e todos os pacientes do Brasil.
+
+Resultados locais em `data/staging/pilots/madeira-mamore-2019/`: partições selecionadas, controle mensal por processamento, série diária observada por data da internação e linhas segregadas. Relatório completo em `data/marts/pilots/madeira-mamore-2019/report.json`. O controle TabNet usa registros respiratórios de AIH normal, todas as idades, antes da reconciliação de episódios. A série diária exclui continuidades, colapsa repetições idênticas e segrega identificadores com informações divergentes.
+
+A consulta de referência é construída a partir das opções do formulário oficial, incluindo os índices dos municípios e do capítulo CID, sem presumir índices fixos. O retorno deve confirmar os mesmos filtros e os 12 períodos no registro de consulta que o TabNet inclui no HTML. O parser suporta células HTML com fechamento implícito e meses por extenso. Formulário, resposta, requisição e SHA-256 ficam em `data/raw/tabnet/`. `--require-tabnet` faz o comando falhar se a comparação não for aceita; `--skip-tabnet` permite investigar somente a ingestão, sem alegar validação.
+
+A exportação do relatório mantém só totais amplos e proveniência dos arquivos públicos. Identificadores, contagens por arquivo da coorte e células diárias não são publicados; a tabela mensal inteira é omitida se houver contagem menor que 5. O recorte por ano de processamento não certifica uma coorte madura por data da internação: dados do início podem se referir a admissões anteriores, e admissões do fim podem aparecer em competências posteriores. Por isso não há preenchimento de zeros nem liberação para ajuste do modelo neste piloto.

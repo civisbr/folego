@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "madeira-mamore-2019",
+  "health_region_code": "11004",
+  "processing_year": 2019,
+  "file_states": "all",
+  "territory_snapshot": "web/public/data/municipalities.parquet",
+  "reference_state": "RO",
+  "reference_endpoint": "https://tabnet.datasus.gov.br/cgi/deftohtm.exe?sih/cnv/nrro.def",
+  "purpose": "Conferência de internações respiratórias por residência e competência, antes de modelagem.",
+  "clinical_cohort_complete": false
+}

@@ -6,8 +6,8 @@ Primeira versão, novembro de 2026. **Não há desempenho epidemiológico real a
 | --- | --- |
 | Python 3.12, uv, Ruff, pytest, Makefile | Implementados; `make check` executa validações locais. |
 | Correspondência de 100% dos municípios | Snapshot com 5.571/5.571, 439 regiões; teste nacional e manifesto versionados. Um complemento com resolução oficial da SES/MT. |
-| SIH RD: download e conversão DBC → Parquet | Adaptador implementado com dependência opcional; download nacional desde 2012 não executado. |
-| Desfechos CID/idade/data/residência | Implementados e testados com exemplos controlados; concordância TabNet < 1% pendente. |
+| SIH RD: download e conversão DBC → Parquet | Piloto real de 2019 executado: 324 arquivos das 27 UFs, projetados para os residentes de Madeira-Mamoré. Série nacional desde 2012 ainda pendente. |
+| Desfechos CID/idade/data/residência | Implementados; piloto Madeira-Mamoré/2019 concorda com TabNet em 2.677 internações e 12 meses (0% de diferença). Outras regiões/anos e maturação por data de internação pendentes. |
 | PM2,5 ponderado pela população | Operação testada; extração dos rasters e overlay populacional nacional pendentes. |
 | FIRMS, CAMS, ERA5, InfoGripe | Adaptadores e cache; integração autenticada e validação de granularidade pendentes. |
 | Modelo com lags e confundidores | Implementado; testes sintéticos recuperam efeito conhecido e exercitam fluxo de previsão. Ajuste científico por região pendente. |
@@ -51,3 +51,11 @@ PRs Dependabot #1–#9 integrados: DuckDB 2.0.0, PyArrow 26.0.1, statsmodels 0.1
 O conjunto atualizado passou por testes de efeito conhecido, previsão completa, conversão/cache SIH e interoperabilidade Arrow → Parquet → DuckDB persistente. Os oito cenários de navegador também passaram com Vite 8. As APIs usadas foram confrontadas com as [notas de statsmodels](https://www.statsmodels.org/stable/release/index.html), a [migração DuckDB 2](https://duckdb.org/docs/2.0/operations_manual/migration), as [notas Arrow 26](https://arrow.apache.org/blog/2026/10/08/26.0.0-release/) e a [migração Vite 8](https://vite.dev/guide/migration).
 
 A conciliação final também atualizou pandas para 3.1.1 e as dependências transitivas liberadas pela retirada do PySUS completo. Os acessores de calendário do pandas foram adaptados aos nomes atuais, removendo avisos de depreciação sem alterar o desenho do modelo.
+
+## Primeiro aceite de ingestão com dados reais
+
+O [relatório Madeira-Mamoré / competências de 2019](pilots/madeira-mamore-2019.md) documenta o processamento de 324 arquivos RD, 12.356.283 registros examinados e a seleção dos residentes dos cinco municípios da coorte. Foram conferidas 2.677 internações respiratórias normais com o TabNet, com diferença de 0% no total e em cada um dos 12 meses. A cobertura das 27 UFs inclui 45 internações fora de Rondônia que seriam perdidas usando apenas arquivos RO.
+
+A validação é de ingestão **por competência de processamento**. Não valida o modelo, o efeito da fumaça, pagamentos atribuíveis, uma série madura por data de internação ou as outras regiões e anos. As condições do relatório devem ser preservadas na interpretação. O acesso ADS/CAMS ainda precisa ser configurado para prosseguir com a exposição ambiental.
+
+A entrega do piloto passou por 39 testes locais, incluindo projeção DBF comparada ao leitor de referência, truncamento, separação entre processamento e internação, reconciliação de identificadores, filtros e HTML legado do TabNet, cobertura das 27 UFs e proteção da publicação. Lint, formatação e build do site também passaram. O comando de configuração ADS tem testes de permissão do arquivo, preservação de configuração existente e ausência de impressão da chave.

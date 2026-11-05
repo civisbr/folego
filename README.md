@@ -29,6 +29,17 @@ O Fôlego está sendo construído para estimar o excesso de internações respir
 - Executor de previsão de pesquisa sobre painéis preparados, preservando histórico de exposição e atraso de 62 dias para o SIH, além de divisões temporais, métricas semanais e teste de controle negativo.
 - Exportação de agregados JSON/Parquet com supressão de contagens menores que 5 e pagamentos associados; arquivos públicos estáticos e CSV do recorte selecionado.
 
+### Primeiro piloto com dados reais
+
+O [piloto Madeira-Mamoré / 2019](docs/pilots/madeira-mamore-2019.md) processou **324 arquivos das 27 UFs**, conferindo **2.677 internações respiratórias por residência** com o TabNet: **diferença de 0% no total e nos 12 meses**. Quarenta e cinco desses atendimentos ocorreram fora de Rondônia. O recorte é por competência de processamento; a série por data de internação ainda precisa de uma janela maior para maturação. Isso valida a primeira ingestão e sua conferência, sem atribuir internações à fumaça ou liberar previsões reais.
+
+```sh
+uv run --extra sih folego pilot --require-tabnet \
+  --publish-report docs/pilots/madeira-mamore-2019.md
+```
+
+Os arquivos brutos e as células diárias ficam fora do Git. O relatório publica apenas totais amplos, a consulta de referência e a proveniência dos arquivos oficiais.
+
 ### Executar localmente
 
 Pré-requisitos: [uv](https://docs.astral.sh/uv/), Python 3.12, Node.js 22.12 ou superior e Make.

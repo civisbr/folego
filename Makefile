@@ -1,4 +1,4 @@
-.PHONY: setup test lint check demo territory serve web-build web-lint
+.PHONY: setup test lint check demo territory serve web-build web-lint pilot
 setup:
 	uv sync --frozen
 	npm --prefix web ci
@@ -26,3 +26,6 @@ serve:
 
 web-build:
 	npm --prefix web run build
+
+pilot:
+	uv run --extra sih folego pilot --require-tabnet --publish-report docs/pilots/madeira-mamore-2019.md
