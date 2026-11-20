@@ -27,6 +27,18 @@ O snapshot público tem 5.571 municípios e 439 regiões. A malha mínima da API
 
 Para atualizar os arquivos territoriais públicos, regenere a correspondência, confira a cobertura e exporte os formatos JSON/CSV/Parquet e o manifesto. A publicação automática desses snapshots foi deliberadamente evitada: mudanças de limites exigem revisão. `folego geography` dissolve os polígonos oficiais pela tabela em staging. O comando `folego demo` regenera os exemplos determinísticos, sem alterar a data para parecer uma previsão nova.
 
+## Exposição a PM2,5
+
+```sh
+uv run --extra climate folego exposure data/raw/cams/cams-global-reanalysis-eac4/<arquivo>.nc
+```
+
+O comando gera `data/marts/exposure/pm25-daily.parquet` com `date`, `health_region_code`, `population` e `pm25` (µg/m³). Cada dia local (UTC−3) é a média das oito análises de 3 horas do EAC4; dias incompletos são descartados. A ponderação usa a população do WorldPop 2020 (grade de 1 km, sem restrição, CC BY 4.0): cada pixel populado vai para a região de saúde que contém seu centro e para o ponto mais próximo da grade de 0,75° do CAMS. Pixels populados a mais de meio passo de qualquer ponto da grade são encaixados no ponto mais próximo só até um passo (0,75°) — caso de Fernando de Noronha, a leste do limite −33 do pedido nacional — e contabilizados no manifesto; além disso o comando falha. Também falha se o raster não estiver em EPSG:4326, se alguma região ficar sem pixel populado ou se houver valores ausentes. Ao lado do Parquet fica `pm25-daily.parquet.source.json`, com SHA-256 e proveniência do NetCDF, do raster e da malha, período, encaixes e atribuições. O raster WorldPop tem SHA-256 fixado no código; downloads em cache são conferidos contra o hash registrado antes de cada uso.
+
+Limitações: as fronteiras vêm da malha simplificada das regiões; pedidos futuros devem usar limite leste −32 para cobrir Noronha; o WorldPop 2020 é fixo no tempo e diverge do Censo 2022 em algumas regiões (razão total WorldPop/IBGE entre 0,71 e 1,62, mediana 1,04), o que afeta a distribuição interna dos pesos; o PM2,5 é total, não apenas de fumaça.
+
+Atribuição: WorldPop (www.worldpop.org), School of Geography and Environmental Science, University of Southampton — Population Counts, Unconstrained individual countries 2000-2020 (1 km), Brasil, 2020 ([hub.worldpop.org](https://hub.worldpop.org/Global1_2000-2020)). Confirmar o DOI do recorte nacional antes de citar em publicação.
+
 ## Painel diário preparado para pesquisa
 
 O comando `folego forecast` recebe dois Parquets privados com uma linha por `date` (tipo Date), `health_region_code`, `age_group`, `outcome`. As chaves devem ser únicas e as datas completas e contíguas em cada grupo:

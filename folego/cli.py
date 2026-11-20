@@ -22,6 +22,14 @@ def main():
     cams = commands.add_parser("cams", help="Executar requisição exportada do ADS")
     cams.add_argument("--dataset", required=True)
     cams.add_argument("--request", type=Path, required=True)
+    exposure = commands.add_parser(
+        "exposure", help="PM2,5 diário do CAMS ponderado pela população, por região de saúde"
+    )
+    exposure.add_argument("cams_file", type=Path)
+    exposure.add_argument("--regions", type=Path, default=Path("web/public/data/regions.geojson"))
+    exposure.add_argument(
+        "--output", type=Path, default=Path("data/marts/exposure/pm25-daily.parquet")
+    )
     export = commands.add_parser("export", help="Exportar agregados com supressão de células")
     export.add_argument("source", type=Path)
     export.add_argument("--output", type=Path, default=Path("data/public"))
@@ -120,6 +128,21 @@ def main():
         from .ingest.cams import retrieve_cams
 
         print(retrieve_cams(args.dataset, json.loads(args.request.read_text())))
+    elif args.command == "exposure":
+        from .ingest.worldpop import WORLDPOP_ATTRIBUTION, download_worldpop
+        from .transform.cams_exposure import build_exposure
+
+        series = build_exposure(
+            args.cams_file,
+            download_worldpop(),
+            args.regions,
+            args.output,
+            attribution=(WORLDPOP_ATTRIBUTION,),
+        )
+        print(
+            f"{series.height} linhas, {series['health_region_code'].n_unique()} regiões: "
+            f"{args.output}"
+        )
     elif args.command == "export":
         import polars as pl
 

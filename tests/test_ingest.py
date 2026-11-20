@@ -83,3 +83,31 @@ def test_sih_converter_validates_fields_and_caches_parquet(tmp_path, monkeypatch
     assert calls == [str(tmp_path / "raw.dbc")]
     assert frame.height == 1 and "EXTRA" not in frame.columns
     assert frame["DIAG_PRINC"][0] == "J450"
+
+
+def test_cached_download_rejects_tampered_or_unexpected_files(tmp_path):
+    import hashlib
+    import json
+
+    from folego.ingest.common import cached_download
+
+    target = tmp_path / "file.bin"
+    target.write_bytes(b"original")
+    digest = hashlib.sha256(b"original").hexdigest()
+    (tmp_path / "file.bin.source.json").write_text(json.dumps({"sha256": digest}))
+    url = "https://example.invalid/file.bin"
+    assert cached_download(url, target, expected_sha256=digest) == target
+    with pytest.raises(ValueError, match="Unexpected SHA-256"):
+        cached_download(url, target, expected_sha256="0" * 64)
+    target.write_bytes(b"tampered")
+    with pytest.raises(ValueError, match="changed since download"):
+        cached_download(url, target)
+
+
+def test_truncated_manifest_counts_as_missing(tmp_path):
+    from folego.ingest.common import _recorded_sha256
+
+    manifest = tmp_path / "file.bin.source.json"
+    manifest.write_text('{"sha256": "ab')
+    assert _recorded_sha256(manifest) is None
+    assert _recorded_sha256(tmp_path / "absent.json") is None

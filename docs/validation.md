@@ -8,7 +8,7 @@ Primeira versão, novembro de 2026. **Não há desempenho epidemiológico real a
 | Correspondência de 100% dos municípios | Snapshot com 5.571/5.571, 439 regiões; teste nacional e manifesto versionados. Um complemento com resolução oficial da SES/MT. |
 | SIH RD: download e conversão DBC → Parquet | Piloto real de 2019 executado: 324 arquivos das 27 UFs, projetados para os residentes de Madeira-Mamoré. Série nacional desde 2012 ainda pendente. |
 | Desfechos CID/idade/data/residência | Implementados; piloto Madeira-Mamoré/2019 concorda com TabNet em 2.677 internações e 12 meses (0% de diferença). Outras regiões/anos e maturação por data de internação pendentes. |
-| PM2,5 ponderado pela população | Operação testada; extração dos rasters e overlay populacional nacional pendentes. |
+| PM2,5 ponderado pela população | Extração do EAC4 e pesos populacionais (WorldPop 2020) implementados e testados com dados sintéticos; pesos nacionais cobrem as 439 regiões. Série real 2012–2025 aguardando o download do ADS. |
 | FIRMS, CAMS, ERA5, InfoGripe | Adaptadores e cache; integração autenticada e validação de granularidade pendentes. |
 | Modelo com lags e confundidores | Implementado; testes sintéticos recuperam efeito conhecido e exercitam fluxo de previsão. Ajuste científico por região pendente. |
 | Excesso, pagamentos e incerteza | Implementados com simulação conjunta e preservação do histórico observado. IPCA real precisa ser fornecido. |
