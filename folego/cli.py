@@ -30,6 +30,24 @@ def main():
     exposure.add_argument(
         "--output", type=Path, default=Path("data/marts/exposure/pm25-daily.parquet")
     )
+    meteorology = commands.add_parser(
+        "meteorology", help="Temperatura e umidade diárias do ERA5 por região de saúde"
+    )
+    meteorology.add_argument("era5_files", type=Path, nargs="+")
+    meteorology.add_argument(
+        "--regions", type=Path, default=Path("web/public/data/regions.geojson")
+    )
+    meteorology.add_argument(
+        "--output", type=Path, default=Path("data/marts/exposure/meteorology-daily.parquet")
+    )
+    ipca = commands.add_parser("ipca", help="Atualizar o número-índice mensal do IPCA (SIDRA)")
+    ipca.add_argument("--refresh", action="store_true")
+    ipca.add_argument("--output", type=Path, default=Path("data/marts/ipca.parquet"))
+    calendar = commands.add_parser("calendar", help="Feriados nacionais e estaduais por região")
+    calendar.add_argument("--start", required=True)
+    calendar.add_argument("--end", required=True)
+    calendar.add_argument("--regions", type=Path, default=Path("web/public/data/regions.geojson"))
+    calendar.add_argument("--output", type=Path, default=Path("data/marts/calendar.parquet"))
     export = commands.add_parser("export", help="Exportar agregados com supressão de células")
     export.add_argument("source", type=Path)
     export.add_argument("--output", type=Path, default=Path("data/public"))
@@ -141,6 +159,68 @@ def main():
         )
         print(
             f"{series.height} linhas, {series['health_region_code'].n_unique()} regiões: "
+            f"{args.output}"
+        )
+    elif args.command == "meteorology":
+        from .ingest.worldpop import WORLDPOP_ATTRIBUTION, download_worldpop
+        from .transform.meteorology import build_meteorology
+
+        series = build_meteorology(
+            args.era5_files,
+            download_worldpop(),
+            args.regions,
+            args.output,
+            attribution=(WORLDPOP_ATTRIBUTION,),
+        )
+        print(
+            f"{series.height} linhas, {series['health_region_code'].n_unique()} regiões: "
+            f"{args.output}"
+        )
+    elif args.command == "ipca":
+        from datetime import UTC, datetime
+
+        from .ingest.ipca import IPCA_ATTRIBUTION, download_ipca
+        from .transform.cams_exposure import describe_input, write_with_manifest
+
+        frame, source = download_ipca(refresh=args.refresh)
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        write_with_manifest(
+            args.output,
+            frame.write_parquet,
+            {
+                "created_at": datetime.now(UTC).isoformat(),
+                "months": [str(frame["month"].min()), str(frame["month"].max())],
+                "inputs": {"sidra": [describe_input(source)]},
+                "attribution": [IPCA_ATTRIBUTION],
+            },
+        )
+        print(f"IPCA {frame['month'].min()} a {frame['month'].max()}: {args.output}")
+    elif args.command == "calendar":
+        from datetime import UTC, date, datetime
+
+        import holidays
+
+        from .transform.calendar import holiday_calendar, region_states
+        from .transform.cams_exposure import describe_input, write_with_manifest
+
+        start, end = date.fromisoformat(args.start), date.fromisoformat(args.end)
+        if start > end:
+            parser.exit(1, "--start deve ser anterior ou igual a --end\n")
+        frame = holiday_calendar(start, end, region_states(args.regions))
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        write_with_manifest(
+            args.output,
+            frame.write_parquet,
+            {
+                "created_at": datetime.now(UTC).isoformat(),
+                "dates": [args.start, args.end],
+                "holidays_package": holidays.__version__,
+                "coverage": "national and state public holidays; municipal ones are absent",
+                "inputs": {"regions": [describe_input(args.regions)]},
+            },
+        )
+        print(
+            f"{frame.height} linhas, {frame['health_region_code'].n_unique()} regiões: "
             f"{args.output}"
         )
     elif args.command == "export":

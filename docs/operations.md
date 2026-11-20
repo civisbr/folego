@@ -39,6 +39,22 @@ Limitações: as fronteiras vêm da malha simplificada das regiões; pedidos fut
 
 Atribuição: WorldPop (www.worldpop.org), School of Geography and Environmental Science, University of Southampton — Population Counts, Unconstrained individual countries 2000-2020 (1 km), Brasil, 2020 ([hub.worldpop.org](https://hub.worldpop.org/Global1_2000-2020)). Confirmar o DOI do recorte nacional antes de citar em publicação.
 
+## Meteorologia, IPCA e feriados
+
+```sh
+uv run --extra climate folego meteorology data/raw/era5/*.nc
+uv run folego ipca --refresh
+uv run folego calendar --start 2012-01-01 --end 2025-12-31
+```
+
+`meteorology` lê os arquivos anuais do ERA5 (2 m, a cada 3 h, grade de 0,75°) e gera `data/marts/exposure/meteorology-daily.parquet` com `temperature` (°C) e `humidity` (umidade relativa, %), ponderadas pela mesma população do PM2,5 e com manifesto de proveniência. A umidade vem da fórmula de Magnus (Alduchov & Eskridge, 1996) aplicada a cada passo antes da média diária. O último dia local de cada ano é completado com o primeiro horário do arquivo seguinte. Ponto de orvalho acima da temperatura (neblina, pontos sobre o mar) é limitado à temperatura e contabilizado no manifesto; excesso acima de 5 K indica arquivo corrompido e interrompe a execução, assim como anos faltando ou sobrepostos entre os arquivos. No CDS, pedir a grade de 0,75° dobra o custo: cabe um ano por pedido, e a fila aceita poucos pedidos simultâneos por usuário.
+
+`ipca` baixa a tabela SIDRA 1737, variável 2266 (número-índice, dez/1993 = 100), confere os rótulos das colunas e recusa meses repetidos, lacunas ou valores ausentes. Sem `--refresh`, usa o retrato mais recente em `data/raw/ipca/`; com `--refresh`, grava um novo arquivo datado (`sidra-1737-AAAAMMDD.json`) sem apagar os anteriores, para que deflações já feitas continuem rastreáveis. Fonte: IBGE, Sistema Nacional de Índices de Preços ao Consumidor.
+
+`calendar` gera, para cada região e dia, `holiday` (feriados públicos nacionais e do estado da região, pelo pacote `holidays`) e `optional_holiday` (pontos facultativos como o Carnaval). Feriados municipais não estão cobertos. O pacote está fixado em `holidays==0.108` porque o calendário pode mudar entre versões; a versão usada fica no manifesto. Ele exige `python-dateutil` < 3, o que rebaixou essa dependência de 4.0.0 para 2.9.0.post0 no `uv.lock`.
+
+Os três comandos gravam, ao lado do Parquet, um `.source.json` com hashes das entradas, período e atribuições; saída e manifesto são substituídos juntos.
+
 ## Painel diário preparado para pesquisa
 
 O comando `folego forecast` recebe dois Parquets privados com uma linha por `date` (tipo Date), `health_region_code`, `age_group`, `outcome`. As chaves devem ser únicas e as datas completas e contíguas em cada grupo:

@@ -9,9 +9,9 @@ Primeira versão, novembro de 2026. **Não há desempenho epidemiológico real a
 | SIH RD: download e conversão DBC → Parquet | Piloto real de 2019 executado: 324 arquivos das 27 UFs, projetados para os residentes de Madeira-Mamoré. Série nacional desde 2012 ainda pendente. |
 | Desfechos CID/idade/data/residência | Implementados; piloto Madeira-Mamoré/2019 concorda com TabNet em 2.677 internações e 12 meses (0% de diferença). Outras regiões/anos e maturação por data de internação pendentes. |
 | PM2,5 ponderado pela população | Extração do EAC4 e pesos populacionais (WorldPop 2020) implementados e testados com dados sintéticos; pesos nacionais cobrem as 439 regiões. Série real 2012–2025 aguardando o download do ADS. |
-| FIRMS, CAMS, ERA5, InfoGripe | Adaptadores e cache; integração autenticada e validação de granularidade pendentes. |
+| FIRMS, CAMS, ERA5, InfoGripe | CAMS e ERA5 autenticados e em download (2012–2025); série meteorológica regional implementada (`folego meteorology`). Feriados nacionais e estaduais por região (`folego calendar`). FIRMS histórico e InfoGripe pendentes. |
 | Modelo com lags e confundidores | Implementado; testes sintéticos recuperam efeito conhecido e exercitam fluxo de previsão. Ajuste científico por região pendente. |
-| Excesso, pagamentos e incerteza | Implementados com simulação conjunta e preservação do histórico observado. IPCA real precisa ser fornecido. |
+| Excesso, pagamentos e incerteza | Implementados com simulação conjunta e preservação do histórico observado. IPCA real disponível pela SIDRA (`folego ipca`); falta aplicá-lo aos pagamentos do SIH. |
 | Controle negativo | Teste Wald conjunto implementado; avaliação com SIH real pendente. |
 | Backtest 2019–2024 | Divisões temporais e executor de métricas implementados; estudo real e relatório de MAE/MAPE/precisão/recall pendentes. |
 | CAMS × MERRA-2 | Sensibilidade pendente; adaptador MERRA-2 não implementado. |

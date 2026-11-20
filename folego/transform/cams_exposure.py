@@ -1,6 +1,7 @@
 """CAMS PM2.5 grid → population-weighted daily series per health region."""
 
 import json
+import os
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -12,26 +13,34 @@ from ..ingest.common import sha256_file
 
 STEPS_PER_DAY = 8
 COPERNICUS_ATTRIBUTION = (
-    "Generated using Copernicus Atmosphere Monitoring Service information "
-    "(CAMS global reanalysis EAC4)."
+    "Generated using Copernicus Atmosphere Monitoring Service information {year}. "
+    "CAMS global reanalysis (EAC4), DOI 10.24381/d58bbf47."
 )
 
 
 def daily_cell_means(path: Path, *, utc_offset_hours: int = -3):
-    """Mean of the eight 3-hourly analyses within each local day, per grid point.
-
-    Returns a float64 DataArray (date, latitude, longitude) in µg/m³ with longitudes in
-    −180..180. Days without all eight analyses are dropped, never averaged from fewer.
-    """
+    """Daily CAMS PM2.5 in µg/m³ per grid point; see ``local_daily_means``."""
     import xarray as xr
 
     with xr.open_dataset(path) as ds:
-        field = ds["pm2p5"].transpose("valid_time", "latitude", "longitude").load()
+        field = ds["pm2p5"].load()
+    means = local_daily_means(field, utc_offset_hours=utc_offset_hours, name="CAMS PM2.5")
+    return pm25_to_micrograms(means, field.attrs.get("units"))
+
+
+def local_daily_means(field, *, utc_offset_hours: int = -3, name: str = "field"):
+    """Mean of the eight 3-hourly values within each local day, per grid point.
+
+    Returns a float64 DataArray (date, latitude, longitude) with ascending coordinates
+    and longitudes in −180..180. Days without all eight values are dropped, never
+    averaged from fewer.
+    """
+    field = field.transpose("valid_time", "latitude", "longitude")
     # xarray's mean skips NaN, so a gap would otherwise shrink a day silently.
     if not np.isfinite(field.values).all():
-        raise ValueError("Missing CAMS PM2.5 values")
+        raise ValueError(f"Missing {name} values")
     if field.indexes["valid_time"].has_duplicates:
-        raise ValueError("Repeated CAMS analysis times; check overlapping files")
+        raise ValueError(f"Repeated {name} times; check overlapping files")
     field = field.assign_coords(
         latitude=field["latitude"].astype("float64"),
         longitude=_normalize_longitude(field["longitude"].values.astype("float64")),
@@ -43,7 +52,7 @@ def daily_cell_means(path: Path, *, utc_offset_hours: int = -3):
     complete = counts["date"].values[counts.values == STEPS_PER_DAY]
     # Sorting after the reduction avoids copying the full 3-hourly field.
     means = grouped.mean("valid_time").sel(date=complete).sortby(["latitude", "longitude"])
-    return pm25_to_micrograms(means.astype("float64"), field.attrs.get("units"))
+    return means.astype("float64")
 
 
 def population_cell_weights(
@@ -131,15 +140,21 @@ def population_cell_weights(
 
 
 def regional_daily_pm25(daily, weights: pl.DataFrame) -> pl.DataFrame:
+    return regional_daily_means(daily, weights, column="pm25", name="CAMS")
+
+
+def regional_daily_means(
+    daily, weights: pl.DataFrame, *, column: str, name: str = "source"
+) -> pl.DataFrame:
     """Population-weighted mean of the daily grid for every region and date."""
     lat_axis = daily["latitude"].values
     lon_axis = daily["longitude"].values
     lat_index = _exact_index(weights["latitude"].to_numpy(), lat_axis)
     lon_index = _exact_index(weights["longitude"].to_numpy(), lon_axis)
     if (lat_index < 0).any() or (lon_index < 0).any():
-        raise ValueError("Weights refer to points missing from the CAMS grid")
+        raise ValueError(f"Weights refer to points missing from the {name} grid")
     if daily.sizes["date"] == 0:
-        raise ValueError("No complete local day in the CAMS file")
+        raise ValueError(f"No complete local day in the {name} data")
     codes, region = np.unique(weights["health_region_code"].to_numpy(), return_inverse=True)
     population = weights["population"].to_numpy()
     if not (np.isfinite(population).all() and (population >= 0).all()):
@@ -157,7 +172,7 @@ def regional_daily_pm25(daily, weights: pl.DataFrame) -> pl.DataFrame:
             "date": np.repeat(dates, len(codes)),
             "health_region_code": np.tile(codes, len(dates)),
             "population": np.tile(totals, len(dates)),
-            "pm25": regional.ravel(),
+            column: regional.ravel(),
         }
     ).sort("health_region_code", "date")
 
@@ -182,42 +197,79 @@ def build_exposure(
         report=snapping,
     )
     series = regional_daily_pm25(daily, weights)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    series.write_parquet(output)
-    inputs = {}
-    for name, path in (
-        ("cams", cams_file),
-        ("population", population_raster),
-        ("regions", regions_geojson),
-    ):
-        # cached_download appends ".source.json"; retrieve_cams replaces the suffix.
-        candidates = (
-            Path(path).with_suffix(Path(path).suffix + ".source.json"),
-            Path(path).with_suffix(".source.json"),
-        )
-        provenance = next((p for p in candidates if p.exists()), None)
-        inputs[name] = {
-            "path": str(path),
-            "sha256": sha256_file(Path(path)),
-            "source": json.loads(provenance.read_text()) if provenance else None,
-        }
-    output.with_suffix(output.suffix + ".source.json").write_text(
-        json.dumps(
-            {
-                "created_at": datetime.now(UTC).isoformat(),
-                "rows": series.height,
-                "regions": series["health_region_code"].n_unique(),
-                "dates": [str(series["date"].min()), str(series["date"].max())],
-                "local_day": "UTC-3, mean of 8 three-hourly analyses",
-                "snapped_beyond_grid": snapping,
-                "inputs": inputs,
-                "attribution": [COPERNICUS_ATTRIBUTION, *attribution],
-            },
-            ensure_ascii=False,
-            indent=2,
-        )
+    write_series(
+        series,
+        output,
+        inputs={
+            "cams": [cams_file],
+            "population": [population_raster],
+            "regions": [regions_geojson],
+        },
+        details={
+            "local_day": "UTC-3, mean of 8 three-hourly analyses",
+            "snapped_beyond_grid": snapping,
+            "attribution": [
+                COPERNICUS_ATTRIBUTION.format(year=datetime.now(UTC).year),
+                *attribution,
+            ],
+        },
     )
     return series
+
+
+def write_series(
+    series: pl.DataFrame, output: Path, *, inputs: dict[str, list[Path]], details: dict
+) -> None:
+    """Write a regional daily series with a manifest of every input's hash and source."""
+    output.parent.mkdir(parents=True, exist_ok=True)
+    manifest = {
+        "created_at": datetime.now(UTC).isoformat(),
+        "rows": series.height,
+        "regions": series["health_region_code"].n_unique(),
+        "dates": [str(series["date"].min()), str(series["date"].max())],
+        **details,
+        "inputs": {
+            name: [describe_input(Path(p)) for p in paths] for name, paths in inputs.items()
+        },
+    }
+    write_with_manifest(output, series.write_parquet, manifest)
+
+
+def write_with_manifest(output: Path, write, manifest: dict) -> None:
+    """Replace the output and its manifest together, so neither outlives the other."""
+    sidecar = output.with_suffix(output.suffix + ".source.json")
+    staged = output.with_name(output.name + ".tmp")
+    staged_sidecar = sidecar.with_name(sidecar.name + ".tmp")
+    try:
+        write(staged)
+        staged_sidecar.write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
+        os.replace(staged, output)
+        os.replace(staged_sidecar, sidecar)
+    finally:
+        staged.unlink(missing_ok=True)
+        staged_sidecar.unlink(missing_ok=True)
+
+
+def describe_input(path: Path) -> dict:
+    # cached_download appends ".source.json"; the ADS/CDS helpers replace the suffix.
+    candidates = (
+        path.with_suffix(path.suffix + ".source.json"),
+        path.with_suffix(".source.json"),
+    )
+    provenance = next((p for p in candidates if p.exists()), None)
+    return {
+        # Relative paths keep the operator's home directory out of shareable manifests.
+        "path": _portable(path),
+        "sha256": sha256_file(path),
+        "source": json.loads(provenance.read_text()) if provenance else None,
+    }
+
+
+def _portable(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(Path.cwd().resolve()))
+    except ValueError:
+        return path.name
 
 
 def _normalize_longitude(values: np.ndarray) -> np.ndarray:
