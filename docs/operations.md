@@ -21,7 +21,7 @@ Nunca coloque chaves em arquivos versionados, argumentos de processos ou documen
 
 ## Territorialização
 
-`folego territory --refresh` consulta IBGE e pagina a API nacional do Ministério da Saúde com páginas de 500 linhas. Falta de correspondência interrompe a execução por padrão; `--allow-incomplete` serve apenas para investigação. O complemento de Boa Esperança do Norte foi conferido na Resolução CIB/MT nº 507/2025; a população de 2022 permanece ausente, pois não se deve inventar um denominador de um município novo.
+`folego territory --refresh` consulta IBGE e pagina a API nacional do Ministério da Saúde com páginas de 500 linhas. Nessa API, `offset` é o índice da página (0, 1, 2…), não o deslocamento em registros. As páginas são baixadas como um conjunto em `data/raw/territory/health-pages/` e só substituem o cache anterior quando todas chegam íntegras; páginas sobrepostas, página curta antes da última, código municipal inválido ou mais de 40 páginas interrompem a execução. A tabela `municipalities.parquet` só é regravada após a conferência de cobertura. Falta de correspondência interrompe a execução por padrão; `--allow-incomplete` serve apenas para investigação. O complemento de Boa Esperança do Norte foi conferido na Resolução CIB/MT nº 507/2025; a população de 2022 permanece ausente, pois não se deve inventar um denominador de um município novo.
 
 O snapshot público tem 5.571 municípios e 439 regiões. A malha mínima da API IBGE contém 5.570 polígonos, anterior ao município novo; o manifesto declara isso. Os municípios de origem e o novo território estão na região Teles Pires. Não use a malha simplificada para análise de exposição fina; ela atende apenas ao mapa público.
 
