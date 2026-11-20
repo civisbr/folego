@@ -25,8 +25,12 @@ O formato segue a documentação oficial:
 
 ```yaml
 url: https://ads.atmosphere.copernicus.eu/api
-key: "SEU_TOKEN"
+key: SEU_TOKEN
 ```
+
+A chave fica sem aspas: o cliente lê o valor literalmente. Versões anteriores deste comando
+gravavam a chave entre aspas, o que causa `401 Authentication failed`; nesse caso, remova as
+aspas da linha `key` ou apague `~/.cdsapirc` e execute o comando de novo.
 
 O comando salva a configuração local; ele não afirma que a autenticação ou a licença
 já foram validadas. O próximo download pequeno do CAMS fará essa verificação. Não é
