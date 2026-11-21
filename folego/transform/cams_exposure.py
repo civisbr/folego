@@ -240,6 +240,7 @@ def write_with_manifest(output: Path, write, manifest: dict) -> None:
     sidecar = output.with_suffix(output.suffix + ".source.json")
     staged = output.with_name(output.name + ".tmp")
     staged_sidecar = sidecar.with_name(sidecar.name + ".tmp")
+    output.parent.mkdir(parents=True, exist_ok=True)
     try:
         write(staged)
         staged_sidecar.write_text(json.dumps(manifest, ensure_ascii=False, indent=2))

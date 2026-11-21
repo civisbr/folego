@@ -67,6 +67,43 @@ Arquivo ausente no FTP só conta como `unpublished` depois da última competênc
 
 Riscos aceitos: o FTP do DATASUS não tem TLS, então o hash registrado prova o que foi lido, mas não a origem; a conferência mensal contra o TabNet é o controle de origem. O DATASUS republica arquivos revisados com o mesmo nome, e um DBC apagado não pode ser recuperado byte a byte. `N_AIH` fica nos Parquets locais porque a deduplicação de revisões entre competências depende dele; nada com esse campo é publicado. A extração nacional também apaga os DBC de 2019 baixados pelo piloto; rodar o piloto de novo baixa os arquivos outra vez.
 
+## Desfechos diários, conferência TabNet e painel
+
+```sh
+uv run folego outcomes
+uv run folego tabnet-national
+uv run folego panel --regions 11004
+```
+
+`outcomes` lê todas as partições do SIH nacional e grava `data/marts/outcomes/daily-admissions.parquet`, com contagens diárias por data de internação, região de saúde de residência, faixa etária e desfecho. Os desfechos são:
+- `respiratory` (J00–J99, inclui asma e pneumonia), `asthma` (J45–J46), `pneumonia` (J12–J18) e `circulatory` (I00–I99);
+- `negative_control` (S00–S99, T00–T98).
+
+O tratamento das AIH é o mesmo do piloto:
+- só AIH normais (tipo 1);
+- repetições idênticas entre competências contam uma vez;
+- números de AIH com conteúdo clínico divergente ficam em quarentena.
+
+O SIH registra os residentes do DF pela região administrativa (5300xx–5301xx); esses códigos vão para Brasília (530010). Se mais de 0,1% das internações ficar sem região de saúde, a execução para.
+
+O pagamento (`VAL_TOT`) é corrigido pelo IPCA do mês de processamento até o último mês da série. A janela de datas certificada:
+- começa na primeira competência e cobre só a sequência contínua de competências com arquivos das 27 UF;
+- exclui os últimos `--maturity-months` meses (padrão 6), porque internações recentes continuam chegando em competências posteriores.
+
+O arquivo guarda só as células com internação; o manifesto registra a janela e a reconciliação. Ele também guarda o hash de todas as partições usadas, o commit do código e se há uma conferência TabNet aprovada para anos da janela (`tabnet_validation.validated`). Se uma competência no meio da série estiver incompleta enquanto meses posteriores estão completos, a execução para; basta rodar `sih-national` de novo. O pagamento considera só as AIH normais, então as AIH de continuação de internações longas não entram. Desfechos e painel têm células com menos de 5 internações e são privados (`classification` no manifesto): só podem ser publicados depois de passar por `suppress_small_cells`.
+
+Primeira execução nacional (competências 2012-01 a 2026-07, maturidade de 6 meses, internações de 2012-01-01 a 2026-01-31):
+- 50,9 milhões de internações;
+- nenhuma AIH em conflito ou duplicada;
+- nenhuma residência sem região;
+- 7 registros com idade inválida.
+
+Conferência TabNet: AC 2012, RO 2019, AM 2013, SP 2016, BA 2021 e RS 2024 bateram 12 de 12 meses, com erro zero. Os relatórios ficam em `data/marts/validation/history/`.
+
+`tabnet-national` compara, para pares UF:ANO (padrão: RO 2019, AM 2013, SP 2016, BA 2021, RS 2024), as AIH respiratórias normais por UF de residência e mês de processamento com o TabNet, usando todos os arquivos estaduais do ano. Aprova com erro relativo abaixo de 1% em cada mês e no ano; caso contrário, sai com erro. Primeira conferência parcial: AC 2012 bateu 12 de 12 meses, sem diferença.
+
+`panel` junta desfechos, PM2,5, meteorologia e feriados no formato abaixo, no intervalo coberto por todas as exposições, gravando uma região por vez para caber na memória. A execução para se houver lacuna de dias numa exposição, região sem nenhuma internação no arquivo de desfechos (códigos de região divergentes) ou exposições fora da janela certificada. As internações são zeradas apenas dentro da janela certificada e ficam nulas fora dela. `mean_payment` é o pagamento corrigido dividido pelas internações do dia.
+
 ## Painel diário preparado para pesquisa
 
 O comando `folego forecast` recebe dois Parquets privados com uma linha por `date` (tipo Date), `health_region_code`, `age_group`, `outcome`. As chaves devem ser únicas e as datas completas e contíguas em cada grupo:

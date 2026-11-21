@@ -28,6 +28,42 @@ def main():
     national.add_argument("--states", nargs="+")
     national.add_argument("--workers", type=int, default=3)
     national.add_argument("--keep-source", action="store_true", help="Manter os DBC baixados")
+    outcomes = commands.add_parser(
+        "outcomes", help="Internações diárias por região a partir do SIH nacional"
+    )
+    outcomes.add_argument("--maturity-months", type=int, default=6)
+    outcomes.add_argument(
+        "--lookup", type=Path, default=Path("data/staging/municipalities.parquet")
+    )
+    outcomes.add_argument("--ipca", type=Path, default=Path("data/marts/ipca.parquet"))
+    outcomes.add_argument(
+        "--output", type=Path, default=Path("data/marts/outcomes/daily-admissions.parquet")
+    )
+    tabnet_check = commands.add_parser(
+        "tabnet-national", help="Conferir o SIH nacional com o TabNet por UF de residência e ano"
+    )
+    tabnet_check.add_argument(
+        "--checks", nargs="+", help="Pares UF:ANO, por exemplo SP:2016 (padrão: amostra fixa)"
+    )
+    tabnet_check.add_argument(
+        "--lookup", type=Path, default=Path("data/staging/municipalities.parquet")
+    )
+    tabnet_check.add_argument(
+        "--output", type=Path, default=Path("data/marts/validation/tabnet-national.json")
+    )
+    panel = commands.add_parser("panel", help="Montar o painel diário de pesquisa")
+    panel.add_argument(
+        "--outcomes", type=Path, default=Path("data/marts/outcomes/daily-admissions.parquet")
+    )
+    panel.add_argument("--pm25", type=Path, default=Path("data/marts/exposure/pm25-daily.parquet"))
+    panel.add_argument(
+        "--meteorology",
+        type=Path,
+        default=Path("data/marts/exposure/meteorology-daily.parquet"),
+    )
+    panel.add_argument("--calendar", type=Path, default=Path("data/marts/calendar.parquet"))
+    panel.add_argument("--regions", nargs="+", help="Códigos de região de saúde (padrão: todas)")
+    panel.add_argument("--output", type=Path, default=Path("data/marts/panel/daily-panel.parquet"))
     cams = commands.add_parser("cams", help="Executar requisição exportada do ADS")
     cams.add_argument("--dataset", required=True)
     cams.add_argument("--request", type=Path, required=True)
@@ -146,6 +182,70 @@ def main():
         from .publish.demo import build_demo
 
         print(f"{build_demo()} linhas sintéticas; nenhum dado de saúde observado")
+    elif args.command == "outcomes":
+        from .transform.national_outcomes import build_national_outcomes
+
+        if not 1 <= args.maturity_months <= 24:
+            parser.exit(2, "--maturity-months deve ficar entre 1 e 24.\n")
+        os.umask(0o077)
+        build_national_outcomes(
+            Path("data"),
+            args.lookup,
+            args.ipca,
+            args.output,
+            maturity_months=args.maturity_months,
+        )
+        manifest = json.loads(args.output.with_suffix(".parquet.source.json").read_text())
+        print(
+            json.dumps(
+                {k: manifest[k] for k in ("rows", "admission_window", "reconciliation")},
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+    elif args.command == "tabnet-national":
+        import re
+
+        from .evaluate.tabnet_national import DEFAULT_CHECKS, validate_national
+
+        checks = DEFAULT_CHECKS
+        if args.checks:
+            from .ingest.sih import STATES
+
+            if not all(re.fullmatch(r"[A-Za-z]{2}:20\d{2}", c) for c in args.checks):
+                parser.exit(2, "Use pares UF:ANO, por exemplo SP:2016.\n")
+            checks = [(c[:2].upper(), int(c[3:])) for c in args.checks]
+            if not {state for state, _ in checks} <= set(STATES):
+                parser.exit(2, f"UF inválida; use: {' '.join(STATES)}\n")
+        os.umask(0o077)
+        report = validate_national(Path("data"), args.lookup, checks, output=args.output)
+        summary = [
+            {
+                k: r.get(k)
+                for k in ("state", "year", "status", "accepted", "annual_relative_error", "error")
+            }
+            for r in report["checks"]
+        ]
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
+        if not report["accepted"]:
+            parser.exit(1, "Conferência TabNet não aprovada em todas as UF/anos.\n")
+    elif args.command == "panel":
+        import re
+
+        from .transform.panel import build_panel
+
+        if args.regions and not all(re.fullmatch(r"\d{5}", code) for code in args.regions):
+            parser.exit(2, "Códigos de região de saúde têm 5 dígitos.\n")
+        os.umask(0o077)
+        manifest = build_panel(
+            args.outcomes,
+            args.pm25,
+            args.meteorology,
+            args.calendar,
+            args.output,
+            regions=args.regions,
+        )
+        print(json.dumps({k: manifest[k] for k in ("rows", "regions", "dates")}, indent=2))
     elif args.command == "sih-national":
         from datetime import date
 

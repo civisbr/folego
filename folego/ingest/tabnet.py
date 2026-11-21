@@ -43,7 +43,9 @@ class TabnetForm(HTMLParser):
             self.option["text"] += data.strip()
 
 
-def build_query(form: TabnetForm, year: int, municipality_codes: list[str], state: str):
+def build_query(form: TabnetForm, year: int, municipality_codes: list[str] | None, state: str):
+    """``municipality_codes=None`` selects every residence municipality of the state."""
+
     def require(field, value):
         if not any(o["value"] == value for o in form.options.get(field, [])):
             raise ValueError(f"TabNet option missing: {field}={value}")
@@ -60,8 +62,8 @@ def build_query(form: TabnetForm, year: int, municipality_codes: list[str], stat
         filename = f"nr{state.lower()}{year % 100:02d}{month:02d}.dbf"
         require("Arquivos", filename)
         items.append(("Arquivos", filename))
-    selected = []
-    for code in municipality_codes:
+    selected = [] if municipality_codes is not None else ["TODAS_AS_CATEGORIAS__"]
+    for code in municipality_codes or []:
         matches = [
             o["value"]
             for o in form.options.get("SMunicípio", [])
@@ -185,7 +187,10 @@ def validate_response_scope(payload: bytes, fields, state: str, year: int):
             echoed.setdefault(key, []).append(value)
     expected = {"Def": [f"sih/cnv/nr{state.lower()}.def"]}
     for key in ("Linha", "Coluna", "Incremento", "SMunicípio", "SCapítulo_CID-10"):
-        expected[key] = [value for name, value in fields if name == key]
+        # TabNet leaves "all categories" selections out of its echo.
+        expected[key] = [
+            value for name, value in fields if name == key and value != "TODAS_AS_CATEGORIAS__"
+        ]
     extra_filters = {key for key in echoed if key.startswith("S") and key not in expected}
     if extra_filters:
         raise ValueError("TabNet response scope contains unexpected selection filters")
@@ -198,12 +203,17 @@ def validate_response_scope(payload: bytes, fields, state: str, year: int):
 
 
 def retrieve_reference(
-    year: int, state: str, municipality_codes: list[str], root=Path("data"), *, refresh=False
+    year: int,
+    state: str,
+    municipality_codes: list[str] | None,
+    root=Path("data"),
+    *,
+    refresh=False,
 ):
     scope = {
         "year": year,
         "state": state,
-        "municipality_codes": sorted(municipality_codes),
+        "municipality_codes": "all" if municipality_codes is None else sorted(municipality_codes),
         "period_basis": "processing_competence",
         "outcome": "J00-J99",
         "metric": "Internações",
