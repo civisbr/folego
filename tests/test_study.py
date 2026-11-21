@@ -122,3 +122,19 @@ def test_sensitivity_exposure_column_replaces_pm25(tmp_path):
     assert report["exposure"] == "pm25_merra2" and "effect" in report["results"][0]
     with pytest.raises(ValueError, match="not in the panel"):
         region_study(path, "11004", tmp_path / "t.json", exposure="nope")
+
+
+def test_meteorology_source_comes_from_the_panel_manifest(tmp_path):
+    import json
+
+    from folego.evaluate.study import meteorology_source
+
+    panel = tmp_path / "panel.parquet"
+    assert meteorology_source(panel) == "unknown"
+    for text, expected in (
+        ("Global Modeling ... MERRA-2 tavg1_2d_slv_Nx", "MERRA-2"),
+        ("Hersbach et al., ERA5", "ERA5"),
+    ):
+        manifest = {"inputs": {"meteorology": [{"source": {"attribution": [text]}}]}}
+        panel.with_suffix(".parquet.source.json").write_text(json.dumps(manifest))
+        assert meteorology_source(panel) == expected

@@ -168,6 +168,21 @@ def _finite(value):
     return value
 
 
+def meteorology_source(panel_path: Path) -> str:
+    """ "ERA5", "MERRA-2" or "unknown", read from the panel's input manifests."""
+    manifest = Path(panel_path).with_suffix(".parquet.source.json")
+    if not manifest.exists():
+        return "unknown"
+    inputs = json.loads(manifest.read_text()).get("inputs", {}).get("meteorology") or []
+    source = (inputs[0].get("source") or {}) if inputs else {}
+    attribution = " ".join(source.get("attribution", []))
+    if "MERRA-2" in attribution:
+        return "MERRA-2"
+    if "ERA5" in attribution:
+        return "ERA5"
+    return "unknown"
+
+
 def region_study(
     panel_path: Path,
     region: str,
@@ -213,6 +228,7 @@ def region_study(
         "inputs": {"panel": [describe_input(panel_path)]},
         "mode": "research",
         "exposure": exposure,
+        "meteorology": meteorology_source(panel_path),
         "validated": False,
         "region": region,
         "basis": {

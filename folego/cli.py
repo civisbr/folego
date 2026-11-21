@@ -63,13 +63,17 @@ def main():
     fires.add_argument(
         "--output", type=Path, default=Path("data/marts/exposure/fires-daily.parquet")
     )
-    merra = commands.add_parser("merra2", help="PM2,5 MERRA-2 por região (sensibilidade ao CAMS)")
+    merra = commands.add_parser("merra2", help="MERRA-2 por região: PM2,5 ou temperatura/umidade")
     merra.add_argument("--start", default="2012-01")
     merra.add_argument("--end", default="2025-12")
     merra.add_argument("--regions", type=Path, default=Path("web/public/data/regions.geojson"))
     merra.add_argument(
-        "--output", type=Path, default=Path("data/marts/exposure/pm25-merra2-daily.parquet")
+        "--product",
+        choices=["pm25", "weather"],
+        default="pm25",
+        help="pm25: aerossóis (sensibilidade); weather: temperatura e umidade a 2 m",
     )
+    merra.add_argument("--output", type=Path, help="Padrão conforme --product")
     maturity = commands.add_parser(
         "maturity", help="Medir em quantos meses as internações chegam ao SIH"
     )
@@ -275,12 +279,15 @@ def main():
     elif args.command == "study":
         import re
 
-        from .evaluate.study import region_study
+        from .evaluate.study import meteorology_source, region_study
 
         if not re.fullmatch(r"\d{5}", args.region):
             parser.exit(2, "Código de região de saúde tem 5 dígitos.\n")
         os.umask(0o077)
         suffix = "" if args.exposure == "pm25" else f"-{args.exposure}"
+        # Results from different weather sources must not overwrite each other.
+        if meteorology_source(args.panel) == "MERRA-2":
+            suffix += "-met_merra2"
         output = args.output or Path("data/marts/studies") / f"{args.region}{suffix}.json"
         report = region_study(args.panel, args.region, output, exposure=args.exposure)
         summary = [
@@ -320,7 +327,7 @@ def main():
     elif args.command == "merra2":
         from datetime import date
 
-        from .ingest.merra2 import build_merra2
+        from .ingest.merra2 import build_merra2, build_merra2_weather
         from .ingest.worldpop import download_worldpop
 
         try:
@@ -330,7 +337,12 @@ def main():
         if not date(2012, 1, 1) <= start <= end < date.today().replace(day=1):
             parser.exit(2, "Use 2012-01 <= início <= fim < mês atual.\n")
         os.umask(0o077)
-        series = build_merra2(start, end, download_worldpop(), args.regions, args.output)
+        build, default = {
+            "pm25": (build_merra2, "pm25-merra2-daily.parquet"),
+            "weather": (build_merra2_weather, "meteorology-merra2-daily.parquet"),
+        }[args.product]
+        output = args.output or Path("data/marts/exposure") / default
+        series = build(start, end, download_worldpop(), args.regions, output)
         print(
             json.dumps(
                 {
