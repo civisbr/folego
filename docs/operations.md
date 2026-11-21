@@ -120,12 +120,13 @@ uv run folego study --region 11004
 
 `study` ajusta, para cada desfecho (todas as idades, 0–4 e 60+), o modelo quasi-Poisson com base cruzada do PM2,5 e confundidores. O relatório em `data/marts/studies/<região>.json` traz:
 - o risco relativo cumulativo de +10 µg/m³ sustentado em todos os lags, com IC 95%;
+- o mesmo risco com a tendência temporal de 4 e 10 graus de liberdade por ano (o principal usa 7), para mostrar quanto ele depende da suavização;
 - a dispersão e a autocorrelação dos resíduos (ACF e Ljung-Box);
 - o teste conjunto de exposição, cuja significância no controle negativo (S/T) sinaliza confusão residual;
 - quando há SRAG no painel, o efeito com e sem o ajuste por SRAG;
 - um backtest de 2019 a 2024 (MAE/MAPE semanais).
 
-O relatório é de pesquisa (`validated=false`) e guarda o commit do código e o hash do painel; cada execução é mantida em `history/`. O backtest usa exposições observadas, e uma dobra sem histórico suficiente aparece com erro sem invalidar as outras.
+O relatório é de pesquisa (`validated=false`) e guarda o commit do código e o hash do painel; cada execução é mantida em `history/`. O campo `confounders` descreve a especificação usada e cada estrato traz o `trend_df` efetivo. Relatórios sem `confounders` (anteriores a 2026-11-21) usavam 6 graus de tendência e três harmônicos também na estimativa do efeito e não são comparáveis com os novos. O backtest usa exposições observadas, e uma dobra sem histórico suficiente aparece com erro sem invalidar as outras.
 
 ## Focos de queimada e MERRA-2
 
@@ -142,7 +143,9 @@ uv run folego study --region 11004 --exposure pm25_merra2
 
 `merra2 --product weather` faz o mesmo com o produto M2T1NXSLV: temperatura (T2M) e umidade relativa calculada a cada hora a partir de T2M e do ponto de orvalho (T2MDEW), pela mesma fórmula de Magnus e com o mesmo limite de ponto de orvalho da série do ERA5. Grava `data/marts/exposure/meteorology-merra2-daily.parquet` com as colunas do ERA5, para servir de `--meteorology` no painel enquanto o ERA5 não sai da fila do Copernicus. Diferenças em relação ao ERA5 desta série: dados horários (não a cada 3 h) numa grade de 0,5° × 0,625° (não 0,75°). Os meses intermediários ficam em `data/staging/merra2-slv/`. Fonte: GMAO, MERRA-2 tavg1_2d_slv_Nx, DOI 10.5067/VJAFPLI1CSIV. Um estudo feito com essa meteorologia registra `meteorology: MERRA-2` no relatório e grava em `<região>-met_merra2.json`, para não sobrescrever o resultado com ERA5; ao reportar, cite a fonte usada. No teste com agosto de 2019, Porto Velho teve média de 29 °C e 55% de umidade.
 
-No painel, `--merra2` e `--fires` acrescentam essas colunas sem mudar o intervalo da análise principal; os dias que essas fontes não cobrem ficam nulos. No estudo, `--exposure pm25_merra2` repete a análise com o MERRA-2 no lugar do CAMS e grava o relatório em `data/marts/studies/<região>-pm25_merra2.json`.
+No painel, `--merra2` e `--fires` acrescentam essas colunas sem mudar o intervalo da análise principal; os dias que essas fontes não cobrem ficam nulos. No estudo, `--exposure pm25_merra2` repete a análise com o MERRA-2 no lugar do CAMS e grava o relatório em `data/marts/studies/<região>-pm25_merra2.json`. O relatório registra em `pm25_source` a fonte da coluna `pm25` do painel e em `exposure_source` a da coluna modelada.
+
+Sem CAMS e ERA5, o painel aceita os marts do MERRA-2 como fontes principais: um mart de PM2,5 com a coluna `pm25_merra2` vira `pm25`, e a meteorologia do MERRA-2 entra no lugar da do ERA5. Para que os relatórios não se sobrescrevam, o estudo acrescenta ao nome `-met_merra2` quando a meteorologia é do MERRA-2, `-pm25main_merra2` quando o PM2,5 principal é do MERRA-2 e `-unknown_source` quando a fonte não é reconhecida no manifesto do painel. O download do MERRA-2 repete cada requisição até 4 vezes em erro de rede, 429 ou 5xx, e avisa cada nova tentativa na saída de erro.
 
 ## Painel diário preparado para pesquisa
 

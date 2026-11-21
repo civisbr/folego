@@ -19,7 +19,11 @@ def fit_count_model(counts, design, *, offset=None):
     model = sm.GLM(counts, x, family=sm.families.Poisson(), offset=offset).fit()
     # Pearson scale implements overdispersion without claiming sub-Poisson certainty.
     scale = max(1.0, float(model.pearson_chi2 / model.df_resid))
-    return sm.GLM(counts, x, family=sm.families.Poisson(), offset=offset).fit(scale=scale)
+    fitted = sm.GLM(counts, x, family=sm.families.Poisson(), offset=offset).fit(scale=scale)
+    # A sparse stratum with a dense trend can stop with huge, meaningless coefficients.
+    if not fitted.converged:
+        raise ValueError("GLM did not converge")
+    return fitted
 
 
 def predict_counts(model, design, *, offset=None):
@@ -33,8 +37,20 @@ class ConfounderDesign:
     A holiday indicator is supplied from an externally verified local calendar.
     """
 
-    def __init__(self, include_srag=False):
+    def __init__(self, include_srag=False, *, trend_df_per_year=None, harmonics=3):
+        # None keeps the forecasting design (6 df trend + harmonics, which repeat beyond
+        # training). Inference uses a dense time spline instead (~7 df/year, Bhaskaran et
+        # al. 2013), which absorbs season and epidemics but extrapolates poorly.
+        if trend_df_per_year is not None and not (
+            isinstance(trend_df_per_year, int | float) and 0 < trend_df_per_year < 366
+        ):
+            raise ValueError("trend_df_per_year must be positive and finite")
+        if not isinstance(harmonics, int) or harmonics < 0:
+            raise ValueError("harmonics must be a non-negative integer")
         self.include_srag = include_srag
+        self.trend_df_per_year = trend_df_per_year
+        self.harmonics = harmonics
+        self.trend_df = 6
         self.info = None
         self.origin = None
 
@@ -45,21 +61,24 @@ class ConfounderDesign:
         dates = pd.to_datetime(data["date"])
         if fit:
             self.origin = dates.min()
+            if self.trend_df_per_year is not None:
+                years = (dates.max() - dates.min()).days / 365.25
+                self.trend_df = max(3, round(self.trend_df_per_year * years))
         if self.origin is None:
             raise ValueError("Fit confounders before predicting")
         data["trend"] = (dates - self.origin).dt.days / 365.25
         data["weekday"] = dates.dt.day_of_week
-        for h in (1, 2, 3):
+        for h in range(1, self.harmonics + 1):
             data[f"sin{h}"] = np.sin(2 * np.pi * h * dates.dt.day_of_year / 365.25)
             data[f"cos{h}"] = np.cos(2 * np.pi * h * dates.dt.day_of_year / 365.25)
         # Fixed wide boundaries keep forecasts valid; knots are learned on past data.
         formula = (
             "0 + bs(temperature, df=4, lower_bound=-30, upper_bound=60)"
             " + bs(humidity, df=4, lower_bound=0, upper_bound=100)"
-            " + cr(trend, df=6, constraints='center')"
+            f" + cr(trend, df={self.trend_df}, constraints='center')"
             " + C(weekday, levels=[0,1,2,3,4,5,6]) + holiday"
-            " + sin1 + cos1 + sin2 + cos2 + sin3 + cos3"
         )
+        formula += "".join(f" + sin{h} + cos{h}" for h in range(1, self.harmonics + 1))
         if self.include_srag:
             formula += " + srag"
         if fit:

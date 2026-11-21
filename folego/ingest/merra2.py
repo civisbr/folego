@@ -102,6 +102,28 @@ WEATHER = Product(
 )
 
 
+def _retry(request: Callable, *, attempts: int = 4, pause: float = 20.0):
+    """Retry transport errors, 429 and 5xx; a year of daily requests meets some."""
+    import sys
+    import time
+
+    for attempt in range(1, attempts + 1):
+        try:
+            response = request()
+            if (response.status_code < 500 and response.status_code != 429) or attempt == attempts:
+                return response
+            reason = f"HTTP {response.status_code}"
+        # TransportError also covers "server disconnected" protocol errors from OPeNDAP.
+        except httpx.TransportError as error:
+            if attempt == attempts:
+                raise
+            # The exception type only: its text may carry the request URL.
+            reason = type(error).__name__
+        print(f"MERRA-2: {reason}, tentativa {attempt}/{attempts}", file=sys.stderr)
+        time.sleep(pause * attempt)
+    raise AssertionError("unreachable")
+
+
 def bearer_token() -> str:
     try:
         credentials = netrc.netrc().authenticators("urs.earthdata.nasa.gov")
@@ -127,13 +149,15 @@ def month_granules(
     """Granule id per day; the file prefix (400/401) changes for reprocessed months."""
     first = date(year, month, 1)
     last = (first + timedelta(days=32)).replace(day=1) - timedelta(days=1)
-    response = client.get(
-        CMR,
-        params={
-            "collection_concept_id": product.collection,
-            "temporal": f"{first}T00:00:00Z,{last}T23:59:59Z",
-            "page_size": 100,
-        },
+    response = _retry(
+        lambda: client.get(
+            CMR,
+            params={
+                "collection_concept_id": product.collection,
+                "temporal": f"{first}T00:00:00Z,{last}T23:59:59Z",
+                "page_size": 100,
+            },
+        )
     )
     response.raise_for_status()
     granules = {}
@@ -159,7 +183,7 @@ def fetch_day(client: httpx.Client, granule: str, product: Product) -> tuple[byt
         + [f"/lat{LAT}", f"/lon{LON}", "/time"]
     )
     url = OPENDAP.format(collection=product.collection, granule=granule.replace(":", "%3A"))
-    response = client.get(url + ".dap.nc4", params={"dap4.ce": constraint})
+    response = _retry(lambda: client.get(url + ".dap.nc4", params={"dap4.ce": constraint}))
     if response.status_code != 200 or response.content[:4] != b"\x89HDF":
         raise RuntimeError(f"MERRA-2 subset failed for {granule} ({response.status_code})")
     return response.content, hashlib.sha256(response.content).hexdigest()

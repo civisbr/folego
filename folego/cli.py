@@ -279,7 +279,7 @@ def main():
     elif args.command == "study":
         import re
 
-        from .evaluate.study import meteorology_source, region_study
+        from .evaluate.study import input_source, meteorology_source, region_study
 
         if not re.fullmatch(r"\d{5}", args.region):
             parser.exit(2, "Código de região de saúde tem 5 dígitos.\n")
@@ -288,6 +288,12 @@ def main():
         # Results from different weather sources must not overwrite each other.
         if meteorology_source(args.panel) == "MERRA-2":
             suffix += "-met_merra2"
+        if input_source(args.panel, "pm25") == "MERRA-2" and args.exposure == "pm25":
+            # Distinct from "-pm25_merra2", the MERRA-2 sensitivity run on a CAMS panel.
+            suffix += "-pm25main_merra2"
+        if "unknown" in (meteorology_source(args.panel), input_source(args.panel, "pm25")):
+            # An unrecognised source must not overwrite the report of a known one.
+            suffix += "-unknown_source"
         output = args.output or Path("data/marts/studies") / f"{args.region}{suffix}.json"
         report = region_study(args.panel, args.region, output, exposure=args.exposure)
         summary = [

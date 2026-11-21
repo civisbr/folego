@@ -230,3 +230,39 @@ def test_months_written_by_the_first_version_are_reused(tmp_path, monkeypatch):
     (slv / "201902.source.json").write_text('{"year": 2019, "month": 2}')
     with pytest.raises(AssertionError, match="fetched again"):
         merra2.extract_month(2019, 2, tmp_path / "data", client=None, product=merra2.WEATHER)
+
+
+def test_transient_failures_are_retried():
+    import httpx
+
+    calls = []
+
+    def flaky():
+        calls.append(1)
+        if len(calls) == 1:
+            raise httpx.ConnectTimeout("handshake timed out")
+        if len(calls) == 2:
+            return httpx.Response(503)
+        return httpx.Response(200)
+
+    assert merra2._retry(flaky, pause=0).status_code == 200
+    assert len(calls) == 3
+
+
+def test_retries_end_with_the_last_answer_or_error_and_skip_client_errors():
+    import httpx
+
+    assert merra2._retry(lambda: httpx.Response(503), attempts=2, pause=0).status_code == 503
+    calls = []
+
+    def missing():
+        calls.append(1)
+        return httpx.Response(404)
+
+    assert merra2._retry(missing, pause=0).status_code == 404 and len(calls) == 1
+
+    def disconnected():
+        raise httpx.RemoteProtocolError("Server disconnected")
+
+    with pytest.raises(httpx.RemoteProtocolError):
+        merra2._retry(disconnected, attempts=2, pause=0)

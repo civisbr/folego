@@ -79,6 +79,10 @@ def test_study_recovers_effect_and_passes_negative_control(tmp_path):
     assert all(np.isfinite(b["mae"]) for b in backtest)
     assert len(respiratory["residuals"]["acf"]) == 7
     assert (tmp_path / "study.json").exists()
+    sensitivity = respiratory["effect_by_trend_df_per_year"]
+    assert set(sensitivity) == {"4", "10"}
+    assert all(v["lower"] < np.exp(EFFECT) < v["upper"] for v in sensitivity.values())
+    assert "7 df/year" in report["confounders"]["inference"]
 
 
 def test_missing_region_fails(tmp_path):
@@ -138,3 +142,35 @@ def test_meteorology_source_comes_from_the_panel_manifest(tmp_path):
         manifest = {"inputs": {"meteorology": [{"source": {"attribution": [text]}}]}}
         panel.with_suffix(".parquet.source.json").write_text(json.dumps(manifest))
         assert meteorology_source(panel) == expected
+    from folego.evaluate.study import input_source
+
+    merra = {"inputs": {"pm25": [{"source": {"attribution": "GMAO, MERRA-2 aer"}}]}}
+    panel.with_suffix(".parquet.source.json").write_text(json.dumps(merra))
+    assert input_source(panel, "pm25") == "MERRA-2"
+    cams = {"inputs": {"pm25": [{"source": {"attribution": ["Atmosphere Monitoring Service"]}}]}}
+    panel.with_suffix(".parquet.source.json").write_text(json.dumps(cams))
+    assert input_source(panel, "pm25") == "CAMS"
+
+
+def test_dense_trend_df_scales_with_training_span():
+    import pandas as pd
+
+    from folego.models.glm import ConfounderDesign
+
+    days = pd.date_range("2018-01-01", "2019-12-31")
+    step = np.arange(len(days))
+    frame = pd.DataFrame(
+        {
+            "date": days,
+            "temperature": 25 + np.sin(step),
+            "humidity": 70 + 5 * np.cos(step),
+            "holiday": 0,
+        }
+    )
+    design = ConfounderDesign(trend_df_per_year=7, harmonics=0)
+    width = design.transform(frame, fit=True).shape[1]
+    assert design.trend_df == 14
+    # Prediction reuses the fitted knots, so the width does not depend on the new span.
+    assert design.transform(frame.iloc[:30]).shape[1] == width
+    with pytest.raises(ValueError, match="positive"):
+        ConfounderDesign(trend_df_per_year=0)

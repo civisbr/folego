@@ -26,6 +26,9 @@ from .negative_control import joint_exposure_test
 
 NEGATIVE_CONTROL = "negative_control"
 MIN_TRAINING_DAYS = 365
+TREND_DF_PER_YEAR = 7
+# Effect estimates must not hinge on one smoothing choice; these bracket the default.
+TREND_SENSITIVITY = (4, 10)
 
 
 def stratum_series(panel: pl.DataFrame, region: str, outcome: str, age_group: str | None):
@@ -95,20 +98,50 @@ def residual_autocorrelation(model, max_lag=7) -> dict:
     return {"acf": acf, "ljung_box_pvalue": float(test["lb_pvalue"].iloc[0])}
 
 
-def fit_stratum(series: pl.DataFrame, basis: CrossBasis) -> dict:
-    include_srag = "srag" in series.columns
-    confounders = ConfounderDesign(include_srag=include_srag)
+def _inference_design(include_srag: bool, trend_df_per_year: float) -> ConfounderDesign:
+    # A 6 df trend plus harmonics left the dry-season drop in viral admissions, which
+    # coincides with the fire season, to the exposure (protective RR, failed negative
+    # control, Ljung-Box p≈0 in region 11004); a dense time spline absorbs it.
+    return ConfounderDesign(
+        include_srag=include_srag, trend_df_per_year=trend_df_per_year, harmonics=0
+    )
+
+
+def _effect(series, basis, include_srag, trend_df_per_year):
+    confounders = _inference_design(include_srag, trend_df_per_year)
     rows, design, width = _design(series, basis, confounders, fit=True)
+    model = fit_count_model(rows["admissions"].to_numpy(), design)
+    return rows, model, width, confounders.trend_df
+
+
+def fit_stratum(
+    series: pl.DataFrame,
+    basis: CrossBasis,
+    *,
+    trend_df_per_year: float = TREND_DF_PER_YEAR,
+    sensitivity=TREND_SENSITIVITY,
+) -> dict:
+    include_srag = "srag" in series.columns
+    rows, model, width, trend_df = _effect(series, basis, include_srag, trend_df_per_year)
     counts = rows["admissions"].to_numpy()
-    model = fit_count_model(counts, design)
     unadjusted = None
     if include_srag:
         # SRAG can sit on the causal path; both estimates are reported side by side.
-        plain = ConfounderDesign(include_srag=False)
-        plain_rows, plain_design, _ = _design(series.drop("srag"), basis, plain, fit=True)
-        unadjusted = cumulative_relative_risk(
-            fit_count_model(plain_rows["admissions"].to_numpy(), plain_design), basis, width
-        )
+        try:
+            plain = _effect(series.drop("srag"), basis, False, trend_df_per_year)[1]
+            unadjusted = cumulative_relative_risk(plain, basis, width)
+        except ValueError as error:
+            unadjusted = {"error": str(error)}
+    by_trend = {}
+    for df in sensitivity:
+        try:
+            _, alternative, _, effective = _effect(series, basis, include_srag, df)
+            by_trend[str(df)] = {
+                **cumulative_relative_risk(alternative, basis, width),
+                "trend_df": effective,
+            }
+        except ValueError as error:
+            by_trend[str(df)] = {"error": str(error)}
     return {
         "days": rows.height,
         "dates": [str(rows["date"].min()), str(rows["date"].max())],
@@ -117,6 +150,8 @@ def fit_stratum(series: pl.DataFrame, basis: CrossBasis) -> dict:
         "srag_adjusted": include_srag,
         "effect": cumulative_relative_risk(model, basis, width),
         "effect_without_srag": unadjusted,
+        "trend_df": trend_df,
+        "effect_by_trend_df_per_year": by_trend,
         "exposure_test": joint_exposure_test(model, range(1, width + 1)),
         "dispersion": float(model.scale),
         "residuals": residual_autocorrelation(model),
@@ -168,19 +203,30 @@ def _finite(value):
     return value
 
 
-def meteorology_source(panel_path: Path) -> str:
-    """ "ERA5", "MERRA-2" or "unknown", read from the panel's input manifests."""
+def input_source(panel_path: Path, name: str) -> str:
+    """Product behind a panel input ("CAMS", "ERA5", "MERRA-2" or "unknown")."""
     manifest = Path(panel_path).with_suffix(".parquet.source.json")
     if not manifest.exists():
         return "unknown"
-    inputs = json.loads(manifest.read_text()).get("inputs", {}).get("meteorology") or []
-    source = (inputs[0].get("source") or {}) if inputs else {}
-    attribution = " ".join(source.get("attribution", []))
+    try:
+        source = json.loads(manifest.read_text())["inputs"][name][0]["source"]
+    except (KeyError, IndexError, TypeError, ValueError):
+        return "unknown"
+    attribution = source.get("attribution", []) if isinstance(source, dict) else []
+    # Marts store either one attribution string or a list of them.
+    if not isinstance(attribution, str):
+        attribution = " ".join(a for a in attribution if isinstance(a, str))
     if "MERRA-2" in attribution:
         return "MERRA-2"
     if "ERA5" in attribution:
         return "ERA5"
+    if "Atmosphere Monitoring" in attribution:
+        return "CAMS"
     return "unknown"
+
+
+def meteorology_source(panel_path: Path) -> str:
+    return input_source(panel_path, "meteorology")
 
 
 def region_study(
@@ -192,6 +238,7 @@ def region_study(
     age_groups=(None, "0-4", "60+"),
     basis: CrossBasis | None = None,
     exposure: str = "pm25",
+    trend_df_per_year: float = TREND_DF_PER_YEAR,
 ) -> dict:
     basis = basis or CrossBasis()
     panel = pl.read_parquet(panel_path).filter(pl.col("health_region_code") == region)
@@ -208,7 +255,7 @@ def region_study(
             entry = {"outcome": outcome, "age_group": age_group or "all"}
             try:
                 series = stratum_series(panel, region, outcome, age_group)
-                entry.update(fit_stratum(series, basis))
+                entry.update(fit_stratum(series, basis, trend_df_per_year=trend_df_per_year))
                 if age_group is None:
                     entry["backtest"] = backtest_stratum(series, basis)
             except ValueError as error:
@@ -229,6 +276,11 @@ def region_study(
         "mode": "research",
         "exposure": exposure,
         "meteorology": meteorology_source(panel_path),
+        "pm25_source": input_source(panel_path, "pm25"),
+        # The modelled column: a sensitivity run swaps in the MERRA-2 input.
+        "exposure_source": input_source(
+            panel_path, "merra2" if exposure == "pm25_merra2" else "pm25"
+        ),
         "validated": False,
         "region": region,
         "basis": {
@@ -236,6 +288,14 @@ def region_study(
             "knots": list(basis.knots),
             "lag_degree": basis.lag_degree,
             "reference": basis.reference,
+        },
+        "confounders": {
+            "inference": f"natural time spline, {trend_df_per_year} df/year, no harmonics",
+            "trend_sensitivity_df_per_year": list(TREND_SENSITIVITY),
+            "backtest": (
+                f"time spline {ConfounderDesign().trend_df} df"
+                f" + {ConfounderDesign().harmonics} harmonics"
+            ),
         },
         "negative_control_flag": None
         if control is None
