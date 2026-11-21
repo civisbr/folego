@@ -1,0 +1,541 @@
+{
+  "generated_at": "2026-11-21T01:38:43.399580+00:00",
+  "basis": "normal AIHs (IDENT 1), J00-J99, state of residence, processing competence",
+  "accepted": true,
+  "checks": [
+    {
+      "state": "AC",
+      "year": 2012,
+      "status": "compared",
+      "source": {
+        "url": "https://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nrac.def",
+        "retrieved_at": "2026-11-21T00:30:04.483026+00:00",
+        "sha256": "2670967fb40c65a574a72c848db6f05266b28c4e6480f20510510a216510a5db"
+      },
+      "accepted": true,
+      "criterion": "relative error < 1% annually and in every month",
+      "total_observed": 4578,
+      "total_reference": 4578,
+      "annual_relative_error": 0.0,
+      "months": [
+        {
+          "month": 1,
+          "observed": 309,
+          "reference": 309,
+          "relative_error": 0.0
+        },
+        {
+          "month": 2,
+          "observed": 295,
+          "reference": 295,
+          "relative_error": 0.0
+        },
+        {
+          "month": 3,
+          "observed": 414,
+          "reference": 414,
+          "relative_error": 0.0
+        },
+        {
+          "month": 4,
+          "observed": 406,
+          "reference": 406,
+          "relative_error": 0.0
+        },
+        {
+          "month": 5,
+          "observed": 475,
+          "reference": 475,
+          "relative_error": 0.0
+        },
+        {
+          "month": 6,
+          "observed": 499,
+          "reference": 499,
+          "relative_error": 0.0
+        },
+        {
+          "month": 7,
+          "observed": 393,
+          "reference": 393,
+          "relative_error": 0.0
+        },
+        {
+          "month": 8,
+          "observed": 402,
+          "reference": 402,
+          "relative_error": 0.0
+        },
+        {
+          "month": 9,
+          "observed": 320,
+          "reference": 320,
+          "relative_error": 0.0
+        },
+        {
+          "month": 10,
+          "observed": 376,
+          "reference": 376,
+          "relative_error": 0.0
+        },
+        {
+          "month": 11,
+          "observed": 393,
+          "reference": 393,
+          "relative_error": 0.0
+        },
+        {
+          "month": 12,
+          "observed": 296,
+          "reference": 296,
+          "relative_error": 0.0
+        }
+      ]
+    },
+    {
+      "state": "RO",
+      "year": 2019,
+      "status": "compared",
+      "source": {
+        "url": "https://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nrro.def",
+        "retrieved_at": "2026-11-21T01:37:06.466197+00:00",
+        "sha256": "2d633c8fca6639bf2c95492991d4bbf3bae59ec1b9432b25ed71c83463851c1c"
+      },
+      "accepted": true,
+      "criterion": "relative error < 1% annually and in every month",
+      "total_observed": 13069,
+      "total_reference": 13069,
+      "annual_relative_error": 0.0,
+      "months": [
+        {
+          "month": 1,
+          "observed": 764,
+          "reference": 764,
+          "relative_error": 0.0
+        },
+        {
+          "month": 2,
+          "observed": 881,
+          "reference": 881,
+          "relative_error": 0.0
+        },
+        {
+          "month": 3,
+          "observed": 1227,
+          "reference": 1227,
+          "relative_error": 0.0
+        },
+        {
+          "month": 4,
+          "observed": 1468,
+          "reference": 1468,
+          "relative_error": 0.0
+        },
+        {
+          "month": 5,
+          "observed": 1451,
+          "reference": 1451,
+          "relative_error": 0.0
+        },
+        {
+          "month": 6,
+          "observed": 1267,
+          "reference": 1267,
+          "relative_error": 0.0
+        },
+        {
+          "month": 7,
+          "observed": 1162,
+          "reference": 1162,
+          "relative_error": 0.0
+        },
+        {
+          "month": 8,
+          "observed": 996,
+          "reference": 996,
+          "relative_error": 0.0
+        },
+        {
+          "month": 9,
+          "observed": 1076,
+          "reference": 1076,
+          "relative_error": 0.0
+        },
+        {
+          "month": 10,
+          "observed": 935,
+          "reference": 935,
+          "relative_error": 0.0
+        },
+        {
+          "month": 11,
+          "observed": 994,
+          "reference": 994,
+          "relative_error": 0.0
+        },
+        {
+          "month": 12,
+          "observed": 848,
+          "reference": 848,
+          "relative_error": 0.0
+        }
+      ]
+    },
+    {
+      "state": "AM",
+      "year": 2013,
+      "status": "compared",
+      "source": {
+        "url": "https://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nram.def",
+        "retrieved_at": "2026-11-21T01:37:07.817868+00:00",
+        "sha256": "6f96e402bfc5147e9767e2ae96ea01932f99fa3dde91b47521c0fca7d55fd81a"
+      },
+      "accepted": true,
+      "criterion": "relative error < 1% annually and in every month",
+      "total_observed": 17788,
+      "total_reference": 17788,
+      "annual_relative_error": 0.0,
+      "months": [
+        {
+          "month": 1,
+          "observed": 1310,
+          "reference": 1310,
+          "relative_error": 0.0
+        },
+        {
+          "month": 2,
+          "observed": 1470,
+          "reference": 1470,
+          "relative_error": 0.0
+        },
+        {
+          "month": 3,
+          "observed": 1820,
+          "reference": 1820,
+          "relative_error": 0.0
+        },
+        {
+          "month": 4,
+          "observed": 1761,
+          "reference": 1761,
+          "relative_error": 0.0
+        },
+        {
+          "month": 5,
+          "observed": 1706,
+          "reference": 1706,
+          "relative_error": 0.0
+        },
+        {
+          "month": 6,
+          "observed": 1662,
+          "reference": 1662,
+          "relative_error": 0.0
+        },
+        {
+          "month": 7,
+          "observed": 1464,
+          "reference": 1464,
+          "relative_error": 0.0
+        },
+        {
+          "month": 8,
+          "observed": 1598,
+          "reference": 1598,
+          "relative_error": 0.0
+        },
+        {
+          "month": 9,
+          "observed": 1471,
+          "reference": 1471,
+          "relative_error": 0.0
+        },
+        {
+          "month": 10,
+          "observed": 1311,
+          "reference": 1311,
+          "relative_error": 0.0
+        },
+        {
+          "month": 11,
+          "observed": 1150,
+          "reference": 1150,
+          "relative_error": 0.0
+        },
+        {
+          "month": 12,
+          "observed": 1065,
+          "reference": 1065,
+          "relative_error": 0.0
+        }
+      ]
+    },
+    {
+      "state": "SP",
+      "year": 2016,
+      "status": "compared",
+      "source": {
+        "url": "https://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nrsp.def",
+        "retrieved_at": "2026-11-21T01:37:10.108475+00:00",
+        "sha256": "bdac2736a017159f75cf8f7c9432399be377e8f1fb8bb15739a87a20ec0111ea"
+      },
+      "accepted": true,
+      "criterion": "relative error < 1% annually and in every month",
+      "total_observed": 237242,
+      "total_reference": 237242,
+      "annual_relative_error": 0.0,
+      "months": [
+        {
+          "month": 1,
+          "observed": 13864,
+          "reference": 13864,
+          "relative_error": 0.0
+        },
+        {
+          "month": 2,
+          "observed": 13358,
+          "reference": 13358,
+          "relative_error": 0.0
+        },
+        {
+          "month": 3,
+          "observed": 18556,
+          "reference": 18556,
+          "relative_error": 0.0
+        },
+        {
+          "month": 4,
+          "observed": 24430,
+          "reference": 24430,
+          "relative_error": 0.0
+        },
+        {
+          "month": 5,
+          "observed": 24868,
+          "reference": 24868,
+          "relative_error": 0.0
+        },
+        {
+          "month": 6,
+          "observed": 25283,
+          "reference": 25283,
+          "relative_error": 0.0
+        },
+        {
+          "month": 7,
+          "observed": 23884,
+          "reference": 23884,
+          "relative_error": 0.0
+        },
+        {
+          "month": 8,
+          "observed": 20718,
+          "reference": 20718,
+          "relative_error": 0.0
+        },
+        {
+          "month": 9,
+          "observed": 19574,
+          "reference": 19574,
+          "relative_error": 0.0
+        },
+        {
+          "month": 10,
+          "observed": 18728,
+          "reference": 18728,
+          "relative_error": 0.0
+        },
+        {
+          "month": 11,
+          "observed": 17646,
+          "reference": 17646,
+          "relative_error": 0.0
+        },
+        {
+          "month": 12,
+          "observed": 16333,
+          "reference": 16333,
+          "relative_error": 0.0
+        }
+      ]
+    },
+    {
+      "state": "BA",
+      "year": 2021,
+      "status": "compared",
+      "source": {
+        "url": "https://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nrba.def",
+        "retrieved_at": "2026-11-21T01:38:41.033239+00:00",
+        "sha256": "4be83e3354a837b1d232bfad98f99ee1f04856b43cc76ea48f017d72f2a99544"
+      },
+      "accepted": true,
+      "criterion": "relative error < 1% annually and in every month",
+      "total_observed": 46781,
+      "total_reference": 46781,
+      "annual_relative_error": 0.0,
+      "months": [
+        {
+          "month": 1,
+          "observed": 3539,
+          "reference": 3539,
+          "relative_error": 0.0
+        },
+        {
+          "month": 2,
+          "observed": 3409,
+          "reference": 3409,
+          "relative_error": 0.0
+        },
+        {
+          "month": 3,
+          "observed": 3668,
+          "reference": 3668,
+          "relative_error": 0.0
+        },
+        {
+          "month": 4,
+          "observed": 3648,
+          "reference": 3648,
+          "relative_error": 0.0
+        },
+        {
+          "month": 5,
+          "observed": 3721,
+          "reference": 3721,
+          "relative_error": 0.0
+        },
+        {
+          "month": 6,
+          "observed": 4194,
+          "reference": 4194,
+          "relative_error": 0.0
+        },
+        {
+          "month": 7,
+          "observed": 4107,
+          "reference": 4107,
+          "relative_error": 0.0
+        },
+        {
+          "month": 8,
+          "observed": 4128,
+          "reference": 4128,
+          "relative_error": 0.0
+        },
+        {
+          "month": 9,
+          "observed": 3982,
+          "reference": 3982,
+          "relative_error": 0.0
+        },
+        {
+          "month": 10,
+          "observed": 3793,
+          "reference": 3793,
+          "relative_error": 0.0
+        },
+        {
+          "month": 11,
+          "observed": 4059,
+          "reference": 4059,
+          "relative_error": 0.0
+        },
+        {
+          "month": 12,
+          "observed": 4533,
+          "reference": 4533,
+          "relative_error": 0.0
+        }
+      ]
+    },
+    {
+      "state": "RS",
+      "year": 2024,
+      "status": "compared",
+      "source": {
+        "url": "https://tabnet.datasus.gov.br/cgi/tabcgi.exe?sih/cnv/nrrs.def",
+        "retrieved_at": "2026-11-21T01:38:18.238646+00:00",
+        "sha256": "7bf2cc1636ae14799e703fb7595695069101c4e10ddff933f7c75338eb5471b4"
+      },
+      "accepted": true,
+      "criterion": "relative error < 1% annually and in every month",
+      "total_observed": 96651,
+      "total_reference": 96651,
+      "annual_relative_error": 0.0,
+      "months": [
+        {
+          "month": 1,
+          "observed": 5848,
+          "reference": 5848,
+          "relative_error": 0.0
+        },
+        {
+          "month": 2,
+          "observed": 4838,
+          "reference": 4838,
+          "relative_error": 0.0
+        },
+        {
+          "month": 3,
+          "observed": 5934,
+          "reference": 5934,
+          "relative_error": 0.0
+        },
+        {
+          "month": 4,
+          "observed": 6977,
+          "reference": 6977,
+          "relative_error": 0.0
+        },
+        {
+          "month": 5,
+          "observed": 7880,
+          "reference": 7880,
+          "relative_error": 0.0
+        },
+        {
+          "month": 6,
+          "observed": 9396,
+          "reference": 9396,
+          "relative_error": 0.0
+        },
+        {
+          "month": 7,
+          "observed": 9847,
+          "reference": 9847,
+          "relative_error": 0.0
+        },
+        {
+          "month": 8,
+          "observed": 10188,
+          "reference": 10188,
+          "relative_error": 0.0
+        },
+        {
+          "month": 9,
+          "observed": 10031,
+          "reference": 10031,
+          "relative_error": 0.0
+        },
+        {
+          "month": 10,
+          "observed": 10164,
+          "reference": 10164,
+          "relative_error": 0.0
+        },
+        {
+          "month": 11,
+          "observed": 8436,
+          "reference": 8436,
+          "relative_error": 0.0
+        },
+        {
+          "month": 12,
+          "observed": 7112,
+          "reference": 7112,
+          "relative_error": 0.0
+        }
+      ]
+    }
+  ]
+}

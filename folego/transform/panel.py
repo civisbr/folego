@@ -36,6 +36,7 @@ def build_panel(
     output: Path,
     *,
     regions: list[str] | None = None,
+    srag_path: Path | None = None,
 ) -> dict:
     window = json.loads(outcomes_path.with_suffix(".parquet.source.json").read_text())
     admission_start, admission_end = (date.fromisoformat(d) for d in window["admission_window"])
@@ -45,6 +46,25 @@ def build_panel(
     )
     calendar = pl.read_parquet(calendar_path).select("date", "health_region_code", "holiday")
     sources = {"pm25": pm25, "meteorology": weather, "calendar": calendar}
+    if srag_path is not None:
+        # Viral SRAG with onset in the 7 days before t, on a log scale. Day t itself is
+        # left out: same-day viral SRAG is partly the respiratory outcome and partly a
+        # mediator of PM2.5, and adjusting for it would bias the effect toward null.
+        srag = pl.read_parquet(srag_path).select("date", "health_region_code", "viral")
+        _coverage(srag, "srag")
+        sources["srag"] = (
+            srag.sort("health_region_code", "date")
+            .with_columns(
+                pl.col("viral")
+                .shift(1)
+                .rolling_sum(window_size=7)
+                .over("health_region_code")
+                .log1p()
+                .alias("srag")
+            )
+            .filter(pl.col("srag").is_not_null())
+            .select("date", "health_region_code", "srag")
+        )
     codes = set(pm25["health_region_code"])
     for name, frame in sources.items():
         if set(frame["health_region_code"]) != codes:
@@ -58,10 +78,12 @@ def build_panel(
     start, end = max(s for s, _ in spans), min(e for _, e in spans)
     if start > end:
         raise ValueError("Exposure sources do not overlap in time")
-    exposures = (
-        pm25.join(weather, on=["date", "health_region_code"])
-        .join(calendar, on=["date", "health_region_code"])
-        .filter(pl.col("date").is_between(start, end) & pl.col("health_region_code").is_in(codes))
+    exposures = pm25
+    for name, frame in sources.items():
+        if name != "pm25":
+            exposures = exposures.join(frame, on=["date", "health_region_code"])
+    exposures = exposures.filter(
+        pl.col("date").is_between(start, end) & pl.col("health_region_code").is_in(codes)
     )
     strata = pl.DataFrame({"age_group": AGE_GROUPS}, schema={"age_group": pl.String}).join(
         pl.DataFrame({"outcome": OUTCOMES}), how="cross"
@@ -86,6 +108,7 @@ def build_panel(
         "temperature",
         "humidity",
         "holiday",
+        *(["srag"] if srag_path is not None else []),
         "admissions",
         "mean_payment",
     ]
@@ -148,6 +171,7 @@ def build_panel(
                 "pm25": pm25_path,
                 "meteorology": meteorology_path,
                 "calendar": calendar_path,
+                **({"srag": srag_path} if srag_path is not None else {}),
             }.items()
         },
     }

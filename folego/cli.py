@@ -39,6 +39,26 @@ def main():
     outcomes.add_argument(
         "--output", type=Path, default=Path("data/marts/outcomes/daily-admissions.parquet")
     )
+    srag_cmd = commands.add_parser(
+        "srag", help="SRAG hospitalizada (SIVEP-Gripe) por região e dia de início dos sintomas"
+    )
+    srag_cmd.add_argument("--start", type=int, default=2012)
+    srag_cmd.add_argument("--end", type=int, default=2025)
+    srag_cmd.add_argument(
+        "--lookup", type=Path, default=Path("data/staging/municipalities.parquet")
+    )
+    srag_cmd.add_argument("--keep-source", action="store_true")
+    srag_cmd.add_argument("--output", type=Path, default=Path("data/marts/srag/daily-srag.parquet"))
+    study = commands.add_parser("study", help="Estudo de associação PM2,5 × internações por região")
+    study.add_argument("--region", required=True, help="Código da região de saúde (5 dígitos)")
+    study.add_argument("--panel", type=Path, default=Path("data/marts/panel/daily-panel.parquet"))
+    study.add_argument("--output", type=Path, help="Padrão: data/marts/studies/<região>.json")
+    maturity = commands.add_parser(
+        "maturity", help="Medir em quantos meses as internações chegam ao SIH"
+    )
+    maturity.add_argument(
+        "--output", type=Path, default=Path("data/marts/validation/sih-maturity.json")
+    )
     tabnet_check = commands.add_parser(
         "tabnet-national", help="Conferir o SIH nacional com o TabNet por UF de residência e ano"
     )
@@ -62,6 +82,7 @@ def main():
         default=Path("data/marts/exposure/meteorology-daily.parquet"),
     )
     panel.add_argument("--calendar", type=Path, default=Path("data/marts/calendar.parquet"))
+    panel.add_argument("--srag", type=Path, help="SRAG diária (folego srag) como confundidor")
     panel.add_argument("--regions", nargs="+", help="Códigos de região de saúde (padrão: todas)")
     panel.add_argument("--output", type=Path, default=Path("data/marts/panel/daily-panel.parquet"))
     cams = commands.add_parser("cams", help="Executar requisição exportada do ADS")
@@ -203,6 +224,73 @@ def main():
                 indent=2,
             )
         )
+    elif args.command == "srag":
+        from datetime import date
+
+        import polars as pl
+
+        from .ingest.srag import build_srag
+
+        # The current year is still being notified; its zeros would not be real.
+        if not 2009 <= args.start <= args.end < date.today().year:
+            parser.exit(2, "Use 2009 <= início <= fim <= ano passado.\n")
+        os.umask(0o077)
+        series = build_srag(
+            args.start, args.end, args.lookup, args.output, keep_source=args.keep_source
+        )
+        print(
+            json.dumps(
+                {
+                    "rows": series.height,
+                    "viral_by_year": {
+                        str(r["year"]): r["viral"]
+                        for r in series.group_by(pl.col("date").dt.year().alias("year"))
+                        .agg(pl.col("viral").sum())
+                        .sort("year")
+                        .to_dicts()
+                    },
+                },
+                indent=2,
+            )
+        )
+    elif args.command == "study":
+        import re
+
+        from .evaluate.study import region_study
+
+        if not re.fullmatch(r"\d{5}", args.region):
+            parser.exit(2, "Código de região de saúde tem 5 dígitos.\n")
+        os.umask(0o077)
+        output = args.output or Path("data/marts/studies") / f"{args.region}.json"
+        report = region_study(args.panel, args.region, output)
+        summary = [
+            {
+                "outcome": r["outcome"],
+                "age_group": r["age_group"],
+                **(
+                    {
+                        k: round(v, 3)
+                        for k, v in r["effect"].items()
+                        if k in ("rr", "lower", "upper")
+                    }
+                    if "effect" in r
+                    else {"error": r["error"]}
+                ),
+            }
+            for r in report["results"]
+        ]
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
+        print(
+            f"Controle negativo sinalizado: {report['negative_control_flag']}; relatório: {output}"
+        )
+    elif args.command == "maturity":
+        from .transform.national_outcomes import maturity_profile
+
+        os.umask(0o077)
+        report = maturity_profile(Path("data"))
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2))
+        print(json.dumps({k: report[k] for k in ("admission_months", "cumulative_share")}))
     elif args.command == "tabnet-national":
         import re
 
@@ -244,6 +332,7 @@ def main():
             args.calendar,
             args.output,
             regions=args.regions,
+            srag_path=args.srag,
         )
         print(json.dumps({k: manifest[k] for k in ("rows", "regions", "dates")}, indent=2))
     elif args.command == "sih-national":

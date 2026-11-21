@@ -334,3 +334,84 @@ def build_national_outcomes(
     }
     write_with_manifest(output, counts.write_parquet, manifest)
     return counts
+
+
+def maturity_profile(root: Path, *, max_lag: int = 24) -> dict:
+    """Share of an admission month's records that arrive within k processing months.
+
+    Only admission months followed by at least ``max_lag`` certified competences are
+    used, so each month's eventual total is known; this is the evidence behind the
+    ``maturity_months`` cut-off.
+    """
+    window = certified_window(root, maturity_months=0)
+    last = tuple(int(part) for part in window["competences"][-1].split("-"))
+    first = tuple(int(part) for part in window["competences"][0].split("-"))
+    newest_admission = _add_months(last, -max_lag)
+    files = sorted(national_root(root).glob("*/*/*.parquet"))
+    admitted = pl.col("DT_INTER").str.strip_chars().str.to_date("%Y%m%d", strict=False)
+    month_index = pl.col("ANO_CMPT").cast(pl.Int32, strict=False) * 12 + pl.col("MES_CMPT").cast(
+        pl.Int32, strict=False
+    )
+    lags = (
+        pl.scan_parquet(files)
+        .filter(pl.col("IDENT").str.strip_chars() == "1")
+        .select(
+            (admitted.dt.year() * 12 + admitted.dt.month()).alias("admission"),
+            month_index.alias("competence"),
+            pl.col("DIAG_PRINC").str.strip_chars().str.slice(0, 1).alias("chapter"),
+        )
+        .filter(
+            pl.col("admission").is_between(
+                first[0] * 12 + first[1], newest_admission[0] * 12 + newest_admission[1]
+            )
+        )
+        .with_columns(
+            # Lags past max_lag stay in the denominator as one tail bin; negative lags
+            # (processed before admission) and unparseable dates are counted apart.
+            pl.when(pl.col("competence").is_null())
+            .then(-2)
+            .when(pl.col("competence") < pl.col("admission"))
+            .then(-1)
+            .otherwise(pl.min_horizontal(pl.col("competence") - pl.col("admission"), max_lag + 1))
+            .alias("lag")
+        )
+        .group_by("chapter", "lag")
+        .agg(pl.len().alias("records"))
+        .collect(engine="streaming")
+    )
+    if lags.is_empty():
+        raise ValueError(f"Need more than {max_lag} certified competences")
+
+    invalid = lags.filter(pl.col("lag") < 0)
+    lags = lags.filter(pl.col("lag") >= 0)
+
+    def cumulative(frame: pl.DataFrame) -> list[float]:
+        counts = dict(zip(frame["lag"].to_list(), frame["records"].to_list(), strict=True))
+        total = sum(counts.values())
+        running, shares = 0, []
+        for lag in range(max_lag + 1):
+            running += counts.get(lag, 0)
+            shares.append(round(running / total, 5))
+        return shares
+
+    overall = lags.group_by("lag").agg(pl.col("records").sum())
+    return {
+        "generated_at": datetime.now(UTC).isoformat(),
+        "admission_months": [
+            f"{first[0]}-{first[1]:02d}",
+            f"{newest_admission[0]}-{newest_admission[1]:02d}",
+        ],
+        "max_lag_months": max_lag,
+        "basis": "normal AIHs, share of records arriving by k months after admission month",
+        "records": int(lags["records"].sum()),
+        "arriving_after_max_lag": int(lags.filter(pl.col("lag") > max_lag)["records"].sum()),
+        "processed_before_admission": int(invalid.filter(pl.col("lag") == -1)["records"].sum()),
+        "invalid_competence": int(invalid.filter(pl.col("lag") == -2)["records"].sum()),
+        "partitions": len(files),
+        "software": software_provenance(),
+        "cumulative_share": cumulative(overall),
+        "by_chapter": {
+            chapter: cumulative(lags.filter(pl.col("chapter") == chapter))
+            for chapter in sorted(set(lags["chapter"].to_list()) & set("IJST"))
+        },
+    }

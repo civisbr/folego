@@ -98,11 +98,33 @@ Primeira execução nacional (competências 2012-01 a 2026-07, maturidade de 6 m
 - nenhuma residência sem região;
 - 7 registros com idade inválida.
 
-Conferência TabNet: AC 2012, RO 2019, AM 2013, SP 2016, BA 2021 e RS 2024 bateram 12 de 12 meses, com erro zero. Os relatórios ficam em `data/marts/validation/history/`.
+Conferência TabNet: AC 2012, RO 2019, AM 2013, SP 2016, BA 2021 e RS 2024 bateram 12 de 12 meses, com erro zero. Os relatórios ficam em `data/marts/validation/history/`; cópias versionadas da conferência e da medição de maturação estão em `docs/evidence/`.
 
 `tabnet-national` compara, para pares UF:ANO (padrão: RO 2019, AM 2013, SP 2016, BA 2021, RS 2024), as AIH respiratórias normais por UF de residência e mês de processamento com o TabNet, usando todos os arquivos estaduais do ano. Aprova com erro relativo abaixo de 1% em cada mês e no ano; caso contrário, sai com erro. Primeira conferência parcial: AC 2012 bateu 12 de 12 meses, sem diferença.
 
 `panel` junta desfechos, PM2,5, meteorologia e feriados no formato abaixo, no intervalo coberto por todas as exposições, gravando uma região por vez para caber na memória. A execução para se houver lacuna de dias numa exposição, região sem nenhuma internação no arquivo de desfechos (códigos de região divergentes) ou exposições fora da janela certificada. As internações são zeradas apenas dentro da janela certificada e ficam nulas fora dela. `mean_payment` é o pagamento corrigido dividido pelas internações do dia.
+
+## SRAG, maturação e estudo regional
+
+```sh
+uv run folego srag --start 2012 --end 2025
+uv run folego maturity
+uv run folego panel --regions 11004 --srag data/marts/srag/daily-srag.parquet
+uv run folego study --region 11004
+```
+
+`srag` descobre nas páginas do Portal de Dados Abertos do SUS o arquivo mais recente de cada ano do SIVEP-Gripe (CSV até 2018, Parquet a partir de 2019). Só são aceitos os hosts oficiais. Cada arquivo é reduzido a contagens diárias de SRAG hospitalizada por data de início dos sintomas, região de saúde de residência e classificação final, e depois é apagado; o manifesto guarda URL e hash. A coluna `viral` soma influenza, COVID-19 e outros vírus. A SRAG sem especificação fica separada, porque a própria fumaça pode causá-la e ajustar por ela removeria parte do efeito. Um arquivo do ano anterior e um do seguinte também são lidos, quando publicados, porque o arquivo é por ano de notificação. O ano corrente não é aceito, porque ainda está em notificação. A extração para se não houver internações, se mais de 2% das residências ficarem sem região ou se mais de 1% das datas de início forem inválidas; o arquivo bruto é apagado mesmo quando a extração falha. A classificação final (1 influenza, 2 outro vírus, 3 outro agente, 4 não especificado, 5 COVID-19) é tratada como estável entre os dicionários de 2012 a 2025; isso ainda precisa ser conferido nos dicionários de cada período. No painel, `--srag` adiciona `srag` = log(1 + casos virais com início nos 7 dias anteriores ao dia, sem incluí-lo). O dia corrente fica de fora porque a SRAG viral do próprio dia é em parte o desfecho e em parte mediadora do PM2,5.
+
+`maturity` mede, para os meses de internação com pelo menos 24 competências posteriores, a fração dos registros que chega até k meses depois. Resultado nacional: 48% no próprio mês, 98,6% em 3 meses e 99,99% em 6.
+
+`study` ajusta, para cada desfecho (todas as idades, 0–4 e 60+), o modelo quasi-Poisson com base cruzada do PM2,5 e confundidores. O relatório em `data/marts/studies/<região>.json` traz:
+- o risco relativo cumulativo de +10 µg/m³ sustentado em todos os lags, com IC 95%;
+- a dispersão e a autocorrelação dos resíduos (ACF e Ljung-Box);
+- o teste conjunto de exposição, cuja significância no controle negativo (S/T) sinaliza confusão residual;
+- quando há SRAG no painel, o efeito com e sem o ajuste por SRAG;
+- um backtest de 2019 a 2024 (MAE/MAPE semanais).
+
+O relatório é de pesquisa (`validated=false`) e guarda o commit do código e o hash do painel; cada execução é mantida em `history/`. O backtest usa exposições observadas, e uma dobra sem histórico suficiente aparece com erro sem invalidar as outras.
 
 ## Painel diário preparado para pesquisa
 

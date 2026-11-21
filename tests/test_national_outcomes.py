@@ -228,6 +228,25 @@ def test_panel_zero_fills_only_inside_the_admission_window(tmp_path):
     assert cell["admissions"].to_list() == [0, 2, 0, None, None]
     assert cell["mean_payment"].to_list() == [None, 150.0, None, None, None]
     assert set(panel["health_region_code"]) == {"11004"}
+    srag = tmp_path / "srag.parquet"
+    daily(date(2018, 12, 20), 30, regions, viral=2).with_columns(
+        # A spike on 2 Jan must only reach the following seven days.
+        pl.when(pl.col("date") == date(2019, 1, 2)).then(100).otherwise(2).alias("viral")
+    ).write_parquet(srag)
+    build_panel(
+        outcomes,
+        paths["pm25"],
+        paths["meteo"],
+        paths["calendar"],
+        output,
+        regions=["11004"],
+        srag_path=srag,
+    )
+    import math
+
+    by_day = dict(pl.read_parquet(output).select("date", "srag").unique().sort("date").iter_rows())
+    assert by_day[date(2019, 1, 2)] == math.log1p(14)
+    assert by_day[date(2019, 1, 3)] == math.log1p(112)
 
 
 def test_panel_refuses_gaps_in_an_exposure(tmp_path):
@@ -402,3 +421,19 @@ def test_panel_fails_when_outcome_regions_differ(tmp_path):
         build_panel(
             outcomes, paths["pm25"], paths["meteo"], paths["calendar"], tmp_path / "p.parquet"
         )
+
+
+def test_maturity_profile_counts_records_by_processing_lag(tmp_path):
+    from folego.transform.national_outcomes import maturity_profile
+
+    root = tmp_path / "data"
+    for month in range(1, 13):
+        for state in STATES:
+            write_partition(root, state, 2019, month)
+    # Two January admissions: one processed in January, one in March.
+    write_partition(root, "RO", 2019, 1, [aih(1, "J00", "20190115")])
+    write_partition(root, "RO", 2019, 3, [aih(2, "J00", "20190120"), aih(3, "I21", "20190301")])
+    report = maturity_profile(root, max_lag=3)
+    assert report["admission_months"] == ["2019-01", "2019-09"]
+    assert report["by_chapter"]["J"] == [0.5, 0.5, 1.0, 1.0]
+    assert report["cumulative_share"][0] == pytest.approx(2 / 3, abs=1e-4)

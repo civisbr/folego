@@ -6,14 +6,14 @@ Primeira versão, novembro de 2026. **Não há desempenho epidemiológico real a
 | --- | --- |
 | Python 3.12, uv, Ruff, pytest, Makefile | Implementados; `make check` executa validações locais. |
 | Correspondência de 100% dos municípios | Snapshot com 5.571/5.571, 439 regiões; teste nacional e manifesto versionados. Um complemento com resolução oficial da SES/MT. |
-| SIH RD: download e conversão DBC → Parquet | Piloto real de 2019 executado: 324 arquivos das 27 UFs, projetados para os residentes de Madeira-Mamoré. Série nacional desde 2012 ainda pendente. |
-| Desfechos CID/idade/data/residência | Implementados; piloto Madeira-Mamoré/2019 concorda com TabNet em 2.677 internações e 12 meses (0% de diferença). Outras regiões/anos e maturação por data de internação pendentes. |
+| SIH RD: download e conversão DBC → Parquet | Série nacional extraída (`folego sih-national`): 4.776 arquivos, das competências 2012-01 a 2026-07 nas 27 UFs, com os capítulos I, J, S e T de todas as residências; DBC apagados e hash/URL preservados. |
+| Desfechos CID/idade/data/residência | Série nacional diária por região de saúde (`folego outcomes`): 50,9 milhões de internações de 2012-01-01 a 2026-01-31, nenhuma AIH em conflito, nenhuma residência sem região. Conferência TabNet com erro zero em 12 de 12 meses para AC 2012, AM 2013, SP 2016, RO 2019, BA 2021 e RS 2024. Maturação medida (`folego maturity`): 98,6% dos registros chegam em 3 meses e 99,99% em 6, o que justifica o corte de 6 meses. |
 | PM2,5 ponderado pela população | Extração do EAC4 e pesos populacionais (WorldPop 2020) implementados e testados com dados sintéticos; pesos nacionais cobrem as 439 regiões. Série real 2012–2025 aguardando o download do ADS. |
-| FIRMS, CAMS, ERA5, InfoGripe | CAMS e ERA5 autenticados e em download (2012–2025); série meteorológica regional implementada (`folego meteorology`). Feriados nacionais e estaduais por região (`folego calendar`). FIRMS histórico e InfoGripe pendentes. |
-| Modelo com lags e confundidores | Implementado; testes sintéticos recuperam efeito conhecido e exercitam fluxo de previsão. Ajuste científico por região pendente. |
-| Excesso, pagamentos e incerteza | Implementados com simulação conjunta e preservação do histórico observado. IPCA real disponível pela SIDRA (`folego ipca`); falta aplicá-lo aos pagamentos do SIH. |
-| Controle negativo | Teste Wald conjunto implementado; avaliação com SIH real pendente. |
-| Backtest 2019–2024 | Divisões temporais e executor de métricas implementados; estudo real e relatório de MAE/MAPE/precisão/recall pendentes. |
+| FIRMS, CAMS, ERA5, SRAG | CAMS e ERA5 autenticados e em download (2012–2025); série meteorológica regional implementada (`folego meteorology`). Feriados nacionais e estaduais por região (`folego calendar`). SRAG hospitalizada por região e dia (`folego srag`, SIVEP-Gripe 2012–2025) entra no painel como confundidor. FIRMS histórico pendente. |
+| Modelo com lags e confundidores | Implementado; testes sintéticos recuperam efeito conhecido e exercitam fluxo de previsão. Estudo regional (`folego study`) com risco relativo cumulativo, dispersão, autocorrelação dos resíduos, controle negativo e backtest testado com dados sintéticos; execução real aguarda CAMS e ERA5. |
+| Excesso, pagamentos e incerteza | Implementados com simulação conjunta e preservação do histórico observado. Pagamentos do SIH corrigidos pelo IPCA (SIDRA) do mês de processamento. |
+| Controle negativo | Teste Wald conjunto aplicado às internações S/T no estudo regional; avaliação com dados reais aguarda a exposição. |
+| Backtest 2019–2024 | Executado pelo estudo regional (origens de 1º de julho, previsão jul–out, treino até origem − 62 dias). Usa exposição observada, não previsões arquivadas, portanto é otimista. Execução real pendente. |
 | CAMS × MERRA-2 | Sensibilidade pendente; adaptador MERRA-2 não implementado. |
 | Painel e arquivos abertos | Implementados, com mapa real e valores sintéticos explícitos; publicação via GitHub Pages. |
 | Atualização diária | Auditoria territorial agendada. Previsão de pesquisa depende de painéis preparados configurados; não é uma operação científica nacional ativa. |
