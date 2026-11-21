@@ -10,6 +10,7 @@ Backtest inputs are observed exposures, not archived forecasts, so its errors ar
 lower bound for an operational forecast.
 """
 
+import dataclasses
 import json
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
@@ -28,8 +29,13 @@ from .negative_control import joint_exposure_test
 NEGATIVE_CONTROL = "negative_control"
 # Bumped whenever the model specification changes, so reports of different
 # specifications are never compared by mistake. 1: 6 df trend + harmonics; 2: 7 df per
-# calendar year; 3: 7 df per year of days present.
-MODEL_SPEC_VERSION = 3
+# calendar year; 3: 7 df per year of days present; 4: knots without support dropped.
+MODEL_SPEC_VERSION = 4
+# A hinge needs days above its knot; a region that never reaches 75 µg/m³ would get an
+# all-zero column and a rank-deficient design.
+MIN_SHARE_ABOVE_KNOT = 0.01
+# |log RR| + 1.96·SE beyond this (RR bounds past e^±20) is a degenerate fit, not an estimate.
+MAX_LOG_RR_BOUND = 20.0
 MIN_TRAINING_DAYS = 365
 TREND_DF_PER_YEAR = 7
 # Effect estimates must not hinge on one smoothing choice; these bracket the default.
@@ -81,6 +87,9 @@ def cumulative_relative_risk(model, basis: CrossBasis, width: int, *, increase=1
     covariance = np.asarray(model.cov_params())[1 : width + 1, 1 : width + 1]
     log_rr = float(contrast @ beta)
     se = float(np.sqrt(contrast @ covariance @ contrast))
+    # A sparse stratum can "converge" to huge coefficients; its RR is not an estimate.
+    if not (np.isfinite(log_rr) and np.isfinite(se) and abs(log_rr) + 1.96 * se < MAX_LOG_RR_BOUND):
+        raise ValueError("Degenerate fit: effect or standard error non-finite or out of bounds")
     return {
         "increase_ug_m3": increase,
         "reference_ug_m3": basis.reference,
@@ -250,6 +259,7 @@ def region_study(
     trend_df_per_year: float = TREND_DF_PER_YEAR,
 ) -> dict:
     basis = basis or CrossBasis()
+    requested_knots = basis.knots
     panel = pl.read_parquet(panel_path).filter(pl.col("health_region_code") == region)
     if panel.is_empty():
         raise ValueError(f"Region {region} not in the panel")
@@ -258,6 +268,16 @@ def region_study(
     if exposure != "pm25":
         # Sensitivity runs swap the exposure column; everything downstream reads "pm25".
         panel = panel.drop("pm25").rename({exposure: "pm25"})
+    # NaN sorts above every number in polars and would count as support for every knot.
+    levels = panel.group_by("date").agg(pl.col("pm25").first())["pm25"].drop_nulls().drop_nans()
+    if levels.is_empty():
+        raise ValueError(f"No {exposure} values for region {region}")
+    supported = tuple(k for k in basis.knots if (levels > k).mean() >= MIN_SHARE_ABOVE_KNOT)
+    if basis.reference in basis.knots and basis.reference not in supported:
+        # The +10 µg/m³ contrast would sit almost wholly above the observed levels.
+        raise ValueError(f"PM2.5 rarely exceeds {basis.reference} µg/m³ in region {region}")
+    if supported != basis.knots:
+        basis = dataclasses.replace(basis, knots=supported)
     results = []
     for outcome in outcomes:
         for age_group in age_groups:
@@ -295,6 +315,9 @@ def region_study(
         "basis": {
             "max_lag": basis.max_lag,
             "knots": list(basis.knots),
+            "requested_knots": list(requested_knots),
+            "min_share_above_knot": MIN_SHARE_ABOVE_KNOT,
+            "max_log_rr_bound": MAX_LOG_RR_BOUND,
             "lag_degree": basis.lag_degree,
             "reference": basis.reference,
         },

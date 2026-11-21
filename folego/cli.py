@@ -302,7 +302,7 @@ def main():
                 "age_group": r["age_group"],
                 **(
                     {
-                        k: round(v, 3)
+                        k: None if v is None else round(v, 3)
                         for k, v in r["effect"].items()
                         if k in ("rr", "lower", "upper")
                     }

@@ -174,3 +174,48 @@ def test_dense_trend_df_scales_with_training_span():
     assert design.transform(frame.iloc[:30]).shape[1] == width
     with pytest.raises(ValueError, match="positive"):
         ConfounderDesign(trend_df_per_year=0)
+
+
+def test_knots_without_support_are_dropped(tmp_path):
+    path = synthetic_panel(tmp_path / "panel.parquet", years=3)
+    # Cap exposure below the top knot (75 µg/m³) so its hinge would be all zeros.
+    pl.read_parquet(path).with_columns(pl.col("pm25").clip(upper_bound=60)).write_parquet(path)
+    report = region_study(
+        path, "11004", tmp_path / "s.json", outcomes=("respiratory",), age_groups=(None,)
+    )
+    assert 75.0 not in report["basis"]["knots"] and 15.0 in report["basis"]["knots"]
+    assert "effect" in report["results"][0]
+    assert report["model_spec_version"] == 4 and report["basis"]["requested_knots"][-1] == 75.0
+
+
+def test_degenerate_fit_is_rejected():
+    from types import SimpleNamespace
+
+    from folego.evaluate.study import cumulative_relative_risk
+    from folego.models.crossbasis import CrossBasis
+
+    basis = CrossBasis()
+    width = basis.transform(np.full(20, 20.0)).shape[1]
+    model = SimpleNamespace(
+        params=np.r_[0.0, np.full(width, 50.0)], cov_params=lambda: np.eye(width + 1)
+    )
+    with pytest.raises(ValueError, match="Degenerate"):
+        cumulative_relative_risk(model, basis, width)
+
+
+def test_nan_exposure_is_not_support_and_clean_regions_are_refused(tmp_path):
+    path = synthetic_panel(tmp_path / "panel.parquet", years=2)
+    panel = pl.read_parquet(path)
+    nan_spikes = pl.when(pl.col("date").dt.day() == 1).then(float("nan")).otherwise(pl.col("pm25"))
+    panel.with_columns(nan_spikes.clip(upper_bound=60).alias("pm25")).write_parquet(path)
+    report = region_study(
+        path, "11004", tmp_path / "s.json", outcomes=("respiratory",), age_groups=(None,)
+    )
+    # NaN days (about 3%) must not count as days above 75 µg/m³.
+    assert 75.0 not in report["basis"]["knots"]
+    panel.with_columns(pl.col("pm25").clip(upper_bound=12)).write_parquet(path)
+    with pytest.raises(ValueError, match="rarely exceeds"):
+        region_study(path, "11004", tmp_path / "s.json")
+    panel.with_columns(pl.lit(None, pl.Float64).alias("pm25")).write_parquet(path)
+    with pytest.raises(ValueError, match="No pm25"):
+        region_study(path, "11004", tmp_path / "s.json")
