@@ -55,6 +55,18 @@ uv run folego calendar --start 2012-01-01 --end 2025-12-31
 
 Os três comandos gravam, ao lado do Parquet, um `.source.json` com hashes das entradas, período e atribuições; saída e manifesto são substituídos juntos.
 
+## Extração nacional do SIH
+
+```sh
+uv run --extra sih folego sih-national --start 2012-01 --end 2026-10
+```
+
+Para cada UF e competência, baixa o `RD<UF><AAMM>.dbc` do FTP do DATASUS, guarda só as AIH com diagnóstico principal nos capítulos I (circulatório), J (respiratório), S e T (controles negativos), de qualquer residência, em `data/staging/sih/national/<ano>/<UF>/<AAAAMM>.parquet`, e apaga o DBC. O manifesto `.source.json` de cada partição registra URL, data e SHA-256 do DBC original, contagem de registros lidos e mantidos e o hash do Parquet; com isso o arquivo pode ser baixado de novo e conferido. Partições já extraídas são reaproveitadas, e um Parquet alterado depois da extração interrompe aquela partição. Competências ainda não publicadas aparecem em `unpublished` no `coverage.json`, e falhas em `failed`, sem interromper as outras partições; basta rodar de novo. `--keep-source` mantém os DBC. Um ano completo de DBC nacional tem cerca de 900 MB, e o recorte em Parquet fica em torno de 6% disso.
+
+Arquivo ausente no FTP só conta como `unpublished` depois da última competência extraída daquela UF; lacuna antes dela, ou uma execução que não extrai nada (como quando o diretório do FTP muda e tudo responde 550), sai em `failed` com código de erro. `coverage.json` é recalculado a partir de todos os manifestos em disco, e cada execução fica registrada em `runs/`. Os manifestos guardam o commit do código e as versões de `pyreaddbc`, `dbfread` e `polars`. Só uma execução por pasta de dados roda por vez, e os arquivos são criados legíveis apenas pelo operador.
+
+Riscos aceitos: o FTP do DATASUS não tem TLS, então o hash registrado prova o que foi lido, mas não a origem; a conferência mensal contra o TabNet é o controle de origem. O DATASUS republica arquivos revisados com o mesmo nome, e um DBC apagado não pode ser recuperado byte a byte. `N_AIH` fica nos Parquets locais porque a deduplicação de revisões entre competências depende dele; nada com esse campo é publicado. A extração nacional também apaga os DBC de 2019 baixados pelo piloto; rodar o piloto de novo baixa os arquivos outra vez.
+
 ## Painel diário preparado para pesquisa
 
 O comando `folego forecast` recebe dois Parquets privados com uma linha por `date` (tipo Date), `health_region_code`, `age_group`, `outcome`. As chaves devem ser únicas e as datas completas e contíguas em cada grupo:

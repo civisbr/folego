@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 
@@ -19,6 +20,14 @@ def main():
     sih.add_argument("--state", required=True)
     sih.add_argument("--year", type=int, required=True)
     sih.add_argument("--month", type=int, required=True)
+    national = commands.add_parser(
+        "sih-national", help="Extrair internações J/I/S/T de todo o país e apagar os DBC"
+    )
+    national.add_argument("--start", default="2012-01", help="Competência inicial AAAA-MM")
+    national.add_argument("--end", required=True, help="Competência final AAAA-MM")
+    national.add_argument("--states", nargs="+")
+    national.add_argument("--workers", type=int, default=3)
+    national.add_argument("--keep-source", action="store_true", help="Manter os DBC baixados")
     cams = commands.add_parser("cams", help="Executar requisição exportada do ADS")
     cams.add_argument("--dataset", required=True)
     cams.add_argument("--request", type=Path, required=True)
@@ -137,6 +146,36 @@ def main():
         from .publish.demo import build_demo
 
         print(f"{build_demo()} linhas sintéticas; nenhum dado de saúde observado")
+    elif args.command == "sih-national":
+        from datetime import date
+
+        from .ingest.sih import STATES
+        from .ingest.sih_national import extract_national
+
+        try:
+            start, end = (date.fromisoformat(f"{value}-01") for value in (args.start, args.end))
+        except ValueError:
+            parser.exit(2, "Use competências no formato AAAA-MM.\n")
+        if not date(2012, 1, 1) <= start <= end <= date.today():
+            parser.exit(2, "Use 2012-01 <= início <= fim <= mês atual.\n")
+        states = [state.upper() for state in args.states] if args.states else STATES
+        if not set(states) <= set(STATES):
+            parser.exit(2, f"UF inválida; use: {' '.join(STATES)}\n")
+        if not 1 <= args.workers <= 8:
+            parser.exit(2, "--workers deve ficar entre 1 e 8.\n")
+        # Nationwide health microdata: readable by the operator only.
+        os.umask(0o077)
+        report = extract_national(
+            start,
+            end,
+            states=states,
+            workers=args.workers,
+            keep_source=args.keep_source,
+        )
+        summary = {k: v for k, v in report.items() if k not in ("states",)}
+        print(json.dumps(summary, ensure_ascii=False, indent=2))
+        if report["failed"]:
+            parser.exit(1, f"{len(report['failed'])} partições falharam; rode de novo.\n")
     elif args.command == "sih":
         from .ingest.sih import convert_sih, download_sih
 

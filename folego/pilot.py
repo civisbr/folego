@@ -7,8 +7,6 @@ separate and explicitly immature at the processing-window boundary.
 import hashlib
 import json
 import re
-import shutil
-import struct
 from datetime import UTC, datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -17,37 +15,9 @@ import httpx
 import polars as pl
 
 from .ingest.dbf import projected_dbf_rows
-from .ingest.sih import STATES, download_sih
+from .ingest.sih import CLINICAL_FIELDS, FIELDS, SCHEMA, STATES, download_sih, ensure_dbc_reserve
 from .ingest.tabnet import compare_monthly_counts, retrieve_reference
 from .transform.outcomes import aggregate_outcomes
-
-FIELDS = [
-    "ANO_CMPT",
-    "MES_CMPT",
-    "N_AIH",
-    "IDENT",
-    "MUNIC_RES",
-    "MUNIC_MOV",
-    "DT_INTER",
-    "DT_SAIDA",
-    "DIAG_PRINC",
-    "COD_IDADE",
-    "IDADE",
-    "VAL_TOT",
-]
-CLINICAL_FIELDS = [
-    "N_AIH",
-    "MUNIC_RES",
-    "MUNIC_MOV",
-    "DT_INTER",
-    "DT_SAIDA",
-    "DIAG_PRINC",
-    "COD_IDADE",
-    "IDADE",
-    "VAL_TOT",
-]
-SCHEMA = {name: pl.String for name in FIELDS if name not in ("IDADE", "VAL_TOT")}
-SCHEMA.update(IDADE=pl.Int64, VAL_TOT=pl.Float64)
 
 
 def extract_partition(
@@ -72,13 +42,7 @@ def extract_partition(
                 raise ValueError("Corrupt pilot partition cache")
             return metadata
     output.parent.mkdir(parents=True, exist_ok=True)
-    with source.open("rb") as stream:
-        header = stream.read(32)
-    if len(header) != 32:
-        raise ValueError("Truncated DBC header")
-    count, header_size, record_size = struct.unpack_from("<IHH", header, 4)
-    if shutil.disk_usage(output.parent).free < header_size + count * record_size + 512 * 1024**2:
-        raise ValueError("Insufficient disk reserve for DBC decompression")
+    ensure_dbc_reserve(source, output.parent)
     stats = {}
     with TemporaryDirectory(prefix="folego-pilot-") as directory:
         dbf = Path(directory) / "source.dbf"

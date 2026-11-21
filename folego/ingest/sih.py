@@ -1,10 +1,54 @@
 """SIH reduced AIH downloads by competence; microdata remain local."""
 
+import shutil
+import struct
 from pathlib import Path
 
 import polars as pl
 
 from .common import cached_download
+
+FIELDS = [
+    "ANO_CMPT",
+    "MES_CMPT",
+    "N_AIH",
+    "IDENT",
+    "MUNIC_RES",
+    "MUNIC_MOV",
+    "DT_INTER",
+    "DT_SAIDA",
+    "DIAG_PRINC",
+    "COD_IDADE",
+    "IDADE",
+    "VAL_TOT",
+]
+CLINICAL_FIELDS = [
+    "N_AIH",
+    "MUNIC_RES",
+    "MUNIC_MOV",
+    "DT_INTER",
+    "DT_SAIDA",
+    "DIAG_PRINC",
+    "COD_IDADE",
+    "IDADE",
+    "VAL_TOT",
+]
+SCHEMA = {name: pl.String for name in FIELDS if name not in ("IDADE", "VAL_TOT")}
+SCHEMA.update(IDADE=pl.Int64, VAL_TOT=pl.Float64)
+
+
+def ensure_dbc_reserve(source: Path, directory: Path) -> int:
+    """Return the DBF size the DBC header declares; refuse if it plus 512 MiB won't fit."""
+    with source.open("rb") as stream:
+        header = stream.read(32)
+    if len(header) != 32:
+        raise ValueError("Truncated DBC header")
+    count, header_size, record_size = struct.unpack_from("<IHH", header, 4)
+    expected = header_size + count * record_size
+    if shutil.disk_usage(directory).free < expected + 512 * 1024**2:
+        raise ValueError("Insufficient disk reserve for DBC decompression")
+    return expected
+
 
 STATES = "AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO".split()
 
