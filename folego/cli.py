@@ -53,6 +53,23 @@ def main():
     study.add_argument("--region", required=True, help="Código da região de saúde (5 dígitos)")
     study.add_argument("--panel", type=Path, default=Path("data/marts/panel/daily-panel.parquet"))
     study.add_argument("--output", type=Path, help="Padrão: data/marts/studies/<região>.json")
+    study.add_argument(
+        "--exposure", default="pm25", choices=["pm25", "pm25_merra2"], help="Coluna de PM2,5"
+    )
+    fires = commands.add_parser("fires", help="Focos de queimada FIRMS VIIRS por região e dia")
+    fires.add_argument("--start", default="2012-01-20")
+    fires.add_argument("--end", default="2025-12-31")
+    fires.add_argument("--regions", type=Path, default=Path("web/public/data/regions.geojson"))
+    fires.add_argument(
+        "--output", type=Path, default=Path("data/marts/exposure/fires-daily.parquet")
+    )
+    merra = commands.add_parser("merra2", help="PM2,5 MERRA-2 por região (sensibilidade ao CAMS)")
+    merra.add_argument("--start", default="2012-01")
+    merra.add_argument("--end", default="2025-12")
+    merra.add_argument("--regions", type=Path, default=Path("web/public/data/regions.geojson"))
+    merra.add_argument(
+        "--output", type=Path, default=Path("data/marts/exposure/pm25-merra2-daily.parquet")
+    )
     maturity = commands.add_parser(
         "maturity", help="Medir em quantos meses as internações chegam ao SIH"
     )
@@ -83,6 +100,8 @@ def main():
     )
     panel.add_argument("--calendar", type=Path, default=Path("data/marts/calendar.parquet"))
     panel.add_argument("--srag", type=Path, help="SRAG diária (folego srag) como confundidor")
+    panel.add_argument("--merra2", type=Path, help="PM2,5 MERRA-2 (folego merra2), sensibilidade")
+    panel.add_argument("--fires", type=Path, help="Focos FIRMS (folego fires)")
     panel.add_argument("--regions", nargs="+", help="Códigos de região de saúde (padrão: todas)")
     panel.add_argument("--output", type=Path, default=Path("data/marts/panel/daily-panel.parquet"))
     cams = commands.add_parser("cams", help="Executar requisição exportada do ADS")
@@ -261,8 +280,9 @@ def main():
         if not re.fullmatch(r"\d{5}", args.region):
             parser.exit(2, "Código de região de saúde tem 5 dígitos.\n")
         os.umask(0o077)
-        output = args.output or Path("data/marts/studies") / f"{args.region}.json"
-        report = region_study(args.panel, args.region, output)
+        suffix = "" if args.exposure == "pm25" else f"-{args.exposure}"
+        output = args.output or Path("data/marts/studies") / f"{args.region}{suffix}.json"
+        report = region_study(args.panel, args.region, output, exposure=args.exposure)
         summary = [
             {
                 "outcome": r["outcome"],
@@ -282,6 +302,42 @@ def main():
         print(json.dumps(summary, ensure_ascii=False, indent=2))
         print(
             f"Controle negativo sinalizado: {report['negative_control_flag']}; relatório: {output}"
+        )
+    elif args.command == "fires":
+        from datetime import date
+
+        from .ingest.firms_archive import build_fires
+
+        try:
+            start, end = date.fromisoformat(args.start), date.fromisoformat(args.end)
+        except ValueError:
+            parser.exit(2, "Use datas AAAA-MM-DD.\n")
+        if not date(2012, 1, 20) <= start < end < date.today():
+            parser.exit(2, "Use 2012-01-20 <= início < fim < hoje (arquivo VIIRS SNPP).\n")
+        os.umask(0o077)
+        series = build_fires(start, end, args.regions, args.output)
+        print(json.dumps({"rows": series.height, "fires": int(series["fire_count"].sum())}))
+    elif args.command == "merra2":
+        from datetime import date
+
+        from .ingest.merra2 import build_merra2
+        from .ingest.worldpop import download_worldpop
+
+        try:
+            start, end = (date.fromisoformat(f"{v}-01") for v in (args.start, args.end))
+        except ValueError:
+            parser.exit(2, "Use meses AAAA-MM.\n")
+        if not date(2012, 1, 1) <= start <= end < date.today().replace(day=1):
+            parser.exit(2, "Use 2012-01 <= início <= fim < mês atual.\n")
+        os.umask(0o077)
+        series = build_merra2(start, end, download_worldpop(), args.regions, args.output)
+        print(
+            json.dumps(
+                {
+                    "rows": series.height,
+                    "dates": [str(series["date"].min()), str(series["date"].max())],
+                }
+            )
         )
     elif args.command == "maturity":
         from .transform.national_outcomes import maturity_profile
@@ -333,6 +389,8 @@ def main():
             args.output,
             regions=args.regions,
             srag_path=args.srag,
+            merra2_path=args.merra2,
+            fires_path=args.fires,
         )
         print(json.dumps({k: manifest[k] for k in ("rows", "regions", "dates")}, indent=2))
     elif args.command == "sih-national":

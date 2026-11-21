@@ -37,6 +37,8 @@ def build_panel(
     *,
     regions: list[str] | None = None,
     srag_path: Path | None = None,
+    merra2_path: Path | None = None,
+    fires_path: Path | None = None,
 ) -> dict:
     window = json.loads(outcomes_path.with_suffix(".parquet.source.json").read_text())
     admission_start, admission_end = (date.fromisoformat(d) for d in window["admission_window"])
@@ -65,8 +67,20 @@ def build_panel(
             .filter(pl.col("srag").is_not_null())
             .select("date", "health_region_code", "srag")
         )
+    # Sensitivity exposures are joined without narrowing the main span, so the main
+    # analysis does not change when they are added; days they lack stay null.
+    optional = {
+        "merra2": (merra2_path, ["pm25_merra2"]),
+        "fires": (fires_path, ["fire_count", "frp"]),
+    }
+    extra_columns, extras = [], {}
+    for name, (path, columns) in optional.items():
+        if path is not None:
+            extras[name] = pl.read_parquet(path).select("date", "health_region_code", *columns)
+            _coverage(extras[name], name)
+            extra_columns += columns
     codes = set(pm25["health_region_code"])
-    for name, frame in sources.items():
+    for name, frame in {**sources, **extras}.items():
         if set(frame["health_region_code"]) != codes:
             raise ValueError(f"{name} covers different health regions than PM2.5")
     if regions is not None:
@@ -82,6 +96,8 @@ def build_panel(
     for name, frame in sources.items():
         if name != "pm25":
             exposures = exposures.join(frame, on=["date", "health_region_code"])
+    for frame in extras.values():
+        exposures = exposures.join(frame, on=["date", "health_region_code"], how="left")
     exposures = exposures.filter(
         pl.col("date").is_between(start, end) & pl.col("health_region_code").is_in(codes)
     )
@@ -109,6 +125,7 @@ def build_panel(
         "humidity",
         "holiday",
         *(["srag"] if srag_path is not None else []),
+        *extra_columns,
         "admissions",
         "mean_payment",
     ]
@@ -172,6 +189,7 @@ def build_panel(
                 "meteorology": meteorology_path,
                 "calendar": calendar_path,
                 **({"srag": srag_path} if srag_path is not None else {}),
+                **{name: path for name, (path, _) in optional.items() if path is not None},
             }.items()
         },
     }

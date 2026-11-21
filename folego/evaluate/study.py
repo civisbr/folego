@@ -176,11 +176,17 @@ def region_study(
     outcomes=("respiratory", "pneumonia", "asthma", "circulatory", NEGATIVE_CONTROL),
     age_groups=(None, "0-4", "60+"),
     basis: CrossBasis | None = None,
+    exposure: str = "pm25",
 ) -> dict:
     basis = basis or CrossBasis()
     panel = pl.read_parquet(panel_path).filter(pl.col("health_region_code") == region)
     if panel.is_empty():
         raise ValueError(f"Region {region} not in the panel")
+    if exposure not in panel.columns:
+        raise ValueError(f"Exposure column {exposure!r} not in the panel")
+    if exposure != "pm25":
+        # Sensitivity runs swap the exposure column; everything downstream reads "pm25".
+        panel = panel.drop("pm25").rename({exposure: "pm25"})
     results = []
     for outcome in outcomes:
         for age_group in age_groups:
@@ -206,6 +212,7 @@ def region_study(
         "software": software_provenance(),
         "inputs": {"panel": [describe_input(panel_path)]},
         "mode": "research",
+        "exposure": exposure,
         "validated": False,
         "region": region,
         "basis": {

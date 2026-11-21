@@ -28,12 +28,14 @@ def daily_cell_means(path: Path, *, utc_offset_hours: int = -3):
     return pm25_to_micrograms(means, field.attrs.get("units"))
 
 
-def local_daily_means(field, *, utc_offset_hours: int = -3, name: str = "field"):
-    """Mean of the eight 3-hourly values within each local day, per grid point.
+def local_daily_means(
+    field, *, utc_offset_hours: int = -3, name: str = "field", steps_per_day: int = STEPS_PER_DAY
+):
+    """Mean of the ``steps_per_day`` values (eight 3-hourly by default) in each local day.
 
     Returns a float64 DataArray (date, latitude, longitude) with ascending coordinates
-    and longitudes in −180..180. Days without all eight values are dropped, never
-    averaged from fewer.
+    and longitudes in −180..180. Days without all ``steps_per_day`` values are
+    dropped, never averaged from fewer.
     """
     field = field.transpose("valid_time", "latitude", "longitude")
     # xarray's mean skips NaN, so a gap would otherwise shrink a day silently.
@@ -49,7 +51,7 @@ def local_daily_means(field, *, utc_offset_hours: int = -3, name: str = "field")
     field = field.assign_coords(date=("valid_time", local_date.values))
     grouped = field.groupby("date")
     counts = grouped.count("valid_time").isel(latitude=0, longitude=0)
-    complete = counts["date"].values[counts.values == STEPS_PER_DAY]
+    complete = counts["date"].values[counts.values == steps_per_day]
     # Sorting after the reduction avoids copying the full 3-hourly field.
     means = grouped.mean("valid_time").sel(date=complete).sortby(["latitude", "longitude"])
     return means.astype("float64")

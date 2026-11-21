@@ -247,6 +247,26 @@ def test_panel_zero_fills_only_inside_the_admission_window(tmp_path):
     by_day = dict(pl.read_parquet(output).select("date", "srag").unique().sort("date").iter_rows())
     assert by_day[date(2019, 1, 2)] == math.log1p(14)
     assert by_day[date(2019, 1, 3)] == math.log1p(112)
+    merra = tmp_path / "merra.parquet"
+    daily(date(2019, 1, 2), 10, regions, pm25_merra2=9.0).write_parquet(merra)
+    fires = tmp_path / "fires.parquet"
+    daily(date(2018, 12, 1), 60, regions, fire_count=3, frp=1.5).write_parquet(fires)
+    manifest = build_panel(
+        outcomes,
+        paths["pm25"],
+        paths["meteo"],
+        paths["calendar"],
+        output,
+        regions=["11004"],
+        merra2_path=merra,
+        fires_path=fires,
+    )
+    panel = pl.read_parquet(output)
+    # MERRA-2 starts on 2 Jan; the main span still starts on 1 Jan, with a null there.
+    assert manifest["dates"][0] == "2019-01-01"
+    by_day = dict(panel.select("date", "pm25_merra2").unique().iter_rows())
+    assert by_day[date(2019, 1, 1)] is None and by_day[date(2019, 1, 2)] == 9.0
+    assert set(panel["fire_count"]) == {3}
 
 
 def test_panel_refuses_gaps_in_an_exposure(tmp_path):

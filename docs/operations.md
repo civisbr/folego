@@ -12,7 +12,8 @@ Para criar a conta ADS e salvar a chave fora do Git, siga [o guia de configuraç
 
 
 - SIH: FTP público DATASUS; a conversão DBC usa o leitor `pyreaddbc` mantido pelo projeto PySUS, sem a dependência transitiva de DuckDB < 2, instalado com `uv sync --extra sih`, que pode exigir bibliotecas nativas do leitor pyreaddbc. O download nacional histórico é volumoso; comece por competência/UF e faça inventário dos arquivos.
-- FIRMS: `FIRMS_MAP_KEY` no ambiente. A chave não entra no manifesto; o adaptador não deve ser chamado com logging de URLs sensíveis. O modo implementado usa VIIRS SNPP NRT; arquivos históricos precisam de ingestão própria.
+- FIRMS: MAP_KEY em `~/.config/folego/firms-key` (permissão 600) ou `FIRMS_MAP_KEY` no ambiente. A chave não entra em manifestos, logs nem mensagens de erro. O histórico usa o arquivo VIIRS SNPP de processamento padrão (`folego fires`).
+- MERRA-2: login Earthdata em `~/.netrc` (permissão 600), com a aplicação NASA GESDISC DATA ARCHIVE autorizada no perfil. A cada execução o comando pede ao Earthdata o token Bearer da conta (o URS devolve o existente ou cria um, válido por cerca de 60 dias, que pode ser revogado no perfil). O token fica só em memória e não vai para a busca no CMR. Redirecionamentos para fora dos hosts da NASA são bloqueados antes do envio.
 - CAMS: configure o cliente `cdsapi` para o ADS, aceite os termos do dataset e exporte a requisição pela interface oficial. Use `uv sync --extra climate`. API e nomes de parâmetros podem mudar; o código recebe o JSON oficial, sem inventar parâmetros ou substituir silenciosamente variáveis.
 - ERA5: conta CDS, termos aceitos e requisição oficial. ERA5 é reanálise histórica; previsões operacionais exigem outro produto meteorológico e seu arquivo de rodadas.
 - InfoGripe: indique explicitamente a URL do snapshot oficial. A compatibilidade de granularidade deve ser verificada antes de acrescentar o termo SRAG.
@@ -125,6 +126,21 @@ uv run folego study --region 11004
 - um backtest de 2019 a 2024 (MAE/MAPE semanais).
 
 O relatório é de pesquisa (`validated=false`) e guarda o commit do código e o hash do painel; cada execução é mantida em `history/`. O backtest usa exposições observadas, e uma dobra sem histórico suficiente aparece com erro sem invalidar as outras.
+
+## Focos de queimada e MERRA-2
+
+```sh
+uv run folego fires --start 2012-01-20 --end 2025-12-31
+uv run --extra climate folego merra2 --start 2012-01 --end 2025-12
+uv run folego panel --regions 11004 --merra2 data/marts/exposure/pm25-merra2-daily.parquet --fires data/marts/exposure/fires-daily.parquet
+uv run folego study --region 11004 --exposure pm25_merra2
+```
+
+`fires` percorre o arquivo FIRMS VIIRS S-NPP (375 m, de 2012-01-20 em diante) em blocos de 5 dias, o máximo da API, sobre o retângulo do Brasil. Ficam só os focos de vegetação (tipo 0) com confiança nominal ou alta. Cada foco vai para a região de saúde que contém o ponto e para o dia local (UTC−3). Saem `fire_count` e `frp` (potência radiativa) por região e dia. Os focos dentro do retângulo mas fora do Brasil (Bolívia, Paraguai, Peru) são contados à parte. Só o agregado de cada bloco é gravado, com o hash da resposta; nenhum dado de foco individual fica em disco. O dia local D vai das 03 UTC de D às 03 UTC de D+1, então o comando busca um dia UTC além do fim. Ele recusa datas que o arquivo de processamento padrão ainda não cobre, em vez de preenchê-las com zero. Dias de pane do satélite S-NPP aparecem como zero focos; é uma limitação conhecida. Em cada nova execução, os blocos já baixados são reaproveitados só se os parâmetros e o hash conferirem. Quando a cota de transações por 10 minutos se esgota, o comando espera e tenta de novo.
+
+`merra2` baixa do OPeNDAP do Earthdata Cloud (o OPeNDAP próprio do GES DISC foi aposentado) só as cinco espécies de aerossol e a janela do Brasil, um dia por vez. Calcula o PM2,5 de Buchard et al. (2016) — poeira e sal marinho < 2,5 µm, carbono negro, 1,4 × carbono orgânico e 1,375 × sulfato — e a média do dia local a partir das 24 médias horárias. Grava um NetCDF diário por mês e descarta os dados horários. Um mês só é gravado completo: se o primeiro dia do mês seguinte ainda não foi publicado, o comando para. A ponderação populacional é a mesma do CAMS. Num teste com agosto de 2019, a Madeira-Mamoré chegou a 146 µg/m³.
+
+No painel, `--merra2` e `--fires` acrescentam essas colunas sem mudar o intervalo da análise principal; os dias que essas fontes não cobrem ficam nulos. No estudo, `--exposure pm25_merra2` repete a análise com o MERRA-2 no lugar do CAMS e grava o relatório em `data/marts/studies/<região>-pm25_merra2.json`.
 
 ## Painel diário preparado para pesquisa
 

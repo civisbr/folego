@@ -105,3 +105,20 @@ def test_srag_adjusted_and_unadjusted_effects_and_per_fold_errors(tmp_path):
     assert "error" in folds[2019] and "mae" in folds[2020]
     assert len(list((tmp_path / "history").glob("study-*.json"))) == 1
     assert report["inputs"]["panel"][0]["sha256"]
+
+
+def test_sensitivity_exposure_column_replaces_pm25(tmp_path):
+    path = synthetic_panel(tmp_path / "panel.parquet", years=3)
+    panel = pl.read_parquet(path)
+    panel.with_columns((pl.col("pm25") * 1.1).alias("pm25_merra2")).write_parquet(path)
+    report = region_study(
+        path,
+        "11004",
+        tmp_path / "s.json",
+        outcomes=("respiratory",),
+        age_groups=(None,),
+        exposure="pm25_merra2",
+    )
+    assert report["exposure"] == "pm25_merra2" and "effect" in report["results"][0]
+    with pytest.raises(ValueError, match="not in the panel"):
+        region_study(path, "11004", tmp_path / "t.json", exposure="nope")
