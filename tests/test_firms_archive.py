@@ -136,3 +136,56 @@ def test_key_file_link_and_non_ascii_key_are_refused(tmp_path, monkeypatch):
     monkeypatch.setenv("FIRMS_MAP_KEY", "é" * 32)
     with pytest.raises(RuntimeError, match="ASCII"):
         firms_archive.map_key()
+
+
+def test_national_outage_days_become_null_not_zero():
+    from datetime import timedelta
+
+    days = [date(2022, 7, 1) + timedelta(days=i) for i in range(40)]
+    counts = pl.DataFrame(
+        {
+            "date": days,
+            "health_region_code": "A",
+            "fire_count": [0 if 26 <= d.day <= 28 and d.month == 7 else 500 for d in days],
+            "frp": 1.0,
+        }
+    )
+    assert firms_archive.outage_days(counts, days[0], days[-1]) == [
+        date(2022, 7, 26),
+        date(2022, 7, 27),
+        date(2022, 7, 28),
+    ]
+    # A day missing from the counts altogether is an outage too.
+    assert date(2022, 7, 10) in firms_archive.outage_days(
+        counts.filter(pl.col("date") != date(2022, 7, 10)), days[0], days[-1]
+    )
+
+
+def test_build_nulls_outage_days_in_every_region_and_lists_them(tmp_path, monkeypatch):
+    from datetime import timedelta
+
+    regions = write_regions(tmp_path)
+    outage = {date(2019, 8, 1) + timedelta(days=i) for i in range(9, 27)}
+
+    def fetch(client, key, first, **_):
+        days = [first + timedelta(days=i) for i in range(5)]
+        # Region A burns every day; region B never does and keeps real zeros.
+        return csv(
+            [(-0.5, 0.0, d.isoformat(), "1500", "n", 1.0, 0) for d in days if d not in outage]
+        )
+
+    monkeypatch.setenv("FIRMS_MAP_KEY", "a" * 32)
+    monkeypatch.setattr(firms_archive, "fetch_chunk", fetch)
+    monkeypatch.setattr(firms_archive, "archive_end", lambda client, key: date(2019, 12, 31))
+    output = tmp_path / "fires.parquet"
+    # The 18-day outage is longer than half the median window and reaches the end.
+    series = firms_archive.build_fires(
+        date(2019, 8, 1), date(2019, 8, 27), regions, output, tmp_path / "data"
+    )
+    nulls = series.filter(pl.col("fire_count").is_null())
+    assert set(nulls["date"]) == outage and set(nulls["health_region_code"]) == {"A", "B"}
+    assert nulls["frp"].null_count() == nulls.height
+    normal = series.filter(pl.col("date") == date(2019, 8, 2))
+    assert dict(normal.select("health_region_code", "fire_count").iter_rows()) == {"A": 1, "B": 0}
+    manifest = json.loads(output.with_suffix(".parquet.source.json").read_text())
+    assert manifest["outage_days"] == sorted(d.isoformat() for d in outage)

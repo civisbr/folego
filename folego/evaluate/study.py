@@ -16,6 +16,7 @@ from pathlib import Path
 
 import numpy as np
 import polars as pl
+from statsmodels.tools.sm_exceptions import PerfectSeparationError
 
 from ..ingest.sih_national import software_provenance
 from ..models.crossbasis import CrossBasis
@@ -25,6 +26,10 @@ from .backtest import rolling_backtest
 from .negative_control import joint_exposure_test
 
 NEGATIVE_CONTROL = "negative_control"
+# Bumped whenever the model specification changes, so reports of different
+# specifications are never compared by mistake. 1: 6 df trend + harmonics; 2: 7 df per
+# calendar year; 3: 7 df per year of days present.
+MODEL_SPEC_VERSION = 3
 MIN_TRAINING_DAYS = 365
 TREND_DF_PER_YEAR = 7
 # Effect estimates must not hinge on one smoothing choice; these bracket the default.
@@ -130,17 +135,19 @@ def fit_stratum(
         try:
             plain = _effect(series.drop("srag"), basis, False, trend_df_per_year)[1]
             unadjusted = cumulative_relative_risk(plain, basis, width)
-        except ValueError as error:
+        except (ValueError, PerfectSeparationError) as error:
             unadjusted = {"error": str(error)}
     by_trend = {}
-    for df in sensitivity:
+    for df in (d for d in sensitivity if d != trend_df_per_year):
         try:
             _, alternative, _, effective = _effect(series, basis, include_srag, df)
             by_trend[str(df)] = {
                 **cumulative_relative_risk(alternative, basis, width),
                 "trend_df": effective,
+                "dispersion": float(alternative.scale),
+                "exposure_test": joint_exposure_test(alternative, range(1, width + 1)),
             }
-        except ValueError as error:
+        except (ValueError, PerfectSeparationError) as error:
             by_trend[str(df)] = {"error": str(error)}
     return {
         "days": rows.height,
@@ -187,7 +194,7 @@ def backtest_stratum(series: pl.DataFrame, basis: CrossBasis, years=range(2019, 
 
         try:
             reports.extend(rolling_backtest(full, fit_predict, [year]))
-        except ValueError as error:
+        except (ValueError, PerfectSeparationError) as error:
             reports.append({"year": year, "error": str(error)})
     return reports
 
@@ -214,8 +221,10 @@ def input_source(panel_path: Path, name: str) -> str:
         return "unknown"
     attribution = source.get("attribution", []) if isinstance(source, dict) else []
     # Marts store either one attribution string or a list of them.
-    if not isinstance(attribution, str):
+    if isinstance(attribution, list):
         attribution = " ".join(a for a in attribution if isinstance(a, str))
+    elif not isinstance(attribution, str):
+        attribution = ""
     if "MERRA-2" in attribution:
         return "MERRA-2"
     if "ERA5" in attribution:
@@ -258,7 +267,7 @@ def region_study(
                 entry.update(fit_stratum(series, basis, trend_df_per_year=trend_df_per_year))
                 if age_group is None:
                     entry["backtest"] = backtest_stratum(series, basis)
-            except ValueError as error:
+            except (ValueError, PerfectSeparationError) as error:
                 entry["error"] = str(error)
             results.append(entry)
     control = next(
@@ -289,9 +298,12 @@ def region_study(
             "lag_degree": basis.lag_degree,
             "reference": basis.reference,
         },
+        "model_spec_version": MODEL_SPEC_VERSION,
         "confounders": {
             "inference": f"natural time spline, {trend_df_per_year} df/year, no harmonics",
-            "trend_sensitivity_df_per_year": list(TREND_SENSITIVITY),
+            "trend_sensitivity_df_per_year": [
+                d for d in TREND_SENSITIVITY if d != trend_df_per_year
+            ],
             "backtest": (
                 f"time spline {ConfounderDesign().trend_df} df"
                 f" + {ConfounderDesign().harmonics} harmonics"

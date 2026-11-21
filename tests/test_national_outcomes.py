@@ -267,6 +267,15 @@ def test_panel_zero_fills_only_inside_the_admission_window(tmp_path):
     by_day = dict(panel.select("date", "pm25_merra2").unique().iter_rows())
     assert by_day[date(2019, 1, 1)] is None and by_day[date(2019, 1, 2)] == 9.0
     assert set(panel["fire_count"]) == {3}
+    assert manifest["pm25_source_column"] == "pm25"
+    # A MERRA-2 mart used as the main exposure becomes the panel's pm25 column.
+    main = tmp_path / "merra-main.parquet"
+    daily(date(2018, 12, 1), 60, regions, pm25_merra2=7.0).write_parquet(main)
+    manifest = build_panel(
+        outcomes, main, paths["meteo"], paths["calendar"], output, regions=["11004"]
+    )
+    assert manifest["pm25_source_column"] == "pm25_merra2"
+    assert set(pl.read_parquet(output)["pm25"]) == {7.0}
 
 
 def test_panel_refuses_gaps_in_an_exposure(tmp_path):

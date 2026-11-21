@@ -62,7 +62,8 @@ class ConfounderDesign:
         if fit:
             self.origin = dates.min()
             if self.trend_df_per_year is not None:
-                years = (dates.max() - dates.min()).days / 365.25
+                # Days present, not the calendar span: gaps carry no information.
+                years = dates.nunique() / 365.25
                 self.trend_df = max(3, round(self.trend_df_per_year * years))
         if self.origin is None:
             raise ValueError("Fit confounders before predicting")

@@ -119,8 +119,18 @@ def _retry(request: Callable, *, attempts: int = 4, pause: float = 20.0):
                 raise
             # The exception type only: its text may carry the request URL.
             reason = type(error).__name__
-        print(f"MERRA-2: {reason}, tentativa {attempt}/{attempts}", file=sys.stderr)
-        time.sleep(pause * attempt)
+        wait = pause * attempt
+        # Only the delay-seconds form of Retry-After is read; an HTTP date falls back.
+        if reason == "HTTP 429" and re.fullmatch(
+            r"[0-9]{1,6}", response.headers.get("retry-after", "")
+        ):
+            # Honour the server's back-off, but never hang a run for more than 5 minutes.
+            wait = min(max(wait, float(response.headers["retry-after"])), 300.0)
+        print(
+            f"MERRA-2: {reason}, tentativa {attempt}/{attempts}, espera {wait:.0f} s",
+            file=sys.stderr,
+        )
+        time.sleep(wait)
     raise AssertionError("unreachable")
 
 

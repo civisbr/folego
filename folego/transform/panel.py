@@ -43,10 +43,12 @@ def build_panel(
     window = json.loads(outcomes_path.with_suffix(".parquet.source.json").read_text())
     admission_start, admission_end = (date.fromisoformat(d) for d in window["admission_window"])
     pm25 = pl.read_parquet(pm25_path)
+    pm25_column = "pm25"
     # The MERRA-2 mart names its column pm25_merra2 so it can sit beside CAMS in a
     # sensitivity panel; used as the main exposure it becomes pm25.
     if "pm25" not in pm25.columns and "pm25_merra2" in pm25.columns:
         pm25 = pm25.rename({"pm25_merra2": "pm25"})
+        pm25_column = "pm25_merra2"
     pm25 = pm25.select("date", "health_region_code", "pm25")
     weather = pl.read_parquet(meteorology_path).select(
         "date", "health_region_code", "temperature", "humidity"
@@ -186,6 +188,7 @@ def build_panel(
         "admission_window": window["admission_window"],
         "admissions_outside_window": "null",
         "mean_payment": window["payment"],
+        "pm25_source_column": pm25_column,
         "inputs": {
             name: [describe_input(path)]
             for name, path in {

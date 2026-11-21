@@ -42,6 +42,11 @@ CHUNK_PARAMETERS = {
     "filter": "type 0, confidence n/h",
     "utc_offset_hours": -3,
 }
+# A national daily total under this share of its 31-day centred median is a sensor
+# outage (S-NPP safe mode, e.g. 27 Jul–10 Aug 2022), not a day without fires: in
+# 2012–2025 such days total 0–111 detections against a median of hundreds to thousands.
+OUTAGE_SHARE = 0.05
+OUTAGE_WINDOW_DAYS = 31
 AVAILABILITY = "https://firms.modaps.eosdis.nasa.gov/api/data_availability/csv/{key}/{source}"
 # httpx logs request URLs at INFO, and the FIRMS URL carries the key.
 logging.getLogger("httpx").setLevel(logging.WARNING)
@@ -173,6 +178,27 @@ def reduce_chunk(payload: bytes, regions_geojson: Path, *, utc_offset_hours=-3) 
     return counts, stats
 
 
+def outage_days(counts: pl.DataFrame, first_day: date, last_day: date) -> list[date]:
+    national = (
+        pl.DataFrame({"date": pl.date_range(first_day, last_day, eager=True)})
+        .join(counts.group_by("date").agg(pl.col("fire_count").sum()), on="date", how="left")
+        .with_columns(pl.col("fire_count").fill_null(0))
+        .sort("date")
+        .with_columns(
+            # Zero-total days are left out of the median: Brazil never has a day without
+            # fires, and counting them would let an outage of 16+ days, or one at the edge
+            # of the range, pull the median to zero and hide itself.
+            pl.when(pl.col("fire_count") > 0)
+            .then(pl.col("fire_count"))
+            .rolling_median(OUTAGE_WINDOW_DAYS, center=True, min_samples=1)
+            .alias("typical")
+        )
+    )
+    return national.filter(
+        (pl.col("fire_count") == 0) | (pl.col("fire_count") < OUTAGE_SHARE * pl.col("typical"))
+    )["date"].to_list()
+
+
 def sha256_of(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -262,9 +288,18 @@ def build_fires(
     grid = pl.DataFrame({"date": pl.date_range(first_day, last_day, eager=True)}).join(
         pl.DataFrame({"health_region_code": codes}), how="cross"
     )
+    outages = outage_days(counts, first_day, last_day)
+    # An outage day is unknown, not zero: a zero would read as a clean-air day.
+    is_outage = pl.col("date").is_in(outages)
     series = (
         grid.join(counts, on=["date", "health_region_code"], how="left")
-        .with_columns(pl.col("fire_count").fill_null(0), pl.col("frp").fill_null(0.0))
+        .with_columns(
+            pl.when(is_outage)
+            .then(None)
+            .otherwise(pl.col("fire_count").fill_null(0))
+            .alias("fire_count"),
+            pl.when(is_outage).then(None).otherwise(pl.col("frp").fill_null(0.0)).alias("frp"),
+        )
         .sort("health_region_code", "date")
     )
     totals = {
@@ -286,11 +321,17 @@ def build_fires(
             "filter": "type 0 (vegetation fire), confidence nominal or high",
             "local_day": "UTC-3",
             "totals": totals,
+            "outage_rule": f"national total < {OUTAGE_SHARE} × centred "
+            f"{OUTAGE_WINDOW_DAYS}-day median → null",
+            "outage_days": [d.isoformat() for d in outages],
             "chunks_sha256": hashlib.sha256(
                 json.dumps(sorted(m["response_sha256"] for m in manifests)).encode()
             ).hexdigest(),
-            # Cite the product DOI from FIRMS' citation page before publishing.
-            "attribution": "NASA FIRMS (LANCE/EOSDIS), VIIRS S-NPP 375 m standard processing",
+            # FIRMS publishes no DOI for its standard-processing files (VNP14IMGTML); the
+            # upstream science product is VNP14IMG V002 (Giglio 2024).
+            "attribution": "NASA LANCE FIRMS (ESDIS), VIIRS S-NPP 375 m standard processing",
+            "upstream_product": "VNP14IMG V002 (Giglio 2024), not the FIRMS file itself",
+            "upstream_product_doi": "10.5067/VIIRS/VNP14IMG.002",
             "inputs": {"regions": [describe_input(regions_geojson)]},
         },
     )
