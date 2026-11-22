@@ -45,7 +45,18 @@ class ConfounderDesign:
     A holiday indicator is supplied from an externally verified local calendar.
     """
 
-    def __init__(self, include_srag=False, *, trend_df_per_year=None, harmonics=3, extra=()):
+    # Means of the previous days, built by the study from contiguous rows.
+    LAGGED_METEOROLOGY = ("temperature_lag1_7", "temperature_lag8_21", "humidity_lag1_7")
+
+    def __init__(
+        self,
+        include_srag=False,
+        *,
+        trend_df_per_year=None,
+        harmonics=3,
+        extra=(),
+        lagged_meteorology=False,
+    ):
         # None keeps the forecasting design (6 df trend + harmonics, which repeat beyond
         # training). Inference uses a dense time spline instead (~7 df/year, Bhaskaran et
         # al. 2013), which absorbs season and epidemics but extrapolates poorly.
@@ -60,6 +71,7 @@ class ConfounderDesign:
         # Names go into a patsy formula, which evaluates Python; a bare string would also
         # be split into one term per letter.
         reserved = {"trend", "weekday", "holiday", "temperature", "humidity", "srag", "C", "I"}
+        reserved |= set(self.LAGGED_METEOROLOGY)
         if isinstance(extra, str) or not all(
             isinstance(c, str)
             and c.isidentifier()
@@ -71,11 +83,17 @@ class ConfounderDesign:
             raise ValueError("extra confounders must be a sequence of new column names")
         self.include_srag = include_srag
         self.extra = tuple(extra)
+        self.lagged_meteorology = bool(lagged_meteorology)
         self.trend_df_per_year = trend_df_per_year
         self.harmonics = harmonics
         self.trend_df = 6
         self.info = None
         self.origin = None
+
+    @property
+    def columns(self):
+        """Optional columns a row needs before it can enter the design."""
+        return self.extra + (self.LAGGED_METEOROLOGY if self.lagged_meteorology else ())
 
     def transform(self, frame, *, fit=False):
         import pandas as pd
@@ -103,6 +121,12 @@ class ConfounderDesign:
             " + C(weekday, levels=[0,1,2,3,4,5,6]) + holiday"
         )
         formula += "".join(f" + sin{h} + cos{h}" for h in range(1, self.harmonics + 1))
+        if self.lagged_meteorology:
+            formula += (
+                " + bs(temperature_lag1_7, df=3, lower_bound=-30, upper_bound=60)"
+                " + bs(temperature_lag8_21, df=3, lower_bound=-30, upper_bound=60)"
+                " + bs(humidity_lag1_7, df=3, lower_bound=0, upper_bound=100)"
+            )
         if self.include_srag:
             formula += " + srag"
         formula += "".join(f" + {c}" for c in self.extra)

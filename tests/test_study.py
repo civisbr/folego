@@ -188,6 +188,26 @@ def test_dense_trend_df_scales_with_training_span():
         ConfounderDesign(trend_df_per_year=0)
 
 
+def test_lagged_meteorology_uses_previous_days_only(tmp_path):
+    from folego.evaluate.study import stratum_series
+    from folego.models.glm import ConfounderDesign
+
+    panel = pl.read_parquet(synthetic_panel(tmp_path / "panel.parquet", years=1))
+    series = stratum_series(panel, "11004", "respiratory", "60+")
+    temperature = series["temperature"].to_numpy()
+    # Day 21 (0-based) is the first with all of lags 1-21 present.
+    assert series["temperature_lag1_7"][21] == pytest.approx(temperature[14:21].mean())
+    assert series["temperature_lag8_21"][21] == pytest.approx(temperature[0:14].mean())
+    assert series["humidity_lag1_7"][0] is None and series["temperature_lag8_21"][9] is None
+    lagged = ConfounderDesign(trend_df_per_year=7, harmonics=0, lagged_meteorology=True)
+    plain = ConfounderDesign(trend_df_per_year=7, harmonics=0)
+    rows = series.drop_nulls()
+    assert lagged.columns == ConfounderDesign.LAGGED_METEOROLOGY
+    assert lagged.transform(rows, fit=True).shape[1] == plain.transform(rows, fit=True).shape[1] + 9
+    with pytest.raises(ValueError, match="extra"):
+        ConfounderDesign(extra=("temperature_lag1_7",))
+
+
 def test_knots_without_support_are_dropped(tmp_path):
     path = synthetic_panel(tmp_path / "panel.parquet", years=3)
     # Cap exposure below the top knot (75 µg/m³) so its hinge would be all zeros.
@@ -197,7 +217,7 @@ def test_knots_without_support_are_dropped(tmp_path):
     )
     assert 75.0 not in report["basis"]["knots"] and 15.0 in report["basis"]["knots"]
     assert "effect" in report["results"][0]
-    assert report["model_spec_version"] == 6 and report["basis"]["requested_knots"][-1] == 75.0
+    assert report["model_spec_version"] == 7 and report["basis"]["requested_knots"][-1] == 75.0
 
 
 def test_degenerate_fit_is_rejected():

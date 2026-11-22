@@ -32,8 +32,9 @@ NEGATIVE_CONTROL = "negative_control"
 # calendar year; 3: 7 df per year of days present; 4: knots without support dropped;
 # 5: effects with a log-RR standard error above MAX_LOG_RR_SE rejected; HAC and
 # lagged-outcome sensitivities added; 6: effects from a numerically singular covariance
-# rejected.
-MODEL_SPEC_VERSION = 6
+# rejected; 7: mean temperature of lags 1-7 and 8-21 and humidity of lags 1-7 in the
+# inference design.
+MODEL_SPEC_VERSION = 7
 # A hinge needs days above its knot; a region that never reaches 75 µg/m³ would get an
 # all-zero column and a rank-deficient design.
 MIN_SHARE_ABOVE_KNOT = 0.01
@@ -79,13 +80,24 @@ def stratum_series(panel: pl.DataFrame, region: str, outcome: str, age_group: st
     dates = series["date"].to_list()
     if any((b - a).days != 1 for a, b in zip(dates, dates[1:], strict=False)):
         raise ValueError("Panel has missing days; the lag basis needs contiguous rows")
-    return series
+    # Rows are contiguous days, so shift(1) is the previous day. With same-day weather
+    # only, the elderly negative control (S/T) and circulatory admissions came out
+    # "protective" (RR 0.985 and 0.986 pooled over 115 regions); adding these means
+    # brought both to the null and left the respiratory effect unchanged.
+    if not {"temperature", "humidity"} <= set(series.columns):
+        return series
+    temperature, humidity = pl.col("temperature").shift(1), pl.col("humidity").shift(1)
+    return series.with_columns(
+        temperature.rolling_mean(7, min_samples=5).alias("temperature_lag1_7"),
+        temperature.shift(7).rolling_mean(14, min_samples=10).alias("temperature_lag8_21"),
+        humidity.rolling_mean(7, min_samples=5).alias("humidity_lag1_7"),
+    )
 
 
 def _design(series: pl.DataFrame, basis: CrossBasis, confounders: ConfounderDesign, *, fit: bool):
     exposure = basis.transform(series["pm25"].to_numpy())
     usable = np.isfinite(exposure).all(axis=1) & series["admissions"].is_not_null().to_numpy()
-    for column in confounders.extra:
+    for column in confounders.columns:
         usable &= series[column].is_not_null().to_numpy()
     rows = series.filter(pl.Series(usable))
     if fit and rows.height < MIN_TRAINING_DAYS:
@@ -147,7 +159,11 @@ def _inference_design(include_srag: bool, trend_df_per_year: float, extra=()) ->
     # coincides with the fire season, to the exposure (protective RR, failed negative
     # control, Ljung-Box p≈0 in region 11004); a dense time spline absorbs it.
     return ConfounderDesign(
-        include_srag=include_srag, trend_df_per_year=trend_df_per_year, harmonics=0, extra=extra
+        include_srag=include_srag,
+        trend_df_per_year=trend_df_per_year,
+        harmonics=0,
+        extra=extra,
+        lagged_meteorology=True,
     )
 
 
@@ -397,7 +413,10 @@ def region_study(
         },
         "model_spec_version": MODEL_SPEC_VERSION,
         "confounders": {
-            "inference": f"natural time spline, {trend_df_per_year} df/year, no harmonics",
+            "inference": (
+                f"natural time spline, {trend_df_per_year} df/year, no harmonics;"
+                " cubic B-splines of mean temperature (lags 1-7, 8-21) and humidity (lags 1-7)"
+            ),
             "trend_sensitivity_df_per_year": [
                 d for d in TREND_SENSITIVITY if d != trend_df_per_year
             ],
