@@ -107,12 +107,16 @@ def cumulative_relative_risk(model, basis: CrossBasis, width: int, *, increase=1
     # A sparse stratum can "converge" to huge coefficients; its RR is not an estimate.
     if not (np.isfinite(log_rr) and np.isfinite(se)):
         raise ValueError("Degenerate fit: non-finite effect or standard error")
-    if abs(log_rr) + 1.96 * se >= MAX_LOG_RR_BOUND:
-        raise ValueError(f"Degenerate fit: |log RR| + 1.96·SE = {abs(log_rr) + 1.96 * se:.3g}")
+    bound = abs(log_rr) + 1.96 * se
+    if bound >= MAX_LOG_RR_BOUND:
+        raise ValueError(f"Degenerate fit: |log RR| + 1.96·SE = {bound:.3g}")
     if se > MAX_LOG_RR_SE:
         raise ValueError(f"Degenerate fit: log-RR SE = {se:.3g}")
-    # NaN outside the exposure block makes cond NaN or raises LinAlgError (a ValueError).
-    condition = float(np.linalg.cond(full_covariance))
+    # NaN outside the exposure block makes cond NaN or, depending on numpy, raises.
+    try:
+        condition = float(np.linalg.cond(full_covariance))
+    except np.linalg.LinAlgError:
+        condition = float("nan")
     if not condition <= MAX_COVARIANCE_CONDITION:
         raise ValueError(f"Degenerate fit: covariance condition number {condition:.3g}")
     return {

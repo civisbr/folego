@@ -262,7 +262,16 @@ def test_singular_covariance_is_rejected():
         cumulative_relative_risk(model, basis, width)
     broken = np.diag([1e-4] * (width + 1) + [np.nan])
     model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: broken)
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="condition number nan"):
+        cumulative_relative_risk(model, basis, width)
+    # Either side of 1/eps ≈ 4.5e15.
+    edge = np.diag([1e-4] * (width + 1) + [1e11])
+    model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: edge)
+    effect = cumulative_relative_risk(model, basis, width)
+    assert effect["covariance_condition"] == pytest.approx(1e15)
+    beyond = np.diag([1e-4] * (width + 1) + [1e12])
+    model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: beyond)
+    with pytest.raises(ValueError, match="condition number 1e\\+16"):
         cumulative_relative_risk(model, basis, width)
     healthy = np.diag([1e-4] * (width + 1) + [1e4])
     model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: healthy)
