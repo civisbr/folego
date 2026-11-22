@@ -232,6 +232,7 @@ def test_design_drops_rows_without_lagged_meteorology(tmp_path):
     series = stratum_series(raw, "11004", "respiratory", "60+")
     rows = _design(series, CrossBasis(), _inference_design(False, 7), fit=True)[0]
     assert not set(series["date"][500:522]) & set(rows["date"])
+    assert {series["date"][499], series["date"][522]} <= set(rows["date"])
 
 
 def test_confounder_design_errors_are_value_errors():
