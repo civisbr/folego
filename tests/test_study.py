@@ -199,8 +199,10 @@ def test_lagged_meteorology_uses_previous_full_windows(tmp_path):
     # Full windows only: day 21 is the first with lags 8-21, day 7 with lags 1-7.
     assert series["temperature_lag8_21"][20] is None
     assert series["humidity_lag1_7"][6] is None and series["humidity_lag1_7"][7] is not None
-    with pytest.raises(ValueError, match="humidity"):
+    with pytest.raises(ValueError, match="lacks humidity$"):
         stratum_series(panel.drop("humidity"), "11004", "respiratory", "60+")
+    with pytest.raises(ValueError, match="lacks temperature$"):
+        stratum_series(panel.drop("temperature"), "11004", "respiratory", "60+")
 
 
 def test_design_drops_rows_without_lagged_meteorology(tmp_path):
@@ -220,6 +222,29 @@ def test_design_drops_rows_without_lagged_meteorology(tmp_path):
     assert rows["date"].min() == series["date"][21]
     assert series["date"][400] not in rows["date"].to_list()
     assert np.isfinite(design).all()
+    # A missing same-day value drops that day (and the windows holding it), not the stratum.
+    raw = panel.with_columns(
+        pl.when(pl.col("date") == series["date"][500])
+        .then(None)
+        .otherwise(pl.col("temperature"))
+        .alias("temperature")
+    )
+    series = stratum_series(raw, "11004", "respiratory", "60+")
+    rows = _design(series, CrossBasis(), _inference_design(False, 7), fit=True)[0]
+    assert not set(series["date"][500:522]) & set(rows["date"])
+
+
+def test_confounder_design_errors_are_value_errors():
+    import pandas as pd
+
+    from folego.models.glm import ConfounderDesign
+
+    frame = pd.DataFrame(
+        {"date": pd.date_range("2018-01-01", periods=60), "humidity": 70.0, "holiday": 0}
+    )
+    frame["temperature"] = np.where(np.arange(60) == 3, np.nan, 25.0)
+    with pytest.raises(ValueError, match="Confounder design"):
+        ConfounderDesign(trend_df_per_year=7, harmonics=0).transform(frame, fit=True)
 
 
 def test_lagged_meteorology_terms_and_names():
@@ -235,7 +260,7 @@ def test_lagged_meteorology_terms_and_names():
         frame[column] = frame["humidity" if column.startswith("humidity") else "temperature"]
     lagged = ConfounderDesign(trend_df_per_year=7, harmonics=0, lagged_meteorology=True)
     plain = ConfounderDesign(trend_df_per_year=7, harmonics=0)
-    assert lagged.columns == ConfounderDesign.LAGGED_METEOROLOGY and plain.columns == ()
+    assert lagged.columns == plain.columns + ConfounderDesign.LAGGED_METEOROLOGY
     width = plain.transform(frame, fit=True).shape[1]
     assert lagged.transform(frame, fit=True).shape[1] == width + 9
     for name in ("temperature_lag1_7", "bs", "cr", "np"):

@@ -84,8 +84,9 @@ def stratum_series(panel: pl.DataFrame, region: str, outcome: str, age_group: st
     # left elderly injury and circulatory admissions "protected" by PM2.5 (see
     # docs/methodology.md). Full windows only: a partial mean would average different
     # days at the start of the series and around weather gaps.
-    if not {"temperature", "humidity"} <= set(series.columns):
-        raise ValueError("Panel lacks temperature or humidity")
+    missing = {"temperature", "humidity"} - set(series.columns)
+    if missing:
+        raise ValueError(f"Panel lacks {', '.join(sorted(missing))}")
     temperature, humidity = pl.col("temperature").shift(1), pl.col("humidity").shift(1)
     return series.with_columns(
         temperature.rolling_mean(7).alias("temperature_lag1_7"),
@@ -98,8 +99,11 @@ def _design(series: pl.DataFrame, basis: CrossBasis, confounders: ConfounderDesi
     exposure = basis.transform(series["pm25"].to_numpy())
     usable = np.isfinite(exposure).all(axis=1) & series["admissions"].is_not_null().to_numpy()
     for column in confounders.columns:
+        values = series[column]
         # A float NaN is not null; a rolling mean spreads one over its whole window.
-        usable &= series[column].fill_nan(None).is_not_null().to_numpy()
+        if values.dtype.is_float():
+            values = values.fill_nan(None)
+        usable &= values.is_not_null().to_numpy()
     rows = series.filter(pl.Series(usable))
     if fit and rows.height < MIN_TRAINING_DAYS:
         raise ValueError(f"Only {rows.height} usable days; need {MIN_TRAINING_DAYS}")

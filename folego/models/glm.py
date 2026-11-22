@@ -2,7 +2,7 @@
 
 import numpy as np
 import statsmodels.api as sm
-from patsy import build_design_matrices, dmatrix
+from patsy import PatsyError, build_design_matrices, dmatrix
 
 
 def fit_count_model(counts, design, *, offset=None, hac_lags=None):
@@ -93,8 +93,9 @@ class ConfounderDesign:
 
     @property
     def columns(self):
-        """Optional columns a row needs before it can enter the design."""
-        return self.extra + (self.LAGGED_METEOROLOGY if self.lagged_meteorology else ())
+        """Columns a row needs, non-missing, before it can enter the design."""
+        base = ("temperature", "humidity", "holiday") + (("srag",) if self.include_srag else ())
+        return base + self.extra + (self.LAGGED_METEOROLOGY if self.lagged_meteorology else ())
 
     def transform(self, frame, *, fit=False):
         import pandas as pd
@@ -131,12 +132,16 @@ class ConfounderDesign:
         if self.include_srag:
             formula += " + srag"
         formula += "".join(f" + {c}" for c in self.extra)
-        if fit:
-            design = dmatrix(formula, data, NA_action="raise")
-            self.info = design.design_info
-        elif self.info is not None:
-            design = build_design_matrices([self.info], data, NA_action="raise")[0]
-        else:
+        if not fit and self.info is None:
             raise ValueError("Unfitted design")
+        # PatsyError is not a ValueError; callers skip a stratum only on ValueError.
+        try:
+            if fit:
+                design = dmatrix(formula, data, NA_action="raise")
+                self.info = design.design_info
+            else:
+                design = build_design_matrices([self.info], data, NA_action="raise")[0]
+        except PatsyError as error:
+            raise ValueError(f"Confounder design: {error}") from error
         # Drop the first weekday column: fit_count_model adds an intercept.
         return np.asarray(design)[:, 1:]
