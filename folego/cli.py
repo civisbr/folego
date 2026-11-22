@@ -6,6 +6,23 @@ import os
 from pathlib import Path
 
 
+def study_suffix(meteorology: str, pm25: str, exposure: str, knots=None) -> str:
+    """Report name suffix, so runs on different sources or bases never overwrite each other."""
+    from .models.crossbasis import CrossBasis
+
+    suffix = "" if exposure == "pm25" else f"-{exposure}"
+    if meteorology == "MERRA-2":
+        suffix += "-met_merra2"
+    if pm25 == "MERRA-2" and exposure == "pm25":
+        # Distinct from "-pm25_merra2", the MERRA-2 sensitivity run on a CAMS panel.
+        suffix += "-pm25main_merra2"
+    if "unknown" in (meteorology, pm25):
+        suffix += "-unknown_source"
+    if knots is not None and tuple(knots) != CrossBasis().knots:
+        suffix += "-knots" + "_".join(f"{k:g}" for k in knots)
+    return suffix
+
+
 def main():
     parser = argparse.ArgumentParser(prog="folego")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -55,6 +72,13 @@ def main():
     study.add_argument("--output", type=Path, help="Padrão: data/marts/studies/<região>.json")
     study.add_argument(
         "--exposure", default="pm25", choices=["pm25", "pm25_merra2"], help="Coluna de PM2,5"
+    )
+    study.add_argument(
+        "--knots",
+        type=float,
+        nargs="+",
+        help="Nós da base de exposição em µg/m³ (padrão 15 35 75); iguais entre regiões"
+        " para combinar estudos",
     )
     fires = commands.add_parser("fires", help="Focos de queimada FIRMS VIIRS por região e dia")
     fires.add_argument("--start", default="2012-01-20")
@@ -284,18 +308,32 @@ def main():
         if not re.fullmatch(r"\d{5}", args.region):
             parser.exit(2, "Código de região de saúde tem 5 dígitos.\n")
         os.umask(0o077)
-        suffix = "" if args.exposure == "pm25" else f"-{args.exposure}"
-        # Results from different weather sources must not overwrite each other.
-        if meteorology_source(args.panel) == "MERRA-2":
-            suffix += "-met_merra2"
-        if input_source(args.panel, "pm25") == "MERRA-2" and args.exposure == "pm25":
-            # Distinct from "-pm25_merra2", the MERRA-2 sensitivity run on a CAMS panel.
-            suffix += "-pm25main_merra2"
-        if "unknown" in (meteorology_source(args.panel), input_source(args.panel, "pm25")):
-            # An unrecognised source must not overwrite the report of a known one.
-            suffix += "-unknown_source"
+        basis = None
+        if args.knots is not None:
+            from .models.crossbasis import CrossBasis
+
+            # Rounded so the report name (and the design) cannot hide near-duplicate knots.
+            knots = tuple(sorted({round(k, 1) for k in args.knots}))
+            if (
+                not all(0 < k < 1000 for k in knots)
+                or CrossBasis().reference not in knots
+                or len(knots) > 8
+                or any(b - a < 1 for a, b in zip(knots, knots[1:], strict=False))
+            ):
+                parser.exit(
+                    2,
+                    "Até 8 nós entre 0 e 1000 µg/m³, a 1 µg/m³ ou mais um do outro,"
+                    " incluindo a referência 15.\n",
+                )
+            basis = CrossBasis(knots=knots)
+        suffix = study_suffix(
+            meteorology_source(args.panel),
+            input_source(args.panel, "pm25"),
+            args.exposure,
+            None if basis is None else basis.knots,
+        )
         output = args.output or Path("data/marts/studies") / f"{args.region}{suffix}.json"
-        report = region_study(args.panel, args.region, output, exposure=args.exposure)
+        report = region_study(args.panel, args.region, output, exposure=args.exposure, basis=basis)
         summary = [
             {
                 "outcome": r["outcome"],
@@ -307,7 +345,7 @@ def main():
                         if k in ("rr", "lower", "upper")
                     }
                     if "effect" in r
-                    else {"error": r["error"]}
+                    else {"error": r.get("error") or r.get("effect_error")}
                 ),
             }
             for r in report["results"]

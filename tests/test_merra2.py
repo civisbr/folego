@@ -266,3 +266,16 @@ def test_retries_end_with_the_last_answer_or_error_and_skip_client_errors():
 
     with pytest.raises(httpx.RemoteProtocolError):
         merra2._retry(disconnected, attempts=2, pause=0)
+
+
+def test_retry_after_is_honoured_but_capped(monkeypatch):
+    import time
+
+    import httpx
+
+    waits = []
+    monkeypatch.setattr(time, "sleep", waits.append)
+    for header, expected in (("30", 30.0), ("99999", 300.0), ("Wed, 21 Oct 2026 07:28:00 GMT", 0)):
+        answers = iter([httpx.Response(429, headers={"retry-after": header}), httpx.Response(200)])
+        assert merra2._retry(lambda a=answers: next(a), pause=0).status_code == 200
+        assert waits.pop() == expected

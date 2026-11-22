@@ -29,13 +29,19 @@ from .negative_control import joint_exposure_test
 NEGATIVE_CONTROL = "negative_control"
 # Bumped whenever the model specification changes, so reports of different
 # specifications are never compared by mistake. 1: 6 df trend + harmonics; 2: 7 df per
-# calendar year; 3: 7 df per year of days present; 4: knots without support dropped.
-MODEL_SPEC_VERSION = 4
+# calendar year; 3: 7 df per year of days present; 4: knots without support dropped;
+# 5: effects with a log-RR standard error above MAX_LOG_RR_SE rejected; HAC and
+# lagged-outcome sensitivities added.
+MODEL_SPEC_VERSION = 5
 # A hinge needs days above its knot; a region that never reaches 75 µg/m³ would get an
 # all-zero column and a rank-deficient design.
 MIN_SHARE_ABOVE_KNOT = 0.01
 # |log RR| + 1.96·SE beyond this (RR bounds past e^±20) is a degenerate fit, not an estimate.
 MAX_LOG_RR_BOUND = 20.0
+# A 95% CI spanning more than a factor of e^±5.9 says nothing about the effect.
+MAX_LOG_RR_SE = 3.0
+# Newey-West window for the autocorrelation-robust interval: the lag basis length.
+HAC_LAGS = 7
 MIN_TRAINING_DAYS = 365
 TREND_DF_PER_YEAR = 7
 # Effect estimates must not hinge on one smoothing choice; these bracket the default.
@@ -71,6 +77,8 @@ def stratum_series(panel: pl.DataFrame, region: str, outcome: str, age_group: st
 def _design(series: pl.DataFrame, basis: CrossBasis, confounders: ConfounderDesign, *, fit: bool):
     exposure = basis.transform(series["pm25"].to_numpy())
     usable = np.isfinite(exposure).all(axis=1) & series["admissions"].is_not_null().to_numpy()
+    for column in confounders.extra:
+        usable &= series[column].is_not_null().to_numpy()
     rows = series.filter(pl.Series(usable))
     if fit and rows.height < MIN_TRAINING_DAYS:
         raise ValueError(f"Only {rows.height} usable days; need {MIN_TRAINING_DAYS}")
@@ -88,7 +96,12 @@ def cumulative_relative_risk(model, basis: CrossBasis, width: int, *, increase=1
     log_rr = float(contrast @ beta)
     se = float(np.sqrt(contrast @ covariance @ contrast))
     # A sparse stratum can "converge" to huge coefficients; its RR is not an estimate.
-    if not (np.isfinite(log_rr) and np.isfinite(se) and abs(log_rr) + 1.96 * se < MAX_LOG_RR_BOUND):
+    if not (
+        np.isfinite(log_rr)
+        and np.isfinite(se)
+        and abs(log_rr) + 1.96 * se < MAX_LOG_RR_BOUND
+        and se <= MAX_LOG_RR_SE
+    ):
         raise ValueError("Degenerate fit: effect or standard error non-finite or out of bounds")
     return {
         "increase_ug_m3": increase,
@@ -112,20 +125,58 @@ def residual_autocorrelation(model, max_lag=7) -> dict:
     return {"acf": acf, "ljung_box_pvalue": float(test["lb_pvalue"].iloc[0])}
 
 
-def _inference_design(include_srag: bool, trend_df_per_year: float) -> ConfounderDesign:
+def _inference_design(include_srag: bool, trend_df_per_year: float, extra=()) -> ConfounderDesign:
     # A 6 df trend plus harmonics left the dry-season drop in viral admissions, which
     # coincides with the fire season, to the exposure (protective RR, failed negative
     # control, Ljung-Box p≈0 in region 11004); a dense time spline absorbs it.
     return ConfounderDesign(
-        include_srag=include_srag, trend_df_per_year=trend_df_per_year, harmonics=0
+        include_srag=include_srag, trend_df_per_year=trend_df_per_year, harmonics=0, extra=extra
     )
 
 
-def _effect(series, basis, include_srag, trend_df_per_year):
-    confounders = _inference_design(include_srag, trend_df_per_year)
+def _effect(series, basis, include_srag, trend_df_per_year, *, extra=(), hac_lags=None):
+    confounders = _inference_design(include_srag, trend_df_per_year, extra)
     rows, design, width = _design(series, basis, confounders, fit=True)
-    model = fit_count_model(rows["admissions"].to_numpy(), design)
+    model = fit_count_model(rows["admissions"].to_numpy(), design, hac_lags=hac_lags)
     return rows, model, width, confounders.trend_df
+
+
+def _guarded(compute):
+    try:
+        return compute()
+    except (ValueError, PerfectSeparationError) as error:
+        return {"error": str(error)}
+
+
+def _autocorrelation_sensitivity(series, basis, include_srag, trend_df_per_year, width):
+    """Two checks on intervals that residual autocorrelation may make too narrow.
+
+    HAC keeps the estimate and widens the interval; the lagged outcome (log of the
+    previous day's admissions) changes the estimate too, and can absorb part of a real
+    lagged effect, so it is a bound on sensitivity, not a preferred model.
+    """
+
+    def hac():
+        rows, model = _effect(series, basis, include_srag, trend_df_per_year, hac_lags=HAC_LAGS)[:2]
+        # Newey-West reads neighbouring rows as neighbouring days; a gap breaks that.
+        if (rows["date"].diff().dt.total_days().drop_nulls() != 1).any():
+            raise ValueError("Series has gaps inside the fitted span; HAC needs contiguous days")
+        return {**cumulative_relative_risk(model, basis, width), "maxlags": HAC_LAGS}
+
+    def lagged():
+        # ``series`` is contiguous and sorted, so shift(1) is the previous day.
+        frame = series.with_columns(pl.col("admissions").shift(1).log1p().alias("lagged_outcome"))
+        rows, model = _effect(
+            frame, basis, include_srag, trend_df_per_year, extra=("lagged_outcome",)
+        )[:2]
+        return {
+            "days": rows.height,
+            **cumulative_relative_risk(model, basis, width),
+            "dispersion": float(model.scale),
+            "residuals": residual_autocorrelation(model),
+        }
+
+    return {"effect_hac": _guarded(hac), "effect_with_lagged_outcome": _guarded(lagged)}
 
 
 def fit_stratum(
@@ -138,6 +189,8 @@ def fit_stratum(
     include_srag = "srag" in series.columns
     rows, model, width, trend_df = _effect(series, basis, include_srag, trend_df_per_year)
     counts = rows["admissions"].to_numpy()
+    # A degenerate effect still leaves dispersion and residuals worth reporting.
+    effect = _guarded(lambda: cumulative_relative_risk(model, basis, width))
     unadjusted = None
     if include_srag:
         # SRAG can sit on the causal path; both estimates are reported side by side.
@@ -164,8 +217,9 @@ def fit_stratum(
         "admissions": int(counts.sum()),
         "mean_daily": float(counts.mean()),
         "srag_adjusted": include_srag,
-        "effect": cumulative_relative_risk(model, basis, width),
+        **({"effect_error": effect["error"]} if "error" in effect else {"effect": effect}),
         "effect_without_srag": unadjusted,
+        **_autocorrelation_sensitivity(series, basis, include_srag, trend_df_per_year, width),
         "trend_df": trend_df,
         "effect_by_trend_df_per_year": by_trend,
         "exposure_test": joint_exposure_test(model, range(1, width + 1)),
@@ -260,7 +314,8 @@ def region_study(
 ) -> dict:
     basis = basis or CrossBasis()
     requested_knots = basis.knots
-    panel = pl.read_parquet(panel_path).filter(pl.col("health_region_code") == region)
+    # A multi-region panel does not fit in memory several times over; read one region.
+    panel = pl.scan_parquet(panel_path).filter(pl.col("health_region_code") == region).collect()
     if panel.is_empty():
         raise ValueError(f"Region {region} not in the panel")
     if exposure not in panel.columns:
@@ -318,6 +373,7 @@ def region_study(
             "requested_knots": list(requested_knots),
             "min_share_above_knot": MIN_SHARE_ABOVE_KNOT,
             "max_log_rr_bound": MAX_LOG_RR_BOUND,
+            "max_log_rr_se": MAX_LOG_RR_SE,
             "lag_degree": basis.lag_degree,
             "reference": basis.reference,
         },
@@ -327,6 +383,10 @@ def region_study(
             "trend_sensitivity_df_per_year": [
                 d for d in TREND_SENSITIVITY if d != trend_df_per_year
             ],
+            "autocorrelation_sensitivity": (
+                f"Newey-West (HAC, {HAC_LAGS} lags) interval; log of previous-day admissions"
+                " as a covariate"
+            ),
             "backtest": (
                 f"time spline {ConfounderDesign().trend_df} df"
                 f" + {ConfounderDesign().harmonics} harmonics"

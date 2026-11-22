@@ -28,6 +28,25 @@ def _coverage(frame: pl.DataFrame, name: str) -> tuple[date, date]:
     return spans["first"].max(), spans["last"].min()
 
 
+def _fires_outages(fires_path: Path | None) -> dict:
+    """Sensor-outage days of the fires mart, null in the panel, so its users see why."""
+    if fires_path is None:
+        return {}
+    manifest = Path(fires_path).with_suffix(".parquet.source.json")
+    if not manifest.exists():
+        raise ValueError("Fires mart has no manifest; its outage days are unknown")
+    source = json.loads(manifest.read_text())
+    days, rule = source.get("outage_days"), source.get("outage_rule")
+    if not isinstance(days, list) or not isinstance(rule, str):
+        raise ValueError("Fires manifest lacks the outage_days list or its rule")
+    for day in days:
+        date.fromisoformat(day)
+    return {
+        "fires_outage_days": source["outage_days"],
+        "fires_outage_rule": source.get("outage_rule"),
+    }
+
+
 def build_panel(
     outcomes_path: Path,
     pm25_path: Path,
@@ -40,6 +59,8 @@ def build_panel(
     merra2_path: Path | None = None,
     fires_path: Path | None = None,
 ) -> dict:
+    # Checked first: a fires mart without its outage list must fail before the heavy work.
+    fires_outages = _fires_outages(fires_path)
     window = json.loads(outcomes_path.with_suffix(".parquet.source.json").read_text())
     admission_start, admission_end = (date.fromisoformat(d) for d in window["admission_window"])
     pm25 = pl.read_parquet(pm25_path)
@@ -189,6 +210,7 @@ def build_panel(
         "admissions_outside_window": "null",
         "mean_payment": window["payment"],
         "pm25_source_column": pm25_column,
+        **fires_outages,
         "inputs": {
             name: [describe_input(path)]
             for name, path in {

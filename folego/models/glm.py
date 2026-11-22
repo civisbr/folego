@@ -5,7 +5,7 @@ import statsmodels.api as sm
 from patsy import build_design_matrices, dmatrix
 
 
-def fit_count_model(counts, design, *, offset=None):
+def fit_count_model(counts, design, *, offset=None, hac_lags=None):
     counts, design = np.asarray(counts, float), np.asarray(design, float)
     if counts.ndim != 1 or design.ndim != 2 or len(counts) != len(design):
         raise ValueError("Incompatible outcome/design shapes")
@@ -19,7 +19,15 @@ def fit_count_model(counts, design, *, offset=None):
     model = sm.GLM(counts, x, family=sm.families.Poisson(), offset=offset).fit()
     # Pearson scale implements overdispersion without claiming sub-Poisson certainty.
     scale = max(1.0, float(model.pearson_chi2 / model.df_resid))
-    fitted = sm.GLM(counts, x, family=sm.families.Poisson(), offset=offset).fit(scale=scale)
+    if hac_lags is None:
+        fitted = sm.GLM(counts, x, family=sm.families.Poisson(), offset=offset).fit(scale=scale)
+    else:
+        # Newey-West sandwich: the point estimate is the Poisson one, the covariance
+        # absorbs both overdispersion and residual autocorrelation up to hac_lags days.
+        # Unlike the quasi-Poisson scale it has no floor at 1 and no small-sample correction.
+        fitted = sm.GLM(counts, x, family=sm.families.Poisson(), offset=offset).fit(
+            cov_type="HAC", cov_kwds={"maxlags": hac_lags}
+        )
     # A sparse stratum with a dense trend can stop with huge, meaningless coefficients.
     if not fitted.converged:
         raise ValueError("GLM did not converge")
@@ -37,7 +45,7 @@ class ConfounderDesign:
     A holiday indicator is supplied from an externally verified local calendar.
     """
 
-    def __init__(self, include_srag=False, *, trend_df_per_year=None, harmonics=3):
+    def __init__(self, include_srag=False, *, trend_df_per_year=None, harmonics=3, extra=()):
         # None keeps the forecasting design (6 df trend + harmonics, which repeat beyond
         # training). Inference uses a dense time spline instead (~7 df/year, Bhaskaran et
         # al. 2013), which absorbs season and epidemics but extrapolates poorly.
@@ -47,7 +55,22 @@ class ConfounderDesign:
             raise ValueError("trend_df_per_year must be positive and finite")
         if not isinstance(harmonics, int) or harmonics < 0:
             raise ValueError("harmonics must be a non-negative integer")
+        import keyword
+
+        # Names go into a patsy formula, which evaluates Python; a bare string would also
+        # be split into one term per letter.
+        reserved = {"trend", "weekday", "holiday", "temperature", "humidity", "srag", "C", "I"}
+        if isinstance(extra, str) or not all(
+            isinstance(c, str)
+            and c.isidentifier()
+            and not keyword.iskeyword(c)
+            and c not in reserved
+            and not c.startswith(("sin", "cos"))
+            for c in extra
+        ):
+            raise ValueError("extra confounders must be a sequence of new column names")
         self.include_srag = include_srag
+        self.extra = tuple(extra)
         self.trend_df_per_year = trend_df_per_year
         self.harmonics = harmonics
         self.trend_df = 6
@@ -82,6 +105,7 @@ class ConfounderDesign:
         formula += "".join(f" + sin{h} + cos{h}" for h in range(1, self.harmonics + 1))
         if self.include_srag:
             formula += " + srag"
+        formula += "".join(f" + {c}" for c in self.extra)
         if fit:
             design = dmatrix(formula, data, NA_action="raise")
             self.info = design.design_info

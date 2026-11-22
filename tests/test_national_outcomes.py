@@ -251,6 +251,8 @@ def test_panel_zero_fills_only_inside_the_admission_window(tmp_path):
     daily(date(2019, 1, 2), 10, regions, pm25_merra2=9.0).write_parquet(merra)
     fires = tmp_path / "fires.parquet"
     daily(date(2018, 12, 1), 60, regions, fire_count=3, frp=1.5).write_parquet(fires)
+    fires_manifest = fires.with_suffix(".parquet.source.json")
+    fires_manifest.write_text(json.dumps({"outage_days": ["2018-12-25"], "outage_rule": "r"}))
     manifest = build_panel(
         outcomes,
         paths["pm25"],
@@ -268,6 +270,15 @@ def test_panel_zero_fills_only_inside_the_admission_window(tmp_path):
     assert by_day[date(2019, 1, 1)] is None and by_day[date(2019, 1, 2)] == 9.0
     assert set(panel["fire_count"]) == {3}
     assert manifest["pm25_source_column"] == "pm25"
+    assert manifest["fires_outage_days"] == ["2018-12-25"]
+    fires_manifest.write_text("{}")
+    with pytest.raises(ValueError, match="outage_days"):
+        build_panel(
+            outcomes, paths["pm25"], paths["meteo"], paths["calendar"], output, fires_path=fires
+        )
+    # The failed build left the previous panel and its manifest in place.
+    on_disk = json.loads(output.with_suffix(".parquet.source.json").read_text())
+    assert on_disk["fires_outage_days"] == ["2018-12-25"]
     # A MERRA-2 mart used as the main exposure becomes the panel's pm25 column.
     main = tmp_path / "merra-main.parquet"
     daily(date(2018, 12, 1), 60, regions, pm25_merra2=7.0).write_parquet(main)

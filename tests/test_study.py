@@ -83,6 +83,18 @@ def test_study_recovers_effect_and_passes_negative_control(tmp_path):
     assert set(sensitivity) == {"4", "10"}
     assert all(v["lower"] < np.exp(EFFECT) < v["upper"] for v in sensitivity.values())
     assert "7 df/year" in report["confounders"]["inference"]
+    hac = respiratory["effect_hac"]
+    # Same estimate; only the interval changes.
+    assert hac["rr"] == pytest.approx(respiratory["effect"]["rr"])
+    assert hac["lower"] < np.exp(EFFECT) < hac["upper"]
+    lagged = respiratory["effect_with_lagged_outcome"]
+    assert lagged["lower"] < np.exp(EFFECT) < lagged["upper"]
+    assert "ljung_box_pvalue" in lagged["residuals"] and lagged["days"] > 0
+    from folego.models.glm import ConfounderDesign
+
+    for bad in ("lagged", ("trend",), ("lambda",), ("a b",)):
+        with pytest.raises(ValueError, match="column names"):
+            ConfounderDesign(extra=bad)
 
 
 def test_missing_region_fails(tmp_path):
@@ -185,7 +197,7 @@ def test_knots_without_support_are_dropped(tmp_path):
     )
     assert 75.0 not in report["basis"]["knots"] and 15.0 in report["basis"]["knots"]
     assert "effect" in report["results"][0]
-    assert report["model_spec_version"] == 4 and report["basis"]["requested_knots"][-1] == 75.0
+    assert report["model_spec_version"] == 5 and report["basis"]["requested_knots"][-1] == 75.0
 
 
 def test_degenerate_fit_is_rejected():
@@ -219,3 +231,53 @@ def test_nan_exposure_is_not_support_and_clean_regions_are_refused(tmp_path):
     panel.with_columns(pl.lit(None, pl.Float64).alias("pm25")).write_parquet(path)
     with pytest.raises(ValueError, match="No pm25"):
         region_study(path, "11004", tmp_path / "s.json")
+
+
+def test_imprecise_effect_is_rejected():
+    from types import SimpleNamespace
+
+    from folego.evaluate.study import cumulative_relative_risk
+    from folego.models.crossbasis import CrossBasis
+
+    basis = CrossBasis()
+    width = basis.transform(np.full(20, 20.0)).shape[1]
+    # A huge covariance on a zero effect: inside the RR bound, but SE far above 3.
+    model = SimpleNamespace(params=np.zeros(width + 1), cov_params=lambda: np.eye(width + 1) * 4)
+    with pytest.raises(ValueError, match="Degenerate"):
+        cumulative_relative_risk(model, basis, width)
+
+
+def test_degenerate_effect_keeps_stratum_diagnostics(tmp_path, monkeypatch):
+    from folego.evaluate import study
+
+    def degenerate(*args, **kwargs):
+        raise ValueError("Degenerate fit: test")
+
+    monkeypatch.setattr(study, "cumulative_relative_risk", degenerate)
+    panel = pl.read_parquet(synthetic_panel(tmp_path / "panel.parquet", years=3))
+    series = study.stratum_series(panel, "11004", "respiratory", None)
+    result = study.fit_stratum(series, study.CrossBasis(), sensitivity=())
+    assert "effect" not in result and result["effect_error"].startswith("Degenerate")
+    assert result["dispersion"] > 0 and "ljung_box_pvalue" in result["residuals"]
+    assert "error" in result["effect_hac"]
+
+
+def test_common_knots_are_kept_and_named(tmp_path):
+    from folego.cli import study_suffix
+    from folego.models.crossbasis import CrossBasis
+
+    path = synthetic_panel(tmp_path / "panel.parquet", years=3)
+    report = region_study(
+        path,
+        "11004",
+        tmp_path / "s.json",
+        outcomes=("respiratory",),
+        age_groups=(None,),
+        basis=CrossBasis(knots=(15.0, 35.0)),
+    )
+    assert report["basis"]["knots"] == report["basis"]["requested_knots"] == [15.0, 35.0]
+    assert study_suffix("ERA5", "CAMS", "pm25") == ""
+    assert study_suffix("MERRA-2", "CAMS", "pm25", (15.0, 35.0)) == "-met_merra2-knots15_35"
+    assert study_suffix("MERRA-2", "MERRA-2", "pm25") == "-met_merra2-pm25main_merra2"
+    assert study_suffix("ERA5", "CAMS", "pm25_merra2") == "-pm25_merra2"
+    assert study_suffix("unknown", "CAMS", "pm25", CrossBasis().knots) == "-unknown_source"

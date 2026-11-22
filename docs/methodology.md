@@ -16,7 +16,7 @@ A agregação exclui idade desconhecida; o uso científico exige um relatório d
 
 ## Modelo implementado
 
-GLM Poisson com escala quasi-Poisson estimada pela dispersão de Pearson, limitada inferiormente a 1. Matriz de desenho inclui intercepto; erros de rank e dados não finitos interrompem o ajuste. A dispersão do GLM não corrige, sozinha, autocorrelação residual; diagnóstico e estimadores de incerteza adequados ainda devem ser avaliados.
+GLM Poisson com escala quasi-Poisson estimada pela dispersão de Pearson, limitada inferiormente a 1. Matriz de desenho inclui intercepto; erros de rank e dados não finitos interrompem o ajuste. A dispersão do GLM não corrige, sozinha, autocorrelação residual. O estudo regional relata, como sensibilidade, o intervalo de Newey-West (HAC, 7 lags) para o mesmo efeito e o efeito ajustado por log(1 + internações do dia anterior); o segundo pode absorver parte de um efeito defasado real e serve de limite, não de modelo preferido.
 
 A base cruzada usa funções lineares por partes para exposição (nós fixos 15, 35 e 75 µg/m³; no estudo regional, um nó com menos de 1% dos dias acima dele é retirado, porque sua coluna seria quase toda zero; a escolha usa a série inteira da região, e o backtest a herda) e polinômios de Legendre de grau 2 para lags 0–7. A base de exposição é centrada em 15 µg/m³ e escalada por 10. Os primeiros 7 dias permanecem ausentes, sem preenchimento artificial. Essa parametrização é inspirada em DLNM e **não equivale numericamente** ao padrão `ns` × `ns` do pacote R `dlnm`.
 
