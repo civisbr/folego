@@ -31,8 +31,9 @@ NEGATIVE_CONTROL = "negative_control"
 # specifications are never compared by mistake. 1: 6 df trend + harmonics; 2: 7 df per
 # calendar year; 3: 7 df per year of days present; 4: knots without support dropped;
 # 5: effects with a log-RR standard error above MAX_LOG_RR_SE rejected; HAC and
-# lagged-outcome sensitivities added.
-MODEL_SPEC_VERSION = 5
+# lagged-outcome sensitivities added; 6: effects from a numerically singular covariance
+# rejected.
+MODEL_SPEC_VERSION = 6
 # A hinge needs days above its knot; a region that never reaches 75 µg/m³ would get an
 # all-zero column and a rank-deficient design.
 MIN_SHARE_ABOVE_KNOT = 0.01
@@ -40,6 +41,10 @@ MIN_SHARE_ABOVE_KNOT = 0.01
 MAX_LOG_RR_BOUND = 20.0
 # A 95% CI spanning more than a factor of e^±5.9 says nothing about the effect.
 MAX_LOG_RR_SE = 3.0
+# Past 1/eps the covariance is numerically singular: sparse strata (~150 admissions in
+# 14 years) "converged" with condition ~1e20 and exposure SEs ~1e-8, which dominated
+# inverse-variance pooling. Healthy strata stay below ~1e14.
+MAX_COVARIANCE_CONDITION = 1 / np.finfo(float).eps
 # Newey-West window for the autocorrelation-robust interval: the lag basis length.
 HAC_LAGS = 7
 MIN_TRAINING_DAYS = 365
@@ -92,7 +97,8 @@ def cumulative_relative_risk(model, basis: CrossBasis, width: int, *, increase=1
     reference = np.full(basis.max_lag + 1, basis.reference)
     contrast = basis.transform(level)[-1] - basis.transform(reference)[-1]
     beta = np.asarray(model.params)[1 : width + 1]
-    covariance = np.asarray(model.cov_params())[1 : width + 1, 1 : width + 1]
+    full_covariance = np.asarray(model.cov_params())
+    covariance = full_covariance[1 : width + 1, 1 : width + 1]
     log_rr = float(contrast @ beta)
     se = float(np.sqrt(contrast @ covariance @ contrast))
     # A sparse stratum can "converge" to huge coefficients; its RR is not an estimate.
@@ -101,6 +107,7 @@ def cumulative_relative_risk(model, basis: CrossBasis, width: int, *, increase=1
         and np.isfinite(se)
         and abs(log_rr) + 1.96 * se < MAX_LOG_RR_BOUND
         and se <= MAX_LOG_RR_SE
+        and np.linalg.cond(full_covariance) <= MAX_COVARIANCE_CONDITION
     ):
         raise ValueError("Degenerate fit: effect or standard error non-finite or out of bounds")
     return {
@@ -374,6 +381,7 @@ def region_study(
             "min_share_above_knot": MIN_SHARE_ABOVE_KNOT,
             "max_log_rr_bound": MAX_LOG_RR_BOUND,
             "max_log_rr_se": MAX_LOG_RR_SE,
+            "max_covariance_condition": MAX_COVARIANCE_CONDITION,
             "lag_degree": basis.lag_degree,
             "reference": basis.reference,
         },

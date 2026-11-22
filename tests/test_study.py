@@ -197,7 +197,7 @@ def test_knots_without_support_are_dropped(tmp_path):
     )
     assert 75.0 not in report["basis"]["knots"] and 15.0 in report["basis"]["knots"]
     assert "effect" in report["results"][0]
-    assert report["model_spec_version"] == 5 and report["basis"]["requested_knots"][-1] == 75.0
+    assert report["model_spec_version"] == 6 and report["basis"]["requested_knots"][-1] == 75.0
 
 
 def test_degenerate_fit_is_rejected():
@@ -245,6 +245,24 @@ def test_imprecise_effect_is_rejected():
     model = SimpleNamespace(params=np.zeros(width + 1), cov_params=lambda: np.eye(width + 1) * 4)
     with pytest.raises(ValueError, match="Degenerate"):
         cumulative_relative_risk(model, basis, width)
+
+
+def test_singular_covariance_is_rejected():
+    from types import SimpleNamespace
+
+    from folego.evaluate.study import cumulative_relative_risk
+    from folego.models.crossbasis import CrossBasis
+
+    basis = CrossBasis()
+    width = basis.transform(np.full(20, 20.0)).shape[1]
+    # Tiny exposure variances next to a huge trend one: falsely precise, not an estimate.
+    covariance = np.diag([1e-16] * (width + 1) + [1e4])
+    model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: covariance)
+    with pytest.raises(ValueError, match="Degenerate"):
+        cumulative_relative_risk(model, basis, width)
+    healthy = np.diag([1e-4] * (width + 1) + [1e4])
+    model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: healthy)
+    assert cumulative_relative_risk(model, basis, width)["rr"] == 1.0
 
 
 def test_degenerate_effect_keeps_stratum_diagnostics(tmp_path, monkeypatch):
