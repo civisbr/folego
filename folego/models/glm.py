@@ -71,7 +71,8 @@ class ConfounderDesign:
         # Names go into a patsy formula, which evaluates Python; a bare string would also
         # be split into one term per letter.
         reserved = {"trend", "weekday", "holiday", "temperature", "humidity", "srag", "C", "I"}
-        reserved |= set(self.LAGGED_METEOROLOGY)
+        # A data column named like a formula function would shadow it.
+        reserved |= set(self.LAGGED_METEOROLOGY) | {"bs", "cr", "np"}
         if isinstance(extra, str) or not all(
             isinstance(c, str)
             and c.isidentifier()

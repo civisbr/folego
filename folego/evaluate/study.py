@@ -80,17 +80,17 @@ def stratum_series(panel: pl.DataFrame, region: str, outcome: str, age_group: st
     dates = series["date"].to_list()
     if any((b - a).days != 1 for a, b in zip(dates, dates[1:], strict=False)):
         raise ValueError("Panel has missing days; the lag basis needs contiguous rows")
-    # Rows are contiguous days, so shift(1) is the previous day. With same-day weather
-    # only, the elderly negative control (S/T) and circulatory admissions came out
-    # "protective" (RR 0.985 and 0.986 pooled over 115 regions); adding these means
-    # brought both to the null and left the respiratory effect unchanged.
+    # Rows are contiguous days, so shift(1) is the previous day. Same-day weather alone
+    # left elderly injury and circulatory admissions "protected" by PM2.5 (see
+    # docs/methodology.md). Full windows only: a partial mean would average different
+    # days at the start of the series and around weather gaps.
     if not {"temperature", "humidity"} <= set(series.columns):
-        return series
+        raise ValueError("Panel lacks temperature or humidity")
     temperature, humidity = pl.col("temperature").shift(1), pl.col("humidity").shift(1)
     return series.with_columns(
-        temperature.rolling_mean(7, min_samples=5).alias("temperature_lag1_7"),
-        temperature.shift(7).rolling_mean(14, min_samples=10).alias("temperature_lag8_21"),
-        humidity.rolling_mean(7, min_samples=5).alias("humidity_lag1_7"),
+        temperature.rolling_mean(7).alias("temperature_lag1_7"),
+        temperature.shift(7).rolling_mean(14).alias("temperature_lag8_21"),
+        humidity.rolling_mean(7).alias("humidity_lag1_7"),
     )
 
 
@@ -98,7 +98,8 @@ def _design(series: pl.DataFrame, basis: CrossBasis, confounders: ConfounderDesi
     exposure = basis.transform(series["pm25"].to_numpy())
     usable = np.isfinite(exposure).all(axis=1) & series["admissions"].is_not_null().to_numpy()
     for column in confounders.columns:
-        usable &= series[column].is_not_null().to_numpy()
+        # A float NaN is not null; a rolling mean spreads one over its whole window.
+        usable &= series[column].fill_nan(None).is_not_null().to_numpy()
     rows = series.filter(pl.Series(usable))
     if fit and rows.height < MIN_TRAINING_DAYS:
         raise ValueError(f"Only {rows.height} usable days; need {MIN_TRAINING_DAYS}")
@@ -415,7 +416,8 @@ def region_study(
         "confounders": {
             "inference": (
                 f"natural time spline, {trend_df_per_year} df/year, no harmonics;"
-                " cubic B-splines of mean temperature (lags 1-7, 8-21) and humidity (lags 1-7)"
+                " cubic B-splines (3 df) of mean temperature (lags 1-7, 8-21) and humidity"
+                " (lags 1-7), full windows only"
             ),
             "trend_sensitivity_df_per_year": [
                 d for d in TREND_SENSITIVITY if d != trend_df_per_year

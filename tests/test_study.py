@@ -188,24 +188,59 @@ def test_dense_trend_df_scales_with_training_span():
         ConfounderDesign(trend_df_per_year=0)
 
 
-def test_lagged_meteorology_uses_previous_days_only(tmp_path):
+def test_lagged_meteorology_uses_previous_full_windows(tmp_path):
     from folego.evaluate.study import stratum_series
-    from folego.models.glm import ConfounderDesign
 
     panel = pl.read_parquet(synthetic_panel(tmp_path / "panel.parquet", years=1))
     series = stratum_series(panel, "11004", "respiratory", "60+")
     temperature = series["temperature"].to_numpy()
-    # Day 21 (0-based) is the first with all of lags 1-21 present.
     assert series["temperature_lag1_7"][21] == pytest.approx(temperature[14:21].mean())
     assert series["temperature_lag8_21"][21] == pytest.approx(temperature[0:14].mean())
-    assert series["humidity_lag1_7"][0] is None and series["temperature_lag8_21"][9] is None
+    # Full windows only: day 21 is the first with lags 8-21, day 7 with lags 1-7.
+    assert series["temperature_lag8_21"][20] is None
+    assert series["humidity_lag1_7"][6] is None and series["humidity_lag1_7"][7] is not None
+    with pytest.raises(ValueError, match="humidity"):
+        stratum_series(panel.drop("humidity"), "11004", "respiratory", "60+")
+
+
+def test_design_drops_rows_without_lagged_meteorology(tmp_path):
+    from folego.evaluate.study import _design, _inference_design, stratum_series
+    from folego.models.crossbasis import CrossBasis
+
+    panel = pl.read_parquet(synthetic_panel(tmp_path / "panel.parquet", years=2))
+    series = stratum_series(panel, "11004", "respiratory", "60+")
+    # One NaN day (not null) spoils every window that contains it.
+    series = series.with_columns(
+        pl.when(pl.int_range(pl.len()) == 400)
+        .then(float("nan"))
+        .otherwise(pl.col("temperature_lag1_7"))
+        .alias("temperature_lag1_7")
+    )
+    rows, design, _ = _design(series, CrossBasis(), _inference_design(False, 7), fit=True)
+    assert rows["date"].min() == series["date"][21]
+    assert series["date"][400] not in rows["date"].to_list()
+    assert np.isfinite(design).all()
+
+
+def test_lagged_meteorology_terms_and_names():
+    import pandas as pd
+
+    from folego.models.glm import ConfounderDesign
+
+    days = pd.date_range("2018-01-01", "2019-12-31")
+    step = np.arange(len(days))
+    frame = pd.DataFrame({"date": days, "temperature": 25 + np.sin(step), "humidity": 70.0})
+    frame = frame.assign(holiday=0, humidity=70 + 5 * np.cos(step))
+    for column in ConfounderDesign.LAGGED_METEOROLOGY:
+        frame[column] = frame["humidity" if column.startswith("humidity") else "temperature"]
     lagged = ConfounderDesign(trend_df_per_year=7, harmonics=0, lagged_meteorology=True)
     plain = ConfounderDesign(trend_df_per_year=7, harmonics=0)
-    rows = series.drop_nulls()
-    assert lagged.columns == ConfounderDesign.LAGGED_METEOROLOGY
-    assert lagged.transform(rows, fit=True).shape[1] == plain.transform(rows, fit=True).shape[1] + 9
-    with pytest.raises(ValueError, match="extra"):
-        ConfounderDesign(extra=("temperature_lag1_7",))
+    assert lagged.columns == ConfounderDesign.LAGGED_METEOROLOGY and plain.columns == ()
+    width = plain.transform(frame, fit=True).shape[1]
+    assert lagged.transform(frame, fit=True).shape[1] == width + 9
+    for name in ("temperature_lag1_7", "bs", "cr", "np"):
+        with pytest.raises(ValueError, match="extra"):
+            ConfounderDesign(extra=(name,))
 
 
 def test_knots_without_support_are_dropped(tmp_path):
