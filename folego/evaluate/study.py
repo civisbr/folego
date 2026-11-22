@@ -42,8 +42,11 @@ MAX_LOG_RR_BOUND = 20.0
 # A 95% CI spanning more than a factor of e^±5.9 says nothing about the effect.
 MAX_LOG_RR_SE = 3.0
 # Past 1/eps the covariance is numerically singular: sparse strata (~150 admissions in
-# 14 years) "converged" with condition ~1e20 and exposure SEs ~1e-8, which dominated
-# inverse-variance pooling. Healthy strata stay below ~1e14.
+# 14 years) "converged" with condition ~1e19-1e21 and exposure variances ~1e-16, which
+# dominated inverse-variance pooling. Healthy strata measured 1e10-5e13; the value
+# depends on confounder collinearity, so it is an empirical bound, kept per effect as
+# covariance_condition. The exposure block alone, as a correlation matrix, does not
+# separate the cases: the collapse is in the variances' scale.
 MAX_COVARIANCE_CONDITION = 1 / np.finfo(float).eps
 # Newey-West window for the autocorrelation-robust interval: the lag basis length.
 HAC_LAGS = 7
@@ -102,20 +105,23 @@ def cumulative_relative_risk(model, basis: CrossBasis, width: int, *, increase=1
     log_rr = float(contrast @ beta)
     se = float(np.sqrt(contrast @ covariance @ contrast))
     # A sparse stratum can "converge" to huge coefficients; its RR is not an estimate.
-    if not (
-        np.isfinite(log_rr)
-        and np.isfinite(se)
-        and abs(log_rr) + 1.96 * se < MAX_LOG_RR_BOUND
-        and se <= MAX_LOG_RR_SE
-        and np.linalg.cond(full_covariance) <= MAX_COVARIANCE_CONDITION
-    ):
-        raise ValueError("Degenerate fit: effect or standard error non-finite or out of bounds")
+    if not (np.isfinite(log_rr) and np.isfinite(se)):
+        raise ValueError("Degenerate fit: non-finite effect or standard error")
+    if abs(log_rr) + 1.96 * se >= MAX_LOG_RR_BOUND:
+        raise ValueError(f"Degenerate fit: |log RR| + 1.96·SE = {abs(log_rr) + 1.96 * se:.3g}")
+    if se > MAX_LOG_RR_SE:
+        raise ValueError(f"Degenerate fit: log-RR SE = {se:.3g}")
+    # NaN outside the exposure block makes cond NaN or raises LinAlgError (a ValueError).
+    condition = float(np.linalg.cond(full_covariance))
+    if not condition <= MAX_COVARIANCE_CONDITION:
+        raise ValueError(f"Degenerate fit: covariance condition number {condition:.3g}")
     return {
         "increase_ug_m3": increase,
         "reference_ug_m3": basis.reference,
         "rr": float(np.exp(log_rr)),
         "lower": float(np.exp(log_rr - 1.96 * se)),
         "upper": float(np.exp(log_rr + 1.96 * se)),
+        "covariance_condition": condition,
     }
 
 

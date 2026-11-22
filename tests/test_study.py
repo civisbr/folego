@@ -241,9 +241,9 @@ def test_imprecise_effect_is_rejected():
 
     basis = CrossBasis()
     width = basis.transform(np.full(20, 20.0)).shape[1]
-    # A huge covariance on a zero effect: inside the RR bound, but SE far above 3.
-    model = SimpleNamespace(params=np.zeros(width + 1), cov_params=lambda: np.eye(width + 1) * 4)
-    with pytest.raises(ValueError, match="Degenerate"):
+    # A zero effect with SE ≈ 5: inside the RR bound (1.96·SE ≈ 10 < 20), above SE 3.
+    model = SimpleNamespace(params=np.zeros(width + 1), cov_params=lambda: np.eye(width + 1) * 0.2)
+    with pytest.raises(ValueError, match="Degenerate fit: log-RR SE"):
         cumulative_relative_risk(model, basis, width)
 
 
@@ -258,11 +258,16 @@ def test_singular_covariance_is_rejected():
     # Tiny exposure variances next to a huge trend one: falsely precise, not an estimate.
     covariance = np.diag([1e-16] * (width + 1) + [1e4])
     model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: covariance)
-    with pytest.raises(ValueError, match="Degenerate"):
+    with pytest.raises(ValueError, match="condition number 1e\\+20"):
+        cumulative_relative_risk(model, basis, width)
+    broken = np.diag([1e-4] * (width + 1) + [np.nan])
+    model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: broken)
+    with pytest.raises(ValueError):
         cumulative_relative_risk(model, basis, width)
     healthy = np.diag([1e-4] * (width + 1) + [1e4])
     model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: healthy)
-    assert cumulative_relative_risk(model, basis, width)["rr"] == 1.0
+    effect = cumulative_relative_risk(model, basis, width)
+    assert effect["rr"] == 1.0 and effect["covariance_condition"] == pytest.approx(1e8)
 
 
 def test_degenerate_effect_keeps_stratum_diagnostics(tmp_path, monkeypatch):
