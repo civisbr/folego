@@ -1,0 +1,894 @@
+{
+  "generated_at": "2026-11-23T19:06:17.484748+00:00",
+  "purpose": "pooled effect of +10 ug/m3 PM2.5 (reference 15) before and after lagged meteorology (model_spec_version 6 vs 7)",
+  "panel": {
+    "path": "data/marts/panel/smoke-cams.parquet",
+    "sha256": "e827755d87008429e1320df81bfcd0c4201fabc635ee0326b3b0a2068642510d",
+    "missing_temperature_humidity_holiday": 0
+  },
+  "regions": [
+    "11001",
+    "11002",
+    "11003",
+    "11004",
+    "11005",
+    "11006",
+    "11007",
+    "12001",
+    "12002",
+    "12003",
+    "13001",
+    "13002",
+    "13003",
+    "13004",
+    "13005",
+    "13006",
+    "13008",
+    "14002",
+    "15001",
+    "15002",
+    "15003",
+    "15004",
+    "15006",
+    "15007",
+    "15008",
+    "15010",
+    "15011",
+    "15012",
+    "16001",
+    "16002",
+    "17001",
+    "17002",
+    "17003",
+    "17004",
+    "17005",
+    "17006",
+    "17007",
+    "17008",
+    "21001",
+    "21002",
+    "21003",
+    "21004",
+    "21005",
+    "21007",
+    "21008",
+    "21010",
+    "21012",
+    "21014",
+    "21015",
+    "21017",
+    "22004",
+    "22007",
+    "29002",
+    "31009",
+    "31091",
+    "33001",
+    "33003",
+    "33004",
+    "33005",
+    "35011",
+    "35012",
+    "35013",
+    "35014",
+    "35015",
+    "35016",
+    "35031",
+    "35032",
+    "35033",
+    "35041",
+    "35051",
+    "35052",
+    "35071",
+    "35072",
+    "35073",
+    "35074",
+    "35081",
+    "35082",
+    "35083",
+    "35101",
+    "35102",
+    "35103",
+    "35104",
+    "35131",
+    "35132",
+    "35133",
+    "35141",
+    "35151",
+    "35163",
+    "35171",
+    "35174",
+    "43007",
+    "43008",
+    "43010",
+    "50009",
+    "50010",
+    "51001",
+    "51002",
+    "51003",
+    "51004",
+    "51005",
+    "51006",
+    "51007",
+    "51008",
+    "51009",
+    "51010",
+    "51011",
+    "51012",
+    "51013",
+    "51014",
+    "51015",
+    "51016",
+    "52006",
+    "52008",
+    "52014",
+    "53001"
+  ],
+  "meteorology": "MERRA-2",
+  "exposure": "CAMS PM2.5",
+  "basis": {
+    "requested_knots": [
+      15,
+      35
+    ],
+    "reference_ug_m3": 15,
+    "max_lag": 7
+  },
+  "reports": "data/marts/studies/{region}-met_merra2-knots15_35.json (spec 7) and the latest spec-6 copy in data/marts/studies/history/",
+  "method": "DerSimonian-Laird random effects on log RR; SE from the 95% CI as (log upper - log lower)/(2 × 1.959964); strata whose effect was rejected (effect_error/error) are counted in 'rejected' and left out",
+  "versions": {
+    "6": {
+      "model_spec_version": 6,
+      "git_commits": [
+        "0966b45"
+      ],
+      "regions": 115,
+      "effect": {
+        "asthma|0-4": {
+          "rr": 1.011,
+          "lower": 0.9697,
+          "upper": 1.0541,
+          "i2": 0.3637,
+          "regions": 59,
+          "rejected": 56
+        },
+        "asthma|60+": {
+          "rr": 0.9674,
+          "lower": 0.8856,
+          "upper": 1.0569,
+          "i2": 0.2236,
+          "regions": 27,
+          "rejected": 88
+        },
+        "asthma|all": {
+          "rr": 1.0217,
+          "lower": 1.0026,
+          "upper": 1.0412,
+          "i2": 0.0139,
+          "regions": 93,
+          "rejected": 22
+        },
+        "circulatory|0-4": {
+          "rr": 1.0057,
+          "lower": 0.9464,
+          "upper": 1.0687,
+          "i2": 0.036,
+          "regions": 42,
+          "rejected": 73
+        },
+        "circulatory|60+": {
+          "rr": 0.9874,
+          "lower": 0.9812,
+          "upper": 0.9937,
+          "i2": 0,
+          "regions": 115,
+          "rejected": 0
+        },
+        "circulatory|all": {
+          "rr": 0.9953,
+          "lower": 0.9884,
+          "upper": 1.0024,
+          "i2": 0.2282,
+          "regions": 115,
+          "rejected": 0
+        },
+        "negative_control|0-4": {
+          "rr": 1.0148,
+          "lower": 0.9825,
+          "upper": 1.0481,
+          "i2": 0.3731,
+          "regions": 104,
+          "rejected": 11
+        },
+        "negative_control|60+": {
+          "rr": 0.9854,
+          "lower": 0.9762,
+          "upper": 0.9947,
+          "i2": 0,
+          "regions": 113,
+          "rejected": 2
+        },
+        "negative_control|all": {
+          "rr": 0.9949,
+          "lower": 0.9895,
+          "upper": 1.0003,
+          "i2": 0.122,
+          "regions": 115,
+          "rejected": 0
+        },
+        "pneumonia|0-4": {
+          "rr": 1.0106,
+          "lower": 0.9971,
+          "upper": 1.0244,
+          "i2": 0.0995,
+          "regions": 109,
+          "rejected": 6
+        },
+        "pneumonia|60+": {
+          "rr": 1.01,
+          "lower": 0.9956,
+          "upper": 1.0247,
+          "i2": 0.2794,
+          "regions": 114,
+          "rejected": 1
+        },
+        "pneumonia|all": {
+          "rr": 1.0133,
+          "lower": 1.0042,
+          "upper": 1.0225,
+          "i2": 0.2543,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|0-4": {
+          "rr": 1.0134,
+          "lower": 1.0016,
+          "upper": 1.0255,
+          "i2": 0.2543,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|60+": {
+          "rr": 1.0053,
+          "lower": 0.9933,
+          "upper": 1.0175,
+          "i2": 0.3398,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|all": {
+          "rr": 1.0116,
+          "lower": 1.0041,
+          "upper": 1.0191,
+          "i2": 0.3277,
+          "regions": 115,
+          "rejected": 0
+        }
+      },
+      "effect_hac": {
+        "asthma|0-4": {
+          "rr": 1.0126,
+          "lower": 0.9709,
+          "upper": 1.056,
+          "i2": 0.3414,
+          "regions": 59,
+          "rejected": 56
+        },
+        "asthma|60+": {
+          "rr": 0.9569,
+          "lower": 0.8786,
+          "upper": 1.0422,
+          "i2": 0.2216,
+          "regions": 28,
+          "rejected": 87
+        },
+        "asthma|all": {
+          "rr": 1.0214,
+          "lower": 1.0006,
+          "upper": 1.0427,
+          "i2": 0,
+          "regions": 95,
+          "rejected": 20
+        },
+        "circulatory|0-4": {
+          "rr": 1.0085,
+          "lower": 0.9441,
+          "upper": 1.0774,
+          "i2": 0.1781,
+          "regions": 42,
+          "rejected": 73
+        },
+        "circulatory|60+": {
+          "rr": 0.9879,
+          "lower": 0.9816,
+          "upper": 0.9942,
+          "i2": 0,
+          "regions": 115,
+          "rejected": 0
+        },
+        "circulatory|all": {
+          "rr": 0.9929,
+          "lower": 0.9872,
+          "upper": 0.9986,
+          "i2": 0.0353,
+          "regions": 115,
+          "rejected": 0
+        },
+        "negative_control|0-4": {
+          "rr": 1.0143,
+          "lower": 0.982,
+          "upper": 1.0478,
+          "i2": 0.44,
+          "regions": 105,
+          "rejected": 10
+        },
+        "negative_control|60+": {
+          "rr": 0.988,
+          "lower": 0.9776,
+          "upper": 0.9986,
+          "i2": 0.0917,
+          "regions": 113,
+          "rejected": 2
+        },
+        "negative_control|all": {
+          "rr": 0.9954,
+          "lower": 0.9899,
+          "upper": 1.001,
+          "i2": 0.2015,
+          "regions": 115,
+          "rejected": 0
+        },
+        "pneumonia|0-4": {
+          "rr": 1.0138,
+          "lower": 0.9993,
+          "upper": 1.0285,
+          "i2": 0.147,
+          "regions": 109,
+          "rejected": 6
+        },
+        "pneumonia|60+": {
+          "rr": 1.0108,
+          "lower": 0.9963,
+          "upper": 1.0256,
+          "i2": 0.3153,
+          "regions": 114,
+          "rejected": 1
+        },
+        "pneumonia|all": {
+          "rr": 1.0135,
+          "lower": 1.0044,
+          "upper": 1.0226,
+          "i2": 0.2252,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|0-4": {
+          "rr": 1.0153,
+          "lower": 1.0028,
+          "upper": 1.0279,
+          "i2": 0.2859,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|60+": {
+          "rr": 1.005,
+          "lower": 0.9928,
+          "upper": 1.0173,
+          "i2": 0.3729,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|all": {
+          "rr": 1.012,
+          "lower": 1.0045,
+          "upper": 1.0195,
+          "i2": 0.2933,
+          "regions": 115,
+          "rejected": 0
+        }
+      },
+      "effect_with_lagged_outcome": {
+        "asthma|0-4": {
+          "rr": 1.0109,
+          "lower": 0.9702,
+          "upper": 1.0533,
+          "i2": 0.3483,
+          "regions": 59,
+          "rejected": 56
+        },
+        "asthma|60+": {
+          "rr": 0.9645,
+          "lower": 0.8841,
+          "upper": 1.0524,
+          "i2": 0.2053,
+          "regions": 27,
+          "rejected": 88
+        },
+        "asthma|all": {
+          "rr": 1.0166,
+          "lower": 0.9982,
+          "upper": 1.0353,
+          "i2": 0,
+          "regions": 93,
+          "rejected": 22
+        },
+        "circulatory|0-4": {
+          "rr": 1.0037,
+          "lower": 0.9421,
+          "upper": 1.0693,
+          "i2": 0.0691,
+          "regions": 42,
+          "rejected": 73
+        },
+        "circulatory|60+": {
+          "rr": 0.9878,
+          "lower": 0.9816,
+          "upper": 0.9941,
+          "i2": 0,
+          "regions": 115,
+          "rejected": 0
+        },
+        "circulatory|all": {
+          "rr": 0.9942,
+          "lower": 0.9881,
+          "upper": 1.0003,
+          "i2": 0.0979,
+          "regions": 115,
+          "rejected": 0
+        },
+        "negative_control|0-4": {
+          "rr": 1.0149,
+          "lower": 0.9824,
+          "upper": 1.0485,
+          "i2": 0.3816,
+          "regions": 104,
+          "rejected": 11
+        },
+        "negative_control|60+": {
+          "rr": 0.9857,
+          "lower": 0.9764,
+          "upper": 0.9951,
+          "i2": 0.0031,
+          "regions": 113,
+          "rejected": 2
+        },
+        "negative_control|all": {
+          "rr": 0.9949,
+          "lower": 0.9895,
+          "upper": 1.0003,
+          "i2": 0.1202,
+          "regions": 115,
+          "rejected": 0
+        },
+        "pneumonia|0-4": {
+          "rr": 1.0091,
+          "lower": 0.9957,
+          "upper": 1.0227,
+          "i2": 0.0917,
+          "regions": 109,
+          "rejected": 6
+        },
+        "pneumonia|60+": {
+          "rr": 1.0099,
+          "lower": 0.9955,
+          "upper": 1.0245,
+          "i2": 0.2758,
+          "regions": 114,
+          "rejected": 1
+        },
+        "pneumonia|all": {
+          "rr": 1.0115,
+          "lower": 1.0028,
+          "upper": 1.0203,
+          "i2": 0.2075,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|0-4": {
+          "rr": 1.0116,
+          "lower": 1.0001,
+          "upper": 1.0233,
+          "i2": 0.2333,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|60+": {
+          "rr": 1.0051,
+          "lower": 0.9932,
+          "upper": 1.0172,
+          "i2": 0.331,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|all": {
+          "rr": 1.0098,
+          "lower": 1.0028,
+          "upper": 1.0169,
+          "i2": 0.2651,
+          "regions": 115,
+          "rejected": 0
+        }
+      },
+      "note": "covariance_condition not recorded before 2abfc2c"
+    },
+    "7": {
+      "model_spec_version": 7,
+      "git_commits": [
+        "5971cef",
+        "d35cd0e"
+      ],
+      "regions": 115,
+      "effect": {
+        "asthma|0-4": {
+          "rr": 1.0274,
+          "lower": 0.9862,
+          "upper": 1.0704,
+          "i2": 0.267,
+          "regions": 58,
+          "rejected": 57
+        },
+        "asthma|60+": {
+          "rr": 0.9572,
+          "lower": 0.871,
+          "upper": 1.052,
+          "i2": 0.2195,
+          "regions": 27,
+          "rejected": 88
+        },
+        "asthma|all": {
+          "rr": 1.0374,
+          "lower": 1.011,
+          "upper": 1.0644,
+          "i2": 0.2241,
+          "regions": 91,
+          "rejected": 24
+        },
+        "circulatory|0-4": {
+          "rr": 1.0124,
+          "lower": 0.9503,
+          "upper": 1.0784,
+          "i2": 0,
+          "regions": 43,
+          "rejected": 72
+        },
+        "circulatory|60+": {
+          "rr": 1.0052,
+          "lower": 0.9982,
+          "upper": 1.0121,
+          "i2": 0,
+          "regions": 115,
+          "rejected": 0
+        },
+        "circulatory|all": {
+          "rr": 1.0079,
+          "lower": 0.9991,
+          "upper": 1.0167,
+          "i2": 0.3865,
+          "regions": 115,
+          "rejected": 0
+        },
+        "negative_control|0-4": {
+          "rr": 1.0164,
+          "lower": 0.9831,
+          "upper": 1.0509,
+          "i2": 0.3229,
+          "regions": 105,
+          "rejected": 10
+        },
+        "negative_control|60+": {
+          "rr": 0.9989,
+          "lower": 0.9887,
+          "upper": 1.0092,
+          "i2": 0,
+          "regions": 113,
+          "rejected": 2
+        },
+        "negative_control|all": {
+          "rr": 0.9992,
+          "lower": 0.9942,
+          "upper": 1.0043,
+          "i2": 0,
+          "regions": 115,
+          "rejected": 0
+        },
+        "pneumonia|0-4": {
+          "rr": 1.022,
+          "lower": 1.0066,
+          "upper": 1.0377,
+          "i2": 0.1457,
+          "regions": 110,
+          "rejected": 5
+        },
+        "pneumonia|60+": {
+          "rr": 1.0103,
+          "lower": 0.9956,
+          "upper": 1.0252,
+          "i2": 0.219,
+          "regions": 113,
+          "rejected": 2
+        },
+        "pneumonia|all": {
+          "rr": 1.0165,
+          "lower": 1.0066,
+          "upper": 1.0264,
+          "i2": 0.2655,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|0-4": {
+          "rr": 1.0216,
+          "lower": 1.0083,
+          "upper": 1.035,
+          "i2": 0.2988,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|60+": {
+          "rr": 1.0067,
+          "lower": 0.9946,
+          "upper": 1.019,
+          "i2": 0.2575,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|all": {
+          "rr": 1.0165,
+          "lower": 1.0082,
+          "upper": 1.0248,
+          "i2": 0.3577,
+          "regions": 115,
+          "rejected": 0
+        }
+      },
+      "effect_max_covariance_condition": 403000000000000.0,
+      "effect_hac": {
+        "asthma|0-4": {
+          "rr": 1.0278,
+          "lower": 0.9862,
+          "upper": 1.0711,
+          "i2": 0.2409,
+          "regions": 58,
+          "rejected": 57
+        },
+        "asthma|60+": {
+          "rr": 0.9488,
+          "lower": 0.8627,
+          "upper": 1.0434,
+          "i2": 0.2797,
+          "regions": 27,
+          "rejected": 88
+        },
+        "asthma|all": {
+          "rr": 1.0361,
+          "lower": 1.0099,
+          "upper": 1.063,
+          "i2": 0.137,
+          "regions": 92,
+          "rejected": 23
+        },
+        "circulatory|0-4": {
+          "rr": 1.0188,
+          "lower": 0.95,
+          "upper": 1.0926,
+          "i2": 0.1621,
+          "regions": 43,
+          "rejected": 72
+        },
+        "circulatory|60+": {
+          "rr": 1.0055,
+          "lower": 0.9987,
+          "upper": 1.0123,
+          "i2": 0,
+          "regions": 115,
+          "rejected": 0
+        },
+        "circulatory|all": {
+          "rr": 1.0071,
+          "lower": 1.0005,
+          "upper": 1.0136,
+          "i2": 0.0891,
+          "regions": 115,
+          "rejected": 0
+        },
+        "negative_control|0-4": {
+          "rr": 1.0178,
+          "lower": 0.9843,
+          "upper": 1.0525,
+          "i2": 0.3909,
+          "regions": 105,
+          "rejected": 10
+        },
+        "negative_control|60+": {
+          "rr": 0.9992,
+          "lower": 0.9884,
+          "upper": 1.0101,
+          "i2": 0.0581,
+          "regions": 113,
+          "rejected": 2
+        },
+        "negative_control|all": {
+          "rr": 0.9997,
+          "lower": 0.9944,
+          "upper": 1.0051,
+          "i2": 0.0769,
+          "regions": 115,
+          "rejected": 0
+        },
+        "pneumonia|0-4": {
+          "rr": 1.0246,
+          "lower": 1.0086,
+          "upper": 1.0409,
+          "i2": 0.1858,
+          "regions": 110,
+          "rejected": 5
+        },
+        "pneumonia|60+": {
+          "rr": 1.012,
+          "lower": 0.997,
+          "upper": 1.0271,
+          "i2": 0.2604,
+          "regions": 113,
+          "rejected": 2
+        },
+        "pneumonia|all": {
+          "rr": 1.0168,
+          "lower": 1.007,
+          "upper": 1.0267,
+          "i2": 0.2394,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|0-4": {
+          "rr": 1.0232,
+          "lower": 1.0093,
+          "upper": 1.0373,
+          "i2": 0.3301,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|60+": {
+          "rr": 1.0073,
+          "lower": 0.9951,
+          "upper": 1.0196,
+          "i2": 0.2881,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|all": {
+          "rr": 1.0174,
+          "lower": 1.0094,
+          "upper": 1.0254,
+          "i2": 0.2819,
+          "regions": 115,
+          "rejected": 0
+        }
+      },
+      "effect_hac_max_covariance_condition": 2030000000000000.0,
+      "effect_with_lagged_outcome": {
+        "asthma|0-4": {
+          "rr": 1.0263,
+          "lower": 0.9865,
+          "upper": 1.0677,
+          "i2": 0.2311,
+          "regions": 58,
+          "rejected": 57
+        },
+        "asthma|60+": {
+          "rr": 0.9546,
+          "lower": 0.8692,
+          "upper": 1.0484,
+          "i2": 0.2111,
+          "regions": 27,
+          "rejected": 88
+        },
+        "asthma|all": {
+          "rr": 1.0344,
+          "lower": 1.011,
+          "upper": 1.0584,
+          "i2": 0.1158,
+          "regions": 91,
+          "rejected": 24
+        },
+        "circulatory|0-4": {
+          "rr": 1.014,
+          "lower": 0.9478,
+          "upper": 1.0849,
+          "i2": 0.0503,
+          "regions": 42,
+          "rejected": 73
+        },
+        "circulatory|60+": {
+          "rr": 1.0049,
+          "lower": 0.9981,
+          "upper": 1.0119,
+          "i2": 0,
+          "regions": 115,
+          "rejected": 0
+        },
+        "circulatory|all": {
+          "rr": 1.0071,
+          "lower": 0.9993,
+          "upper": 1.0149,
+          "i2": 0.2568,
+          "regions": 115,
+          "rejected": 0
+        },
+        "negative_control|0-4": {
+          "rr": 1.0164,
+          "lower": 0.9828,
+          "upper": 1.0512,
+          "i2": 0.3329,
+          "regions": 105,
+          "rejected": 10
+        },
+        "negative_control|60+": {
+          "rr": 0.9989,
+          "lower": 0.9887,
+          "upper": 1.0092,
+          "i2": 0,
+          "regions": 113,
+          "rejected": 2
+        },
+        "negative_control|all": {
+          "rr": 0.9993,
+          "lower": 0.9942,
+          "upper": 1.0043,
+          "i2": 0,
+          "regions": 115,
+          "rejected": 0
+        },
+        "pneumonia|0-4": {
+          "rr": 1.0208,
+          "lower": 1.0056,
+          "upper": 1.0361,
+          "i2": 0.1291,
+          "regions": 110,
+          "rejected": 5
+        },
+        "pneumonia|60+": {
+          "rr": 1.0105,
+          "lower": 0.9958,
+          "upper": 1.0254,
+          "i2": 0.2178,
+          "regions": 113,
+          "rejected": 2
+        },
+        "pneumonia|all": {
+          "rr": 1.0152,
+          "lower": 1.0057,
+          "upper": 1.0247,
+          "i2": 0.2216,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|0-4": {
+          "rr": 1.02,
+          "lower": 1.0071,
+          "upper": 1.033,
+          "i2": 0.2701,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|60+": {
+          "rr": 1.0068,
+          "lower": 0.9949,
+          "upper": 1.019,
+          "i2": 0.2495,
+          "regions": 115,
+          "rejected": 0
+        },
+        "respiratory|all": {
+          "rr": 1.0152,
+          "lower": 1.0076,
+          "upper": 1.0228,
+          "i2": 0.2656,
+          "regions": 115,
+          "rejected": 0
+        }
+      },
+      "effect_with_lagged_outcome_max_covariance_condition": 395000000000000.0,
+      "note": "5971cef and d35cd0e differ only in handling missing weather, absent from this panel; regions 11001, 11002 and 11003 were run at 5971cef with git_dirty=true (uncommitted working tree, not recoverable); the other 112 at d35cd0e, clean"
+    }
+  },
+  "srag_adjusted": "all 115 regions; pooled 'effect' is SRAG-adjusted (srag null count 0 in the panel)",
+  "generator": "ad-hoc pooling script, not versioned in the repository"
+}
