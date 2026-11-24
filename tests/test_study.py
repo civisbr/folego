@@ -394,3 +394,63 @@ def test_common_knots_are_kept_and_named(tmp_path):
     assert study_suffix("MERRA-2", "MERRA-2", "pm25") == "-met_merra2-pm25main_merra2"
     assert study_suffix("ERA5", "CAMS", "pm25_merra2") == "-pm25_merra2"
     assert study_suffix("unknown", "CAMS", "pm25", CrossBasis().knots) == "-unknown_source"
+
+
+def test_covariance_condition_failure_is_rejected(monkeypatch):
+    from types import SimpleNamespace
+
+    from folego.evaluate.study import cumulative_relative_risk
+    from folego.models.crossbasis import CrossBasis
+
+    def broken(_):
+        raise np.linalg.LinAlgError("SVD did not converge")
+
+    basis = CrossBasis()
+    width = basis.transform(np.full(20, 20.0)).shape[1]
+    covariance = np.diag([1e-4] * (width + 2))
+    model = SimpleNamespace(params=np.zeros(width + 2), cov_params=lambda: covariance)
+    monkeypatch.setattr(np.linalg, "cond", broken)
+    with pytest.raises(ValueError, match="condition number nan"):
+        cumulative_relative_risk(model, basis, width)
+
+
+def test_missing_confounder_column_is_a_stratum_error(tmp_path):
+    from folego.evaluate.study import _design, _inference_design, stratum_series
+    from folego.models.crossbasis import CrossBasis
+
+    panel = pl.read_parquet(synthetic_panel(tmp_path / "panel.parquet", years=2))
+    series = stratum_series(panel.drop("holiday"), "11004", "respiratory", "60+")
+    with pytest.raises(ValueError, match="Panel lacks holiday$"):
+        _design(series, CrossBasis(), _inference_design(False, 7), fit=True)
+
+
+def test_confounder_design_error_is_one_line():
+    import pandas as pd
+
+    from folego.models.glm import ConfounderDesign
+
+    frame = pd.DataFrame(
+        {"date": pd.date_range("2018-01-01", periods=60), "humidity": 70.0, "holiday": 0}
+    )
+    frame["temperature"] = np.where(np.arange(60) == 3, np.nan, 25.0)
+    with pytest.raises(ValueError) as caught:
+        ConfounderDesign(trend_df_per_year=7, harmonics=0).transform(frame, fit=True)
+    assert "\n" not in str(caught.value) and "^" not in str(caught.value)
+
+
+def test_missing_weather_fails_only_its_backtest_fold(tmp_path):
+    from folego.evaluate.study import backtest_stratum, stratum_series
+    from folego.models.crossbasis import CrossBasis
+
+    panel = pl.read_parquet(synthetic_panel(tmp_path / "panel.parquet", years=4))
+    panel = panel.with_columns(
+        pl.when(pl.col("date") == date(2020, 8, 15))
+        .then(None)
+        .otherwise(pl.col("temperature"))
+        .alias("temperature")
+    )
+    series = stratum_series(panel, "11004", "respiratory", "60+")
+    folds = backtest_stratum(series, CrossBasis(knots=(15, 35)), years=range(2020, 2022))
+    by_year = {f["year"]: f for f in folds}
+    assert "Confounder design" in by_year[2020]["error"]
+    assert "error" not in by_year[2021]

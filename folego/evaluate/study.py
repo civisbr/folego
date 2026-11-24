@@ -98,6 +98,9 @@ def stratum_series(panel: pl.DataFrame, region: str, outcome: str, age_group: st
 def _design(series: pl.DataFrame, basis: CrossBasis, confounders: ConfounderDesign, *, fit: bool):
     exposure = basis.transform(series["pm25"].to_numpy())
     usable = np.isfinite(exposure).all(axis=1) & series["admissions"].is_not_null().to_numpy()
+    missing = [c for c in confounders.columns if c not in series.columns]
+    if missing:
+        raise ValueError(f"Panel lacks {', '.join(missing)}")
     for column in confounders.columns:
         values = series[column]
         # A float NaN is not null; a rolling mean spreads one over its whole window.

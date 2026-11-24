@@ -65,3 +65,15 @@ def test_crossbasis_future_does_not_change_past():
     changed = x.copy()
     changed[-1] = 1000
     assert np.allclose(basis.transform(x)[7:-1], basis.transform(changed)[7:-1])
+
+
+def test_missing_weather_aborts_the_forecast():
+    history, future, origin = synthetic_panel()
+    history = history.with_columns(
+        pl.when(pl.col("date") == date(2021, 1, 1))
+        .then(None)
+        .otherwise(pl.col("humidity"))
+        .alias("humidity")
+    )
+    with pytest.raises(ValueError, match="Confounder design"):
+        run_forecast(history, future, issued_on=origin)

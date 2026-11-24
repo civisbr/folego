@@ -142,6 +142,8 @@ class ConfounderDesign:
             else:
                 design = build_design_matrices([self.info], data, NA_action="raise")[0]
         except PatsyError as error:
-            raise ValueError(f"Confounder design: {error}") from error
+            # str(PatsyError) appends the formula and a caret line; reports keep one line.
+            message = " ".join(str(getattr(error, "message", error)).split())
+            raise ValueError(f"Confounder design: {message}") from error
         # Drop the first weekday column: fit_count_model adds an intercept.
         return np.asarray(design)[:, 1:]

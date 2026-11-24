@@ -80,6 +80,11 @@ def main():
         help="Nós da base de exposição em µg/m³ (padrão 15 35 75); iguais entre regiões"
         " para combinar estudos",
     )
+    pool = commands.add_parser(
+        "pool", help="Meta-análise (DerSimonian-Laird) de relatórios de estudo por região"
+    )
+    pool.add_argument("reports", type=Path, nargs="+", help="Relatórios JSON de `study`")
+    pool.add_argument("--output", type=Path, required=True)
     fires = commands.add_parser("fires", help="Focos de queimada FIRMS VIIRS por região e dia")
     fires.add_argument("--start", default="2012-01-20")
     fires.add_argument("--end", default="2025-12-31")
@@ -393,6 +398,36 @@ def main():
                     "rows": series.height,
                     "dates": [str(series["date"].min()), str(series["date"].max())],
                 }
+            )
+        )
+    elif args.command == "pool":
+        from .evaluate.pool import pool_studies
+
+        missing = [str(p) for p in args.reports if not p.is_file()]
+        if missing:
+            parser.exit(2, f"Relatório inexistente: {missing[0]}\n")
+        os.umask(0o077)
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            report = pool_studies(args.reports, args.output)
+        except (ValueError, KeyError, TypeError, AttributeError) as error:
+            parser.exit(2, f"Relatórios incompatíveis ou inválidos: {error}\n")
+        print(
+            json.dumps(
+                [
+                    {
+                        "outcome": r["outcome"],
+                        "age_group": r["age_group"],
+                        **{
+                            k: round(r["effect"][k], 3)
+                            for k in ("rr", "lower", "upper")
+                            if k in r["effect"]
+                        },
+                        "regions": r["effect"]["regions"],
+                    }
+                    for r in report["results"]
+                ],
+                ensure_ascii=False,
             )
         )
     elif args.command == "maturity":
