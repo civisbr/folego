@@ -1,0 +1,1728 @@
+{
+  "generated_at": "2026-11-24T22:17:41.030754+00:00",
+  "software": {
+    "pyreaddbc": "2.0.4",
+    "dbfread": "2.0.7",
+    "polars": "2.1.0",
+    "git_commit": "57681ee1c94e084627ccff605eb9806267ab21d0",
+    "git_dirty": false
+  },
+  "mode": "research",
+  "validated": false,
+  "inputs": [
+    {
+      "region": "11001",
+      "path": "data/marts/studies/history/11001-met_merra2-knots15_35-20261122T160034966057Z.json",
+      "sha256": "e92e286ae258f4e974374b38ff28eaa00510e719c4d1203c2fa38d128de9eafc",
+      "generated_at": "2026-11-22T16:00:34.966057+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "11002",
+      "path": "data/marts/studies/history/11002-met_merra2-knots15_35-20261122T160151763996Z.json",
+      "sha256": "ec1f1e23856f677a6e217fcc5b94df4dcebdb1492511863b114345c710ae6009",
+      "generated_at": "2026-11-22T16:01:51.763996+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "11003",
+      "path": "data/marts/studies/history/11003-met_merra2-knots15_35-20261122T160037284728Z.json",
+      "sha256": "d057fea40dd885be9f61d43bfa967742167e53bf9f1ae345ea7f344fbbc654a0",
+      "generated_at": "2026-11-22T16:00:37.284728+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "11004",
+      "path": "data/marts/studies/history/11004-met_merra2-knots15_35-20261122T160022631478Z.json",
+      "sha256": "6eff96fa9d1eef33acb735ed9432b1057d29e2f6ed8e9dbdf1dfb3bfe6ebe074",
+      "generated_at": "2026-11-22T16:00:22.631478+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "11005",
+      "path": "data/marts/studies/history/11005-met_merra2-knots15_35-20261122T160150338567Z.json",
+      "sha256": "2ec4d4ad308ee974887e7544e03fe7f9dd7c24f42bc3ba79555816b4807054cd",
+      "generated_at": "2026-11-22T16:01:50.338567+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "11006",
+      "path": "data/marts/studies/history/11006-met_merra2-knots15_35-20261122T160118425808Z.json",
+      "sha256": "dc34a4c1e769d4309f86c1b6b176ce41871c151c291713e4f55be4985ba901b7",
+      "generated_at": "2026-11-22T16:01:18.425808+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "11007",
+      "path": "data/marts/studies/history/11007-met_merra2-knots15_35-20261122T160657658176Z.json",
+      "sha256": "c9e64b4eaf594918e270fca06ef2c4ef5a235f5cf501b1c38bf42785f31f7256",
+      "generated_at": "2026-11-22T16:06:57.658176+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "12001",
+      "path": "data/marts/studies/history/12001-met_merra2-knots15_35-20261122T160746776050Z.json",
+      "sha256": "45653190c116db6f6dbcdccb4a3d01050ec2e468db9bd46d05dce43279ebf8f7",
+      "generated_at": "2026-11-22T16:07:46.776050+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "12002",
+      "path": "data/marts/studies/history/12002-met_merra2-knots15_35-20261122T160542257620Z.json",
+      "sha256": "742bbf284342dabb93ce4bd7e39959d77f9f15c8d283193ba4d808665a46bbd6",
+      "generated_at": "2026-11-22T16:05:42.257620+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "12003",
+      "path": "data/marts/studies/history/12003-met_merra2-knots15_35-20261122T160523711585Z.json",
+      "sha256": "a99131b034cc22268a385ea93faa02048f8ea98937b758274d7e0e3fc63705f4",
+      "generated_at": "2026-11-22T16:05:23.711585+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "13001",
+      "path": "data/marts/studies/history/13001-met_merra2-knots15_35-20261122T160636640369Z.json",
+      "sha256": "d580823e53ad0f9696c66bd71dc50e3e8a75e4794d18b8b73794ee83b75ea0f7",
+      "generated_at": "2026-11-22T16:06:36.640369+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "13002",
+      "path": "data/marts/studies/history/13002-met_merra2-knots15_35-20261122T160634936471Z.json",
+      "sha256": "270088f6ab612206598b367d4e3855e5472966820332295a49c8c632313a9950",
+      "generated_at": "2026-11-22T16:06:34.936471+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "13003",
+      "path": "data/marts/studies/history/13003-met_merra2-knots15_35-20261122T160847251198Z.json",
+      "sha256": "ecd56496f4719c7a922937d2e7f298acd4f36b71fc2fdad1b6c4d06d4714e4c3",
+      "generated_at": "2026-11-22T16:08:47.251198+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "13004",
+      "path": "data/marts/studies/history/13004-met_merra2-knots15_35-20261122T160952396701Z.json",
+      "sha256": "7c1873e09a59c5e0f42da6ccb9e8010d61d6115612fc1ea30859f2a1db9fef63",
+      "generated_at": "2026-11-22T16:09:52.396701+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "13005",
+      "path": "data/marts/studies/history/13005-met_merra2-knots15_35-20261122T160959366730Z.json",
+      "sha256": "765557d0a71fb44e2d0b9fab7adabadafc83828a8c3c26e445d8a544a73fb442",
+      "generated_at": "2026-11-22T16:09:59.366730+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "13006",
+      "path": "data/marts/studies/history/13006-met_merra2-knots15_35-20261122T161051649541Z.json",
+      "sha256": "abfecd28c2872e8bc7fb473257819a4934c29cbd575dc7d23a2badea7b25a10e",
+      "generated_at": "2026-11-22T16:10:51.649541+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "13008",
+      "path": "data/marts/studies/history/13008-met_merra2-knots15_35-20261122T161207780119Z.json",
+      "sha256": "6b1fe708aee12bfdff35a624b22b6552447de51b585bb3d89863947716583805",
+      "generated_at": "2026-11-22T16:12:07.780119+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "14002",
+      "path": "data/marts/studies/history/14002-met_merra2-knots15_35-20261122T161128474746Z.json",
+      "sha256": "37f513901e1c6d17ea3f277d06b7164e90d5dd412dbbb56a52404db6e776c7ea",
+      "generated_at": "2026-11-22T16:11:28.474746+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15001",
+      "path": "data/marts/studies/history/15001-met_merra2-knots15_35-20261122T161309133695Z.json",
+      "sha256": "32aa8b7f000aca04f1bfdde8d7b29e4b69d0ae8792e4410274a849dedb3e8734",
+      "generated_at": "2026-11-22T16:13:09.133695+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15002",
+      "path": "data/marts/studies/history/15002-met_merra2-knots15_35-20261122T161328270644Z.json",
+      "sha256": "74001d69ee00eb50d47e994a12e6c48090c7bfa0141798c09d3ca2f38d70438a",
+      "generated_at": "2026-11-22T16:13:28.270644+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15003",
+      "path": "data/marts/studies/history/15003-met_merra2-knots15_35-20261122T161310521142Z.json",
+      "sha256": "ed6bc4b3a096161859e4f095b60481fc320d9bd7b27d8459685be1efb4f06d15",
+      "generated_at": "2026-11-22T16:13:10.521142+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15004",
+      "path": "data/marts/studies/history/15004-met_merra2-knots15_35-20261122T161634929616Z.json",
+      "sha256": "705424aa7a69405341f715e7f3a8f3fb57420ecc2f2aaaccf6b5d6eca066e6ca",
+      "generated_at": "2026-11-22T16:16:34.929616+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15006",
+      "path": "data/marts/studies/history/15006-met_merra2-knots15_35-20261122T161602966094Z.json",
+      "sha256": "42d2eb0834e9fd4864d93a2a7ec9debed8042e790b5b7e931b0c8884e8e320ad",
+      "generated_at": "2026-11-22T16:16:02.966094+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15007",
+      "path": "data/marts/studies/history/15007-met_merra2-knots15_35-20261122T161602819615Z.json",
+      "sha256": "effb30d00b81f0aef5a4f3a6a4cd031cda81ce9d5dae8de02166f92af3a82b78",
+      "generated_at": "2026-11-22T16:16:02.819615+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15008",
+      "path": "data/marts/studies/history/15008-met_merra2-knots15_35-20261122T161737325384Z.json",
+      "sha256": "63022a28d50f50055ec39a2337ad084697eb193b0c5f1330a3e40fa2799fbca9",
+      "generated_at": "2026-11-22T16:17:37.325384+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15010",
+      "path": "data/marts/studies/history/15010-met_merra2-knots15_35-20261122T161751531996Z.json",
+      "sha256": "57c99ee9e238b82a12d7e332f1787381058f97c0f7eb3f34f18b096b71099571",
+      "generated_at": "2026-11-22T16:17:51.531996+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15011",
+      "path": "data/marts/studies/history/15011-met_merra2-knots15_35-20261122T161703021714Z.json",
+      "sha256": "0958f0db39f47db5d3227f4f6b14eccc9cc7f1d2ccbcc1e1dfff390f5b682df8",
+      "generated_at": "2026-11-22T16:17:03.021714+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "15012",
+      "path": "data/marts/studies/history/15012-met_merra2-knots15_35-20261122T161939456716Z.json",
+      "sha256": "ad077d6e8bc5a126484c3875c8b545cc36cf4316432d51c1a8c56f05f845780e",
+      "generated_at": "2026-11-22T16:19:39.456716+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "16001",
+      "path": "data/marts/studies/history/16001-met_merra2-knots15_35-20261122T162045401789Z.json",
+      "sha256": "f70e6ece94461ead3d245a4081a06c049c2e28716e0ceb6fcb9629d0e39687a6",
+      "generated_at": "2026-11-22T16:20:45.401789+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "16002",
+      "path": "data/marts/studies/history/16002-met_merra2-knots15_35-20261122T162150542040Z.json",
+      "sha256": "a091aa7c748e7293e6e1f9da6700eaf9ab22cc1aaa4646b4beaf052e621e8a84",
+      "generated_at": "2026-11-22T16:21:50.542040+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "17001",
+      "path": "data/marts/studies/history/17001-met_merra2-knots15_35-20261122T162143056469Z.json",
+      "sha256": "89356d8aae0bf20175a5decebc816fe8a4f4635a46ef05b3781e3cc1bff1becf",
+      "generated_at": "2026-11-22T16:21:43.056469+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "17002",
+      "path": "data/marts/studies/history/17002-met_merra2-knots15_35-20261122T162145362051Z.json",
+      "sha256": "40c6ff71e6dee02264f2e4c266ef6be791a37a096d91262c3efe9a1944b1b73e",
+      "generated_at": "2026-11-22T16:21:45.362051+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "17003",
+      "path": "data/marts/studies/history/17003-met_merra2-knots15_35-20261122T162147658648Z.json",
+      "sha256": "da29fa143e31e6cd624e297858d4f991a626d790d566e658fa2438c1605f89b7",
+      "generated_at": "2026-11-22T16:21:47.658648+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "17004",
+      "path": "data/marts/studies/history/17004-met_merra2-knots15_35-20261122T162412803319Z.json",
+      "sha256": "e8b8de3a08390a7b9f6232c4650f4ba58447c879346716a60e38d286ed4f6b77",
+      "generated_at": "2026-11-22T16:24:12.803319+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "17005",
+      "path": "data/marts/studies/history/17005-met_merra2-knots15_35-20261122T162522452746Z.json",
+      "sha256": "864488369f05d3f3f876d3820441041d0bae4f5639dd59bfbb7a2826a3264f29",
+      "generated_at": "2026-11-22T16:25:22.452746+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "17006",
+      "path": "data/marts/studies/history/17006-met_merra2-knots15_35-20261122T162602278652Z.json",
+      "sha256": "e359ca45c21ae76fd40871612e9971aee905be2e9f9b80e28795660952290328",
+      "generated_at": "2026-11-22T16:26:02.278652+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "17007",
+      "path": "data/marts/studies/history/17007-met_merra2-knots15_35-20261122T162517657913Z.json",
+      "sha256": "e89e6a8e97f3d6be70efaa1d35a81a9c6a3229ac866237f3fa52ddfdf7af4e8d",
+      "generated_at": "2026-11-22T16:25:17.657913+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "17008",
+      "path": "data/marts/studies/history/17008-met_merra2-knots15_35-20261122T162532002757Z.json",
+      "sha256": "19e5a794f41f685c5d6184789c5c93a2938d02f0e7cb28813b4be44cff9793ce",
+      "generated_at": "2026-11-22T16:25:32.002757+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21001",
+      "path": "data/marts/studies/history/21001-met_merra2-knots15_35-20261122T162524439943Z.json",
+      "sha256": "080aa653355898f511e35f18ca708c713b4b9008a6fc6c3ced1352788580a39f",
+      "generated_at": "2026-11-22T16:25:24.439943+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21002",
+      "path": "data/marts/studies/history/21002-met_merra2-knots15_35-20261122T162924518808Z.json",
+      "sha256": "81862074d72553459f11527ae04a305baf72815dcfeedb74bebf26d2a5b28a76",
+      "generated_at": "2026-11-22T16:29:24.518808+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21003",
+      "path": "data/marts/studies/history/21003-met_merra2-knots15_35-20261122T162846431612Z.json",
+      "sha256": "fc6198e000d858ef4292c406035cd0bb9d9eba26c5fc3501875d30c36055c189",
+      "generated_at": "2026-11-22T16:28:46.431612+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21004",
+      "path": "data/marts/studies/history/21004-met_merra2-knots15_35-20261122T163032037817Z.json",
+      "sha256": "d9ea49817eb0d459fa797724b9db4257cb267a0a076923cbff006f80ae84068b",
+      "generated_at": "2026-11-22T16:30:32.037817+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21005",
+      "path": "data/marts/studies/history/21005-met_merra2-knots15_35-20261122T163035643775Z.json",
+      "sha256": "0f9e05ea97db068f82e2ce76f9122037d9dc2741cd9b5291016fbd626b1a6096",
+      "generated_at": "2026-11-22T16:30:35.643775+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21007",
+      "path": "data/marts/studies/history/21007-met_merra2-knots15_35-20261122T162942287863Z.json",
+      "sha256": "fa70d5e39da5a18511388b9cc10811ea77e4a5a801da7de2b900f24cdbf2f106",
+      "generated_at": "2026-11-22T16:29:42.287863+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21008",
+      "path": "data/marts/studies/history/21008-met_merra2-knots15_35-20261122T163053265591Z.json",
+      "sha256": "e6c4cebdda5efc5690db9c9c4873e5e11e788f5b05b4a7e3ac2feb477d0de897",
+      "generated_at": "2026-11-22T16:30:53.265591+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21010",
+      "path": "data/marts/studies/history/21010-met_merra2-knots15_35-20261122T163248397662Z.json",
+      "sha256": "aa378e404d48b1cf0a3c2b7b9105404decfaedd2363e0a524d4fad40eaf15eda",
+      "generated_at": "2026-11-22T16:32:48.397662+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21012",
+      "path": "data/marts/studies/history/21012-met_merra2-knots15_35-20261122T163310668066Z.json",
+      "sha256": "8e9ec114625d3a418e6b7203be2e086a9d24119c6da9e0fa0d253cb1f544cb60",
+      "generated_at": "2026-11-22T16:33:10.668066+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21014",
+      "path": "data/marts/studies/history/21014-met_merra2-knots15_35-20261122T163348355941Z.json",
+      "sha256": "4bc907f5c7dd184836a0f92401b137f38ac88e729e4c02cbb42d693616c71c1f",
+      "generated_at": "2026-11-22T16:33:48.355941+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21015",
+      "path": "data/marts/studies/history/21015-met_merra2-knots15_35-20261122T163449880868Z.json",
+      "sha256": "1c2c10039b5489575dfa0b489e99b9bacdd63417a875bc4504d9e89e3ea66945",
+      "generated_at": "2026-11-22T16:34:49.880868+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "21017",
+      "path": "data/marts/studies/history/21017-met_merra2-knots15_35-20261122T163523008876Z.json",
+      "sha256": "a55c0cd1f1cd8508cdf3d33a21a3c2777d51cee3b774f7068f12f2c3481f96dd",
+      "generated_at": "2026-11-22T16:35:23.008876+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "22004",
+      "path": "data/marts/studies/history/22004-met_merra2-knots15_35-20261122T163519930128Z.json",
+      "sha256": "f5c680e3d046a2554bca104e566b47c34a070fe56824973d0f253068272791e3",
+      "generated_at": "2026-11-22T16:35:19.930128+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "22007",
+      "path": "data/marts/studies/history/22007-met_merra2-knots15_35-20261122T163648483349Z.json",
+      "sha256": "5e328f523aaa450de3522376a7f476a09dfa7f39ddde2410596651259e6c6aaa",
+      "generated_at": "2026-11-22T16:36:48.483349+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "29002",
+      "path": "data/marts/studies/history/29002-met_merra2-knots15_35-20261122T163637703805Z.json",
+      "sha256": "0f535f989516ea61b892cc04b01c4512be65994534d14fec84320894dc8f7e47",
+      "generated_at": "2026-11-22T16:36:37.703805+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "31009",
+      "path": "data/marts/studies/history/31009-met_merra2-knots15_35-20261122T164138117325Z.json",
+      "sha256": "1f6785201de309bcaaa28769631e13f8d56354b93029c12de21d3147009a07e7",
+      "generated_at": "2026-11-22T16:41:38.117325+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "31091",
+      "path": "data/marts/studies/history/31091-met_merra2-knots15_35-20261122T163907095883Z.json",
+      "sha256": "07cd995e9370da3e0c130a6cfa1bc16953078b6eb5436a90f10d9e20afc5a374",
+      "generated_at": "2026-11-22T16:39:07.095883+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "33001",
+      "path": "data/marts/studies/history/33001-met_merra2-knots15_35-20261122T163950494691Z.json",
+      "sha256": "3a5576faa9ce10f3875b347e42bcb84c62985a01d6b4842e93e155efd952e41b",
+      "generated_at": "2026-11-22T16:39:50.494691+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "33003",
+      "path": "data/marts/studies/history/33003-met_merra2-knots15_35-20261122T163939819065Z.json",
+      "sha256": "5c5df585cea0ed02cd15a768ec53854ad73b16c64403847b8bb7b96a16396aac",
+      "generated_at": "2026-11-22T16:39:39.819065+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "33004",
+      "path": "data/marts/studies/history/33004-met_merra2-knots15_35-20261122T164032624399Z.json",
+      "sha256": "b23014c2e0a441722a406c57ca97bde31ed48f43a78aecca69dff6333868fb8c",
+      "generated_at": "2026-11-22T16:40:32.624399+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "33005",
+      "path": "data/marts/studies/history/33005-met_merra2-knots15_35-20261122T164018803430Z.json",
+      "sha256": "791262d87ff80e34867facf4bb70f8ac9dae0fb221d3cfb07e28796bcfe3b29d",
+      "generated_at": "2026-11-22T16:40:18.803430+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35011",
+      "path": "data/marts/studies/history/35011-met_merra2-knots15_35-20261122T164258633217Z.json",
+      "sha256": "e42c6c70ea2bce2f5bd2e7ee6017c189e690d9347c4b2242fe83bd125172cf54",
+      "generated_at": "2026-11-22T16:42:58.633217+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35012",
+      "path": "data/marts/studies/history/35012-met_merra2-knots15_35-20261122T164431565829Z.json",
+      "sha256": "aa87eab0882ad2b2b7200f8cee9c6d21a35e88a26a41561eb4c353998c500294",
+      "generated_at": "2026-11-22T16:44:31.565829+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35013",
+      "path": "data/marts/studies/history/35013-met_merra2-knots15_35-20261122T164317674828Z.json",
+      "sha256": "0ac9e220f268c97425fd2b3b4898ee83c7f02ba954ebdd26e95b02df1e5890ea",
+      "generated_at": "2026-11-22T16:43:17.674828+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35014",
+      "path": "data/marts/studies/history/35014-met_merra2-knots15_35-20261122T164445273523Z.json",
+      "sha256": "84b1cee927ec300d9480aa3db4d8a8e63cd7750a9eaaa3c0b04b7bcd663a3a2e",
+      "generated_at": "2026-11-22T16:44:45.273523+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35015",
+      "path": "data/marts/studies/history/35015-met_merra2-knots15_35-20261122T164432814396Z.json",
+      "sha256": "b593b2a0481e9bce4306b303088cf0ac996428b596ff6f0a68b3e6a5fc2aac9c",
+      "generated_at": "2026-11-22T16:44:32.814396+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35016",
+      "path": "data/marts/studies/history/35016-met_merra2-knots15_35-20261122T164511248345Z.json",
+      "sha256": "e0e4f2e4b2ca124a9e922ecd25c061311e2cf23e7337d44041c1a6ccceb61414",
+      "generated_at": "2026-11-22T16:45:11.248345+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35031",
+      "path": "data/marts/studies/history/35031-met_merra2-knots15_35-20261122T164708697429Z.json",
+      "sha256": "5c7c1d53a70a7f28c667eea4ffe3b8124c1c997149cd7587057f2e5c064765ee",
+      "generated_at": "2026-11-22T16:47:08.697429+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35032",
+      "path": "data/marts/studies/history/35032-met_merra2-knots15_35-20261122T164824445826Z.json",
+      "sha256": "100877d1030ae81112942d2f513d0753644df8faf1bb4dfe401a513b1eadcba2",
+      "generated_at": "2026-11-22T16:48:24.445826+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35033",
+      "path": "data/marts/studies/history/35033-met_merra2-knots15_35-20261122T164939664272Z.json",
+      "sha256": "42f421bbb8c3e263d88c4408972def60039973ac5bee0c5f04f6d0c7fec0cc86",
+      "generated_at": "2026-11-22T16:49:39.664272+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35041",
+      "path": "data/marts/studies/history/35041-met_merra2-knots15_35-20261122T164827766204Z.json",
+      "sha256": "0348c9377c1bc3cffbe8673dc9122504d69a63b6d414cc05e0e8535254152c39",
+      "generated_at": "2026-11-22T16:48:27.766204+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35051",
+      "path": "data/marts/studies/history/35051-met_merra2-knots15_35-20261122T164939839364Z.json",
+      "sha256": "cee9964691ecbc768c7dc74828e06c01cb90ec2a402d4dd05481b9a6ca92371c",
+      "generated_at": "2026-11-22T16:49:39.839364+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35052",
+      "path": "data/marts/studies/history/35052-met_merra2-knots15_35-20261122T164934844621Z.json",
+      "sha256": "b35cc6bd0780f3da3f54026aa88dafd4fcdfdb973b299eb590c5619a053d899e",
+      "generated_at": "2026-11-22T16:49:34.844621+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35071",
+      "path": "data/marts/studies/history/35071-met_merra2-knots15_35-20261122T165053357195Z.json",
+      "sha256": "f454aa84ead379bdadcfc615b99617a3e5bc3d24bdbee2a060df24217bd61bae",
+      "generated_at": "2026-11-22T16:50:53.357195+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35072",
+      "path": "data/marts/studies/history/35072-met_merra2-knots15_35-20261122T165240430115Z.json",
+      "sha256": "df55826cdc748fc08063304f0e51a05d7c765cedac2dcce55cf487c0f060093f",
+      "generated_at": "2026-11-22T16:52:40.430115+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35073",
+      "path": "data/marts/studies/history/35073-met_merra2-knots15_35-20261122T165256341883Z.json",
+      "sha256": "aeb246c4c073fc943ebc0666001bd5b2538ca9a7d4425acb078fdfdb83dc8add",
+      "generated_at": "2026-11-22T16:52:56.341883+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35074",
+      "path": "data/marts/studies/history/35074-met_merra2-knots15_35-20261122T165539990720Z.json",
+      "sha256": "7e3d1cd0be3c5d7b1fa7e2ab971063548b9ed02cce73461a7477e484df2461e6",
+      "generated_at": "2026-11-22T16:55:39.990720+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35081",
+      "path": "data/marts/studies/history/35081-met_merra2-knots15_35-20261122T165325185968Z.json",
+      "sha256": "877929ebce378deae19c822393069ed0682147f3b3bbbe912a1cbfdfacef7f2e",
+      "generated_at": "2026-11-22T16:53:25.185968+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35082",
+      "path": "data/marts/studies/history/35082-met_merra2-knots15_35-20261122T165335555368Z.json",
+      "sha256": "63adb0eb3e275d4ed57e565d898a0bb966753da117c7fd8b8a53cf4a95de8811",
+      "generated_at": "2026-11-22T16:53:35.555368+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35083",
+      "path": "data/marts/studies/history/35083-met_merra2-knots15_35-20261122T165455523586Z.json",
+      "sha256": "9cbb9ed17d88a7c3114a4ed722670c5aef2b1155c0ec397b73c6834c6b7c26b1",
+      "generated_at": "2026-11-22T16:54:55.523586+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35101",
+      "path": "data/marts/studies/history/35101-met_merra2-knots15_35-20261122T165900333212Z.json",
+      "sha256": "41a9ea4a443c9b9c2f404445eeb73045f6f25c9309c6ff53b4cb50119d610e43",
+      "generated_at": "2026-11-22T16:59:00.333212+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35102",
+      "path": "data/marts/studies/history/35102-met_merra2-knots15_35-20261122T165859632074Z.json",
+      "sha256": "801dccf14f6e4ad322739b5dc9ffaf854eb111f8845c309958cc56b15f26326c",
+      "generated_at": "2026-11-22T16:58:59.632074+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35103",
+      "path": "data/marts/studies/history/35103-met_merra2-knots15_35-20261122T165714990256Z.json",
+      "sha256": "3960aacb63dee49535e3cd962a641568318ce3d5f9a57fbab500cdc5c6b56d72",
+      "generated_at": "2026-11-22T16:57:14.990256+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35104",
+      "path": "data/marts/studies/history/35104-met_merra2-knots15_35-20261122T165743542781Z.json",
+      "sha256": "4771e7e62c144a296d481db40c56f0c59217203d16b9a51bc21ef461d072c02b",
+      "generated_at": "2026-11-22T16:57:43.542781+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35131",
+      "path": "data/marts/studies/history/35131-met_merra2-knots15_35-20261122T165908150785Z.json",
+      "sha256": "b4293491b1f9ebeddb37ecbbd350514b0635f59778c1ae3196c8bba957d1f488",
+      "generated_at": "2026-11-22T16:59:08.150785+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35132",
+      "path": "data/marts/studies/history/35132-met_merra2-knots15_35-20261122T165922924191Z.json",
+      "sha256": "7e135f4fc4d3b1c215c0b14184e1b7094e69b5490fccf2defb14334b86e21deb",
+      "generated_at": "2026-11-22T16:59:22.924191+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35133",
+      "path": "data/marts/studies/history/35133-met_merra2-knots15_35-20261122T170125329644Z.json",
+      "sha256": "f9e18f31990c73e09c1f6262afb2a61f57974aa706112033d8ceff2457c2a62a",
+      "generated_at": "2026-11-22T17:01:25.329644+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35141",
+      "path": "data/marts/studies/history/35141-met_merra2-knots15_35-20261122T170331358172Z.json",
+      "sha256": "8cf6fd8cf9adfccc89d2ad979dd820ee58a2da44355b8b2db7532c112d997c62",
+      "generated_at": "2026-11-22T17:03:31.358172+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35151",
+      "path": "data/marts/studies/history/35151-met_merra2-knots15_35-20261122T170341191059Z.json",
+      "sha256": "243bd385262ad38fdf6b6ec366c797860f2042ca3680e5220bc7d9b547551f57",
+      "generated_at": "2026-11-22T17:03:41.191059+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35163",
+      "path": "data/marts/studies/history/35163-met_merra2-knots15_35-20261122T170244574243Z.json",
+      "sha256": "de898dfa6e9b4a2cef587411148dd49b7af6afc0724e89f3f3db19a620117251",
+      "generated_at": "2026-11-22T17:02:44.574243+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35171",
+      "path": "data/marts/studies/history/35171-met_merra2-knots15_35-20261122T170333720240Z.json",
+      "sha256": "3cff18905d3297adee466f8f3e7b7f864e59cced07fa7317f5dfb71f6f32727f",
+      "generated_at": "2026-11-22T17:03:33.720240+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "35174",
+      "path": "data/marts/studies/history/35174-met_merra2-knots15_35-20261122T170435441654Z.json",
+      "sha256": "b2a2ca9f169c0d0c3a791b5e698ebdd40d383a02c799e7fcdc97e704e37b55b3",
+      "generated_at": "2026-11-22T17:04:35.441654+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "43007",
+      "path": "data/marts/studies/history/43007-met_merra2-knots15_35-20261122T170435782625Z.json",
+      "sha256": "9b233b14670c3d208d8c741e335f743cd2622876672a58bbeebe8d856716ddd4",
+      "generated_at": "2026-11-22T17:04:35.782625+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "43008",
+      "path": "data/marts/studies/history/43008-met_merra2-knots15_35-20261122T170732436400Z.json",
+      "sha256": "c7e5c42c703e5fb0c699dfc57644a4871a169ad4c1aa028bdcf1c6738d4e7ab4",
+      "generated_at": "2026-11-22T17:07:32.436400+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "43010",
+      "path": "data/marts/studies/history/43010-met_merra2-knots15_35-20261122T170722059447Z.json",
+      "sha256": "c763ec83063037b946dd9dae65b5f526600a95f72811fc4579c2b7b96fdd593c",
+      "generated_at": "2026-11-22T17:07:22.059447+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "50009",
+      "path": "data/marts/studies/history/50009-met_merra2-knots15_35-20261122T170747694907Z.json",
+      "sha256": "d3abd24dd86e142b9d6bade4840b98cd1e79039f8a21544642d2567d97210b3c",
+      "generated_at": "2026-11-22T17:07:47.694907+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "50010",
+      "path": "data/marts/studies/history/50010-met_merra2-knots15_35-20261122T170916498821Z.json",
+      "sha256": "0c70c05fde98789cf1eecb4dbe454fb0114b3c7fd69874ee4639f0ab41f19214",
+      "generated_at": "2026-11-22T17:09:16.498821+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51001",
+      "path": "data/marts/studies/history/51001-met_merra2-knots15_35-20261122T170823072108Z.json",
+      "sha256": "2a5b1efc8442f9466e97ce8add11dd35e92e3a18c97bd85d84e9d38a2fee4a79",
+      "generated_at": "2026-11-22T17:08:23.072108+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51002",
+      "path": "data/marts/studies/history/51002-met_merra2-knots15_35-20261122T170844543245Z.json",
+      "sha256": "aff69a04991cb6f3721cc9ee7349dec4a4eea9669b86faaf94837a17cc802c56",
+      "generated_at": "2026-11-22T17:08:44.543245+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51003",
+      "path": "data/marts/studies/history/51003-met_merra2-knots15_35-20261122T171303666951Z.json",
+      "sha256": "8df62c167b3d8e8156dfc9521719245b1b82bc942251c1d059796dc7fbf5ed29",
+      "generated_at": "2026-11-22T17:13:03.666951+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51004",
+      "path": "data/marts/studies/history/51004-met_merra2-knots15_35-20261122T171158587877Z.json",
+      "sha256": "c635912625118ec8afa43ca4d2a792f90410ab5e0d9625d8a8a80387e93326c3",
+      "generated_at": "2026-11-22T17:11:58.587877+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51005",
+      "path": "data/marts/studies/history/51005-met_merra2-knots15_35-20261122T171335936322Z.json",
+      "sha256": "4434d6307614ebcbb8811e791fbfeeb69236456666c3697a4cab1caac019f09f",
+      "generated_at": "2026-11-22T17:13:35.936322+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51006",
+      "path": "data/marts/studies/history/51006-met_merra2-knots15_35-20261122T171317234256Z.json",
+      "sha256": "17426381e34291da07d0e31b6e67b76d175a9d3581e701f71f7467bba60c3cd0",
+      "generated_at": "2026-11-22T17:13:17.234256+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51007",
+      "path": "data/marts/studies/history/51007-met_merra2-knots15_35-20261122T171246884757Z.json",
+      "sha256": "a26d3932328d98bcfe2deda365afc6859d7fbd5cbb8e1363079c70b90e6670be",
+      "generated_at": "2026-11-22T17:12:46.884757+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51008",
+      "path": "data/marts/studies/history/51008-met_merra2-knots15_35-20261122T171300171648Z.json",
+      "sha256": "e199afab267478b48d999c7291a6206f147bfdd82c91ef2b2d472730d33d520e",
+      "generated_at": "2026-11-22T17:13:00.171648+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51009",
+      "path": "data/marts/studies/history/51009-met_merra2-knots15_35-20261122T171616168656Z.json",
+      "sha256": "af507a596bdf717dc533cf40601bd11c602ed0dcf3a0eebc6aa70952180f9c5a",
+      "generated_at": "2026-11-22T17:16:16.168656+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51010",
+      "path": "data/marts/studies/history/51010-met_merra2-knots15_35-20261122T171659744551Z.json",
+      "sha256": "816d2cbde0211048d18aa90d0736535a8b43aa8a5139b4a53fce3c96ca09fcd0",
+      "generated_at": "2026-11-22T17:16:59.744551+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51011",
+      "path": "data/marts/studies/history/51011-met_merra2-knots15_35-20261122T171627598220Z.json",
+      "sha256": "22438f5226df1d4aa2b066959c8e82d3652ce533fda29351d4b9ad1b9c2d8e50",
+      "generated_at": "2026-11-22T17:16:27.598220+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51012",
+      "path": "data/marts/studies/history/51012-met_merra2-knots15_35-20261122T171729494225Z.json",
+      "sha256": "6cdc9b27fe498c89536f453851b56e5eda18472986f681cb55d8b67f23465e63",
+      "generated_at": "2026-11-22T17:17:29.494225+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51013",
+      "path": "data/marts/studies/history/51013-met_merra2-knots15_35-20261122T171833955033Z.json",
+      "sha256": "1e34ba8338969a45d4e3efe118025c1650990671c5017c92342a018f5494ec7c",
+      "generated_at": "2026-11-22T17:18:33.955033+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51014",
+      "path": "data/marts/studies/history/51014-met_merra2-knots15_35-20261122T171843800314Z.json",
+      "sha256": "0265db425b02b279677d9e533876071a1c8e3ad9dcf16c9bfb61afe90b8d436b",
+      "generated_at": "2026-11-22T17:18:43.800314+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51015",
+      "path": "data/marts/studies/history/51015-met_merra2-knots15_35-20261122T172029349540Z.json",
+      "sha256": "b3b2ae7c9ac8b4a1b92447150dd22dd9e6ab34e85c50f805a81138384ea369e0",
+      "generated_at": "2026-11-22T17:20:29.349540+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "51016",
+      "path": "data/marts/studies/history/51016-met_merra2-knots15_35-20261122T172036485878Z.json",
+      "sha256": "e3e3c6e1e424d9535e075def4ad5735710834008bfd805c58e78c2afb002e4b0",
+      "generated_at": "2026-11-22T17:20:36.485878+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "52006",
+      "path": "data/marts/studies/history/52006-met_merra2-knots15_35-20261122T172105922103Z.json",
+      "sha256": "0d9891ecd4e8523989f6af9ce8e64ce644b19bb9c452a8727c0a629544e2f239",
+      "generated_at": "2026-11-22T17:21:05.922103+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "52008",
+      "path": "data/marts/studies/history/52008-met_merra2-knots15_35-20261122T172119932948Z.json",
+      "sha256": "a918f9611c06b09047508ef6ccfaeb034787f044a75773fb8cb7014bf2b7d5b0",
+      "generated_at": "2026-11-22T17:21:19.932948+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "52014",
+      "path": "data/marts/studies/history/52014-met_merra2-knots15_35-20261122T172131732605Z.json",
+      "sha256": "3f083b3e7e3ef18038a2fbd8ce5618c1abe75dfcd7f7728359e5b4571a84d044",
+      "generated_at": "2026-11-22T17:21:31.732605+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    },
+    {
+      "region": "53001",
+      "path": "data/marts/studies/history/53001-met_merra2-knots15_35-20261122T172125607142Z.json",
+      "sha256": "e0e05b627754724bed90b7049ace773a599ab3ad98adb063ecdad82bc74849f4",
+      "generated_at": "2026-11-22T17:21:25.607142+00:00",
+      "git_commit": "0966b459931e20f5874efc23de41e54dc1053fb5",
+      "git_dirty": false
+    }
+  ],
+  "method": "DerSimonian-Laird random effects on log RR; SE from the 95% Wald interval as (log upper - log lower) / (2 × 1.96); effects rejected by the study rules ('rejected') and strata that failed outright ('stratum_errors') are counted and left out; regions the study refused have no report and are not counted",
+  "model_spec_version": 6,
+  "exposure": "pm25",
+  "meteorology": "MERRA-2",
+  "exposure_source": "CAMS",
+  "panel_sha256": [
+    "e827755d87008429e1320df81bfcd0c4201fabc635ee0326b3b0a2068642510d"
+  ],
+  "basis": {
+    "max_lag": 7,
+    "requested_knots": [
+      15.0,
+      35.0
+    ],
+    "min_share_above_knot": 0.01,
+    "max_log_rr_bound": 20.0,
+    "max_log_rr_se": 3.0,
+    "max_covariance_condition": 4503599627370496.0,
+    "lag_degree": 2,
+    "reference": 15.0
+  },
+  "confounders": {
+    "inference": "natural time spline, 7 df/year, no harmonics",
+    "trend_sensitivity_df_per_year": [
+      4,
+      10
+    ],
+    "autocorrelation_sensitivity": "Newey-West (HAC, 7 lags) interval; log of previous-day admissions as a covariate"
+  },
+  "regions": [
+    "11001",
+    "11002",
+    "11003",
+    "11004",
+    "11005",
+    "11006",
+    "11007",
+    "12001",
+    "12002",
+    "12003",
+    "13001",
+    "13002",
+    "13003",
+    "13004",
+    "13005",
+    "13006",
+    "13008",
+    "14002",
+    "15001",
+    "15002",
+    "15003",
+    "15004",
+    "15006",
+    "15007",
+    "15008",
+    "15010",
+    "15011",
+    "15012",
+    "16001",
+    "16002",
+    "17001",
+    "17002",
+    "17003",
+    "17004",
+    "17005",
+    "17006",
+    "17007",
+    "17008",
+    "21001",
+    "21002",
+    "21003",
+    "21004",
+    "21005",
+    "21007",
+    "21008",
+    "21010",
+    "21012",
+    "21014",
+    "21015",
+    "21017",
+    "22004",
+    "22007",
+    "29002",
+    "31009",
+    "31091",
+    "33001",
+    "33003",
+    "33004",
+    "33005",
+    "35011",
+    "35012",
+    "35013",
+    "35014",
+    "35015",
+    "35016",
+    "35031",
+    "35032",
+    "35033",
+    "35041",
+    "35051",
+    "35052",
+    "35071",
+    "35072",
+    "35073",
+    "35074",
+    "35081",
+    "35082",
+    "35083",
+    "35101",
+    "35102",
+    "35103",
+    "35104",
+    "35131",
+    "35132",
+    "35133",
+    "35141",
+    "35151",
+    "35163",
+    "35171",
+    "35174",
+    "43007",
+    "43008",
+    "43010",
+    "50009",
+    "50010",
+    "51001",
+    "51002",
+    "51003",
+    "51004",
+    "51005",
+    "51006",
+    "51007",
+    "51008",
+    "51009",
+    "51010",
+    "51011",
+    "51012",
+    "51013",
+    "51014",
+    "51015",
+    "51016",
+    "52006",
+    "52008",
+    "52014",
+    "53001"
+  ],
+  "any_region_dirty": false,
+  "results": [
+    {
+      "outcome": "asthma",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.01093513468717506,
+        "se": 0.021297270916716748,
+        "rr": 1.0109951418016507,
+        "lower": 0.9696621992727675,
+        "upper": 1.0540899475230736,
+        "tau2": 0.0071739391103897085,
+        "q": 91.15869028060636,
+        "i2": 0.3637468921343283,
+        "regions": 59,
+        "rejected": 4,
+        "stratum_errors": 52
+      },
+      "effect_hac": {
+        "log_rr": 0.012482091793011855,
+        "se": 0.021448262200438363,
+        "rr": 1.0125603182385003,
+        "lower": 0.9708760195381965,
+        "upper": 1.0560343210031427,
+        "tau2": 0.007247534556114389,
+        "q": 88.06961936191453,
+        "i2": 0.341430104725967,
+        "regions": 59,
+        "rejected": 4,
+        "stratum_errors": 52
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.010848066432768757,
+        "se": 0.020951981812655382,
+        "rr": 1.0109071200514463,
+        "lower": 0.9702341761404337,
+        "upper": 1.0532851042579565,
+        "tau2": 0.006649880274318845,
+        "q": 89.00429320576295,
+        "i2": 0.34834604139921926,
+        "regions": 59,
+        "rejected": 4,
+        "stratum_errors": 52
+      }
+    },
+    {
+      "outcome": "asthma",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": -0.03311235525115808,
+        "se": 0.04510917284317432,
+        "rr": 0.967429857657895,
+        "lower": 0.8855677324800768,
+        "upper": 1.0568593402414095,
+        "tau2": 0.011433101520117322,
+        "q": 33.4907164551805,
+        "i2": 0.22366545861164455,
+        "regions": 27,
+        "rejected": 10,
+        "stratum_errors": 78
+      },
+      "effect_hac": {
+        "log_rr": -0.04403554982229367,
+        "se": 0.04356983554386741,
+        "rr": 0.9569199385346024,
+        "lower": 0.8785939552107832,
+        "upper": 1.0422286237393736,
+        "tau2": 0.01098311107408878,
+        "q": 34.689735425517505,
+        "i2": 0.2216717807499043,
+        "regions": 28,
+        "rejected": 9,
+        "stratum_errors": 78
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.036099649275675404,
+        "se": 0.044457606287509215,
+        "rr": 0.9645441725658596,
+        "lower": 0.8840545080112758,
+        "upper": 1.0523621025626764,
+        "tau2": 0.010246619492261433,
+        "q": 32.719885242010996,
+        "i2": 0.2053761861420876,
+        "regions": 27,
+        "rejected": 10,
+        "stratum_errors": 78
+      }
+    },
+    {
+      "outcome": "asthma",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.021512795376135964,
+        "se": 0.009641305749417005,
+        "rr": 1.021745863876385,
+        "lower": 1.0026192603916866,
+        "upper": 1.041237338629084,
+        "tau2": 0.00012006684093863517,
+        "q": 93.3034320722611,
+        "i2": 0.013969819151471602,
+        "regions": 93,
+        "rejected": 4,
+        "stratum_errors": 18
+      },
+      "effect_hac": {
+        "log_rr": 0.021202171206155137,
+        "se": 0.010495370864503646,
+        "rr": 1.0214285342031717,
+        "lower": 1.000631443588347,
+        "upper": 1.0426578708570478,
+        "tau2": 0.0,
+        "q": 85.39208188378011,
+        "i2": 0.0,
+        "regions": 95,
+        "rejected": 2,
+        "stratum_errors": 18
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.016443997414106643,
+        "se": 0.009288252881034484,
+        "rr": 1.016579944086245,
+        "lower": 0.9982405713797023,
+        "upper": 1.0352562421802267,
+        "tau2": 0.0,
+        "q": 86.50610060641469,
+        "i2": 0.0,
+        "regions": 93,
+        "rejected": 4,
+        "stratum_errors": 18
+      }
+    },
+    {
+      "outcome": "circulatory",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.0056908122099171895,
+        "se": 0.031006755235160385,
+        "rr": 1.0057070356419564,
+        "lower": 0.9464071342427436,
+        "upper": 1.0687225454497746,
+        "tau2": 0.0014310996366916923,
+        "q": 42.53258693285917,
+        "i2": 0.03603324047226353,
+        "regions": 42,
+        "rejected": 2,
+        "stratum_errors": 71
+      },
+      "effect_hac": {
+        "log_rr": 0.008506171221594047,
+        "se": 0.033681488258295054,
+        "rr": 1.00854245149179,
+        "lower": 0.944112878064057,
+        "upper": 1.0773689249391392,
+        "tau2": 0.0072417532587714896,
+        "q": 49.8849482402363,
+        "i2": 0.17810879942078117,
+        "regions": 42,
+        "rejected": 2,
+        "stratum_errors": 71
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.0036764900527326266,
+        "se": 0.032300288357073464,
+        "rr": 1.003683256632166,
+        "lower": 0.9421110959310841,
+        "upper": 1.0692794979218043,
+        "tau2": 0.0028439619340492484,
+        "q": 44.04483508980508,
+        "i2": 0.0691303550937772,
+        "regions": 42,
+        "rejected": 2,
+        "stratum_errors": 71
+      }
+    },
+    {
+      "outcome": "circulatory",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": -0.012677183204160048,
+        "se": 0.003239758976336277,
+        "rr": 0.9874028337958705,
+        "lower": 0.9811527620481091,
+        "upper": 0.9936927193202048,
+        "tau2": 0.0,
+        "q": 95.18043388484953,
+        "i2": 0.0,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_hac": {
+        "log_rr": -0.012169434610728716,
+        "se": 0.0032424263818452647,
+        "rr": 0.9879043134979132,
+        "lower": 0.9816459353081594,
+        "upper": 0.9942025913053981,
+        "tau2": 0.0,
+        "q": 91.0187518578497,
+        "i2": 0.0,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.012248106810185124,
+        "se": 0.003230805920193035,
+        "rr": 0.9878265959498632,
+        "lower": 0.9815910666675636,
+        "upper": 0.9941017362542582,
+        "tau2": 0.0,
+        "q": 87.57318409063679,
+        "i2": 0.0,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      }
+    },
+    {
+      "outcome": "circulatory",
+      "age_group": "all",
+      "effect": {
+        "log_rr": -0.00466305671775674,
+        "se": 0.0035784196152271338,
+        "rr": 0.995347798451908,
+        "lower": 0.9883911496135374,
+        "upper": 1.0023534106617933,
+        "tau2": 0.00025654868576066364,
+        "q": 147.70492646950962,
+        "i2": 0.22819094308589122,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_hac": {
+        "log_rr": -0.007121099998157611,
+        "se": 0.0029187198888340877,
+        "rr": 0.9929041949561873,
+        "lower": 0.9872403129877336,
+        "upper": 0.9986005710990893,
+        "tau2": 3.300933478059372e-05,
+        "q": 118.17230316687957,
+        "i2": 0.03530694634078143,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.005837426382896105,
+        "se": 0.003116365642074905,
+        "rr": 0.994179578286567,
+        "lower": 0.9881255612324698,
+        "upper": 1.000270686904661,
+        "tau2": 9.317198278328727e-05,
+        "q": 126.37740578729453,
+        "i2": 0.09794002108357021,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      }
+    },
+    {
+      "outcome": "negative_control",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.014652596926907412,
+        "se": 0.016490529336691477,
+        "rr": 1.0147604724668793,
+        "lower": 0.9824863381040497,
+        "upper": 1.0480947943442547,
+        "tau2": 0.007842519159146437,
+        "q": 164.3034768913296,
+        "i2": 0.37311125760214897,
+        "regions": 104,
+        "rejected": 1,
+        "stratum_errors": 10
+      },
+      "effect_hac": {
+        "log_rr": 0.014247085530381868,
+        "se": 0.01655891711858395,
+        "rr": 1.0143490589526223,
+        "lower": 0.9819563791595837,
+        "upper": 1.0478103052588421,
+        "tau2": 0.009214626919856864,
+        "q": 185.71053982719826,
+        "i2": 0.4399887044818731,
+        "regions": 105,
+        "rejected": 0,
+        "stratum_errors": 10
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.01481246491216681,
+        "se": 0.01661537548129893,
+        "rr": 1.0149227131473333,
+        "lower": 0.9824029968728288,
+        "upper": 1.0485189040966305,
+        "tau2": 0.008135743205901031,
+        "q": 166.57658027990703,
+        "i2": 0.3816657790253354,
+        "regions": 104,
+        "rejected": 1,
+        "stratum_errors": 10
+      }
+    },
+    {
+      "outcome": "negative_control",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": -0.014694047944177417,
+        "se": 0.004795627166828957,
+        "rr": 0.9854133827374215,
+        "lower": 0.9761944535772415,
+        "upper": 0.9947193730917611,
+        "tau2": 0.0,
+        "q": 109.9656805097638,
+        "i2": 0.0,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2
+      },
+      "effect_hac": {
+        "log_rr": -0.012038234713465922,
+        "se": 0.005406055123001851,
+        "rr": 0.988033934945324,
+        "lower": 0.97762012685049,
+        "upper": 0.998558673038485,
+        "tau2": 0.0002581280992563484,
+        "q": 123.30622599921088,
+        "i2": 0.0916922556634183,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.01443106222830734,
+        "se": 0.0048352497217486615,
+        "rr": 0.9856725664606234,
+        "lower": 0.97637538407548,
+        "upper": 0.9950582779112392,
+        "tau2": 8.533850893827646e-06,
+        "q": 112.35421842793215,
+        "i2": 0.003152693622797626,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2
+      }
+    },
+    {
+      "outcome": "negative_control",
+      "age_group": "all",
+      "effect": {
+        "log_rr": -0.0051306687450817755,
+        "se": 0.0027744597482307182,
+        "rr": 0.9948824706548968,
+        "lower": 0.9894870416798304,
+        "upper": 1.000307319574438,
+        "tau2": 9.285936488905174e-05,
+        "q": 129.84286765347267,
+        "i2": 0.12201569435261118,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_hac": {
+        "log_rr": -0.004614689241614422,
+        "se": 0.002847180185177062,
+        "rr": 0.9953959420770864,
+        "lower": 0.9898566320964407,
+        "upper": 1.0009662504407975,
+        "tau2": 0.0001567203155254969,
+        "q": 142.77046079634056,
+        "i2": 0.20151550002616503,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.00515457252093181,
+        "se": 0.002768525085610259,
+        "rr": 0.994858689491552,
+        "lower": 0.9894748989305356,
+        "upper": 1.0002717735706113,
+        "tau2": 9.118061364627646e-05,
+        "q": 129.57909282302325,
+        "i2": 0.12022844491048325,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      }
+    },
+    {
+      "outcome": "pneumonia",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.010588251036824765,
+        "se": 0.006909172751284112,
+        "rr": 1.0106445049349901,
+        "lower": 0.997050630405745,
+        "upper": 1.0244237195252928,
+        "tau2": 0.00044505468712286415,
+        "q": 119.94166825985928,
+        "i2": 0.09956229918352558,
+        "regions": 109,
+        "rejected": 0,
+        "stratum_errors": 6
+      },
+      "effect_hac": {
+        "log_rr": 0.01372701543737473,
+        "se": 0.007358783950783627,
+        "rr": 1.0138216634963804,
+        "lower": 0.9993040411855978,
+        "upper": 1.0285501939481012,
+        "tau2": 0.0007489653395558343,
+        "q": 126.62041741567585,
+        "i2": 0.1470569896681655,
+        "regions": 109,
+        "rejected": 0,
+        "stratum_errors": 6
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.009066854471750081,
+        "se": 0.006818025864352884,
+        "rr": 1.009108082906625,
+        "lower": 0.9957127404271533,
+        "upper": 1.022683633183845,
+        "tau2": 0.0004001627936342243,
+        "q": 118.91377230849886,
+        "i2": 0.09177887553836224,
+        "regions": 109,
+        "rejected": 0,
+        "stratum_errors": 6
+      }
+    },
+    {
+      "outcome": "pneumonia",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": 0.009986076087518591,
+        "se": 0.007332326025455978,
+        "rr": 1.0100361033319512,
+        "lower": 0.9956243183908272,
+        "upper": 1.0246565006395598,
+        "tau2": 0.0013144329018858524,
+        "q": 156.81060635710622,
+        "i2": 0.27938547892185256,
+        "regions": 114,
+        "rejected": 0,
+        "stratum_errors": 1
+      },
+      "effect_hac": {
+        "log_rr": 0.010749815644117049,
+        "se": 0.007388718417597133,
+        "rr": 1.010807802508741,
+        "lower": 0.9962748830724952,
+        "upper": 1.025552717400186,
+        "tau2": 0.001522868717776795,
+        "q": 165.0526732376547,
+        "i2": 0.3153700707573849,
+        "regions": 114,
+        "rejected": 0,
+        "stratum_errors": 1
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.009862949681291247,
+        "se": 0.007309167505276503,
+        "rr": 1.009911748872204,
+        "lower": 0.995546925838975,
+        "upper": 1.0244838430399426,
+        "tau2": 0.0012905016545429672,
+        "q": 156.03137772128198,
+        "i2": 0.27578669335438866,
+        "regions": 114,
+        "rejected": 0,
+        "stratum_errors": 1
+      }
+    },
+    {
+      "outcome": "pneumonia",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.013233997612490004,
+        "se": 0.004597974515786975,
+        "rr": 1.013321954537856,
+        "lower": 1.004230892622612,
+        "upper": 1.0224953156607366,
+        "tau2": 0.0004940924574306396,
+        "q": 152.87810274128728,
+        "i2": 0.25430785733310646,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_hac": {
+        "log_rr": 0.013398027536317863,
+        "se": 0.0045766877462476265,
+        "rr": 1.0134881832937443,
+        "lower": 1.0044375363872766,
+        "upper": 1.022620382518259,
+        "tau2": 0.00045656426551815435,
+        "q": 147.14614199116264,
+        "i2": 0.22526001390612974,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.0114573975984256,
+        "se": 0.004402298044379465,
+        "rr": 1.0115232849704578,
+        "lower": 1.0028328985262367,
+        "upper": 1.0202889808871356,
+        "tau2": 0.00037549284474941213,
+        "q": 143.85238770958208,
+        "i2": 0.20752097469421144,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      }
+    },
+    {
+      "outcome": "respiratory",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.013358671528412334,
+        "se": 0.006011713970238848,
+        "rr": 1.0134482972296739,
+        "lower": 1.0015769542334336,
+        "upper": 1.0254603471221129,
+        "tau2": 0.0008066703120851857,
+        "q": 152.89185306035003,
+        "i2": 0.2543749211084419,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_hac": {
+        "log_rr": 0.015173936030063877,
+        "se": 0.006313884387357839,
+        "rr": 1.0152896447086193,
+        "lower": 1.0028026427112442,
+        "upper": 1.0279321361435378,
+        "tau2": 0.0010498172239050614,
+        "q": 159.6547792088704,
+        "i2": 0.28595936454330595,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.011581308119973389,
+        "se": 0.005861355679598336,
+        "rr": 1.011648631113949,
+        "lower": 1.0000930553173382,
+        "upper": 1.0233377258179068,
+        "tau2": 0.0007014826199265225,
+        "q": 148.6873110163591,
+        "i2": 0.23329032436764346,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      }
+    },
+    {
+      "outcome": "respiratory",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": 0.0053039487350767765,
+        "se": 0.006153415060272311,
+        "rr": 1.0053180395725136,
+        "lower": 0.9932660306920806,
+        "upper": 1.0175162841174774,
+        "tau2": 0.0011181909185337198,
+        "q": 172.67065300855606,
+        "i2": 0.3397835821333742,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_hac": {
+        "log_rr": 0.0049819868858631535,
+        "se": 0.006203790578213653,
+        "rr": 1.0049944176172023,
+        "lower": 0.9928482536793188,
+        "upper": 1.0172891735457137,
+        "tau2": 0.0012808068541280279,
+        "q": 181.80012903240774,
+        "i2": 0.37293773878632214,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.0051251888170207715,
+        "se": 0.006105387513914914,
+        "rr": 1.005138345063706,
+        "lower": 0.9931819781898421,
+        "upper": 1.0172386480056432,
+        "tau2": 0.0010737422435824326,
+        "q": 170.4196502688668,
+        "i2": 0.33106305628403143,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      }
+    },
+    {
+      "outcome": "respiratory",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.011501244037847882,
+        "se": 0.0037919630800069084,
+        "rr": 1.0115676376372427,
+        "lower": 1.004077286006535,
+        "upper": 1.019113866806795,
+        "tau2": 0.0004266210247858813,
+        "q": 169.5744925721322,
+        "i2": 0.3277290807666275,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_hac": {
+        "log_rr": 0.011935201518177683,
+        "se": 0.0037738595455136395,
+        "rr": 1.0120067102429853,
+        "lower": 1.004548751111005,
+        "upper": 1.0195200386682457,
+        "tau2": 0.00039561254274166573,
+        "q": 161.31683258545954,
+        "i2": 0.29331615199172023,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.009759038699660511,
+        "se": 0.003574501552117175,
+        "rr": 1.0098068134030864,
+        "lower": 1.0027568086850722,
+        "upper": 1.0169063840438586,
+        "tau2": 0.0003109451628237042,
+        "q": 155.12634049230107,
+        "i2": 0.2651151336503176,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0
+      }
+    }
+  ]
+}
