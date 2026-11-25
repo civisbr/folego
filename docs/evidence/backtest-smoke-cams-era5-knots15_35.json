@@ -1,0 +1,1261 @@
+{
+  "generated_at": "2026-11-25T23:30:44.276211+00:00",
+  "software": {
+    "pyreaddbc": "2.0.4",
+    "dbfread": "2.0.7",
+    "polars": "2.1.0",
+    "git_commit": "2554579c6c48e5d18d8a2bde184bd8e09b4b91a1",
+    "git_dirty": false,
+    "git_dirty_includes_untracked": true
+  },
+  "mode": "research",
+  "validated": false,
+  "inputs": [
+    {
+      "region": "11001",
+      "path": "11001-backtest-knots15_35.json",
+      "sha256": "3402193615adbaaedd8632741640cc6a4119ef9d4dfaf565010baae99678005a",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11002",
+      "path": "11002-backtest-knots15_35.json",
+      "sha256": "a6cdcffb53d50734f05aedf5205d77724b12ca4b4babe201bc439d9270e84478",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11003",
+      "path": "11003-backtest-knots15_35.json",
+      "sha256": "cdd436cbb1f24f1e1da207e8371879ad12a82a35c5e6eebe79848f49863f361b",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11004",
+      "path": "11004-backtest-knots15_35.json",
+      "sha256": "8e88fc7c344c447649202e82fc5a2d745698e5c451b77630bad7a1af1957d0c8",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11005",
+      "path": "11005-backtest-knots15_35.json",
+      "sha256": "b37dce6008ed984873e6451497e744d7e3cc5b5959648de4f97e7f1891f28efc",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11006",
+      "path": "11006-backtest-knots15_35.json",
+      "sha256": "fba5e54175e609f7e30a2f3d8bfc81a106791c2d6bb0c20b83ea9514a259d5af",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11007",
+      "path": "11007-backtest-knots15_35.json",
+      "sha256": "2d851e8e1d92438f3a4a3444fd28a76288d77c5dfcc79f3488490f77df1a5c4f",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "12001",
+      "path": "12001-backtest-knots15_35.json",
+      "sha256": "d73a3c0624b5378aac4c394716bc8f520990ebd6fef8dc7877b2b124a11ab304",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "12002",
+      "path": "12002-backtest-knots15_35.json",
+      "sha256": "9bf79d35aa84c7ee9096896d070818f358dfed0aac0adcc1e798d727cc0e815c",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "12003",
+      "path": "12003-backtest-knots15_35.json",
+      "sha256": "03e09b1dde425663cbd24a9eedccf128552e221b0d0ddb8faa2a6c7075d4e9ec",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13001",
+      "path": "13001-backtest-knots15_35.json",
+      "sha256": "31468bed312e20f8bed71275c02f159ea8a5c3c1fdb6e92239e67adbf55d33e3",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13002",
+      "path": "13002-backtest-knots15_35.json",
+      "sha256": "67be74123a1e5a53424bfcfe0a4a10f7695108d85627a98c59e171c49cf4144a",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13003",
+      "path": "13003-backtest-knots15_35.json",
+      "sha256": "943d808312fb34672b487021e5b2f3bfbb0e2cb6323aac7125bfadd4034918fb",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13004",
+      "path": "13004-backtest-knots15_35.json",
+      "sha256": "06c358eca3ab1fe3adbf9a0d2a4a293eccd3b04da3b052c81c7795c8f4abdb5d",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13005",
+      "path": "13005-backtest-knots15_35.json",
+      "sha256": "81820f2b1fa0de432c9d39930b2f7bcd341cc35d119135dbc9fcf7a9ca42f704",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13006",
+      "path": "13006-backtest-knots15_35.json",
+      "sha256": "f1238b7ef73fa2dcc811818374267106d8455d29c6ec16f2f13c70a7429d8f6b",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13008",
+      "path": "13008-backtest-knots15_35.json",
+      "sha256": "9ba1e6f806f62be25ee04121803f447036e72545f7cb348400528c8b31e754a0",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "14002",
+      "path": "14002-backtest-knots15_35.json",
+      "sha256": "c74bcd070d57963d99d4d3e37830170c87878203d309b7f65de2c483d438bd87",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15001",
+      "path": "15001-backtest-knots15_35.json",
+      "sha256": "5336a2afa127f799011ddfd5dfd006b240d596b09d20763be72db4dea5b7b3a7",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15002",
+      "path": "15002-backtest-knots15_35.json",
+      "sha256": "a7ea746a63531c2251d58d7e24d8da766331bf742fb6011924195cc8249d5958",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15003",
+      "path": "15003-backtest-knots15_35.json",
+      "sha256": "538ff00a9de609084a2ebbe2aa95f829c5b010462b1fbf760f05685fbd7f2392",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15004",
+      "path": "15004-backtest-knots15_35.json",
+      "sha256": "46d828e4f8178edc945648706d8d38eac5adae1106b98a4255b78872bdef35be",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15006",
+      "path": "15006-backtest-knots15_35.json",
+      "sha256": "9433ae2473ab98775bd37af41deeec6d320b79347c978e014c68b39cfbe7d832",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15007",
+      "path": "15007-backtest-knots15_35.json",
+      "sha256": "6a3058e138d8bc688af07fb907b3fd93835475ed87190cc5f10770e0d792695b",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15008",
+      "path": "15008-backtest-knots15_35.json",
+      "sha256": "a374ffe64c6fdec04ec5e6e594f8f2f3094361eccc29bb8df3aa949ab08e9a4d",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15010",
+      "path": "15010-backtest-knots15_35.json",
+      "sha256": "33129629aaadd26adbad2df78996b9d7e7f9b8f5bf4a8441b3d04bbdb3d56304",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15011",
+      "path": "15011-backtest-knots15_35.json",
+      "sha256": "8be2c56daa11e8d23815719e658a78ed68b7fd27faddab8f9228f65d5be166bb",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15012",
+      "path": "15012-backtest-knots15_35.json",
+      "sha256": "e300f9da2577eae127e228209d3ea053934a5bbf2e5d58759385bbcaa879e96f",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "16001",
+      "path": "16001-backtest-knots15_35.json",
+      "sha256": "f63d516039d89c17ab44acf0975c3965c177d14eab3b9f97cebc58709eba94f0",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "16002",
+      "path": "16002-backtest-knots15_35.json",
+      "sha256": "e00d67f1af5f85efc6851d44529f068f858284316f2176b17a38026ebcbf6967",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17001",
+      "path": "17001-backtest-knots15_35.json",
+      "sha256": "9f3a1fea4fdfc7d7af997c558a53537290925e5b2ea058ea82ac88d6f6218455",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17002",
+      "path": "17002-backtest-knots15_35.json",
+      "sha256": "6eabb169dfb9c84a81fa6837bb587ef96fd90fcb300e6b8b53a3c7d7a0c9043f",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17003",
+      "path": "17003-backtest-knots15_35.json",
+      "sha256": "9725e3c6d7b5b8788d01dfe4b9be0c3bf94b30e2a2031ff175408e5a996d732f",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17004",
+      "path": "17004-backtest-knots15_35.json",
+      "sha256": "d8d030e84aaea6206a57e347eec8567060776cd1d3f6f8fc62ef7467dfa4651a",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17005",
+      "path": "17005-backtest-knots15_35.json",
+      "sha256": "eb8f8acb8ef8f95f7392f2eb596740e817e19b02182f69b3d05108a2660120ea",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17006",
+      "path": "17006-backtest-knots15_35.json",
+      "sha256": "e5be3406e820812e338a6bcaed8ffb6665a12410909790bc5bb22a703da07d30",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17007",
+      "path": "17007-backtest-knots15_35.json",
+      "sha256": "c1d080c8766563f569935551627395896e327b08e6fee2c85a2a2cc939e0ed8f",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17008",
+      "path": "17008-backtest-knots15_35.json",
+      "sha256": "96d9dd71fccac03c7ecb1ab9d7c58831c1428a16890f5a0c95b23c5356dc2e4c",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21001",
+      "path": "21001-backtest-knots15_35.json",
+      "sha256": "6c8738b36d664060c2ea917377fcf4a7b3808b4c2f8568112a7e8ac7c2c44221",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21002",
+      "path": "21002-backtest-knots15_35.json",
+      "sha256": "49a6c251474bb3263b96ab105423fcf1e83b54233a9628a3936574fae36e71c4",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21003",
+      "path": "21003-backtest-knots15_35.json",
+      "sha256": "c7933f5ea822cb03edd59bb0f2f6a710a71edf6d6f900e872f49afeed905061d",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21004",
+      "path": "21004-backtest-knots15_35.json",
+      "sha256": "caf785867e085aac2f7af43cca9a6af5fbf53ac1f54d35a3d1ca2b223bd80b0e",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21005",
+      "path": "21005-backtest-knots15_35.json",
+      "sha256": "0cc10474480eaf74171ba6259cf132503ed3e06776f2331c9991244fdda6eed8",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21007",
+      "path": "21007-backtest-knots15_35.json",
+      "sha256": "2d84c9563a4d45b1da45c9c7ea57b4a4126cf92151e23621f9bdb43d1c683b07",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21008",
+      "path": "21008-backtest-knots15_35.json",
+      "sha256": "9deae780a52cd36b4e47d79f6e063827595dc58d93dec745347924fe4d5e8248",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21010",
+      "path": "21010-backtest-knots15_35.json",
+      "sha256": "c43034edd0a4d993a4c7ea538f7934c0048f0cd0d0ba4199e52ffc93d340f98c",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21012",
+      "path": "21012-backtest-knots15_35.json",
+      "sha256": "376b5f2cfa3d7e45944e4c37e0fb544d9c84695f9738fdfa544e4362f3b3c534",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21014",
+      "path": "21014-backtest-knots15_35.json",
+      "sha256": "d24ca3494169ee67a1aab6705e7d9f0cd628b1a6b39389635c6e01d26d286b74",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21015",
+      "path": "21015-backtest-knots15_35.json",
+      "sha256": "ab5a4e76c355e1b80e25e7ade62a1ea012c4e13478343e58e6f6135dba09d3e2",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21017",
+      "path": "21017-backtest-knots15_35.json",
+      "sha256": "6e2a89685dd7953d28fd0d3097b329c7c2bbb135542012deacdfe669f929a82c",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "22004",
+      "path": "22004-backtest-knots15_35.json",
+      "sha256": "419c3af44e412bf3ee7f5eb0c0462bdf25c79144b77bd010c102a150f8d43a75",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "22007",
+      "path": "22007-backtest-knots15_35.json",
+      "sha256": "e22617794528e1143010cb416a69ce9d468020de158bccca5d304ffa2e9b5eef",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "29002",
+      "path": "29002-backtest-knots15_35.json",
+      "sha256": "0a97d2d19def48d2824f5b00ff839831909bd72cd53c46580810b0759b198bce",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "31009",
+      "path": "31009-backtest-knots15_35.json",
+      "sha256": "38148fc3da25205a964f519135f444ae23cc71ddc4df5a94e9935c807a93c3ad",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "31091",
+      "path": "31091-backtest-knots15_35.json",
+      "sha256": "2a9a2055b86a9f7470a0444ee1759014a756369ce68cb6e4b74f233274e4b69d",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "33001",
+      "path": "33001-backtest-knots15_35.json",
+      "sha256": "cf3facc613d7d830ff704efbff38212f5ffad86e07709fd4794b3b0c4b3d454a",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "33003",
+      "path": "33003-backtest-knots15_35.json",
+      "sha256": "f5f8a4031258d26da84e936bc7464b9c6c67b564c5b59470822ecc2699cd0dfc",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "33004",
+      "path": "33004-backtest-knots15_35.json",
+      "sha256": "de4ad0ca528c57128b93cd6c83b2ac357bc1a1b22d9917378cfabe44722e221b",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "33005",
+      "path": "33005-backtest-knots15_35.json",
+      "sha256": "54f59db7f856a65d62df6fcc0eeaff414905ee98f6d37cccf516d9e40e297d46",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35011",
+      "path": "35011-backtest-knots15_35.json",
+      "sha256": "712e3a6e899038c72edf41b7c510851001bb69fbcd948582c4768ff857cc9f7d",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35012",
+      "path": "35012-backtest-knots15_35.json",
+      "sha256": "a1d5ed0a901e3fdb7d0e97a722f40892efca485f491ec365464d20f0fe709853",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35013",
+      "path": "35013-backtest-knots15_35.json",
+      "sha256": "3d85fda96a19ce199bcf35d949108005025bbd05367c339990d7672dbe516dc2",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35014",
+      "path": "35014-backtest-knots15_35.json",
+      "sha256": "89ec8435facbead7215dcd350eedfb4600dd9c8f47256c94b6d0cadc70c39d0b",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35015",
+      "path": "35015-backtest-knots15_35.json",
+      "sha256": "2a4d7a24755b121098f6102cbeb84d87592bd8bbe224af6e2d35953dbc61a23b",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35016",
+      "path": "35016-backtest-knots15_35.json",
+      "sha256": "e9cb306989c86cb2b7a88e4d39c6af398a1e44c263873d672cbf1cf50dc82ae9",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35031",
+      "path": "35031-backtest-knots15_35.json",
+      "sha256": "afdb0fecf37b3695b6ab48d45f276404c2fca219b8558c8452a1b2894ed767a8",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35032",
+      "path": "35032-backtest-knots15_35.json",
+      "sha256": "f6ccde76ce568b14ab370c969f62cbb34ded4ee3a778729525de7d4303e89e87",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35033",
+      "path": "35033-backtest-knots15_35.json",
+      "sha256": "e6a9e3c73c07a1d282427a9517a474ca835c886afc3fd3712e69e9a98e77adaf",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35041",
+      "path": "35041-backtest-knots15_35.json",
+      "sha256": "8d9b92d19f4bf90c3de977b7d4a81177eb95440a38cb75764705ee8f92ff23e7",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35051",
+      "path": "35051-backtest-knots15_35.json",
+      "sha256": "646572e06f798da409aeeec6573ab5f51d5a71956078d5fee75ccc575c2ef2fb",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35052",
+      "path": "35052-backtest-knots15_35.json",
+      "sha256": "4386064e280065012fd2563fd8a8d575cc2a2e0666fa638b1d24c58b96d4bf12",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35071",
+      "path": "35071-backtest-knots15_35.json",
+      "sha256": "961a293f8be8298a30f90fe752384fd74b057108918b980562243e8084b600d5",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35072",
+      "path": "35072-backtest-knots15_35.json",
+      "sha256": "1f6f46df92cc6b1cde3e3ccfe662810a400d1a55a7a4d3a66e53bf92a34484c8",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35073",
+      "path": "35073-backtest-knots15_35.json",
+      "sha256": "0675e08eb817864d01314446bf52ab736c7d50b3b29eba403cf0605538f04986",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35074",
+      "path": "35074-backtest-knots15_35.json",
+      "sha256": "b8fe58bbb32f4cc6162dffd5143d91755892cb400f7035d39ee39bb1912f695e",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35081",
+      "path": "35081-backtest-knots15_35.json",
+      "sha256": "151b173ea49c89e1fb361650a6ea5fa77269792c1f21bab9436a1e58dfff5a2c",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35082",
+      "path": "35082-backtest-knots15_35.json",
+      "sha256": "ca7696b543a7fe8c4a2d18a112517db57cb0674d6f8191bf058bb22f6a40dd90",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35083",
+      "path": "35083-backtest-knots15_35.json",
+      "sha256": "1efa0856fb4c361f4631421501eacebc564b196291864b7af18957d6ce087d99",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35101",
+      "path": "35101-backtest-knots15_35.json",
+      "sha256": "571cfc105e551bbc75f1014eb091bc0d2d9e43f7f2594ee389df20e62ea99251",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35102",
+      "path": "35102-backtest-knots15_35.json",
+      "sha256": "efc7f7cb92f7eda3201460158c6f576ea47ea2abb01564ab2aec7e66d828180b",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35103",
+      "path": "35103-backtest-knots15_35.json",
+      "sha256": "de03e1540abbddceb7235f308d5dbafc0447918eb1747bfa3f5abd8025d18bbd",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35104",
+      "path": "35104-backtest-knots15_35.json",
+      "sha256": "6d3d58dd5a3028a019d20e59c382520ec9b9e592de73b80938820500cb27c526",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35131",
+      "path": "35131-backtest-knots15_35.json",
+      "sha256": "d61d410c64ad792d3650078c35c44b64021408d8fa1374ef99942335d4702691",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35132",
+      "path": "35132-backtest-knots15_35.json",
+      "sha256": "3848c87520cf0544829ce87cf1e1e7a862cbf6a1537f5ef6a1ca8e6bc3d8257d",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35133",
+      "path": "35133-backtest-knots15_35.json",
+      "sha256": "06f75ab6bad471533e268159533fa2f2716718ea2e577ebcd5e786b439c13c1b",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35141",
+      "path": "35141-backtest-knots15_35.json",
+      "sha256": "240e00f0c5e0293cdad4a15eb9e122b920807eb6593d2d0d302424dbe9808c98",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35151",
+      "path": "35151-backtest-knots15_35.json",
+      "sha256": "3d75ba6f47af50d240dec8e7a0b84e1a860795e50997467256ee1e5e3dad87b8",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35163",
+      "path": "35163-backtest-knots15_35.json",
+      "sha256": "e2acef4e815e486cfc643d35bfc0b5067f2172ae52983c17e3bf830af13a1ce9",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35171",
+      "path": "35171-backtest-knots15_35.json",
+      "sha256": "291b45f50766764df155ab7bd1c8c72c3be5bef8097b4faa0c63a23e7cdc35e9",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35174",
+      "path": "35174-backtest-knots15_35.json",
+      "sha256": "14d59f2d709ac35cf5d779cbf5df834fb0cd20a72fda5651d965a92bfd53e66a",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "43007",
+      "path": "43007-backtest-knots15_35.json",
+      "sha256": "420336a0ba7d72580ab6a7fe93fdf5866029512bb25406b53e5830e07b2da8df",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "43008",
+      "path": "43008-backtest-knots15_35.json",
+      "sha256": "d83348ab4cb974063b69571487a861b8ffd738ab67de1c99500e9a6eda09978d",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "43010",
+      "path": "43010-backtest-knots15_35.json",
+      "sha256": "474409dd97e54ffab0009ad46078123f67d6142cd25a51ccee0a7fa97cd38b09",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "50009",
+      "path": "50009-backtest-knots15_35.json",
+      "sha256": "93d09dec7039672d9fa8d246c637ef38c0e1858a92880f19389a38b2f1d9cc45",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "50010",
+      "path": "50010-backtest-knots15_35.json",
+      "sha256": "6c5b6351a0605260699d172499fcf28fe64c60881450ac2efadd93768bb062d4",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51001",
+      "path": "51001-backtest-knots15_35.json",
+      "sha256": "e0cee5c383774921313b492170ae520125f5350a88987f5f59ea4cfbe2690157",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51002",
+      "path": "51002-backtest-knots15_35.json",
+      "sha256": "de1a58f20e39a0aec4cd29cfc8d0e071fcdb2a830868e1553712cde32da1dc24",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51003",
+      "path": "51003-backtest-knots15_35.json",
+      "sha256": "15c26b2aaae29aac8fe1b25f6b7b9274a0a39c0e67c12ffdfc94f3003940d8bf",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51004",
+      "path": "51004-backtest-knots15_35.json",
+      "sha256": "4f7ed5b7295dc9ffd01bb3d982d8cb3aee1c87f1ce3c5e4f98443c77d9f5bf06",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51005",
+      "path": "51005-backtest-knots15_35.json",
+      "sha256": "a642d732f57ff75a2a58a852e8bfb0451da4298fa0f0cf365fb2611f5fa4ebaa",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51006",
+      "path": "51006-backtest-knots15_35.json",
+      "sha256": "757035f264e379b65806638bd5d9063c25c4205d555308055a21cfddc4425e26",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51007",
+      "path": "51007-backtest-knots15_35.json",
+      "sha256": "e3c2b0b7efac65c0d833ef125039791b5450fe226e042a0b822f838d83a7b244",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51008",
+      "path": "51008-backtest-knots15_35.json",
+      "sha256": "d188d827dd2480a88a71fdbe325189d4f718908e7faca0ad6b1a94dd405e266c",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51009",
+      "path": "51009-backtest-knots15_35.json",
+      "sha256": "57dc6c210fa3d92ba649ad53baafbdd77b0917297c86a54766807c8837499af7",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51010",
+      "path": "51010-backtest-knots15_35.json",
+      "sha256": "72d868c49ad2df601d4e3cd1ddf34d36d909aa00df0da836360b47422bfffb3a",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51011",
+      "path": "51011-backtest-knots15_35.json",
+      "sha256": "7b72508bfd38b7c154d65bc01bf3829bad9a1f2b284c1484a5e2993aaae53233",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51012",
+      "path": "51012-backtest-knots15_35.json",
+      "sha256": "30940e1b7b20be6fc94625c068796a2362359452af5873e224fbb6102ae8c5ba",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51013",
+      "path": "51013-backtest-knots15_35.json",
+      "sha256": "49ac7bda7f538ae0b60f73730438cd78f095a66f1be1af1a8b86b7fb0c1ae761",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51014",
+      "path": "51014-backtest-knots15_35.json",
+      "sha256": "5144c7d43035e78fa5cb8beb141d26ebe045b14c3f261e841c7952c4739ef3c6",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51015",
+      "path": "51015-backtest-knots15_35.json",
+      "sha256": "17e7775bc11f73899f9e8bde48e6cc6e304e7912c11eab0ce890cbcc721f1a7f",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51016",
+      "path": "51016-backtest-knots15_35.json",
+      "sha256": "fa69e2ceadfb52669c98d4f509c56d9a496995e849c56fe5982cc31167735333",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "52006",
+      "path": "52006-backtest-knots15_35.json",
+      "sha256": "a18b4f79c3543cb1a54afe76a75df96afb1e9ca156744583c1f0f648a54f6adc",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "52008",
+      "path": "52008-backtest-knots15_35.json",
+      "sha256": "4d15352aba98b252a79047481f66e77254fe071aa4f49fdb982947f03ceacc67",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "52014",
+      "path": "52014-backtest-knots15_35.json",
+      "sha256": "678f441eff11498756226acea76abaa652939a8fa1f1fa4ced3b08c001bad6b3",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "53001",
+      "path": "53001-backtest-knots15_35.json",
+      "sha256": "d046947c4c368655f28d035f68b065dbf7ab0e2ed2d34d7fd04a24196333c84c",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    }
+  ],
+  "method": "Per region and outcome (all ages), rolling-origin folds; weekly MAE/MAPE of the model with PM2.5 and of the same confounders without it; peaks are test weeks above the 90th percentile of training weeks, pooled across folds as hits/predicted (precision) and hits/observed (recall)",
+  "exposure": "pm25",
+  "meteorology": "ERA5",
+  "exposure_source": "CAMS",
+  "design": "rolling origins 1 July 2019-2024, train up to origin - 62 days, predict Jul-Oct; time spline 6 df + 3 harmonics; baseline refits the same confounders without PM2.5; peaks are test weeks above the training P90",
+  "backtest_inputs": "observed exposures (not archived forecasts): optimistic",
+  "model_spec_version": null,
+  "basis": {
+    "max_lag": 7,
+    "requested_knots": [
+      15.0,
+      35.0
+    ],
+    "reference": 15.0
+  },
+  "regions": [
+    "11001",
+    "11002",
+    "11003",
+    "11004",
+    "11005",
+    "11006",
+    "11007",
+    "12001",
+    "12002",
+    "12003",
+    "13001",
+    "13002",
+    "13003",
+    "13004",
+    "13005",
+    "13006",
+    "13008",
+    "14002",
+    "15001",
+    "15002",
+    "15003",
+    "15004",
+    "15006",
+    "15007",
+    "15008",
+    "15010",
+    "15011",
+    "15012",
+    "16001",
+    "16002",
+    "17001",
+    "17002",
+    "17003",
+    "17004",
+    "17005",
+    "17006",
+    "17007",
+    "17008",
+    "21001",
+    "21002",
+    "21003",
+    "21004",
+    "21005",
+    "21007",
+    "21008",
+    "21010",
+    "21012",
+    "21014",
+    "21015",
+    "21017",
+    "22004",
+    "22007",
+    "29002",
+    "31009",
+    "31091",
+    "33001",
+    "33003",
+    "33004",
+    "33005",
+    "35011",
+    "35012",
+    "35013",
+    "35014",
+    "35015",
+    "35016",
+    "35031",
+    "35032",
+    "35033",
+    "35041",
+    "35051",
+    "35052",
+    "35071",
+    "35072",
+    "35073",
+    "35074",
+    "35081",
+    "35082",
+    "35083",
+    "35101",
+    "35102",
+    "35103",
+    "35104",
+    "35131",
+    "35132",
+    "35133",
+    "35141",
+    "35151",
+    "35163",
+    "35171",
+    "35174",
+    "43007",
+    "43008",
+    "43010",
+    "50009",
+    "50010",
+    "51001",
+    "51002",
+    "51003",
+    "51004",
+    "51005",
+    "51006",
+    "51007",
+    "51008",
+    "51009",
+    "51010",
+    "51011",
+    "51012",
+    "51013",
+    "51014",
+    "51015",
+    "51016",
+    "52006",
+    "52008",
+    "52014",
+    "53001"
+  ],
+  "dirty_check_includes_untracked": true,
+  "any_region_dirty": false,
+  "results": [
+    {
+      "outcome": "asthma",
+      "regions": 114,
+      "folds": 679,
+      "fold_errors": 11,
+      "stratum_errors": 0,
+      "median_mape": 63.807794358699994,
+      "median_mape_baseline": 62.2038356641,
+      "median_mae_ratio": 1.001414452557387,
+      "paired_folds": 679,
+      "share_folds_pm25_better": 0.4742268041237113,
+      "observed_peaks": 860,
+      "peaks": {
+        "precision": 0.2525389302640487,
+        "recall": 0.43372093023255814,
+        "hits": 373
+      },
+      "peaks_baseline": {
+        "precision": 0.2515679442508711,
+        "recall": 0.4197674418604651,
+        "hits": 361
+      },
+      "by_year": [
+        {
+          "year": 2019,
+          "folds": 109,
+          "median_mape": 52.5847399526,
+          "median_mae_ratio": 1.0004366582988948
+        },
+        {
+          "year": 2020,
+          "folds": 114,
+          "median_mape": 71.6152641128,
+          "median_mae_ratio": 1.0068319392379255
+        },
+        {
+          "year": 2021,
+          "folds": 114,
+          "median_mape": 66.2547914377,
+          "median_mae_ratio": 1.0002363350779149
+        },
+        {
+          "year": 2022,
+          "folds": 114,
+          "median_mape": 62.312781408250004,
+          "median_mae_ratio": 0.9955346503603291
+        },
+        {
+          "year": 2023,
+          "folds": 114,
+          "median_mape": 79.43598731505,
+          "median_mae_ratio": 1.0043607586873633
+        },
+        {
+          "year": 2024,
+          "folds": 114,
+          "median_mape": 59.03304594485,
+          "median_mae_ratio": 1.005247955911405
+        }
+      ]
+    },
+    {
+      "outcome": "circulatory",
+      "regions": 115,
+      "folds": 685,
+      "fold_errors": 5,
+      "stratum_errors": 0,
+      "median_mape": 25.250216351,
+      "median_mape_baseline": 24.4600831488,
+      "median_mae_ratio": 1.0091261659884307,
+      "paired_folds": 685,
+      "share_folds_pm25_better": 0.4043795620437956,
+      "observed_peaks": 2523,
+      "peaks": {
+        "precision": 0.4418526031102096,
+        "recall": 0.5180340864050733,
+        "hits": 1307
+      },
+      "peaks_baseline": {
+        "precision": 0.44677255829672186,
+        "recall": 0.523979389615537,
+        "hits": 1322
+      },
+      "by_year": [
+        {
+          "year": 2019,
+          "folds": 110,
+          "median_mape": 23.30179189335,
+          "median_mae_ratio": 1.0135644312806495
+        },
+        {
+          "year": 2020,
+          "folds": 115,
+          "median_mape": 27.9096220896,
+          "median_mae_ratio": 1.0114251475310596
+        },
+        {
+          "year": 2021,
+          "folds": 115,
+          "median_mape": 26.8643966413,
+          "median_mae_ratio": 1.008819885049493
+        },
+        {
+          "year": 2022,
+          "folds": 115,
+          "median_mape": 25.4402944517,
+          "median_mae_ratio": 1.0004929361416395
+        },
+        {
+          "year": 2023,
+          "folds": 115,
+          "median_mape": 26.2977274522,
+          "median_mae_ratio": 1.0092513084238923
+        },
+        {
+          "year": 2024,
+          "folds": 115,
+          "median_mape": 22.0746029437,
+          "median_mae_ratio": 1.0072597079721255
+        }
+      ]
+    },
+    {
+      "outcome": "negative_control",
+      "regions": 115,
+      "folds": 685,
+      "fold_errors": 5,
+      "stratum_errors": 0,
+      "median_mape": 18.9966219585,
+      "median_mape_baseline": 18.4036043485,
+      "median_mae_ratio": 1.0031504567812055,
+      "paired_folds": 685,
+      "share_folds_pm25_better": 0.46715328467153283,
+      "observed_peaks": 4015,
+      "peaks": {
+        "precision": 0.5493306891422906,
+        "recall": 0.5519302615193026,
+        "hits": 2216
+      },
+      "peaks_baseline": {
+        "precision": 0.5591588548264504,
+        "recall": 0.5496886674968867,
+        "hits": 2207
+      },
+      "by_year": [
+        {
+          "year": 2019,
+          "folds": 110,
+          "median_mape": 17.7915352216,
+          "median_mae_ratio": 0.9985331592628143
+        },
+        {
+          "year": 2020,
+          "folds": 115,
+          "median_mape": 23.4216255922,
+          "median_mae_ratio": 1.0063141365802175
+        },
+        {
+          "year": 2021,
+          "folds": 115,
+          "median_mape": 21.8418420666,
+          "median_mae_ratio": 1.0062425279345253
+        },
+        {
+          "year": 2022,
+          "folds": 115,
+          "median_mape": 16.9150749239,
+          "median_mae_ratio": 1.0044655486102783
+        },
+        {
+          "year": 2023,
+          "folds": 115,
+          "median_mape": 17.6175755123,
+          "median_mae_ratio": 1.0007483999326316
+        },
+        {
+          "year": 2024,
+          "folds": 115,
+          "median_mape": 15.7686684487,
+          "median_mae_ratio": 1.0059458111118111
+        }
+      ]
+    },
+    {
+      "outcome": "pneumonia",
+      "regions": 115,
+      "folds": 685,
+      "fold_errors": 5,
+      "stratum_errors": 0,
+      "median_mape": 41.8620947915,
+      "median_mape_baseline": 41.5321118494,
+      "median_mae_ratio": 1.0032955132740484,
+      "paired_folds": 685,
+      "share_folds_pm25_better": 0.4583941605839416,
+      "observed_peaks": 735,
+      "peaks": {
+        "precision": 0.19204892966360856,
+        "recall": 0.4272108843537415,
+        "hits": 314
+      },
+      "peaks_baseline": {
+        "precision": 0.18866749688667497,
+        "recall": 0.4122448979591837,
+        "hits": 303
+      },
+      "by_year": [
+        {
+          "year": 2019,
+          "folds": 110,
+          "median_mape": 30.46152002315,
+          "median_mae_ratio": 1.0144527875716753
+        },
+        {
+          "year": 2020,
+          "folds": 115,
+          "median_mape": 65.7524482372,
+          "median_mae_ratio": 1.0000820272872184
+        },
+        {
+          "year": 2021,
+          "folds": 115,
+          "median_mape": 46.9389188512,
+          "median_mae_ratio": 1.0032955132740484
+        },
+        {
+          "year": 2022,
+          "folds": 115,
+          "median_mape": 39.8388712456,
+          "median_mae_ratio": 1.0012433412100086
+        },
+        {
+          "year": 2023,
+          "folds": 115,
+          "median_mape": 51.5417481856,
+          "median_mae_ratio": 0.9949085349175004
+        },
+        {
+          "year": 2024,
+          "folds": 115,
+          "median_mape": 27.9533943666,
+          "median_mae_ratio": 1.0081041924867085
+        }
+      ]
+    },
+    {
+      "outcome": "respiratory",
+      "regions": 115,
+      "folds": 685,
+      "fold_errors": 5,
+      "stratum_errors": 0,
+      "median_mape": 32.7109185594,
+      "median_mape_baseline": 31.8698789692,
+      "median_mae_ratio": 1.0053160055371948,
+      "paired_folds": 685,
+      "share_folds_pm25_better": 0.4291970802919708,
+      "observed_peaks": 888,
+      "peaks": {
+        "precision": 0.21080305927342255,
+        "recall": 0.4966216216216216,
+        "hits": 441
+      },
+      "peaks_baseline": {
+        "precision": 0.21140609636184857,
+        "recall": 0.48423423423423423,
+        "hits": 430
+      },
+      "by_year": [
+        {
+          "year": 2019,
+          "folds": 110,
+          "median_mape": 22.53235908355,
+          "median_mae_ratio": 1.0151735933231727
+        },
+        {
+          "year": 2020,
+          "folds": 115,
+          "median_mape": 45.4469045408,
+          "median_mae_ratio": 1.0119776686597546
+        },
+        {
+          "year": 2021,
+          "folds": 115,
+          "median_mape": 40.2903907166,
+          "median_mae_ratio": 0.9988858898912983
+        },
+        {
+          "year": 2022,
+          "folds": 115,
+          "median_mape": 31.5813054825,
+          "median_mae_ratio": 1.0015834335401714
+        },
+        {
+          "year": 2023,
+          "folds": 115,
+          "median_mape": 46.6788574594,
+          "median_mae_ratio": 0.9977714804232187
+        },
+        {
+          "year": 2024,
+          "folds": 115,
+          "median_mape": 23.1232110216,
+          "median_mae_ratio": 1.0180022965792306
+        }
+      ]
+    }
+  ]
+}

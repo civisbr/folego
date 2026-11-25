@@ -1,0 +1,1775 @@
+{
+  "generated_at": "2026-11-25T23:30:42.601673+00:00",
+  "software": {
+    "pyreaddbc": "2.0.4",
+    "dbfread": "2.0.7",
+    "polars": "2.1.0",
+    "git_commit": "2554579c6c48e5d18d8a2bde184bd8e09b4b91a1",
+    "git_dirty": false,
+    "git_dirty_includes_untracked": true
+  },
+  "mode": "research",
+  "validated": false,
+  "inputs": [
+    {
+      "region": "11001",
+      "path": "11001-pm25_merra2-knots15_35.json",
+      "sha256": "baaa9a21152130f2830d1e8f38a4b766d9ed80ae9300a627685e9dd57315e6e2",
+      "generated_at": "2026-11-25T23:26:19.582089+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11002",
+      "path": "11002-pm25_merra2-knots15_35.json",
+      "sha256": "befe4daf0ef0ec1ad557b6bc7c8d14c10132a0055f1b3625928c8c0fa10fb637",
+      "generated_at": "2026-11-25T23:27:46.967479+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11003",
+      "path": "11003-pm25_merra2-knots15_35.json",
+      "sha256": "55df82a0c8f195836c82c01938e1a7bee795b622ec37acae813388807211cf77",
+      "generated_at": "2026-11-25T23:29:07.325154+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11004",
+      "path": "11004-pm25_merra2-knots15_35.json",
+      "sha256": "69454de86094c48afa98b0f0131f2e7ab1b3ef68d2c6ce6233148524069567e9",
+      "generated_at": "2026-11-25T23:30:28.675089+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11005",
+      "path": "11005-pm25_merra2-knots15_35.json",
+      "sha256": "5fc1d76dd011d30df60913edd73c9c92e839495602c8474ff6d26fbe01f08178",
+      "generated_at": "2026-11-25T21:10:04.123860+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11006",
+      "path": "11006-pm25_merra2-knots15_35.json",
+      "sha256": "7b3bb3ddccef251492f69e2f69b4da0356209c20421d8ba1de6ebc34019f1687",
+      "generated_at": "2026-11-25T21:09:48.670922+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "11007",
+      "path": "11007-pm25_merra2-knots15_35.json",
+      "sha256": "6ada243fcf7a73ada7d0884311b880fec653b762bb842c30721c97ab8fe569c5",
+      "generated_at": "2026-11-25T21:11:46.735166+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "12001",
+      "path": "12001-pm25_merra2-knots15_35.json",
+      "sha256": "14a98e07e5e08026cb4e5231591915d58963e14803e726c1ad6e458db404e1f9",
+      "generated_at": "2026-11-25T21:11:27.415584+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "12002",
+      "path": "12002-pm25_merra2-knots15_35.json",
+      "sha256": "c478405505d96fd291e0f542fb6ffca0e166cbaaa1cea50af61e5df222be0a05",
+      "generated_at": "2026-11-25T21:13:20.457180+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "12003",
+      "path": "12003-pm25_merra2-knots15_35.json",
+      "sha256": "70b3f8b41ba8ba1c98d925a3d799c36d6f7fd2d6d09a32aafd0a9ee076de2067",
+      "generated_at": "2026-11-25T21:13:38.474032+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13001",
+      "path": "13001-pm25_merra2-knots15_35.json",
+      "sha256": "9f642ac0a7add39dace89ace46b3e7e58df92e96bbd726d41e979248186708e9",
+      "generated_at": "2026-11-25T21:15:01.699765+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13002",
+      "path": "13002-pm25_merra2-knots15_35.json",
+      "sha256": "7df4b3ee5de6a01003a0d60940b144131dbfcaec21f10b1c2437a76497e1829b",
+      "generated_at": "2026-11-25T21:15:27.472904+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13003",
+      "path": "13003-pm25_merra2-knots15_35.json",
+      "sha256": "cac520af631be4b881a5da1fb11f11b0d3713d7c41e29624c691d0cee51fc42f",
+      "generated_at": "2026-11-25T21:16:24.269602+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13004",
+      "path": "13004-pm25_merra2-knots15_35.json",
+      "sha256": "736a554281c1bc4088db635340ce41700a604d18e712c6c94dfc9001da64c8e2",
+      "generated_at": "2026-11-25T21:16:58.026762+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13005",
+      "path": "13005-pm25_merra2-knots15_35.json",
+      "sha256": "a53b097062e5fc22086084470cfafcb3924269314f96f2f55d378c682eab759c",
+      "generated_at": "2026-11-25T21:17:46.465442+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13006",
+      "path": "13006-pm25_merra2-knots15_35.json",
+      "sha256": "31aba3267d4d90728906af6adccb542ad0b6794026259a223504701a1b7dad00",
+      "generated_at": "2026-11-25T21:18:06.832467+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "13008",
+      "path": "13008-pm25_merra2-knots15_35.json",
+      "sha256": "49fbb52c3cc8c4b7edc357bc61285f6326ca55551430f78b7cdb8837bab20ddc",
+      "generated_at": "2026-11-25T21:19:10.310631+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "14002",
+      "path": "14002-pm25_merra2-knots15_35.json",
+      "sha256": "33121f71d069b7ff921e60da575e9f5c2ebac26f456be6065b3f804814b74238",
+      "generated_at": "2026-11-25T21:19:46.501866+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15001",
+      "path": "15001-pm25_merra2-knots15_35.json",
+      "sha256": "3f74888ae30f27465d6fc556d8bae8922f09484c489e4efaf4c534ab939f68bb",
+      "generated_at": "2026-11-25T21:20:31.293973+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15002",
+      "path": "15002-pm25_merra2-knots15_35.json",
+      "sha256": "4f0c88c0a25abaaf1b189ba243e1f4e7a4c9f7c4af48e0a896092e219707876a",
+      "generated_at": "2026-11-25T21:21:03.922879+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15003",
+      "path": "15003-pm25_merra2-knots15_35.json",
+      "sha256": "c4782cfc4840b7944adc9ea19a72e56e02ed43748f729e7fb9168021eb772d25",
+      "generated_at": "2026-11-25T21:21:59.872281+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15004",
+      "path": "15004-pm25_merra2-knots15_35.json",
+      "sha256": "2473182dfef52d2429e09ec70924a08022b35d49d983355e99cf4976398ca9b5",
+      "generated_at": "2026-11-25T21:22:56.525258+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15006",
+      "path": "15006-pm25_merra2-knots15_35.json",
+      "sha256": "67c37a3e5f9ad465d361427af33155163bd2122e813569f3442328f472848153",
+      "generated_at": "2026-11-25T21:23:30.281423+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15007",
+      "path": "15007-pm25_merra2-knots15_35.json",
+      "sha256": "170e554927aa67ef5b96bd4d12dc129460ddb1503b2a6ffd558318cb9403b4c0",
+      "generated_at": "2026-11-25T21:24:30.215500+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15008",
+      "path": "15008-pm25_merra2-knots15_35.json",
+      "sha256": "4b72d3113eb1657805f9397fe79375935d7ce8bf8533c01802f83fa0c24922be",
+      "generated_at": "2026-11-25T21:24:55.786966+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15010",
+      "path": "15010-pm25_merra2-knots15_35.json",
+      "sha256": "6cf3bd66e413468f37d56c18d69e198e40b40f0eac2ccc713ace19771b6a71e7",
+      "generated_at": "2026-11-25T21:25:53.628528+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15011",
+      "path": "15011-pm25_merra2-knots15_35.json",
+      "sha256": "952a0ac79cc65ac07d2a7e512e4b6fec17790df00b8f4d8acde1062695e9946c",
+      "generated_at": "2026-11-25T21:26:09.014504+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "15012",
+      "path": "15012-pm25_merra2-knots15_35.json",
+      "sha256": "36098e6e6a9538022dac3a8c16e863b911abfd1b9b695e239c8d369cf8303026",
+      "generated_at": "2026-11-25T21:27:10.158240+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "16001",
+      "path": "16001-pm25_merra2-knots15_35.json",
+      "sha256": "5d13cc4a112482a78f753867986a8041be7aa1904b3dd2b6496e49e44d767a0d",
+      "generated_at": "2026-11-25T21:27:38.933163+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "16002",
+      "path": "16002-pm25_merra2-knots15_35.json",
+      "sha256": "29d826d4bd9eaf6bb568c0a260f733ac5bd4dedd60068f34cfd6154c22337b1e",
+      "generated_at": "2026-11-25T21:28:46.187021+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17001",
+      "path": "17001-pm25_merra2-knots15_35.json",
+      "sha256": "a374a98f2788ce64ec02d6b0ce26a29dc1a830c9e54f50767d5c83e65974adb8",
+      "generated_at": "2026-11-25T21:28:48.638149+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17002",
+      "path": "17002-pm25_merra2-knots15_35.json",
+      "sha256": "9a7ce0304a12c26a482ff13998290780261e80cdb194bdb4d1b8ac9b4e6137ce",
+      "generated_at": "2026-11-25T21:29:48.832394+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17003",
+      "path": "17003-pm25_merra2-knots15_35.json",
+      "sha256": "10a4d8f1eeffc30cb0dbaefa53f9caa36665a79b43d0d4089042eb303cb761e6",
+      "generated_at": "2026-11-25T21:30:25.962081+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17004",
+      "path": "17004-pm25_merra2-knots15_35.json",
+      "sha256": "32928aa8c05cc2007d0a59d5a39959258971327bdc9aac4ba8b8cc22e3191239",
+      "generated_at": "2026-11-25T21:30:59.856478+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17005",
+      "path": "17005-pm25_merra2-knots15_35.json",
+      "sha256": "7681a162c6a0493207be5527eb103c582515d97e2079ffc7d1508174de1b292f",
+      "generated_at": "2026-11-25T21:31:36.699984+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17006",
+      "path": "17006-pm25_merra2-knots15_35.json",
+      "sha256": "44b8926f6d5a2f97fe0e63b2872be2b917ec93f9fbf2aedbf820aa7af949df7a",
+      "generated_at": "2026-11-25T21:32:18.105171+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17007",
+      "path": "17007-pm25_merra2-knots15_35.json",
+      "sha256": "bfe6ec8d73a26fd56dc175462fe6c0c889a88e888147f7eaa8a22286f8522765",
+      "generated_at": "2026-11-25T21:32:39.463143+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "17008",
+      "path": "17008-pm25_merra2-knots15_35.json",
+      "sha256": "a62c333d836804b9675bfca9bd69d5f4bdad46c050fc684e7adb926c8f49e8bf",
+      "generated_at": "2026-11-25T21:33:25.119806+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21001",
+      "path": "21001-pm25_merra2-knots15_35.json",
+      "sha256": "507f7f4e8feaa4a68f00d872580325c92dfc509fc99d8f210af98e6c3fdfca76",
+      "generated_at": "2026-11-25T21:33:57.148084+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21002",
+      "path": "21002-pm25_merra2-knots15_35.json",
+      "sha256": "eb6de8f023d1cbd1cec0cb5b432a5d447ec2622547c545afc6120e233fcff547",
+      "generated_at": "2026-11-25T21:34:53.561496+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21003",
+      "path": "21003-pm25_merra2-knots15_35.json",
+      "sha256": "5e6236a56e38f51472464a8383d0050863ed79c089810b1583da082484f4a0d1",
+      "generated_at": "2026-11-25T21:35:22.612666+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21004",
+      "path": "21004-pm25_merra2-knots15_35.json",
+      "sha256": "e648b14aa1d063cfbd26a9c8420b9cbcd7136a64aed73fe1773f2a4f9e342eda",
+      "generated_at": "2026-11-25T21:36:15.436645+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21005",
+      "path": "21005-pm25_merra2-knots15_35.json",
+      "sha256": "d01483398f7ca0ec96d0e7c7219306f715f649d5047ecf805743b2473dbcafea",
+      "generated_at": "2026-11-25T21:36:51.020775+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21007",
+      "path": "21007-pm25_merra2-knots15_35.json",
+      "sha256": "59205c553eb1338e828e205a25ff9491b6f3acecc750da5eb48a43da5874b443",
+      "generated_at": "2026-11-25T21:37:35.955524+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21008",
+      "path": "21008-pm25_merra2-knots15_35.json",
+      "sha256": "6f42be4905b5fdb1b5cb9c33c1b9cb34f64fe98374194355d112eeb51afbab3a",
+      "generated_at": "2026-11-25T21:38:18.243651+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21010",
+      "path": "21010-pm25_merra2-knots15_35.json",
+      "sha256": "5e6f73608deea339f5225af6863ed08c092551b60b4bac02dd099aa02999c55a",
+      "generated_at": "2026-11-25T21:39:10.699114+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21012",
+      "path": "21012-pm25_merra2-knots15_35.json",
+      "sha256": "01e70a0e2acb609ef53db2faee1c70010091c53dd08568321b4861185eceffe6",
+      "generated_at": "2026-11-25T21:39:44.390612+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21014",
+      "path": "21014-pm25_merra2-knots15_35.json",
+      "sha256": "f96879346119ed952d0ab415f1b32f53eb616479cdc455beb6b76d344b6c6963",
+      "generated_at": "2026-11-25T21:40:35.796799+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21015",
+      "path": "21015-pm25_merra2-knots15_35.json",
+      "sha256": "fe0e1a16bfb83cb0e6cb5d006cd00bb95de8bbbaffc0a41dca7390c1ef30cba9",
+      "generated_at": "2026-11-25T21:40:51.411186+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "21017",
+      "path": "21017-pm25_merra2-knots15_35.json",
+      "sha256": "1d86ed327f76fbf4b6b7e9ff8a407b8ada447cf384ea92e4c8126606a39b7100",
+      "generated_at": "2026-11-25T21:41:51.100025+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "22004",
+      "path": "22004-pm25_merra2-knots15_35.json",
+      "sha256": "484a5be324c4fcaa10d7ebd8932f2599e1fb19cc18ff376f8a8bf95094d95c72",
+      "generated_at": "2026-11-25T21:42:01.999587+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "22007",
+      "path": "22007-pm25_merra2-knots15_35.json",
+      "sha256": "802a6899d383de8fbd7e74bac737dda6ca784f4c688e2584bcff82ed87a8dbe5",
+      "generated_at": "2026-11-25T21:43:03.024905+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "29002",
+      "path": "29002-pm25_merra2-knots15_35.json",
+      "sha256": "f26fc6ea52e6878e9873c0ed7a706d3c694b65f975f1f72f1d8ff2898b120249",
+      "generated_at": "2026-11-25T21:43:13.843166+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "31009",
+      "path": "31009-pm25_merra2-knots15_35.json",
+      "sha256": "2b2b2638bd1963c7e6d2002991042f90a8788fd7b00cfb624f8914f4dba1331e",
+      "generated_at": "2026-11-25T21:44:29.344871+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "31091",
+      "path": "31091-pm25_merra2-knots15_35.json",
+      "sha256": "134f23042534a2f4c70c0996602d1c53fba7754ea8c05ce91d5ee089a715ce11",
+      "generated_at": "2026-11-25T21:44:30.274529+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "33001",
+      "path": "33001-pm25_merra2-knots15_35.json",
+      "sha256": "a40974eb5660cde6227e3e2a9d0855ca106fd390f80e4d7810c527efff37550f",
+      "generated_at": "2026-11-25T21:45:37.261165+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "33003",
+      "path": "33003-pm25_merra2-knots15_35.json",
+      "sha256": "135ea6801fb08f43d5b29d4b24905b1b19d1269c6ea7c6bda03695b20404f961",
+      "generated_at": "2026-11-25T21:45:51.035935+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "33004",
+      "path": "33004-pm25_merra2-knots15_35.json",
+      "sha256": "e66f1aed59756dc07e172ef9173ddc90011ae9115a6868922f01b95cc0ec6f1f",
+      "generated_at": "2026-11-25T21:46:59.333124+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "33005",
+      "path": "33005-pm25_merra2-knots15_35.json",
+      "sha256": "39bd91aea839c49bb0420bcfcabaddfc1d702dca72110ae0491a520b3cabcdd8",
+      "generated_at": "2026-11-25T21:46:59.498796+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35011",
+      "path": "35011-pm25_merra2-knots15_35.json",
+      "sha256": "a71103fc5c0e303b2ca34d947daad179de76f54f3b0f33f2d5e4fa2533cbf135",
+      "generated_at": "2026-11-25T21:48:08.119278+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35012",
+      "path": "35012-pm25_merra2-knots15_35.json",
+      "sha256": "7934c42220dc0af7d4eaf0ca1746b8deea2eb0dc9d343acc11c5361d3ae7dbab",
+      "generated_at": "2026-11-25T21:48:26.306748+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35013",
+      "path": "35013-pm25_merra2-knots15_35.json",
+      "sha256": "95b3b71126b13ec7fd60a9f0f483d7aa10dca6fbabac32f9407c93e296fb254d",
+      "generated_at": "2026-11-25T21:49:20.747235+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35014",
+      "path": "35014-pm25_merra2-knots15_35.json",
+      "sha256": "268ae053a43730066346626583c34b16221695fe9a14106f2a11da3be3c2840b",
+      "generated_at": "2026-11-25T21:49:46.278377+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35015",
+      "path": "35015-pm25_merra2-knots15_35.json",
+      "sha256": "491e64e54b1113d7ef06c7cebbe9a63270496b6ac9666f037989a6d31eacc867",
+      "generated_at": "2026-11-25T21:50:29.979701+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35016",
+      "path": "35016-pm25_merra2-knots15_35.json",
+      "sha256": "88864dded8583b2e0c6b7781c3147cb0aaab52a87c5603f9a7b5428f2bae48b0",
+      "generated_at": "2026-11-25T21:50:54.836030+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35031",
+      "path": "35031-pm25_merra2-knots15_35.json",
+      "sha256": "d0b09b44175f801e9209ae37f8318d70a8bfad1376e0163e9e89f795cf8d76dd",
+      "generated_at": "2026-11-25T21:51:46.048899+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35032",
+      "path": "35032-pm25_merra2-knots15_35.json",
+      "sha256": "605826bc5310f6d46c910a981f10e504a93fa50fb73b3f9320a1e21ed23f2937",
+      "generated_at": "2026-11-25T21:52:12.983604+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35033",
+      "path": "35033-pm25_merra2-knots15_35.json",
+      "sha256": "28f37e8a32635626c25ff82b59ec6fdf9d511fd35355aa509406d991c89f603a",
+      "generated_at": "2026-11-25T21:53:08.505832+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35041",
+      "path": "35041-pm25_merra2-knots15_35.json",
+      "sha256": "5c6a6044201ff2b7b98ee87e81f12ae77ec09145704297cb63cfab4123bb05f4",
+      "generated_at": "2026-11-25T21:53:44.405341+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35051",
+      "path": "35051-pm25_merra2-knots15_35.json",
+      "sha256": "b43bea4d4af1a8eebbd0297d36ca66579b87bb4ee7e6d71a3550019b1cf65f9e",
+      "generated_at": "2026-11-25T21:55:06.454173+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35052",
+      "path": "35052-pm25_merra2-knots15_35.json",
+      "sha256": "1b4d53f53657e4bca359e4d48d6b621849bbba1710b005e15a713b2bcbd96942",
+      "generated_at": "2026-11-25T21:55:29.915565+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35071",
+      "path": "35071-pm25_merra2-knots15_35.json",
+      "sha256": "f945098f1642993b9ab92ea3e59b9c8817fd5a1eb64e9404182932543d5f5354",
+      "generated_at": "2026-11-25T21:58:20.890702+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35072",
+      "path": "35072-pm25_merra2-knots15_35.json",
+      "sha256": "dc3f12c8681c9d74cfe7cb1dd7efdd928350ba93e70d2d1348f160db50f454af",
+      "generated_at": "2026-11-25T21:58:14.210937+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35073",
+      "path": "35073-pm25_merra2-knots15_35.json",
+      "sha256": "afdb5dceb56d69fbaa67fd68ce5cf6362eb90df800466dae6f73b172e706b183",
+      "generated_at": "2026-11-25T22:01:25.731271+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35074",
+      "path": "35074-pm25_merra2-knots15_35.json",
+      "sha256": "e5d076927f5950f8f6b8235cc774955b60a74e7d722c6dc2153d1f2cc5e0d49d",
+      "generated_at": "2026-11-25T22:01:43.005713+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35081",
+      "path": "35081-pm25_merra2-knots15_35.json",
+      "sha256": "72434b8f6a25a4cc3d187e9edfe66c411c06749f8fac959fd3eb9c5d4f4540de",
+      "generated_at": "2026-11-25T22:04:26.045479+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35082",
+      "path": "35082-pm25_merra2-knots15_35.json",
+      "sha256": "c1e883bb5b8820c039f2b01d3534b2185a688e10523c69afc85d184506061fb0",
+      "generated_at": "2026-11-25T22:04:40.279440+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35083",
+      "path": "35083-pm25_merra2-knots15_35.json",
+      "sha256": "c50ef0ecb2b50b19e935310b81c1d10f23c8376c6cd51f9c5f69f90400fb8fdf",
+      "generated_at": "2026-11-25T22:08:24.251405+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35101",
+      "path": "35101-pm25_merra2-knots15_35.json",
+      "sha256": "4fa4d54121551421986e356cc77243957fa252f61cd2ff3e0cdb6b50b1be5d25",
+      "generated_at": "2026-11-25T22:08:15.262977+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35102",
+      "path": "35102-pm25_merra2-knots15_35.json",
+      "sha256": "f0ae4e8af069e69ecd7a1fd07fb3ad63f92ee6e71dc72fd0f765293cd17e6d2b",
+      "generated_at": "2026-11-25T22:11:43.421243+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35103",
+      "path": "35103-pm25_merra2-knots15_35.json",
+      "sha256": "298c3726f8b4aa70d564ba4b2bdb823ec61d1273492cef16985326d0c1e79dc6",
+      "generated_at": "2026-11-25T22:11:19.758230+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35104",
+      "path": "35104-pm25_merra2-knots15_35.json",
+      "sha256": "5afe068d9b2d8b7d5b6f95b9481efc2bca42b564d21ca9d934aa491e37b129e3",
+      "generated_at": "2026-11-25T22:14:17.770850+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35131",
+      "path": "35131-pm25_merra2-knots15_35.json",
+      "sha256": "60c515baa3a9b394ae0d611fbc2460e4e471f031711e1de7057056d6b48a85d2",
+      "generated_at": "2026-11-25T22:15:42.567331+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35132",
+      "path": "35132-pm25_merra2-knots15_35.json",
+      "sha256": "41de4ee4b4f278e414bfe7a1ac6ee4e29bd37587b9507f9949fa3dac1eacfa27",
+      "generated_at": "2026-11-25T22:17:26.043937+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35133",
+      "path": "35133-pm25_merra2-knots15_35.json",
+      "sha256": "402d40e93ea4765f7e3fb3197537a27483b5aede111eeadc6cf2d14f66ea77c8",
+      "generated_at": "2026-11-25T22:18:37.996770+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35141",
+      "path": "35141-pm25_merra2-knots15_35.json",
+      "sha256": "67f20dcae16f8768596df4c4982d3acf4fddc4914de450655c0bf32e936e21a3",
+      "generated_at": "2026-11-25T22:21:35.680044+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35151",
+      "path": "35151-pm25_merra2-knots15_35.json",
+      "sha256": "48199a5336bcbec71c2ffcbdcd46a6d2785561ffe8d83ca21a2c5083297dc9b7",
+      "generated_at": "2026-11-25T22:22:12.797816+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35163",
+      "path": "35163-pm25_merra2-knots15_35.json",
+      "sha256": "b4e37876e5ca4b18cefbc52632be4f6cdda2ebddce36001abf6f9d1ea21323c1",
+      "generated_at": "2026-11-25T22:24:59.435215+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35171",
+      "path": "35171-pm25_merra2-knots15_35.json",
+      "sha256": "be28a76c7d82aa2dda0aa0e01617b6846cec8a480e8b419c4acbd871e1cf498d",
+      "generated_at": "2026-11-25T22:25:22.163014+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "35174",
+      "path": "35174-pm25_merra2-knots15_35.json",
+      "sha256": "7a4ca02721202cbab1ea11a486adca3e641798648b9962302b8fecd2123c9b56",
+      "generated_at": "2026-11-25T22:28:12.942562+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "43007",
+      "path": "43007-pm25_merra2-knots15_35.json",
+      "sha256": "24199a5b36d631faf685b4ba6e999ac5e9fdf3a5455ce3644879fbfca21368cf",
+      "generated_at": "2026-11-25T22:28:38.748591+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "43008",
+      "path": "43008-pm25_merra2-knots15_35.json",
+      "sha256": "a5728c5d9460e69877d0357ad4960cbf4beaadfc4b1d4d686c3f9eff70c893c7",
+      "generated_at": "2026-11-25T22:31:42.148301+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "43010",
+      "path": "43010-pm25_merra2-knots15_35.json",
+      "sha256": "8024c90f8068cfefe77d28e2f90c69b25bf2a97e968f3dc32f3da64bba02bf7f",
+      "generated_at": "2026-11-25T22:31:37.265980+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "50009",
+      "path": "50009-pm25_merra2-knots15_35.json",
+      "sha256": "b784d1a0fdd8f28ab1c0275956b77f998c2d64a0393a7e07032e0ff7ab57a68e",
+      "generated_at": "2026-11-25T22:35:00.899766+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "50010",
+      "path": "50010-pm25_merra2-knots15_35.json",
+      "sha256": "2781decc64bec156caedc3cefd375b93490eabc8717e74cac4392edc88b66b79",
+      "generated_at": "2026-11-25T22:34:48.381325+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51001",
+      "path": "51001-pm25_merra2-knots15_35.json",
+      "sha256": "ff271601c209b683d591136479fae220dbb7afc0c8af002498a7c7ee59a55b24",
+      "generated_at": "2026-11-25T22:38:01.559191+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51002",
+      "path": "51002-pm25_merra2-knots15_35.json",
+      "sha256": "93c5287d1a9ee8f18240dcf4366eb9c1df1e2b74570bd741afd6119198eccc21",
+      "generated_at": "2026-11-25T22:38:16.952115+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51003",
+      "path": "51003-pm25_merra2-knots15_35.json",
+      "sha256": "d73b6d0afe2492ba0b0c9f4f72bfc74135a4f0b5f9f95cee93494ea80949bf93",
+      "generated_at": "2026-11-25T22:40:43.821672+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51004",
+      "path": "51004-pm25_merra2-knots15_35.json",
+      "sha256": "4f4243a9d4ce3881e6eccb10327f15a17412c303e75ecddbd6419a908eb7c710",
+      "generated_at": "2026-11-25T22:41:31.847197+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51005",
+      "path": "51005-pm25_merra2-knots15_35.json",
+      "sha256": "52d5ac0e9a72b8588e56acdf2fdd843affbfc27a1967da16167f4a101903d15c",
+      "generated_at": "2026-11-25T22:44:17.499626+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51006",
+      "path": "51006-pm25_merra2-knots15_35.json",
+      "sha256": "bc1d9f4632223d92ca5dafffa46e105f44ce2e167a0303cd604045ee08bafed9",
+      "generated_at": "2026-11-25T22:44:28.740748+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51007",
+      "path": "51007-pm25_merra2-knots15_35.json",
+      "sha256": "81b45ff93480f953f0817ba21fd1776464415fcd6f041138019568a18410f706",
+      "generated_at": "2026-11-25T22:47:59.349710+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51008",
+      "path": "51008-pm25_merra2-knots15_35.json",
+      "sha256": "88588b99eb67752834878a8928f00752da6a66a574eaba3d402f749024731573",
+      "generated_at": "2026-11-25T22:47:12.592439+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51009",
+      "path": "51009-pm25_merra2-knots15_35.json",
+      "sha256": "fb6e2746518c4c84d7a4d7a6499a9a659bee7293185fce7d6bf2d051aed8af2c",
+      "generated_at": "2026-11-25T22:50:16.219626+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51010",
+      "path": "51010-pm25_merra2-knots15_35.json",
+      "sha256": "9564ab24e9834db79ab13412c4d1e9a523bfc29da7fe8be9f5cb384db9ae9ceb",
+      "generated_at": "2026-11-25T22:50:56.805522+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51011",
+      "path": "51011-pm25_merra2-knots15_35.json",
+      "sha256": "1e690a19b8163a8f9466ea723665e75febe65c2da7888319a15f17e78dd9e4e7",
+      "generated_at": "2026-11-25T22:53:07.704099+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51012",
+      "path": "51012-pm25_merra2-knots15_35.json",
+      "sha256": "5e3f8f185b4cf3122a60d1bba7ae7418343e7322500200aae084e7f92307c950",
+      "generated_at": "2026-11-25T22:53:46.002043+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51013",
+      "path": "51013-pm25_merra2-knots15_35.json",
+      "sha256": "310b44ab6bb2d8de2f24d140bed8c2487412a2527b5382a8977efd773bff2573",
+      "generated_at": "2026-11-25T22:56:09.508503+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51014",
+      "path": "51014-pm25_merra2-knots15_35.json",
+      "sha256": "24ec5a7e7dfb098871e9555c7b133a7a594116e26da52363437fc5128580170d",
+      "generated_at": "2026-11-25T22:56:49.124104+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51015",
+      "path": "51015-pm25_merra2-knots15_35.json",
+      "sha256": "e05154f0c26924c2ca002aa5c1b897e1d17bd8a5d6c4bcf92dc4a005e8f478fb",
+      "generated_at": "2026-11-25T22:59:47.511656+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "51016",
+      "path": "51016-pm25_merra2-knots15_35.json",
+      "sha256": "b38e3f83422ed22d9e75b3d92833b08c75084540410ea356d9c72ef439bab2b7",
+      "generated_at": "2026-11-25T22:59:59.137794+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "52006",
+      "path": "52006-pm25_merra2-knots15_35.json",
+      "sha256": "6ebfc3ea87944bfbb572147a3525a534ff42a89013442e5d487d1f59d6a39ef5",
+      "generated_at": "2026-11-25T23:02:55.330621+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "52008",
+      "path": "52008-pm25_merra2-knots15_35.json",
+      "sha256": "7c7e91fddf0aae7de8141cad21a0081470e5c9d486bed3b51b34d5a39d713c5c",
+      "generated_at": "2026-11-25T23:03:31.141799+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "52014",
+      "path": "52014-pm25_merra2-knots15_35.json",
+      "sha256": "efc108b509b8fe08c7ffcdb9a48dc9f0f374113f8b246273a0af6f5507a44b6e",
+      "generated_at": "2026-11-25T23:06:11.790924+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    },
+    {
+      "region": "53001",
+      "path": "53001-pm25_merra2-knots15_35.json",
+      "sha256": "1cb31efc16edd3d4d99bc3b2022c48597882e26799d0b0f72d1d712c529543a7",
+      "generated_at": "2026-11-25T23:06:26.869310+00:00",
+      "git_commit": "8580e9fb6ceb7b3c2640abff863cb09bf1abde11",
+      "git_dirty": false
+    }
+  ],
+  "method": "DerSimonian-Laird random effects on log RR; SE from the 95% Wald interval as (log upper - log lower) / (2 × 1.96); effects rejected by the study rules ('rejected') and strata that failed outright ('stratum_errors') are counted and left out; regions the study refused have no report and are not counted",
+  "model_spec_version": 7,
+  "exposure": "pm25_merra2",
+  "meteorology": "ERA5",
+  "exposure_source": "MERRA-2",
+  "panel_sha256": [
+    "ba11be31aeb06f1524654cac022795b23fa47003e8e65525208f8680d011efc2"
+  ],
+  "basis": {
+    "max_lag": 7,
+    "requested_knots": [
+      15.0,
+      35.0
+    ],
+    "min_share_above_knot": 0.01,
+    "max_log_rr_bound": 20.0,
+    "max_log_rr_se": 3.0,
+    "max_covariance_condition": 4503599627370496.0,
+    "lag_degree": 2,
+    "reference": 15.0
+  },
+  "confounders": {
+    "inference": "natural time spline, 7 df/year, no harmonics; cubic B-splines (3 df) of mean temperature (lags 1-7, 8-21) and humidity (lags 1-7), full windows only",
+    "trend_sensitivity_df_per_year": [
+      4,
+      10
+    ],
+    "autocorrelation_sensitivity": "Newey-West (HAC, 7 lags) interval; log of previous-day admissions as a covariate"
+  },
+  "regions": [
+    "11001",
+    "11002",
+    "11003",
+    "11004",
+    "11005",
+    "11006",
+    "11007",
+    "12001",
+    "12002",
+    "12003",
+    "13001",
+    "13002",
+    "13003",
+    "13004",
+    "13005",
+    "13006",
+    "13008",
+    "14002",
+    "15001",
+    "15002",
+    "15003",
+    "15004",
+    "15006",
+    "15007",
+    "15008",
+    "15010",
+    "15011",
+    "15012",
+    "16001",
+    "16002",
+    "17001",
+    "17002",
+    "17003",
+    "17004",
+    "17005",
+    "17006",
+    "17007",
+    "17008",
+    "21001",
+    "21002",
+    "21003",
+    "21004",
+    "21005",
+    "21007",
+    "21008",
+    "21010",
+    "21012",
+    "21014",
+    "21015",
+    "21017",
+    "22004",
+    "22007",
+    "29002",
+    "31009",
+    "31091",
+    "33001",
+    "33003",
+    "33004",
+    "33005",
+    "35011",
+    "35012",
+    "35013",
+    "35014",
+    "35015",
+    "35016",
+    "35031",
+    "35032",
+    "35033",
+    "35041",
+    "35051",
+    "35052",
+    "35071",
+    "35072",
+    "35073",
+    "35074",
+    "35081",
+    "35082",
+    "35083",
+    "35101",
+    "35102",
+    "35103",
+    "35104",
+    "35131",
+    "35132",
+    "35133",
+    "35141",
+    "35151",
+    "35163",
+    "35171",
+    "35174",
+    "43007",
+    "43008",
+    "43010",
+    "50009",
+    "50010",
+    "51001",
+    "51002",
+    "51003",
+    "51004",
+    "51005",
+    "51006",
+    "51007",
+    "51008",
+    "51009",
+    "51010",
+    "51011",
+    "51012",
+    "51013",
+    "51014",
+    "51015",
+    "51016",
+    "52006",
+    "52008",
+    "52014",
+    "53001"
+  ],
+  "any_region_dirty": false,
+  "dirty_check_includes_untracked": true,
+  "results": [
+    {
+      "outcome": "asthma",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": -0.017759250468021685,
+        "se": 0.015831871447705332,
+        "rr": 0.9823975156326449,
+        "lower": 0.952381376822864,
+        "upper": 1.0133596710393207,
+        "tau2": 0.0,
+        "q": 53.36304596025895,
+        "i2": 0.0,
+        "regions": 59,
+        "rejected": 0,
+        "stratum_errors": 56,
+        "max_covariance_condition": 47171346743793.4
+      },
+      "effect_hac": {
+        "log_rr": -0.02436171191587819,
+        "se": 0.01531722573957552,
+        "rr": 0.975932639442108,
+        "lower": 0.9470688602282227,
+        "upper": 1.0056760988835822,
+        "tau2": 0.0002809397306936231,
+        "q": 59.16889288372343,
+        "i2": 0.01975519275002316,
+        "regions": 59,
+        "rejected": 0,
+        "stratum_errors": 56,
+        "max_covariance_condition": 102447154313519.11
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.017981124536510344,
+        "se": 0.015762402653627557,
+        "rr": 0.9821795712779727,
+        "lower": 0.9522997467306267,
+        "upper": 1.0129969198749107,
+        "tau2": 0.0,
+        "q": 52.14265755373645,
+        "i2": 0.0,
+        "regions": 59,
+        "rejected": 0,
+        "stratum_errors": 56,
+        "max_covariance_condition": 47135053484388.95
+      }
+    },
+    {
+      "outcome": "asthma",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": 0.010454975370203646,
+        "se": 0.05576858344515896,
+        "rr": 1.010509819590217,
+        "lower": 0.9058772677434848,
+        "upper": 1.1272278617078664,
+        "tau2": 0.01300910820343635,
+        "q": 31.181781195943486,
+        "i2": 0.16617976899336323,
+        "regions": 27,
+        "rejected": 4,
+        "stratum_errors": 84,
+        "max_covariance_condition": 29393188279236.45
+      },
+      "effect_hac": {
+        "log_rr": 0.016698327774271333,
+        "se": 0.057112601771918306,
+        "rr": 1.0168385241105422,
+        "lower": 0.9091525549133254,
+        "upper": 1.137279523142163,
+        "tau2": 0.023954666042810296,
+        "q": 37.90608525913179,
+        "i2": 0.31409429852067217,
+        "regions": 27,
+        "rejected": 4,
+        "stratum_errors": 84,
+        "max_covariance_condition": 58325984432536.875
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.008017376368991079,
+        "se": 0.05460422998729826,
+        "rr": 1.0080496015939286,
+        "lower": 0.9057364453722822,
+        "upper": 1.121920183808003,
+        "tau2": 0.01064597965611657,
+        "q": 30.239256193661966,
+        "i2": 0.14019049167454384,
+        "regions": 27,
+        "rejected": 4,
+        "stratum_errors": 84,
+        "max_covariance_condition": 29366508528387.77
+      }
+    },
+    {
+      "outcome": "asthma",
+      "age_group": "all",
+      "effect": {
+        "log_rr": -0.022386244743764504,
+        "se": 0.014725387950267229,
+        "rr": 0.9778624678622745,
+        "lower": 0.9500430257724946,
+        "upper": 1.0064965271190585,
+        "tau2": 0.002982933126337071,
+        "q": 114.3560981188703,
+        "i2": 0.21298469009980345,
+        "regions": 91,
+        "rejected": 1,
+        "stratum_errors": 23,
+        "max_covariance_condition": 121172272714931.39
+      },
+      "effect_hac": {
+        "log_rr": -0.011000205281318742,
+        "se": 0.014227183578600817,
+        "rr": 0.9890600757397912,
+        "lower": 0.9618608502433746,
+        "upper": 1.0170284331407007,
+        "tau2": 0.002104459586779335,
+        "q": 108.23073498898563,
+        "i2": 0.17768275334120842,
+        "regions": 90,
+        "rejected": 2,
+        "stratum_errors": 23,
+        "max_covariance_condition": 104291209203241.1
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.021816179150735696,
+        "se": 0.013367652968233456,
+        "rr": 0.9784200725304344,
+        "lower": 0.9531177946099095,
+        "upper": 1.0043940463017638,
+        "tau2": 0.0015915419259657187,
+        "q": 103.3343884059791,
+        "i2": 0.1290411508857157,
+        "regions": 91,
+        "rejected": 1,
+        "stratum_errors": 23,
+        "max_covariance_condition": 121658759525640.39
+      }
+    },
+    {
+      "outcome": "circulatory",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": -0.005050115071224915,
+        "se": 0.036213589386233584,
+        "rr": 0.994962615320894,
+        "lower": 0.9267895607278712,
+        "upper": 1.0681503631835447,
+        "tau2": 0.0,
+        "q": 30.140921745544397,
+        "i2": 0.0,
+        "regions": 41,
+        "rejected": 3,
+        "stratum_errors": 71,
+        "max_covariance_condition": 37317473403708.875
+      },
+      "effect_hac": {
+        "log_rr": -0.0034845463407927033,
+        "se": 0.03096611583938371,
+        "rr": 0.9965215176453495,
+        "lower": 0.9378379244053632,
+        "upper": 1.0588771356840128,
+        "tau2": 0.0,
+        "q": 38.85136225715166,
+        "i2": 0.0,
+        "regions": 42,
+        "rejected": 2,
+        "stratum_errors": 71,
+        "max_covariance_condition": 275190913177034.75
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.003691929320108098,
+        "se": 0.03622677172434638,
+        "rr": 0.9963148774716364,
+        "lower": 0.9280251902486738,
+        "upper": 1.069629731500427,
+        "tau2": 0.0,
+        "q": 32.00498032199316,
+        "i2": 0.0,
+        "regions": 41,
+        "rejected": 3,
+        "stratum_errors": 71,
+        "max_covariance_condition": 37149773918555.88
+      }
+    },
+    {
+      "outcome": "circulatory",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": -0.0026798752327771513,
+        "se": 0.00451979265217117,
+        "rr": 0.9973237124273118,
+        "lower": 0.9885276463003155,
+        "upper": 1.0061980472598926,
+        "tau2": 0.0001649999420815266,
+        "q": 125.79230747229809,
+        "i2": 0.09374426552191982,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 75133189702080.78
+      },
+      "effect_hac": {
+        "log_rr": -0.0034608368824605358,
+        "se": 0.004452349659271194,
+        "rr": 0.996545144910843,
+        "lower": 0.9878865238685162,
+        "upper": 1.0052796569756133,
+        "tau2": 0.00026024214292792394,
+        "q": 143.41840664416452,
+        "i2": 0.20512294992339822,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 984939247615041.5
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.002688062315424702,
+        "se": 0.004522153602318816,
+        "rr": 0.9973155472890761,
+        "lower": 0.9885149788495347,
+        "upper": 1.0061944655832138,
+        "tau2": 0.00016666635290487174,
+        "q": 125.95652333049777,
+        "i2": 0.09492579673007494,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 75120394347667.95
+      }
+    },
+    {
+      "outcome": "circulatory",
+      "age_group": "all",
+      "effect": {
+        "log_rr": -0.0035758601300345675,
+        "se": 0.0051147965330313105,
+        "rr": 0.9964305256439877,
+        "lower": 0.9864912124793366,
+        "upper": 1.0064699815620006,
+        "tau2": 0.0008087375495999981,
+        "q": 195.3911522649998,
+        "i2": 0.41655495308514695,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 75533079762196.08
+      },
+      "effect_hac": {
+        "log_rr": -0.004196744634884719,
+        "se": 0.004100249544838784,
+        "rr": 0.9958120493914849,
+        "lower": 0.9878412880706786,
+        "upper": 1.0038471257361727,
+        "tau2": 0.00032399906726287653,
+        "q": 163.86869889804433,
+        "i2": 0.30432107677300585,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 174766334786703.9
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.0035741780995512907,
+        "se": 0.004813336826970727,
+        "rr": 0.9964322016719158,
+        "lower": 0.9870759242118103,
+        "upper": 1.0058771652459901,
+        "tau2": 0.0006027243285622895,
+        "q": 175.2397483565277,
+        "i2": 0.34946265861974757,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 75432861271310.34
+      }
+    },
+    {
+      "outcome": "negative_control",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.0036175752829591926,
+        "se": 0.017128257653765896,
+        "rr": 1.003624126606009,
+        "lower": 0.9704903597362181,
+        "upper": 1.0378891221335274,
+        "tau2": 0.004209154791981717,
+        "q": 126.21663977664717,
+        "i2": 0.17601989575987534,
+        "regions": 105,
+        "rejected": 0,
+        "stratum_errors": 10,
+        "max_covariance_condition": 147239651619552.97
+      },
+      "effect_hac": {
+        "log_rr": 0.0016504030051641258,
+        "se": 0.01675048440277107,
+        "rr": 1.0016517656697492,
+        "lower": 0.969300553527945,
+        "upper": 1.0350827264233076,
+        "tau2": 0.005484180816660481,
+        "q": 145.0469451132662,
+        "i2": 0.2829907591725762,
+        "regions": 105,
+        "rejected": 0,
+        "stratum_errors": 10,
+        "max_covariance_condition": 218109288920348.38
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.004068064801051365,
+        "se": 0.017369259936549263,
+        "rr": 1.0040763506085881,
+        "lower": 0.9704691305343368,
+        "upper": 1.0388473843535508,
+        "tau2": 0.004642057798461382,
+        "q": 128.4933360784225,
+        "i2": 0.19061950468367972,
+        "regions": 105,
+        "rejected": 0,
+        "stratum_errors": 10,
+        "max_covariance_condition": 148226941671945.75
+      }
+    },
+    {
+      "outcome": "negative_control",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": 0.010586649662438968,
+        "se": 0.006886144746823007,
+        "rr": 1.0106428865160626,
+        "lower": 0.9970940364684817,
+        "upper": 1.0243758429075767,
+        "tau2": 0.00044140276085785857,
+        "q": 125.72600445014476,
+        "i2": 0.10917394941622956,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 75803123171738.05
+      },
+      "effect_hac": {
+        "log_rr": 0.011901730070395411,
+        "se": 0.007079890704253738,
+        "rr": 1.0119728374801165,
+        "lower": 0.9980270930345548,
+        "upper": 1.0261134501707372,
+        "tau2": 0.0008093306498079181,
+        "q": 147.79153312085685,
+        "i2": 0.2421758023958534,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 1230418969024245.5
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.010972278595598683,
+        "se": 0.007094637710523967,
+        "rr": 1.0110326948100428,
+        "lower": 0.9970710863442771,
+        "upper": 1.0251898023867758,
+        "tau2": 0.0005553222570466117,
+        "q": 129.27171472333447,
+        "i2": 0.13360784112981833,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 75912805334001.6
+      }
+    },
+    {
+      "outcome": "negative_control",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.0009187145277529084,
+        "se": 0.0030626066109710457,
+        "rr": 1.0009191366752124,
+        "lower": 0.9949289071967382,
+        "upper": 1.0069454318956157,
+        "tau2": 4.7355166665653754e-05,
+        "q": 119.80193136788036,
+        "i2": 0.04842936421504045,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 62174515629169.305
+      },
+      "effect_hac": {
+        "log_rr": 0.0011911204939775663,
+        "se": 0.0031789902882539637,
+        "rr": 1.001191830159731,
+        "lower": 0.9949729775127302,
+        "upper": 1.0074495523329594,
+        "tau2": 0.00015505309808866162,
+        "q": 141.54913636293588,
+        "i2": 0.19462595866568297,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 809640622067804.5
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.0009856791152312067,
+        "se": 0.0030780957466377593,
+        "rr": 1.000986165056538,
+        "lower": 0.994965328113093,
+        "upper": 1.0070434359102662,
+        "tau2": 5.126191123029426e-05,
+        "q": 120.29000905041237,
+        "i2": 0.05229036974946343,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 62177046752302.71
+      }
+    },
+    {
+      "outcome": "pneumonia",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.02527586659790849,
+        "se": 0.008627284020684394,
+        "rr": 1.0255980097365602,
+        "lower": 1.0084014859649544,
+        "upper": 1.0430877901464628,
+        "tau2": 0.0006789635443468266,
+        "q": 120.49008138428366,
+        "i2": 0.09536122187217964,
+        "regions": 110,
+        "rejected": 0,
+        "stratum_errors": 5,
+        "max_covariance_condition": 63578598654923.02
+      },
+      "effect_hac": {
+        "log_rr": 0.026988553941894877,
+        "se": 0.009078160213441738,
+        "rr": 1.0273560435192222,
+        "lower": 1.0092377671291193,
+        "upper": 1.0457995871060553,
+        "tau2": 0.0015386034795281023,
+        "q": 140.89396665354252,
+        "i2": 0.22636857639170319,
+        "regions": 110,
+        "rejected": 0,
+        "stratum_errors": 5,
+        "max_covariance_condition": 3645356259208811.0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.023131195624456716,
+        "se": 0.008400655776081685,
+        "rr": 1.0234007964466254,
+        "lower": 1.0066881769317095,
+        "upper": 1.0403908719379307,
+        "tau2": 0.0005164240726561228,
+        "q": 117.80576837349231,
+        "i2": 0.07474819353135949,
+        "regions": 110,
+        "rejected": 0,
+        "stratum_errors": 5,
+        "max_covariance_condition": 63738376702423.29
+      }
+    },
+    {
+      "outcome": "pneumonia",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": 0.014971431061670377,
+        "se": 0.009095050324073966,
+        "rr": 1.0150840643274341,
+        "lower": 0.997149203685693,
+        "upper": 1.0333415038019613,
+        "tau2": 0.0019738763821986376,
+        "q": 159.7354468668594,
+        "i2": 0.2988406631287496,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 53205972418603.16
+      },
+      "effect_hac": {
+        "log_rr": 0.01536255911922768,
+        "se": 0.008903504182369903,
+        "rr": 1.0154811698402633,
+        "lower": 0.9979138699221131,
+        "upper": 1.0333577249313457,
+        "tau2": 0.0023303350299739337,
+        "q": 190.04793274385915,
+        "i2": 0.4106749892883591,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 85869704101805.86
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.014812296635161249,
+        "se": 0.009125556356477152,
+        "rr": 1.0149225423591925,
+        "lower": 0.9969309254441105,
+        "upper": 1.0332388540660173,
+        "tau2": 0.0020115000550726685,
+        "q": 160.6632167723624,
+        "i2": 0.30288959570199236,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 53247637603510.84
+      }
+    },
+    {
+      "outcome": "pneumonia",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.01639576957440219,
+        "se": 0.005836726740018267,
+        "rr": 1.01653091781388,
+        "lower": 1.0049680853779406,
+        "upper": 1.028226788398878,
+        "tau2": 0.0008498806542393286,
+        "q": 160.43151103373705,
+        "i2": 0.289416404137545,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 57003591080739.42
+      },
+      "effect_hac": {
+        "log_rr": 0.01790264937621696,
+        "se": 0.0057926217513032344,
+        "rr": 1.0180638624134115,
+        "lower": 1.0065706030623367,
+        "upper": 1.0296883544968043,
+        "tau2": 0.000980823957981804,
+        "q": 181.05660042280905,
+        "i2": 0.37036263945206294,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 153447171432269.2
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.01562151797995857,
+        "se": 0.005670288718805743,
+        "rr": 1.015744171738965,
+        "lower": 1.0045179272889013,
+        "upper": 1.027095877926474,
+        "tau2": 0.0007203308763288381,
+        "q": 153.6426594140564,
+        "i2": 0.2580185709180037,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 57024949738275.27
+      }
+    },
+    {
+      "outcome": "respiratory",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.023051952327077255,
+        "se": 0.007045480233611746,
+        "rr": 1.023319702006112,
+        "lower": 1.0092856577536253,
+        "upper": 1.0375488886313924,
+        "tau2": 0.0008169107810015318,
+        "q": 141.83340026394328,
+        "i2": 0.19624009727008604,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 54972064486343.28
+      },
+      "effect_hac": {
+        "log_rr": 0.02497580609483866,
+        "se": 0.0071688511340184955,
+        "rr": 1.0252903144477215,
+        "lower": 1.0109847520449866,
+        "upper": 1.039798302371954,
+        "tau2": 0.001121642847807315,
+        "q": 156.27392142635145,
+        "i2": 0.2705116825667822,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 154655584752183.62
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.02094454121699629,
+        "se": 0.006702944682737426,
+        "rr": 1.0211654174758136,
+        "lower": 1.0078373219180465,
+        "upper": 1.0346697697838854,
+        "tau2": 0.0005860102540333192,
+        "q": 134.2781960408228,
+        "i2": 0.15101629779609108,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 55144360724207.33
+      }
+    },
+    {
+      "outcome": "respiratory",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": 0.007186674689899972,
+        "se": 0.006324732497646208,
+        "rr": 1.0072125608110036,
+        "lower": 0.9948037464710091,
+        "upper": 1.0197761581158502,
+        "tau2": 0.0005259847438818155,
+        "q": 134.69798469010033,
+        "i2": 0.15366217050477915,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 62269256889399.766
+      },
+      "effect_hac": {
+        "log_rr": 0.007939449517914128,
+        "se": 0.00633274617549175,
+        "rr": 1.0079710505234056,
+        "lower": 0.9955372547877023,
+        "upper": 1.0205601385655028,
+        "tau2": 0.0008067941359603293,
+        "q": 155.90884319209653,
+        "i2": 0.26880350295756034,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 116338639520772.14
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.007019274488438666,
+        "se": 0.006305757146593424,
+        "rr": 1.0070439673370941,
+        "lower": 0.9946742229867717,
+        "upper": 1.0195675415261278,
+        "tau2": 0.0005147497322146948,
+        "q": 134.28298806394625,
+        "i2": 0.15104659463108897,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 61994926400880.14
+      }
+    },
+    {
+      "outcome": "respiratory",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.009808250747743944,
+        "se": 0.004326832301759737,
+        "rr": 1.0098565092873508,
+        "lower": 1.0013285411662534,
+        "upper": 1.0184571071571116,
+        "tau2": 0.0003957092120631692,
+        "q": 151.8684468055455,
+        "i2": 0.24935032656278355,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 53885210620766.016
+      },
+      "effect_hac": {
+        "log_rr": 0.011528759122442219,
+        "se": 0.004326112473570848,
+        "rr": 1.0115954713892874,
+        "lower": 1.003054233369706,
+        "upper": 1.0202094400195183,
+        "tau2": 0.00045616358239468997,
+        "q": 161.20928470778435,
+        "i2": 0.29284470056025713,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 537070104137228.44
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.008933634253042697,
+        "se": 0.004087928142693463,
+        "rr": 1.0089736582613598,
+        "lower": 1.0009217196160483,
+        "upper": 1.0170903709191415,
+        "tau2": 0.0002760564937361204,
+        "q": 140.76934970412373,
+        "i2": 0.190164618650217,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 53873317005005.49
+      }
+    }
+  ]
+}
