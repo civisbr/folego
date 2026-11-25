@@ -169,6 +169,20 @@ def main():
     export = commands.add_parser("export", help="Exportar agregados com supressão de células")
     export.add_argument("source", type=Path)
     export.add_argument("--output", type=Path, default=Path("data/public"))
+    study_page = commands.add_parser(
+        "export-study", help="Publicar no site os RR combinados da meta-análise"
+    )
+    evidence = Path("docs/evidence")
+    study_page.add_argument(
+        "--era5", type=Path, default=evidence / "smoke-cams-era5-knots15_35-spec7.json"
+    )
+    study_page.add_argument(
+        "--merra2", type=Path, default=evidence / "smoke-cams-knots15_35-spec7.json"
+    )
+    study_page.add_argument(
+        "--spec6", type=Path, default=evidence / "smoke-cams-knots15_35-spec6.json"
+    )
+    study_page.add_argument("--output", type=Path, default=Path("web/public/data/study.json"))
     forecast = commands.add_parser(
         "forecast", help="Previsão de pesquisa a partir de painéis privados preparados"
     )
@@ -604,6 +618,14 @@ def main():
             f"{frame.height} linhas, {frame['health_region_code'].n_unique()} regiões: "
             f"{args.output}"
         )
+    elif args.command == "export-study":
+        from .publish.export_web import export_study
+
+        try:
+            payload = export_study(args.era5, args.merra2, args.spec6, args.output)
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            parser.exit(2, f"Não foi possível exportar o estudo: {error}\n")
+        print(json.dumps({"regions": payload["regions"], "strata": len(payload["strata"])}))
     elif args.command == "export":
         import polars as pl
 

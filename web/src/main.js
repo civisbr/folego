@@ -1,4 +1,5 @@
 import "./style.css";
+import { renderStudy, studyPage } from "./study.js";
 import * as maplibregl from "maplibre-gl";
 import { Protocol } from "pmtiles";
 import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
@@ -473,6 +474,7 @@ function openDetails() {
 }
 
 const pages = {
+  estudo: studyPage,
   "como-funciona": () =>
     `<div class="eyebrow">METODOLOGIA E LIMITAÇÕES</div><h1>Da fumaça ao planejamento.</h1><p>O Fôlego foi desenhado para estimar quantas internações respiratórias adicionais podem ocorrer após a exposição à fumaça de queimadas — e quanto isso pode representar em valores pagos pelo SUS.</p><div class="content-callout"><b>Estado atual: demonstração.</b><p>A interface usa números sintéticos. A implementação estatística passou por testes com dados artificiais de efeito conhecido; ainda não há modelo nacional treinado nem validação histórica publicada.</p></div><h2>Como a estimativa será produzida</h2><ol><li><b>Histórico de saúde.</b> Internações do SIH/SUS com diagnóstico J00–J99, por residência, data de internação, região de saúde e faixa etária. Asma, pneumonia e causas circulatórias têm análises separadas.</li><li><b>Exposição.</b> PM2,5 do Copernicus/CAMS em µg/m³, ponderado pela população dos pixels de cada região. Os focos do NASA FIRMS descrevem o fogo; não substituem a medição de exposição à fumaça.</li><li><b>Modelo.</b> Regressão quasi-Poisson com base cruzada de exposição e defasagens de 0–7 dias. Temperatura, umidade, sazonalidade, tendência, dia da semana e feriados entram como confundidores. SRAG entra quando há granularidade compatível.</li><li><b>Contrafactual.</b> Comparamos a previsão com um cenário de referência de 15 µg/m³. O histórico observado é preservado; alteramos a exposição dos dias futuros. A diferença é o excesso atribuível estimado.</li><li><b>Pagamento.</b> O excesso é multiplicado pelo valor médio de AIH da mesma região, idade e diagnóstico, corrigido pelo IPCA. <b>Esse valor é a remuneração pelo SUS, não o custo real do hospital.</b></li></ol><h2>Incerteza e alertas</h2><p>Na implementação do modelo, a faixa de 95% usa sorteios conjuntos dos coeficientes e preserva a covariância entre dias e cenários. É um intervalo da média condicional; não inclui toda a incerteza de contagem futura, de exposição ou de especificação. No painel de demonstração, as faixas são apenas ilustrações.</p><p>Os limiares provisórios de excesso relativo são: normal &lt; 5%; atenção 5–10%; alerta 10–20%; emergência ≥ 20%. Não são limiares oficiais de vigilância ou recomendações clínicas. A camada PM2,5 tem escala própria, em µg/m³.</p><h2>O que precisa ser validado</h2><p>Backtest com origem móvel entre 2019 e 2024, MAE e MAPE semanais por região, precisão e recall de picos, controle negativo com S00–T98 e sensibilidade CAMS versus MERRA-2. O SIH tem atraso de publicação; cada rodada histórica precisa respeitar quais dados estavam disponíveis na data da previsão.</p><h2>Limitações</h2><ul><li>Dados ecológicos sustentam associações populacionais; a inferência causal é limitada pelo desenho do estudo.</li><li>O SIH cobre internações financiadas pelo SUS, com possíveis erros de CID e sub-registro; não inclui toda a saúde suplementar.</li><li>PM2,5 total não identifica sozinho a fração proveniente de queimadas. Atribuir todo o efeito à fumaça exige separar outras fontes e fazer análises de sensibilidade.</li><li>Satélites e reanálises têm erro de exposição; umidade, temperatura e vírus sazonais podem deixar confundimento residual.</li><li>O SIH não informa o número de leitos disponíveis. Internações adicionais não equivalem diretamente a ocupação de leitos.</li></ul><h2>Referências e reprodutibilidade</h2><p>O desenho segue a especificação do projeto e o método de <a href="https://www.jstatsoft.org/article/view/v043i08">Gasparrini (2011)</a>. A base cruzada em Python usa funções lineares por partes para exposição e polinômios de Legendre para defasagens; a equivalência com o pacote R dlnm ainda precisa ser avaliada.</p><p>Consulte <a href="https://github.com/civisbr/folego/blob/main/PROJECT.md">os requisitos completos</a>, o <a href="https://github.com/civisbr/folego/blob/main/docs/validation.md">relatório de validação</a> e o código-fonte para reproduzir os testes.</p>`,
   dados: () =>
@@ -491,12 +493,35 @@ function route() {
       a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
   });
-  document.title = `${isPanel ? "Painel" : key === "dados" ? "Dados abertos" : key === "sobre" ? "Sobre" : "Como funciona"} · Fôlego`;
+  const titles = {
+    dados: "Dados abertos",
+    sobre: "Sobre",
+    estudo: "Estudo PM2,5",
+    "como-funciona": "Como funciona",
+  };
+  document.title = `${isPanel ? "Painel" : titles[key]} · Fôlego`;
   if (!isPanel) {
     $("content-page").innerHTML = pages[key]();
     $("download-filtered")?.addEventListener("click", downloadFiltered);
+    if (key === "estudo") loadStudy();
   } else if (map) requestAnimationFrame(() => map.resize());
   if (loadFailed) $("error").hidden = false;
+}
+
+let study;
+async function loadStudy() {
+  try {
+    study ??= await getJSON("study.json");
+    if (study.mode !== "research" || study.validated !== false)
+      throw new Error(
+        "Os resultados do estudo precisam vir marcados como pesquisa.",
+      );
+    if (location.hash === "#estudo") renderStudy(study);
+  } catch (error) {
+    const scope = $("study-scope");
+    if (scope)
+      scope.textContent = `Não foi possível carregar os resultados do estudo. ${error.message}`;
+  }
 }
 
 function downloadFiltered() {

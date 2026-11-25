@@ -1,0 +1,644 @@
+{
+ "mode": "research",
+ "validated": false,
+ "generated_at": "2026-11-25T13:07:26.623493+00:00",
+ "regions": 115,
+ "exposure_source": "CAMS",
+ "contrast_ug_m3": [
+  15.0,
+  25.0
+ ],
+ "max_lag": 7,
+ "knots_ug_m3": [
+  15.0,
+  35.0
+ ],
+ "dirty_check_includes_untracked": false,
+ "method": "DerSimonian-Laird random effects on log RR; SE from the 95% Wald interval as (log upper - log lower) / (2 × 1.96); effects rejected by the study rules ('rejected') and strata that failed outright ('stratum_errors') are counted and left out; regions the study refused have no report and are not counted",
+ "sources": [
+  {
+   "role": "main",
+   "path": "docs/evidence/smoke-cams-era5-knots15_35-spec7.json",
+   "sha256": "326b02263c7965c2b5028c2f9c1f78160613452e8e6930557d6797d1fc740b55",
+   "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+   "region_commits": [
+    "aba2bc19c265b491697e194354ee0e9d868c86f6"
+   ],
+   "meteorology": "ERA5",
+   "model_spec_version": 7,
+   "generated_at": "2026-11-25T13:07:26.623493+00:00"
+  },
+  {
+   "role": "merra2",
+   "path": "docs/evidence/smoke-cams-knots15_35-spec7.json",
+   "sha256": "a4d455b83014bfcab95fe9509354d64666079c745dd570e49dfd970f231d1d8a",
+   "git_commit": "57681ee1c94e084627ccff605eb9806267ab21d0",
+   "region_commits": [
+    "57681ee1c94e084627ccff605eb9806267ab21d0",
+    "d35cd0e535c630f44afd5f12ac5f34458966a20c"
+   ],
+   "meteorology": "MERRA-2",
+   "model_spec_version": 7,
+   "generated_at": "2026-11-24T22:17:40.522208+00:00"
+  },
+  {
+   "role": "spec6",
+   "path": "docs/evidence/smoke-cams-knots15_35-spec6.json",
+   "sha256": "e074ab15dcec648d933cc8c700fa9fa9c995c1d1cc1ded2919fd479025fb21d7",
+   "git_commit": "57681ee1c94e084627ccff605eb9806267ab21d0",
+   "region_commits": [
+    "0966b459931e20f5874efc23de41e54dc1053fb5"
+   ],
+   "meteorology": "MERRA-2",
+   "model_spec_version": 6,
+   "generated_at": "2026-11-24T22:17:41.030754+00:00"
+  }
+ ],
+ "strata": [
+  {
+   "outcome": "asthma",
+   "age_group": "0-4",
+   "main": {
+    "rr": 1.018253,
+    "lower": 0.973829,
+    "upper": 1.064704,
+    "i2": 0.36741,
+    "regions": 59
+   },
+   "hac": {
+    "rr": 1.016572,
+    "lower": 0.971653,
+    "upper": 1.063568,
+    "i2": 0.352303,
+    "regions": 61
+   },
+   "lagged": {
+    "rr": 1.01725,
+    "lower": 0.974234,
+    "upper": 1.062164,
+    "i2": 0.334838,
+    "regions": 59
+   },
+   "merra2": {
+    "rr": 1.027436,
+    "lower": 0.986174,
+    "upper": 1.070425,
+    "i2": 0.267052,
+    "regions": 58
+   },
+   "spec6": {
+    "rr": 1.010995,
+    "lower": 0.969662,
+    "upper": 1.05409,
+    "i2": 0.363747,
+    "regions": 59
+   }
+  },
+  {
+   "outcome": "asthma",
+   "age_group": "60+",
+   "main": {
+    "rr": 0.951345,
+    "lower": 0.869028,
+    "upper": 1.041459,
+    "i2": 0.174835,
+    "regions": 28
+   },
+   "hac": {
+    "rr": 0.944095,
+    "lower": 0.862223,
+    "upper": 1.033741,
+    "i2": 0.224293,
+    "regions": 28
+   },
+   "lagged": {
+    "rr": 0.948807,
+    "lower": 0.867273,
+    "upper": 1.038007,
+    "i2": 0.166208,
+    "regions": 28
+   },
+   "merra2": {
+    "rr": 0.957193,
+    "lower": 0.870963,
+    "upper": 1.05196,
+    "i2": 0.219483,
+    "regions": 27
+   },
+   "spec6": {
+    "rr": 0.96743,
+    "lower": 0.885568,
+    "upper": 1.056859,
+    "i2": 0.223665,
+    "regions": 27
+   }
+  },
+  {
+   "outcome": "asthma",
+   "age_group": "all",
+   "main": {
+    "rr": 1.035036,
+    "lower": 1.008765,
+    "upper": 1.061991,
+    "i2": 0.231246,
+    "regions": 91
+   },
+   "hac": {
+    "rr": 1.034489,
+    "lower": 1.008356,
+    "upper": 1.0613,
+    "i2": 0.144904,
+    "regions": 91
+   },
+   "lagged": {
+    "rr": 1.032253,
+    "lower": 1.0092,
+    "upper": 1.055831,
+    "i2": 0.109944,
+    "regions": 91
+   },
+   "merra2": {
+    "rr": 1.037378,
+    "lower": 1.011038,
+    "upper": 1.064405,
+    "i2": 0.224158,
+    "regions": 91
+   },
+   "spec6": {
+    "rr": 1.021746,
+    "lower": 1.002619,
+    "upper": 1.041237,
+    "i2": 0.01397,
+    "regions": 93
+   }
+  },
+  {
+   "outcome": "circulatory",
+   "age_group": "0-4",
+   "main": {
+    "rr": 1.01114,
+    "lower": 0.949683,
+    "upper": 1.076574,
+    "i2": 0.0,
+    "regions": 42
+   },
+   "hac": {
+    "rr": 1.012949,
+    "lower": 0.951141,
+    "upper": 1.078774,
+    "i2": 0.061554,
+    "regions": 42
+   },
+   "lagged": {
+    "rr": 1.011155,
+    "lower": 0.949685,
+    "upper": 1.076603,
+    "i2": 0.0,
+    "regions": 42
+   },
+   "merra2": {
+    "rr": 1.012351,
+    "lower": 0.950348,
+    "upper": 1.0784,
+    "i2": 0.0,
+    "regions": 43
+   },
+   "spec6": {
+    "rr": 1.005707,
+    "lower": 0.946407,
+    "upper": 1.068723,
+    "i2": 0.036033,
+    "regions": 42
+   }
+  },
+  {
+   "outcome": "circulatory",
+   "age_group": "60+",
+   "main": {
+    "rr": 1.003981,
+    "lower": 0.997143,
+    "upper": 1.010865,
+    "i2": 0.0,
+    "regions": 115
+   },
+   "hac": {
+    "rr": 1.004129,
+    "lower": 0.997379,
+    "upper": 1.010925,
+    "i2": 0.0,
+    "regions": 115
+   },
+   "lagged": {
+    "rr": 1.00382,
+    "lower": 0.997,
+    "upper": 1.010688,
+    "i2": 0.0,
+    "regions": 115
+   },
+   "merra2": {
+    "rr": 1.005151,
+    "lower": 0.998248,
+    "upper": 1.012102,
+    "i2": 0.0,
+    "regions": 115
+   },
+   "spec6": {
+    "rr": 0.987403,
+    "lower": 0.981153,
+    "upper": 0.993693,
+    "i2": 0.0,
+    "regions": 115
+   }
+  },
+  {
+   "outcome": "circulatory",
+   "age_group": "all",
+   "main": {
+    "rr": 1.007729,
+    "lower": 0.999678,
+    "upper": 1.015844,
+    "i2": 0.304928,
+    "regions": 115
+   },
+   "hac": {
+    "rr": 1.006322,
+    "lower": 1.000052,
+    "upper": 1.012631,
+    "i2": 0.061218,
+    "regions": 115
+   },
+   "lagged": {
+    "rr": 1.006773,
+    "lower": 0.999558,
+    "upper": 1.01404,
+    "i2": 0.190516,
+    "regions": 115
+   },
+   "merra2": {
+    "rr": 1.007886,
+    "lower": 0.999146,
+    "upper": 1.016702,
+    "i2": 0.386559,
+    "regions": 115
+   },
+   "spec6": {
+    "rr": 0.995348,
+    "lower": 0.988391,
+    "upper": 1.002353,
+    "i2": 0.228191,
+    "regions": 115
+   }
+  },
+  {
+   "outcome": "negative_control",
+   "age_group": "0-4",
+   "main": {
+    "rr": 1.009403,
+    "lower": 0.977629,
+    "upper": 1.04221,
+    "i2": 0.281005,
+    "regions": 105
+   },
+   "hac": {
+    "rr": 1.010276,
+    "lower": 0.978253,
+    "upper": 1.043348,
+    "i2": 0.354349,
+    "regions": 105
+   },
+   "lagged": {
+    "rr": 1.009163,
+    "lower": 0.977227,
+    "upper": 1.042142,
+    "i2": 0.287182,
+    "regions": 105
+   },
+   "merra2": {
+    "rr": 1.016411,
+    "lower": 0.983095,
+    "upper": 1.050856,
+    "i2": 0.322966,
+    "regions": 105
+   },
+   "spec6": {
+    "rr": 1.01476,
+    "lower": 0.982486,
+    "upper": 1.048095,
+    "i2": 0.373111,
+    "regions": 104
+   }
+  },
+  {
+   "outcome": "negative_control",
+   "age_group": "60+",
+   "main": {
+    "rr": 0.999291,
+    "lower": 0.989178,
+    "upper": 1.009508,
+    "i2": 0.0,
+    "regions": 113
+   },
+   "hac": {
+    "rr": 0.999657,
+    "lower": 0.989878,
+    "upper": 1.009532,
+    "i2": 0.0,
+    "regions": 113
+   },
+   "lagged": {
+    "rr": 0.999342,
+    "lower": 0.989228,
+    "upper": 1.009558,
+    "i2": 0.0,
+    "regions": 113
+   },
+   "merra2": {
+    "rr": 0.998913,
+    "lower": 0.988734,
+    "upper": 1.009198,
+    "i2": 0.0,
+    "regions": 113
+   },
+   "spec6": {
+    "rr": 0.985413,
+    "lower": 0.976194,
+    "upper": 0.994719,
+    "i2": 0.0,
+    "regions": 113
+   }
+  },
+  {
+   "outcome": "negative_control",
+   "age_group": "all",
+   "main": {
+    "rr": 0.997893,
+    "lower": 0.992874,
+    "upper": 1.002938,
+    "i2": 0.0,
+    "regions": 115
+   },
+   "hac": {
+    "rr": 0.999126,
+    "lower": 0.993764,
+    "upper": 1.004518,
+    "i2": 0.093527,
+    "regions": 115
+   },
+   "lagged": {
+    "rr": 0.998054,
+    "lower": 0.993039,
+    "upper": 1.003095,
+    "i2": 0.0,
+    "regions": 115
+   },
+   "merra2": {
+    "rr": 0.999207,
+    "lower": 0.994151,
+    "upper": 1.004288,
+    "i2": 0.0,
+    "regions": 115
+   },
+   "spec6": {
+    "rr": 0.994882,
+    "lower": 0.989487,
+    "upper": 1.000307,
+    "i2": 0.122016,
+    "regions": 115
+   }
+  },
+  {
+   "outcome": "pneumonia",
+   "age_group": "0-4",
+   "main": {
+    "rr": 1.018973,
+    "lower": 1.004111,
+    "upper": 1.034056,
+    "i2": 0.120329,
+    "regions": 110
+   },
+   "hac": {
+    "rr": 1.022135,
+    "lower": 1.006415,
+    "upper": 1.0381,
+    "i2": 0.177248,
+    "regions": 110
+   },
+   "lagged": {
+    "rr": 1.01781,
+    "lower": 1.003215,
+    "upper": 1.032618,
+    "i2": 0.106345,
+    "regions": 110
+   },
+   "merra2": {
+    "rr": 1.022038,
+    "lower": 1.006622,
+    "upper": 1.03769,
+    "i2": 0.145746,
+    "regions": 110
+   },
+   "spec6": {
+    "rr": 1.010645,
+    "lower": 0.997051,
+    "upper": 1.024424,
+    "i2": 0.099562,
+    "regions": 109
+   }
+  },
+  {
+   "outcome": "pneumonia",
+   "age_group": "60+",
+   "main": {
+    "rr": 1.006655,
+    "lower": 0.992167,
+    "upper": 1.021355,
+    "i2": 0.217102,
+    "regions": 113
+   },
+   "hac": {
+    "rr": 1.007776,
+    "lower": 0.993057,
+    "upper": 1.022714,
+    "i2": 0.265448,
+    "regions": 113
+   },
+   "lagged": {
+    "rr": 1.006785,
+    "lower": 0.992272,
+    "upper": 1.021511,
+    "i2": 0.21895,
+    "regions": 113
+   },
+   "merra2": {
+    "rr": 1.010307,
+    "lower": 0.995612,
+    "upper": 1.025218,
+    "i2": 0.219053,
+    "regions": 113
+   },
+   "spec6": {
+    "rr": 1.010036,
+    "lower": 0.995624,
+    "upper": 1.024657,
+    "i2": 0.279385,
+    "regions": 114
+   }
+  },
+  {
+   "outcome": "pneumonia",
+   "age_group": "all",
+   "main": {
+    "rr": 1.01379,
+    "lower": 1.004536,
+    "upper": 1.02313,
+    "i2": 0.205431,
+    "regions": 115
+   },
+   "hac": {
+    "rr": 1.014065,
+    "lower": 1.004841,
+    "upper": 1.023375,
+    "i2": 0.185396,
+    "regions": 115
+   },
+   "lagged": {
+    "rr": 1.01253,
+    "lower": 1.003652,
+    "upper": 1.021487,
+    "i2": 0.162933,
+    "regions": 115
+   },
+   "merra2": {
+    "rr": 1.01647,
+    "lower": 1.006608,
+    "upper": 1.026428,
+    "i2": 0.265518,
+    "regions": 115
+   },
+   "spec6": {
+    "rr": 1.013322,
+    "lower": 1.004231,
+    "upper": 1.022495,
+    "i2": 0.254308,
+    "regions": 115
+   }
+  },
+  {
+   "outcome": "respiratory",
+   "age_group": "0-4",
+   "main": {
+    "rr": 1.020587,
+    "lower": 1.008214,
+    "upper": 1.033112,
+    "i2": 0.228324,
+    "regions": 115
+   },
+   "hac": {
+    "rr": 1.022242,
+    "lower": 1.009322,
+    "upper": 1.035328,
+    "i2": 0.261136,
+    "regions": 115
+   },
+   "lagged": {
+    "rr": 1.01881,
+    "lower": 1.006852,
+    "upper": 1.030909,
+    "i2": 0.198412,
+    "regions": 115
+   },
+   "merra2": {
+    "rr": 1.021575,
+    "lower": 1.008277,
+    "upper": 1.035049,
+    "i2": 0.298798,
+    "regions": 115
+   },
+   "spec6": {
+    "rr": 1.013448,
+    "lower": 1.001577,
+    "upper": 1.02546,
+    "i2": 0.254375,
+    "regions": 115
+   }
+  },
+  {
+   "outcome": "respiratory",
+   "age_group": "60+",
+   "main": {
+    "rr": 1.004781,
+    "lower": 0.992766,
+    "upper": 1.016941,
+    "i2": 0.263777,
+    "regions": 115
+   },
+   "hac": {
+    "rr": 1.004918,
+    "lower": 0.992717,
+    "upper": 1.017268,
+    "i2": 0.306253,
+    "regions": 115
+   },
+   "lagged": {
+    "rr": 1.004861,
+    "lower": 0.992906,
+    "upper": 1.016959,
+    "i2": 0.258138,
+    "regions": 115
+   },
+   "merra2": {
+    "rr": 1.006729,
+    "lower": 0.994649,
+    "upper": 1.018956,
+    "i2": 0.257523,
+    "regions": 115
+   },
+   "spec6": {
+    "rr": 1.005318,
+    "lower": 0.993266,
+    "upper": 1.017516,
+    "i2": 0.339784,
+    "regions": 115
+   }
+  },
+  {
+   "outcome": "respiratory",
+   "age_group": "all",
+   "main": {
+    "rr": 1.015242,
+    "lower": 1.007095,
+    "upper": 1.023455,
+    "i2": 0.351598,
+    "regions": 115
+   },
+   "hac": {
+    "rr": 1.015734,
+    "lower": 1.007916,
+    "upper": 1.023612,
+    "i2": 0.273786,
+    "regions": 115
+   },
+   "lagged": {
+    "rr": 1.01391,
+    "lower": 1.006415,
+    "upper": 1.021461,
+    "i2": 0.261631,
+    "regions": 115
+   },
+   "merra2": {
+    "rr": 1.016506,
+    "lower": 1.008234,
+    "upper": 1.024846,
+    "i2": 0.357704,
+    "regions": 115
+   },
+   "spec6": {
+    "rr": 1.011568,
+    "lower": 1.004077,
+    "upper": 1.019114,
+    "i2": 0.327729,
+    "regions": 115
+   }
+  }
+ ]
+}
