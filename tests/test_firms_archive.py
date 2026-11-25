@@ -5,6 +5,8 @@ import polars as pl
 import pytest
 
 pytest.importorskip("shapely")
+# geo_helpers writes rasters; rasterio comes only with the climate extra.
+pytest.importorskip("rasterio")
 
 from geo_helpers import write_regions  # noqa: E402
 
