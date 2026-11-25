@@ -19,6 +19,7 @@ import numpy as np
 import polars as pl
 from statsmodels.tools.sm_exceptions import PerfectSeparationError
 
+from ..ingest.common import atomic_write_text
 from ..ingest.sih_national import software_provenance
 from ..models.crossbasis import CrossBasis
 from ..models.glm import ConfounderDesign, fit_count_model, predict_counts
@@ -450,6 +451,6 @@ def region_study(
     history = output.parent / "history"
     history.mkdir(parents=True, exist_ok=True)
     stamp = datetime.fromisoformat(report["generated_at"]).strftime("%Y%m%dT%H%M%S%fZ")
-    (history / f"{output.stem}-{stamp}.json").write_text(text)
-    output.write_text(text)
+    atomic_write_text(history / f"{output.stem}-{stamp}.json", text)
+    atomic_write_text(output, text)
     return report

@@ -139,6 +139,7 @@ def test_pool_studies_writes_report_and_history(tmp_path):
     assert first["region"] == "11001" and first["git_dirty"] is False
     assert first["path"] == "11001.json" and len(first["sha256"]) == 64
     assert report["any_region_dirty"] is False
+    assert report["dirty_check_includes_untracked"] is False
     pool_studies(paths, output)
     assert len(list((output.parent / "history").glob("pool-*.json"))) == 2
     with pytest.raises(ValueError, match="overwrite"):
@@ -185,3 +186,66 @@ def test_cli_rejects_missing_report(tmp_path, monkeypatch):
     with pytest.raises(SystemExit) as caught:
         main()
     assert caught.value.code == 2
+
+
+def test_cli_rejects_unreadable_path(tmp_path, monkeypatch, capsys):
+    import sys
+
+    from folego.cli import main
+
+    argv = ["folego", "pool", str(tmp_path / ("x" * 300)), "--output", str(tmp_path / "o.json")]
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(SystemExit) as caught:
+        main()
+    assert caught.value.code == 2
+    # Python 3.14 is_file() returns False instead of raising ENAMETOOLONG.
+    assert any(m in capsys.readouterr().err for m in ("E/S", "inexistente"))
+
+
+def test_cli_reports_write_failure(tmp_path, monkeypatch, capsys):
+    import errno
+    import sys
+
+    from folego import cli
+    from folego.evaluate import pool
+
+    report = tmp_path / "r.json"
+    report.write_text("{}")
+
+    def denied(*_):
+        raise OSError(errno.EACCES, "Permission denied", str(tmp_path / "o.json"))
+
+    monkeypatch.setattr(pool, "pool_studies", denied)
+    argv = ["folego", "pool", str(report), "--output", str(tmp_path / "o.json")]
+    monkeypatch.setattr(sys, "argv", argv)
+    with pytest.raises(SystemExit) as caught:
+        cli.main()
+    assert caught.value.code == 2
+    assert "Permission denied" in capsys.readouterr().err
+
+
+def test_failed_write_leaves_no_partial(tmp_path, monkeypatch):
+    from folego.ingest import common
+
+    target = tmp_path / "out.json"
+    target.write_text("old")
+
+    def broken(src, dst):
+        raise OSError("disk full")
+
+    monkeypatch.setattr(common.os, "replace", broken)
+    with pytest.raises(OSError):
+        common.atomic_write_text(target, "new")
+    assert target.read_text() == "old"
+    assert list(tmp_path.iterdir()) == [target]
+
+
+def test_atomic_write_does_not_follow_planted_symlink(tmp_path):
+    from folego.ingest.common import atomic_write_text
+
+    victim = tmp_path / "victim.txt"
+    victim.write_text("keep")
+    (tmp_path / "out.json.partial").symlink_to(victim)
+    atomic_write_text(tmp_path / "out.json", "new")
+    assert victim.read_text() == "keep"
+    assert (tmp_path / "out.json").read_text() == "new"

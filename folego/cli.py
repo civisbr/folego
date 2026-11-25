@@ -403,13 +403,17 @@ def main():
     elif args.command == "pool":
         from .evaluate.pool import pool_studies
 
-        missing = [str(p) for p in args.reports if not p.is_file()]
-        if missing:
-            parser.exit(2, f"Relatório inexistente: {missing[0]}\n")
-        os.umask(0o077)
-        args.output.parent.mkdir(parents=True, exist_ok=True)
         try:
+            missing = [str(p) for p in args.reports if not p.is_file()]
+            if missing:
+                parser.exit(2, f"Relatório inexistente: {missing[0]}\n")
+            os.umask(0o077)
+            args.output.parent.mkdir(parents=True, exist_ok=True)
             report = pool_studies(args.reports, args.output)
+        except OSError as error:
+            # A whole file list quoted as one argument names a single huge path.
+            reason = error.strerror or str(error)
+            parser.exit(2, f"Falha de E/S em {repr(error.filename)[:200]}: {reason}\n")
         except (ValueError, KeyError, TypeError, AttributeError) as error:
             parser.exit(2, f"Relatórios incompatíveis ou inválidos: {error}\n")
         print(

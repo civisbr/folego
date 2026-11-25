@@ -3,6 +3,7 @@
 import hashlib
 import json
 import os
+import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -84,6 +85,21 @@ def _https_only(response: httpx.Response) -> None:
     # Checked on every hop, so an intermediate plain-HTTP redirect is also refused.
     if response.url.scheme != "https":
         raise ValueError("Download redirected away from HTTPS")
+
+
+def atomic_write_text(path: Path, text: str) -> None:
+    """Readers of the fixed name never see a half-written file after a crash or OOM kill."""
+    # A unique O_EXCL name: concurrent runs do not share it and a planted symlink is not followed.
+    fd, staged = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.", suffix=".partial")
+    try:
+        with os.fdopen(fd, "w") as handle:
+            handle.write(text)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(staged, path)
+    except BaseException:
+        Path(staged).unlink(missing_ok=True)
+        raise
 
 
 def sha256_file(path: Path) -> str:

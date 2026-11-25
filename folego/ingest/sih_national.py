@@ -176,9 +176,10 @@ def software_provenance() -> dict:
         result["git_commit"] = subprocess.run(
             ["git", "rev-parse", "HEAD"], cwd=here, capture_output=True, text=True, check=True
         ).stdout.strip()
+        # An untracked module can be imported, so it counts; ignored data/ does not show.
         result["git_dirty"] = bool(
             subprocess.run(
-                ["git", "status", "--porcelain", "--untracked-files=no"],
+                ["git", "--no-optional-locks", "status", "--porcelain"],
                 cwd=here,
                 capture_output=True,
                 text=True,
@@ -187,6 +188,9 @@ def software_provenance() -> dict:
         )
     except (OSError, subprocess.CalledProcessError):
         result["git_commit"] = None
+        result["git_dirty"] = None
+    # Older reports counted only tracked changes; poolers must not mix the two meanings.
+    result["git_dirty_includes_untracked"] = True
     return result
 
 

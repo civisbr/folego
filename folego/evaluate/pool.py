@@ -2,11 +2,10 @@
 
 import json
 import math
-import os
 from datetime import UTC, datetime
 from pathlib import Path
 
-from ..ingest.common import sha256_file
+from ..ingest.common import atomic_write_text, sha256_file
 from ..ingest.sih_national import software_provenance
 from ..transform.cams_exposure import _portable
 
@@ -158,6 +157,10 @@ def pool_reports(reports: list[dict], effects=EFFECTS) -> dict:
         "any_region_dirty": any(
             (r.get("software") or {}).get("git_dirty") is not False for r in reports
         ),
+        # False when an older report checked only tracked files, so any_region_dirty is weaker.
+        "dirty_check_includes_untracked": all(
+            (r.get("software") or {}).get("git_dirty_includes_untracked") is True for r in reports
+        ),
         "results": pooled,
     }
 
@@ -196,8 +199,6 @@ def pool_studies(paths: list[Path], output: Path | None = None) -> dict:
         history = output.parent / "history"
         history.mkdir(parents=True, exist_ok=True)
         stamp = datetime.fromisoformat(report["generated_at"]).strftime("%Y%m%dT%H%M%S%fZ")
-        (history / f"{output.stem}-{stamp}.json").write_text(text)
-        staged = output.with_name(output.name + ".partial")
-        staged.write_text(text)
-        os.replace(staged, output)
+        atomic_write_text(history / f"{output.stem}-{stamp}.json", text)
+        atomic_write_text(output, text)
     return report

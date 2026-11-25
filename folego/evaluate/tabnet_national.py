@@ -5,13 +5,13 @@ comparison uses the raw partitions before de-duplication, exactly like the pilot
 """
 
 import json
-import os
 from datetime import UTC, datetime
 from pathlib import Path
 
 import httpx
 import polars as pl
 
+from ..ingest.common import atomic_write_text
 from ..ingest.sih import STATES
 from ..ingest.sih_national import national_root
 from ..ingest.tabnet import compare_monthly_counts, retrieve_reference
@@ -89,8 +89,6 @@ def validate_national(
         history.mkdir(parents=True, exist_ok=True)
         stamp = datetime.fromisoformat(report["generated_at"]).strftime("%Y%m%dT%H%M%S%fZ")
         text = json.dumps(report, ensure_ascii=False, indent=2)
-        (history / f"{output.stem}-{stamp}.json").write_text(text)
-        staged = output.with_name(output.name + ".partial")
-        staged.write_text(text)
-        os.replace(staged, output)
+        atomic_write_text(history / f"{output.stem}-{stamp}.json", text)
+        atomic_write_text(output, text)
     return report
