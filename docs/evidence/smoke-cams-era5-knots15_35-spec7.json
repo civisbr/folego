@@ -1,0 +1,1773 @@
+{
+  "generated_at": "2026-11-25T13:07:26.623493+00:00",
+  "software": {
+    "pyreaddbc": "2.0.4",
+    "dbfread": "2.0.7",
+    "polars": "2.1.0",
+    "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+    "git_dirty": false
+  },
+  "mode": "research",
+  "validated": false,
+  "inputs": [
+    {
+      "region": "11001",
+      "path": "data/marts/studies/11001-knots15_35.json",
+      "sha256": "a7233c33c3416bbb5370b43b3b0b0f89ac74c10e1778e5227f68945e0f0e204e",
+      "generated_at": "2026-11-25T11:37:59.043908+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "11002",
+      "path": "data/marts/studies/11002-knots15_35.json",
+      "sha256": "79884b922f66e7c54ce6f0158a6b830910f82c8d1d63989b3de1b2291e6bb127",
+      "generated_at": "2026-11-25T11:38:01.351457+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "11003",
+      "path": "data/marts/studies/11003-knots15_35.json",
+      "sha256": "2d2dee867fd212f07028477c9e60a6d4cc2b40d039897bbddc23933ebe0a5996",
+      "generated_at": "2026-11-25T11:39:17.700813+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "11004",
+      "path": "data/marts/studies/11004-knots15_35.json",
+      "sha256": "6a06519755928886abed4b17990cad7c8e39a7eb33935e6e745fc5c7edd55ea1",
+      "generated_at": "2026-11-25T11:39:25.229496+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "11005",
+      "path": "data/marts/studies/11005-knots15_35.json",
+      "sha256": "8a0181908100e8920558ce4c9d7afac8c2512043a40cfbf960b1a7ea2a8d79b2",
+      "generated_at": "2026-11-25T11:40:56.103138+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "11006",
+      "path": "data/marts/studies/11006-knots15_35.json",
+      "sha256": "2f8bd51d666a3b3cf769285eea044b3612baa078746083367e1fc27c539a3ee8",
+      "generated_at": "2026-11-25T11:40:41.047951+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "11007",
+      "path": "data/marts/studies/11007-knots15_35.json",
+      "sha256": "5fc1d8b7183060ebdae50a1b5f2f9e08b983e2581630c9a030fb5231b0c82360",
+      "generated_at": "2026-11-25T11:42:19.571489+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "12001",
+      "path": "data/marts/studies/12001-knots15_35.json",
+      "sha256": "dde97edacd6fd9511e824d048e1e8f109e0d6c1742067b3f7ee3aa628a402460",
+      "generated_at": "2026-11-25T11:42:06.376639+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "12002",
+      "path": "data/marts/studies/12002-knots15_35.json",
+      "sha256": "56acccc4186a0c8da4c0ef84637ea80dff403bf536356cf041a8e39068417c96",
+      "generated_at": "2026-11-25T11:43:47.526155+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "12003",
+      "path": "data/marts/studies/12003-knots15_35.json",
+      "sha256": "5995ffe2ed838ac4c145cf2dcd405eeb6e2c78d98e0f643a19e753f804f0f719",
+      "generated_at": "2026-11-25T11:43:59.503982+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "13001",
+      "path": "data/marts/studies/13001-knots15_35.json",
+      "sha256": "7b12ac7b16ee671fe209e7e55793d65fb959fec1125d6406648293d385f166dd",
+      "generated_at": "2026-11-25T11:45:19.793717+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "13002",
+      "path": "data/marts/studies/13002-knots15_35.json",
+      "sha256": "477dbe9d6716bc598874ae65b89676428e8aa8cd00be3592da0512f114cb396e",
+      "generated_at": "2026-11-25T11:45:34.437707+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "13003",
+      "path": "data/marts/studies/13003-knots15_35.json",
+      "sha256": "f31cfe1f8fea0ebafcef4bb69c6add1834aa3a4a07d3666858f4d1e6a30ce057",
+      "generated_at": "2026-11-25T11:46:37.697987+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "13004",
+      "path": "data/marts/studies/13004-knots15_35.json",
+      "sha256": "75a2de740dcd901a6cc886678aeede51ddc1b26a3d44b2494d19bb6530aa2322",
+      "generated_at": "2026-11-25T11:46:50.966694+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "13005",
+      "path": "data/marts/studies/13005-knots15_35.json",
+      "sha256": "b7c7887249fef587f132dc48550b60abdfd33f52450fb2e6d14088d50c21ab7b",
+      "generated_at": "2026-11-25T11:48:05.032633+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "13006",
+      "path": "data/marts/studies/13006-knots15_35.json",
+      "sha256": "53379a36df6be372d97a5738d058564558e3b51e22c3755e8aefc39bd07c48f6",
+      "generated_at": "2026-11-25T11:47:56.796744+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "13008",
+      "path": "data/marts/studies/13008-knots15_35.json",
+      "sha256": "8190224cdad116ad8102b0e600ebf090b07bc42d45812ee9b46690d930c42f6b",
+      "generated_at": "2026-11-25T11:49:15.929356+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "14002",
+      "path": "data/marts/studies/14002-knots15_35.json",
+      "sha256": "e468355ba2b979ba7f14189dfa736f9a670df75020505ad39663a683308a7252",
+      "generated_at": "2026-11-25T11:49:16.177288+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15001",
+      "path": "data/marts/studies/15001-knots15_35.json",
+      "sha256": "fe4d603ca683a19165cc309dadddc950bf368b01a060717f79c915de0d092e52",
+      "generated_at": "2026-11-25T11:50:36.885540+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15002",
+      "path": "data/marts/studies/15002-knots15_35.json",
+      "sha256": "48d0f3850066a20297ccf27b4e8b3276a4443a47631ed9d9e651feed1da5816d",
+      "generated_at": "2026-11-25T11:50:32.228724+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15003",
+      "path": "data/marts/studies/15003-knots15_35.json",
+      "sha256": "04c677757fe484d7f8e71aba4d776d3ade7368cf54d187976c22d8d329b71c30",
+      "generated_at": "2026-11-25T11:51:55.417510+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15004",
+      "path": "data/marts/studies/15004-knots15_35.json",
+      "sha256": "2ff55cd5eea84336bb289ba979ae21d71528118b7204943d5305ee3c1a0dd645",
+      "generated_at": "2026-11-25T11:52:25.906979+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15006",
+      "path": "data/marts/studies/15006-knots15_35.json",
+      "sha256": "afb4e09142738933157f3284b10f46abfe5667b865bcef3bf06a59da02e56308",
+      "generated_at": "2026-11-25T11:53:35.851394+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15007",
+      "path": "data/marts/studies/15007-knots15_35.json",
+      "sha256": "6fcdd50d3f750087c85071415a46e5c81ad91ebda0df01c302057d75b1fee148",
+      "generated_at": "2026-11-25T11:54:13.128218+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15008",
+      "path": "data/marts/studies/15008-knots15_35.json",
+      "sha256": "232d23a720ff286a581235b51b70eef39d7a852f3fa1bc5cebc1a738f63a3b02",
+      "generated_at": "2026-11-25T11:55:04.481452+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15010",
+      "path": "data/marts/studies/15010-knots15_35.json",
+      "sha256": "490aadf62978244bfb1467d5cc8fb942f5e11ac7c574649457913fca9a4355e5",
+      "generated_at": "2026-11-25T11:55:25.524467+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15011",
+      "path": "data/marts/studies/15011-knots15_35.json",
+      "sha256": "5f8c0fb32aed9202f0f2b2cad5f6e78382ac2b78b986e9cda6507a71a06308d1",
+      "generated_at": "2026-11-25T11:56:21.528975+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "15012",
+      "path": "data/marts/studies/15012-knots15_35.json",
+      "sha256": "381fbc09cfe2ab50102d3fb96b41752039ca4b5555355dbb426feb166c45f3ab",
+      "generated_at": "2026-11-25T11:56:47.050373+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "16001",
+      "path": "data/marts/studies/16001-knots15_35.json",
+      "sha256": "a3e14001f19dde17ff69b86a686aa08c9679bb055826ef755299aea490441a74",
+      "generated_at": "2026-11-25T11:58:03.625654+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "16002",
+      "path": "data/marts/studies/16002-knots15_35.json",
+      "sha256": "c525416c10a63ce9391e3e062f8db5010260589fe6bfbcf4d9f49f40b93bc91b",
+      "generated_at": "2026-11-25T11:58:44.089377+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "17001",
+      "path": "data/marts/studies/17001-knots15_35.json",
+      "sha256": "1c1163bf991fe6933f7f85cc88a099b9f7335b54c6851ce32dea25d4a356e993",
+      "generated_at": "2026-11-25T11:59:35.863808+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "17002",
+      "path": "data/marts/studies/17002-knots15_35.json",
+      "sha256": "bc4c4937fca2135563636ec466df03d0cecdb123c17f1237acb0b08284335b60",
+      "generated_at": "2026-11-25T12:00:08.389169+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "17003",
+      "path": "data/marts/studies/17003-knots15_35.json",
+      "sha256": "3e0123c3a8cacf0bd14246ce0511318340452066effa128da9e843fe3208401a",
+      "generated_at": "2026-11-25T12:01:20.173277+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "17004",
+      "path": "data/marts/studies/17004-knots15_35.json",
+      "sha256": "2d63d94f165db0b43971c8b1af9840ec3b8a9f60910a570fd1280f99987c35cb",
+      "generated_at": "2026-11-25T12:01:35.941651+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "17005",
+      "path": "data/marts/studies/17005-knots15_35.json",
+      "sha256": "1f6097841221e4ccbe62ebbbdcdd2c21a1910aa54ddef8aadee4208b5467320d",
+      "generated_at": "2026-11-25T12:03:21.174440+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "17006",
+      "path": "data/marts/studies/17006-knots15_35.json",
+      "sha256": "2acde4b473b742918687efe11dfd23dd8773be6acbaca52e5b92767515c8b91e",
+      "generated_at": "2026-11-25T12:03:38.079518+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "17007",
+      "path": "data/marts/studies/17007-knots15_35.json",
+      "sha256": "d63e96ff0c2e5dab5285871a394e44325b5ac82dec7ed5d5dedb8b7f8edddba6",
+      "generated_at": "2026-11-25T12:04:58.234168+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "17008",
+      "path": "data/marts/studies/17008-knots15_35.json",
+      "sha256": "88980cadaea78b110f8b429e2c3c50db9b18e3d24d2f83916d31af24d465d1d6",
+      "generated_at": "2026-11-25T12:05:12.432575+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21001",
+      "path": "data/marts/studies/21001-knots15_35.json",
+      "sha256": "54b611ed3336753a267a2f22b6f5a86fab26683e5ff646fd2b24652e8dc70bf0",
+      "generated_at": "2026-11-25T12:07:07.824260+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21002",
+      "path": "data/marts/studies/21002-knots15_35.json",
+      "sha256": "c25ed20cfe408f630d974614a834f2bf39e4eefe88bb8dbd435ad6d7bafdab9f",
+      "generated_at": "2026-11-25T12:07:34.483694+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21003",
+      "path": "data/marts/studies/21003-knots15_35.json",
+      "sha256": "9a53251659c100682449a48337905f8a4bc2f8475387dd500e7a4152627109d4",
+      "generated_at": "2026-11-25T12:09:16.606978+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21004",
+      "path": "data/marts/studies/21004-knots15_35.json",
+      "sha256": "25805a2aa6cd0e4db9e71df20a6fc2b15136e4b785d239c293e50bd16a1eed39",
+      "generated_at": "2026-11-25T12:09:29.861558+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21005",
+      "path": "data/marts/studies/21005-knots15_35.json",
+      "sha256": "1fc75ea2cae0e419bf395efdbb7aac693fdb2aa168e7cb58970f76db54f20bb6",
+      "generated_at": "2026-11-25T12:11:02.143410+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21007",
+      "path": "data/marts/studies/21007-knots15_35.json",
+      "sha256": "2fb3dfdf080a8e3674f3f5f68fbc071117cbd3069e50894603cb3baea4001b9b",
+      "generated_at": "2026-11-25T12:11:06.996954+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21008",
+      "path": "data/marts/studies/21008-knots15_35.json",
+      "sha256": "f3916fe0ba67980bb8c9110fa16f0d396435246914acbb0db987d716b4d7676d",
+      "generated_at": "2026-11-25T12:12:40.055211+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21010",
+      "path": "data/marts/studies/21010-knots15_35.json",
+      "sha256": "6bd65ebc09231f09d9ccdc681b3384acdfea1c70e75dbab55064a398aedd92e8",
+      "generated_at": "2026-11-25T12:13:01.002974+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21012",
+      "path": "data/marts/studies/21012-knots15_35.json",
+      "sha256": "7d0785347a856ccd9316d0804c8b68ef6d1e0d6227e98b261a87789626ae4b4c",
+      "generated_at": "2026-11-25T12:14:10.971606+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21014",
+      "path": "data/marts/studies/21014-knots15_35.json",
+      "sha256": "99119eb6bde2f901b3e0e86be6241b408bb9ad7617860e102c9260d262ed7b6a",
+      "generated_at": "2026-11-25T12:14:37.152903+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21015",
+      "path": "data/marts/studies/21015-knots15_35.json",
+      "sha256": "9bdbb3b15f609687ae815599c5dba1551dacaba60302a20ecaae27a1f6faa62a",
+      "generated_at": "2026-11-25T12:15:30.151828+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "21017",
+      "path": "data/marts/studies/21017-knots15_35.json",
+      "sha256": "7ea8fdd9ef5573aa4d66a9d8705c7ca34c7428b6210e8b9e3078ef1ddda3eee9",
+      "generated_at": "2026-11-25T12:16:18.829913+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "22004",
+      "path": "data/marts/studies/22004-knots15_35.json",
+      "sha256": "9b5f4befcc8f46dbdb6314535799a6f514e3bb3dbead310b5d189f2d27167c57",
+      "generated_at": "2026-11-25T12:16:50.477236+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "22007",
+      "path": "data/marts/studies/22007-knots15_35.json",
+      "sha256": "ad53c4a1002510ead64bbe91aa7380babb608b8c12b49c4b3f40359c971013b9",
+      "generated_at": "2026-11-25T12:17:25.365067+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "29002",
+      "path": "data/marts/studies/29002-knots15_35.json",
+      "sha256": "2e294543930c4c2c5db3afbbc5819ec35163b0cd6db096d465245d8c80ab3239",
+      "generated_at": "2026-11-25T12:18:02.778294+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "31009",
+      "path": "data/marts/studies/31009-knots15_35.json",
+      "sha256": "4539d0a2517f79be53c6d9013eea43fdf208265ce0c414bd3f97fd89adb5bdb2",
+      "generated_at": "2026-11-25T12:18:54.660825+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "31091",
+      "path": "data/marts/studies/31091-knots15_35.json",
+      "sha256": "fd134d5de83a3b8f8dad641f7829266cc5ddc1312282d86c86980921ab284b12",
+      "generated_at": "2026-11-25T12:19:12.663651+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "33001",
+      "path": "data/marts/studies/33001-knots15_35.json",
+      "sha256": "abc145abac838146bb0519a1557a4dfc42fd3e0a703ba5cc3c52b8d028fb3f55",
+      "generated_at": "2026-11-25T12:20:05.878956+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "33003",
+      "path": "data/marts/studies/33003-knots15_35.json",
+      "sha256": "6668b8d48592dbc2182fe6ea395725424b721e78fa73aa3e7dd0790bc9619dce",
+      "generated_at": "2026-11-25T12:20:28.952444+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "33004",
+      "path": "data/marts/studies/33004-knots15_35.json",
+      "sha256": "f3948a6ffd0004e126190f863e4b61b7dc7bde20061060655dba9b5712b32930",
+      "generated_at": "2026-11-25T12:21:30.068237+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "33005",
+      "path": "data/marts/studies/33005-knots15_35.json",
+      "sha256": "5cb5b79931c565efabcb64edeb26da1ea8522f6aaff34642d1660e16f671834b",
+      "generated_at": "2026-11-25T12:21:38.322238+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35011",
+      "path": "data/marts/studies/35011-knots15_35.json",
+      "sha256": "8161cdef4b6c467b5e87e7b6ab974a753b8e4895f7efb22f28c7dc41cb5e7b5c",
+      "generated_at": "2026-11-25T12:22:40.323851+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35012",
+      "path": "data/marts/studies/35012-knots15_35.json",
+      "sha256": "a3f126b86d7709ed90e9d91efa033faccae02d0ed868aa1d9964e2d71203af40",
+      "generated_at": "2026-11-25T12:22:59.250678+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35013",
+      "path": "data/marts/studies/35013-knots15_35.json",
+      "sha256": "47b00cc3c0957441e25f8d2023db1fa372a5282434a5ddeb2b5333a0295d34a6",
+      "generated_at": "2026-11-25T12:23:53.070077+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35014",
+      "path": "data/marts/studies/35014-knots15_35.json",
+      "sha256": "451e8b6bfa08f09b0fb8d20aaf326bab272380030df427c99990384f215a9b56",
+      "generated_at": "2026-11-25T12:24:18.925801+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35015",
+      "path": "data/marts/studies/35015-knots15_35.json",
+      "sha256": "95f59b599c8f9bbf0124912c4eb452593bbea40468facb8d23e67fb6ba6a9435",
+      "generated_at": "2026-11-25T12:25:02.491814+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35016",
+      "path": "data/marts/studies/35016-knots15_35.json",
+      "sha256": "f0cc2445da4e29af0347899ddb511a90200cbf8d32079dc6055f5744aaf9319c",
+      "generated_at": "2026-11-25T12:25:30.046754+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35031",
+      "path": "data/marts/studies/35031-knots15_35.json",
+      "sha256": "a2fe1800379745b435083ec546716c9aef093fa22fac1a0ace92b5b2c85b4a2c",
+      "generated_at": "2026-11-25T12:26:22.441975+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35032",
+      "path": "data/marts/studies/35032-knots15_35.json",
+      "sha256": "28cc453f5c224efc160acb28c03ddfb143c495cf9900b6b57278ba8c2f96dfdf",
+      "generated_at": "2026-11-25T12:27:34.977746+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35033",
+      "path": "data/marts/studies/35033-knots15_35.json",
+      "sha256": "3bacfdd33990794513195c1f2a1120b144c76608964c2b6be10a53169c9a2829",
+      "generated_at": "2026-11-25T12:27:46.604211+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35041",
+      "path": "data/marts/studies/35041-knots15_35.json",
+      "sha256": "708d3cc40fc9c94585afc2e2ced7ac2b8f273fc91ed2936d9545eb9337dedc1d",
+      "generated_at": "2026-11-25T12:28:59.340941+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35051",
+      "path": "data/marts/studies/35051-knots15_35.json",
+      "sha256": "170d29af33d4cdb80b57ea34dc1053ff0247dddec59a8e00b002d6ef313c54ce",
+      "generated_at": "2026-11-25T12:29:06.788487+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35052",
+      "path": "data/marts/studies/35052-knots15_35.json",
+      "sha256": "e59f4a528502d832788e701a95c53d571bf15d2c5111fb9723d0ecc333dd63ac",
+      "generated_at": "2026-11-25T12:30:12.782690+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35071",
+      "path": "data/marts/studies/35071-knots15_35.json",
+      "sha256": "455e01d767095a8088b9bcbc466e742b760f685b6f7859847b6cbee6538d88ea",
+      "generated_at": "2026-11-25T12:30:33.724503+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35072",
+      "path": "data/marts/studies/35072-knots15_35.json",
+      "sha256": "48e3015709cb4d919c962ac0048876574e9318fc330c07d7410b2caa547e090a",
+      "generated_at": "2026-11-25T12:31:20.419066+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35073",
+      "path": "data/marts/studies/35073-knots15_35.json",
+      "sha256": "dc534b47d153b5b98aee6f10b8e1588b5d50e327c612812119861fb1d5e5188b",
+      "generated_at": "2026-11-25T12:31:57.935503+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35074",
+      "path": "data/marts/studies/35074-knots15_35.json",
+      "sha256": "e3393fdee14c50fe8597b0f217c2c2022f6cfb34535c9dda85813315dea3fa9a",
+      "generated_at": "2026-11-25T12:32:51.017898+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35081",
+      "path": "data/marts/studies/35081-knots15_35.json",
+      "sha256": "76f8198e08f8ce78e166f516a35c48fac18b847b460bfe8b1733cb294fa2166d",
+      "generated_at": "2026-11-25T12:33:08.990602+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35082",
+      "path": "data/marts/studies/35082-knots15_35.json",
+      "sha256": "215ab8963dfb15fd788874bca7ecf882527ed170d36e49ef514ab534d56b07b5",
+      "generated_at": "2026-11-25T12:34:05.470905+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35083",
+      "path": "data/marts/studies/35083-knots15_35.json",
+      "sha256": "4d2caaf76f0114d23f061b46d9f699036c8f6d4ae895a7f536e056b3fc45c69d",
+      "generated_at": "2026-11-25T12:34:15.150962+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35101",
+      "path": "data/marts/studies/35101-knots15_35.json",
+      "sha256": "797a141eaa61c880d49a4d672bc3d1d30738f1d25a511e9a4701964dca65e09c",
+      "generated_at": "2026-11-25T12:35:32.600433+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35102",
+      "path": "data/marts/studies/35102-knots15_35.json",
+      "sha256": "2f8f5dfb7b4ce8e19930d62a1e624f6400c08969dd925e88b046241b7c433d8e",
+      "generated_at": "2026-11-25T12:35:44.340147+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35103",
+      "path": "data/marts/studies/35103-knots15_35.json",
+      "sha256": "8db5f875611122e0b372de06bab401be425cfcbf8cdc9f7f261f81d954b0bd04",
+      "generated_at": "2026-11-25T12:36:51.987228+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35104",
+      "path": "data/marts/studies/35104-knots15_35.json",
+      "sha256": "35cc9795518dbcebc2d3294ff127eb10e77adfda92ad8e0c0502bb5825e5217c",
+      "generated_at": "2026-11-25T12:37:27.332563+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35131",
+      "path": "data/marts/studies/35131-knots15_35.json",
+      "sha256": "6482627e6d3bf40a342a02332011010c69c9026d33a504738dad1b55cee371e1",
+      "generated_at": "2026-11-25T12:38:34.434112+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35132",
+      "path": "data/marts/studies/35132-knots15_35.json",
+      "sha256": "11010167b1bf55c98fba7a95aff3375fa96a9d5d2ea71348ccc680976dee8050",
+      "generated_at": "2026-11-25T12:38:51.773294+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35133",
+      "path": "data/marts/studies/35133-knots15_35.json",
+      "sha256": "0b35849015e7f0ea41ca477d2ee86cf9b04e8e2c7e0b0a833150b7399ceeea76",
+      "generated_at": "2026-11-25T12:40:05.410878+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35141",
+      "path": "data/marts/studies/35141-knots15_35.json",
+      "sha256": "4c16a3ef5fb0ffb669f723815eace938e6782d733e14e231d9be11b1c13e347c",
+      "generated_at": "2026-11-25T12:40:55.828035+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35151",
+      "path": "data/marts/studies/35151-knots15_35.json",
+      "sha256": "50aabc060c71890e0188530a3b8fe2eaa2f7c597f5fb3a37d51581765c382e03",
+      "generated_at": "2026-11-25T12:41:49.777053+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35163",
+      "path": "data/marts/studies/35163-knots15_35.json",
+      "sha256": "bb0966cf0d714395fcf8fc816915dbf06e0caa3d4121ba3f7ecdbf7ea2a0d789",
+      "generated_at": "2026-11-25T12:42:45.314645+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35171",
+      "path": "data/marts/studies/35171-knots15_35.json",
+      "sha256": "cfaec8c6ac780080f9d35847ba8f0e84c3d843740b8aabd2d1ec8b20291f2153",
+      "generated_at": "2026-11-25T12:43:53.140372+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "35174",
+      "path": "data/marts/studies/35174-knots15_35.json",
+      "sha256": "68d8d585bf04ddc22c69a5a12e4a6ad6bfaace6df272eec161850eddb65178e3",
+      "generated_at": "2026-11-25T12:44:19.488520+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "43007",
+      "path": "data/marts/studies/43007-knots15_35.json",
+      "sha256": "735f9ac629ddab8ef4bec57175f53105c1e6587a43fd9148e68a9be89806e7fe",
+      "generated_at": "2026-11-25T12:45:29.669656+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "43008",
+      "path": "data/marts/studies/43008-knots15_35.json",
+      "sha256": "c4124666146ea97983eb28352cea6b30406fac3b54ecc801a0ca9d0a0f96f521",
+      "generated_at": "2026-11-25T12:46:04.706064+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "43010",
+      "path": "data/marts/studies/43010-knots15_35.json",
+      "sha256": "336b2ed4d2b8aaff57bbb5d103e1b1d86f72a02c8adcfb4a407e653b8d74614f",
+      "generated_at": "2026-11-25T12:47:00.525521+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "50009",
+      "path": "data/marts/studies/50009-knots15_35.json",
+      "sha256": "f66baec23d6aa2bc5d5b6639fc0b2f463e569f89137668081c9c828d2174c0ef",
+      "generated_at": "2026-11-25T12:47:43.011679+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "50010",
+      "path": "data/marts/studies/50010-knots15_35.json",
+      "sha256": "ac32ab681ea2e47de878fe036940f80bb60a79a5d55dbbd39be38967d8232d0b",
+      "generated_at": "2026-11-25T12:48:16.183622+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51001",
+      "path": "data/marts/studies/51001-knots15_35.json",
+      "sha256": "116ee380d8661ac69f820ea306aa4fee4b5ce518240753f6f1bee88aaca1b93f",
+      "generated_at": "2026-11-25T12:49:02.795089+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51002",
+      "path": "data/marts/studies/51002-knots15_35.json",
+      "sha256": "d6ef8ecec5c81217189c75a21baea82c66efe7c5f63f469217bd7dc0c08fbfd1",
+      "generated_at": "2026-11-25T12:49:45.533503+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51003",
+      "path": "data/marts/studies/51003-knots15_35.json",
+      "sha256": "3e5b67f07b106f111de2ca48d44311a96d1f92c466cdfe6fcae78e44e72181ef",
+      "generated_at": "2026-11-25T12:50:15.329333+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51004",
+      "path": "data/marts/studies/51004-knots15_35.json",
+      "sha256": "4da83a1f084bbbb8ab60990ee160783e01b6d47818e1435a7e75e49a89717b4e",
+      "generated_at": "2026-11-25T12:52:05.326220+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51005",
+      "path": "data/marts/studies/51005-knots15_35.json",
+      "sha256": "e912100ef115718494b19c6f0bb2a88775cc6c50933c88ff03b4e21cc9c44813",
+      "generated_at": "2026-11-25T12:52:17.865812+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51006",
+      "path": "data/marts/studies/51006-knots15_35.json",
+      "sha256": "d11425e9ba0903fea11ab82a37dfe0d79a1f3924625f73914cb408e8871fdaad",
+      "generated_at": "2026-11-25T12:54:01.625656+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51007",
+      "path": "data/marts/studies/51007-knots15_35.json",
+      "sha256": "da49eaa4c41ed3afd0cb80041ce39c361731c123e8e4bb2401dd0a37b8a52182",
+      "generated_at": "2026-11-25T12:54:12.890100+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51008",
+      "path": "data/marts/studies/51008-knots15_35.json",
+      "sha256": "69ceb9f2ede676df9c4551eeee1f4171b6a2a237a8bdfb61fbe9a97e3634fd34",
+      "generated_at": "2026-11-25T12:55:31.202501+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51009",
+      "path": "data/marts/studies/51009-knots15_35.json",
+      "sha256": "7f103cf1d4dc8f575c8e7ab4675f92dd4c7be55743c8fdbe3ccea859025f2b3e",
+      "generated_at": "2026-11-25T12:55:56.538345+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51010",
+      "path": "data/marts/studies/51010-knots15_35.json",
+      "sha256": "1e3228da250729c03c595fafdd9e5e36595eb0af97c6b0793a649d0df4939e38",
+      "generated_at": "2026-11-25T12:57:20.898909+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51011",
+      "path": "data/marts/studies/51011-knots15_35.json",
+      "sha256": "88155fda426eedc6d3a452ff5017285ac93746c86242147a838918af0b3b6922",
+      "generated_at": "2026-11-25T12:57:23.420252+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51012",
+      "path": "data/marts/studies/51012-knots15_35.json",
+      "sha256": "78c944e306c872d916b14c13cbe036cbefdc14d7d0d7f926b1f3ef43c3dd362b",
+      "generated_at": "2026-11-25T12:58:55.171669+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51013",
+      "path": "data/marts/studies/51013-knots15_35.json",
+      "sha256": "3134d3dff3f57f2564a29e81b7df5927a15f510b42c72e3460a0a5aa0994a954",
+      "generated_at": "2026-11-25T12:59:16.081131+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51014",
+      "path": "data/marts/studies/51014-knots15_35.json",
+      "sha256": "b887bc79fb17712a86085379f6c615ea7fdd665c6d656f6150dcf39f2eb0feb9",
+      "generated_at": "2026-11-25T13:00:43.692488+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51015",
+      "path": "data/marts/studies/51015-knots15_35.json",
+      "sha256": "28bdae58dcb55e8b5c6d7d2124ca7b13e28329ddd89db3333d64eaffe06e01cd",
+      "generated_at": "2026-11-25T13:01:26.630139+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "51016",
+      "path": "data/marts/studies/51016-knots15_35.json",
+      "sha256": "ac4ffdc8771fe5313eb2b18ebe7eb0e77b79344245f22d2aae3c4fe222033d9b",
+      "generated_at": "2026-11-25T13:02:45.497021+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "52006",
+      "path": "data/marts/studies/52006-knots15_35.json",
+      "sha256": "4866e285d6ef72f83c1023d35abe00da35f878ffc78c1d32e885e7d5580f73b5",
+      "generated_at": "2026-11-25T13:03:12.826846+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "52008",
+      "path": "data/marts/studies/52008-knots15_35.json",
+      "sha256": "bdf579e58b06961e9a0ab0a0db5ddad4019cc62f4ce2019600216150bca0bfb9",
+      "generated_at": "2026-11-25T13:05:00.737366+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "52014",
+      "path": "data/marts/studies/52014-knots15_35.json",
+      "sha256": "99d67ef531ad5ffb30fc6d6cfcb3bb68d7618218fa9febdf02bed83b903585dd",
+      "generated_at": "2026-11-25T13:05:27.940154+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    },
+    {
+      "region": "53001",
+      "path": "data/marts/studies/53001-knots15_35.json",
+      "sha256": "516eb13a77b3bd13c6a3d8a8b9ab0a4ae5500231ef391dfff12bdedd6f7b1c3e",
+      "generated_at": "2026-11-25T13:06:36.166920+00:00",
+      "git_commit": "aba2bc19c265b491697e194354ee0e9d868c86f6",
+      "git_dirty": false
+    }
+  ],
+  "method": "DerSimonian-Laird random effects on log RR; SE from the 95% Wald interval as (log upper - log lower) / (2 × 1.96); effects rejected by the study rules ('rejected') and strata that failed outright ('stratum_errors') are counted and left out; regions the study refused have no report and are not counted",
+  "model_spec_version": 7,
+  "exposure": "pm25",
+  "meteorology": "ERA5",
+  "exposure_source": "CAMS",
+  "panel_sha256": [
+    "ba11be31aeb06f1524654cac022795b23fa47003e8e65525208f8680d011efc2"
+  ],
+  "basis": {
+    "max_lag": 7,
+    "requested_knots": [
+      15.0,
+      35.0
+    ],
+    "min_share_above_knot": 0.01,
+    "max_log_rr_bound": 20.0,
+    "max_log_rr_se": 3.0,
+    "max_covariance_condition": 4503599627370496.0,
+    "lag_degree": 2,
+    "reference": 15.0
+  },
+  "confounders": {
+    "inference": "natural time spline, 7 df/year, no harmonics; cubic B-splines (3 df) of mean temperature (lags 1-7, 8-21) and humidity (lags 1-7), full windows only",
+    "trend_sensitivity_df_per_year": [
+      4,
+      10
+    ],
+    "autocorrelation_sensitivity": "Newey-West (HAC, 7 lags) interval; log of previous-day admissions as a covariate"
+  },
+  "regions": [
+    "11001",
+    "11002",
+    "11003",
+    "11004",
+    "11005",
+    "11006",
+    "11007",
+    "12001",
+    "12002",
+    "12003",
+    "13001",
+    "13002",
+    "13003",
+    "13004",
+    "13005",
+    "13006",
+    "13008",
+    "14002",
+    "15001",
+    "15002",
+    "15003",
+    "15004",
+    "15006",
+    "15007",
+    "15008",
+    "15010",
+    "15011",
+    "15012",
+    "16001",
+    "16002",
+    "17001",
+    "17002",
+    "17003",
+    "17004",
+    "17005",
+    "17006",
+    "17007",
+    "17008",
+    "21001",
+    "21002",
+    "21003",
+    "21004",
+    "21005",
+    "21007",
+    "21008",
+    "21010",
+    "21012",
+    "21014",
+    "21015",
+    "21017",
+    "22004",
+    "22007",
+    "29002",
+    "31009",
+    "31091",
+    "33001",
+    "33003",
+    "33004",
+    "33005",
+    "35011",
+    "35012",
+    "35013",
+    "35014",
+    "35015",
+    "35016",
+    "35031",
+    "35032",
+    "35033",
+    "35041",
+    "35051",
+    "35052",
+    "35071",
+    "35072",
+    "35073",
+    "35074",
+    "35081",
+    "35082",
+    "35083",
+    "35101",
+    "35102",
+    "35103",
+    "35104",
+    "35131",
+    "35132",
+    "35133",
+    "35141",
+    "35151",
+    "35163",
+    "35171",
+    "35174",
+    "43007",
+    "43008",
+    "43010",
+    "50009",
+    "50010",
+    "51001",
+    "51002",
+    "51003",
+    "51004",
+    "51005",
+    "51006",
+    "51007",
+    "51008",
+    "51009",
+    "51010",
+    "51011",
+    "51012",
+    "51013",
+    "51014",
+    "51015",
+    "51016",
+    "52006",
+    "52008",
+    "52014",
+    "53001"
+  ],
+  "any_region_dirty": false,
+  "results": [
+    {
+      "outcome": "asthma",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.018088807503915387,
+        "se": 0.022759224314073755,
+        "rr": 1.0182534009174349,
+        "lower": 0.9738292758691817,
+        "upper": 1.0647040648418595,
+        "tau2": 0.008399712147510795,
+        "q": 91.6865455883746,
+        "i2": 0.36740991136921936,
+        "regions": 59,
+        "rejected": 2,
+        "stratum_errors": 54,
+        "max_covariance_condition": 205860716297130.56
+      },
+      "effect_hac": {
+        "log_rr": 0.016436465466963254,
+        "se": 0.023057528376853903,
+        "rr": 1.0165722872886744,
+        "lower": 0.9716532370765614,
+        "upper": 1.0635679230510289,
+        "tau2": 0.008938166430623633,
+        "q": 92.6358448868395,
+        "i2": 0.35230255552487516,
+        "regions": 61,
+        "rejected": 0,
+        "stratum_errors": 54,
+        "max_covariance_condition": 1037100871460683.8
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.01710257162053006,
+        "se": 0.0220438976146636,
+        "rr": 1.0172496579201102,
+        "lower": 0.97423428260912,
+        "upper": 1.0621642914959504,
+        "tau2": 0.007216458621197957,
+        "q": 87.19678612976543,
+        "i2": 0.33483786989941405,
+        "regions": 59,
+        "rejected": 2,
+        "stratum_errors": 54,
+        "max_covariance_condition": 202929552096957.3
+      }
+    },
+    {
+      "outcome": "asthma",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": -0.04987900866394686,
+        "se": 0.04617406397449298,
+        "rr": 0.951344521982436,
+        "lower": 0.8690277907713335,
+        "upper": 1.0414585230958815,
+        "tau2": 0.009840476076948587,
+        "q": 32.72072218676627,
+        "i2": 0.17483483873347955,
+        "regions": 28,
+        "rejected": 2,
+        "stratum_errors": 85,
+        "max_covariance_condition": 191815235662084.84
+      },
+      "effect_hac": {
+        "log_rr": -0.05752870895007217,
+        "se": 0.04628205856059996,
+        "rr": 0.9440947860272797,
+        "lower": 0.8622228252712123,
+        "upper": 1.0337408601118068,
+        "tau2": 0.012605172661545441,
+        "q": 34.806934447507444,
+        "i2": 0.22429250295745323,
+        "regions": 28,
+        "rejected": 2,
+        "stratum_errors": 85,
+        "max_covariance_condition": 1018848310388074.4
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.05254939820346717,
+        "se": 0.04584305381575029,
+        "rr": 0.9488074505146589,
+        "lower": 0.8672727304433355,
+        "upper": 1.0380074762548352,
+        "tau2": 0.00924653451424657,
+        "q": 32.382177697713466,
+        "i2": 0.16620802183089453,
+        "regions": 28,
+        "rejected": 2,
+        "stratum_errors": 85,
+        "max_covariance_condition": 191894633278637.72
+      }
+    },
+    {
+      "outcome": "asthma",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.0344360366394541,
+        "se": 0.013117185963078051,
+        "rr": 1.0350358218892888,
+        "lower": 1.0087645377556158,
+        "upper": 1.061991289838114,
+        "tau2": 0.00286203822887236,
+        "q": 117.07262028048542,
+        "i2": 0.23124638549666168,
+        "regions": 91,
+        "rejected": 2,
+        "stratum_errors": 22,
+        "max_covariance_condition": 206856333041478.66
+      },
+      "effect_hac": {
+        "log_rr": 0.03390782679242715,
+        "se": 0.013054604894560513,
+        "rr": 1.0344892501411391,
+        "lower": 1.0083555152815793,
+        "upper": 1.0613002978009556,
+        "tau2": 0.0019808109428610756,
+        "q": 105.2513774568899,
+        "i2": 0.14490430268370347,
+        "regions": 91,
+        "rejected": 2,
+        "stratum_errors": 22,
+        "max_covariance_condition": 401933161911088.25
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.031743390695577516,
+        "se": 0.011522958195921,
+        "rr": 1.0322525856981497,
+        "lower": 1.0092004590315018,
+        "upper": 1.0558312683518662,
+        "tau2": 0.0011456264247160198,
+        "q": 101.11721412688466,
+        "i2": 0.10994383323233645,
+        "regions": 91,
+        "rejected": 2,
+        "stratum_errors": 22,
+        "max_covariance_condition": 204717583406466.62
+      }
+    },
+    {
+      "outcome": "circulatory",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.011078505816605485,
+        "se": 0.03199250423560479,
+        "rr": 1.0111400997081206,
+        "lower": 0.9496832201345135,
+        "upper": 1.0765740402288397,
+        "tau2": 0.0,
+        "q": 37.498829098266995,
+        "i2": 0.0,
+        "regions": 42,
+        "rejected": 3,
+        "stratum_errors": 70,
+        "max_covariance_condition": 257743062918046.66
+      },
+      "effect_hac": {
+        "log_rr": 0.01286598130441064,
+        "se": 0.032122049039605464,
+        "rr": 1.0129491041449719,
+        "lower": 0.951140740937257,
+        "upper": 1.078773985201194,
+        "tau2": 0.0025467055461578774,
+        "q": 43.68925990981376,
+        "i2": 0.06155425647779578,
+        "regions": 42,
+        "rejected": 3,
+        "stratum_errors": 70,
+        "max_covariance_condition": 513756915573683.2
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.0110930144703834,
+        "se": 0.03199879254554852,
+        "rr": 1.0111547700961716,
+        "lower": 0.9496852938330415,
+        "upper": 1.0766029291256876,
+        "tau2": 0.0,
+        "q": 39.12308674268362,
+        "i2": 0.0,
+        "regions": 42,
+        "rejected": 3,
+        "stratum_errors": 70,
+        "max_covariance_condition": 264574690241980.75
+      }
+    },
+    {
+      "outcome": "circulatory",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": 0.0039728668894897035,
+        "se": 0.00348646382574842,
+        "rr": 1.0039807691866098,
+        "lower": 0.9971434854149042,
+        "upper": 1.0108649353278627,
+        "tau2": 0.0,
+        "q": 86.64785219941454,
+        "i2": 0.0,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 160259306390500.16
+      },
+      "effect_hac": {
+        "log_rr": 0.004120879143287041,
+        "se": 0.0034414817088976456,
+        "rr": 1.004129381640987,
+        "lower": 0.9973790157864618,
+        "upper": 1.0109254346800718,
+        "tau2": 0.0,
+        "q": 87.31157891388537,
+        "i2": 0.0,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 350042391612826.75
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.0038130879825900087,
+        "se": 0.003478614836337631,
+        "rr": 1.003820367051541,
+        "lower": 0.9969995133880147,
+        "upper": 1.0106878847746525,
+        "tau2": 0.0,
+        "q": 82.7061506798913,
+        "i2": 0.0,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 159127754284134.62
+      }
+    },
+    {
+      "outcome": "circulatory",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.0076991132711207505,
+        "se": 0.004092321448307956,
+        "rr": 1.0077288276528802,
+        "lower": 0.9996782150163341,
+        "upper": 1.0158442735156084,
+        "tau2": 0.0004384647284530395,
+        "q": 164.01185058217857,
+        "i2": 0.3049282744183171,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 159561443406995.78
+      },
+      "effect_hac": {
+        "log_rr": 0.006302264391870017,
+        "se": 0.0031886575854134453,
+        "rr": 1.0063221654453702,
+        "lower": 1.0000524969023739,
+        "upper": 1.0126311406685267,
+        "tau2": 6.59451370974311e-05,
+        "q": 121.43388039706788,
+        "i2": 0.061217515019369985,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 520436281704907.8
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.006750206830145962,
+        "se": 0.003669566507750266,
+        "rr": 1.0067730408254205,
+        "lower": 0.9995579542059996,
+        "upper": 1.0140402079417317,
+        "tau2": 0.0002329629923481502,
+        "q": 140.8304879673904,
+        "i2": 0.1905161897443902,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 160943069917165.62
+      }
+    },
+    {
+      "outcome": "negative_control",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.009358962024682402,
+        "se": 0.016318525047075358,
+        "rr": 1.0094028940555524,
+        "lower": 0.977628686623764,
+        "upper": 1.0422098046718238,
+        "tau2": 0.006072749431859357,
+        "q": 144.6463385394849,
+        "i2": 0.28100495975146617,
+        "regions": 105,
+        "rejected": 0,
+        "stratum_errors": 10,
+        "max_covariance_condition": 353685312758882.56
+      },
+      "effect_hac": {
+        "log_rr": 0.01022397801392507,
+        "se": 0.016434274044053232,
+        "rr": 1.0102764214516122,
+        "lower": 0.9782527574746348,
+        "upper": 1.0433483983995215,
+        "tau2": 0.007571985643226165,
+        "q": 161.077797193443,
+        "i2": 0.3543492535156575,
+        "regions": 105,
+        "rejected": 0,
+        "stratum_errors": 10,
+        "max_covariance_condition": 586642907731330.2
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.009121220506024501,
+        "se": 0.016406723596394505,
+        "rr": 1.009162945602567,
+        "lower": 0.9772273442519039,
+        "upper": 1.0421421962530857,
+        "tau2": 0.0062609344530658315,
+        "q": 145.89976757440812,
+        "i2": 0.2871818665032448,
+        "regions": 105,
+        "rejected": 0,
+        "stratum_errors": 10,
+        "max_covariance_condition": 359659467325859.25
+      }
+    },
+    {
+      "outcome": "negative_control",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": -0.0007091203222754988,
+        "se": 0.005189744144551494,
+        "rr": 0.9992911310441204,
+        "lower": 0.9891779653102132,
+        "upper": 1.0095076918441817,
+        "tau2": 0.0,
+        "q": 100.40247867797488,
+        "i2": 0.0,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 167701302715062.75
+      },
+      "effect_hac": {
+        "log_rr": -0.0003433504213576816,
+        "se": 0.005015291336255493,
+        "rr": 0.9996567085166526,
+        "lower": 0.9898782517557453,
+        "upper": 1.0095317612139343,
+        "tau2": 0.0,
+        "q": 111.52357538942859,
+        "i2": 0.0,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 561064216222832.25
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.0006586597375727363,
+        "se": 0.0051895469923986005,
+        "rr": 0.9993415571311354,
+        "lower": 0.9892282633238468,
+        "upper": 1.0095582433660613,
+        "tau2": 0.0,
+        "q": 103.01264436471304,
+        "i2": 0.0,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 165876306179125.4
+      }
+    },
+    {
+      "outcome": "negative_control",
+      "age_group": "all",
+      "effect": {
+        "log_rr": -0.0021088332535927658,
+        "se": 0.0025727476457079353,
+        "rr": 0.9978933887730173,
+        "lower": 0.9928740919066745,
+        "upper": 1.0029380597942885,
+        "tau2": 0.0,
+        "q": 111.88937934454178,
+        "i2": 0.0,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 184968388082623.22
+      },
+      "effect_hac": {
+        "log_rr": -0.0008739722357499263,
+        "se": 0.002745725830331251,
+        "rr": 0.9991264095667481,
+        "lower": 0.9937639306345969,
+        "upper": 1.0045178251300362,
+        "tau2": 7.357059959427598e-05,
+        "q": 125.76217146965543,
+        "i2": 0.09352710224547504,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 325537744802393.5
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": -0.0019477261860951576,
+        "se": 0.0025703405882094967,
+        "rr": 0.9980541694016578,
+        "lower": 0.9930387488056003,
+        "upper": 1.003094920775377,
+        "tau2": 0.0,
+        "q": 112.53600970435085,
+        "i2": 0.0,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 183776878812286.72
+      }
+    },
+    {
+      "outcome": "pneumonia",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.018795746258660637,
+        "se": 0.0074967611910741845,
+        "rr": 1.0189734982110468,
+        "lower": 1.0041105194293303,
+        "upper": 1.0340564808011004,
+        "tau2": 0.0006310435835930686,
+        "q": 123.9099310124546,
+        "i2": 0.12032878148367268,
+        "regions": 110,
+        "rejected": 0,
+        "stratum_errors": 5,
+        "max_covariance_condition": 171223531193730.34
+      },
+      "effect_hac": {
+        "log_rr": 0.021893118422509315,
+        "se": 0.007907631100865667,
+        "rr": 1.0221345312808545,
+        "lower": 1.0064146477561737,
+        "upper": 1.03809995449296,
+        "tau2": 0.0010381521471952142,
+        "q": 132.4821402350602,
+        "i2": 0.1772475912103801,
+        "regions": 110,
+        "rejected": 0,
+        "stratum_errors": 5,
+        "max_covariance_condition": 472491705691121.3
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.017653629955422145,
+        "se": 0.007369339753928964,
+        "rr": 1.0178103763028532,
+        "lower": 1.0032148807176176,
+        "upper": 1.0326182177129695,
+        "tau2": 0.0005437919405324086,
+        "q": 121.9709772559522,
+        "i2": 0.10634478420823852,
+        "regions": 110,
+        "rejected": 0,
+        "stratum_errors": 5,
+        "max_covariance_condition": 172254636038417.94
+      }
+    },
+    {
+      "outcome": "pneumonia",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": 0.006632896657823669,
+        "se": 0.007396451409715851,
+        "rr": 1.0066549430336833,
+        "lower": 0.9921666934071288,
+        "upper": 1.0213547593038634,
+        "tau2": 0.0010730968243877965,
+        "q": 143.05830228038602,
+        "i2": 0.21710241059280527,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 196252350133015.06
+      },
+      "effect_hac": {
+        "log_rr": 0.007746066788084282,
+        "se": 0.007506878545150995,
+        "rr": 1.0077761451763374,
+        "lower": 0.9930568010026037,
+        "upper": 1.0227136632679033,
+        "tau2": 0.0013503623224786836,
+        "q": 152.47390328780148,
+        "i2": 0.2654480695716508,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 743618006287095.0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.0067624051312753985,
+        "se": 0.0074083383004608285,
+        "rr": 1.006785321821045,
+        "lower": 0.9922720771942302,
+        "upper": 1.0215108411600469,
+        "tau2": 0.0010843036206232423,
+        "q": 143.39677159457347,
+        "i2": 0.21895033790120283,
+        "regions": 113,
+        "rejected": 0,
+        "stratum_errors": 2,
+        "max_covariance_condition": 198596078240610.4
+      }
+    },
+    {
+      "outcome": "pneumonia",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.013695826054639317,
+        "se": 0.004678783100956116,
+        "rr": 1.0137900435175984,
+        "lower": 1.0045356663136595,
+        "upper": 1.0231296775225698,
+        "tau2": 0.00042664418713986405,
+        "q": 143.47400101578617,
+        "i2": 0.2054309547870154,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 175201558148046.56
+      },
+      "effect_hac": {
+        "log_rr": 0.013967399450661836,
+        "se": 0.00466240069859754,
+        "rr": 1.014065399310532,
+        "lower": 1.004840772948115,
+        "upper": 1.0233747094694436,
+        "tau2": 0.0004003048373944508,
+        "q": 139.94525739736883,
+        "i2": 0.1853957603128939,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 1696383787621249.5
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.01245235101064389,
+        "se": 0.004493302876566181,
+        "rr": 1.0125302043502487,
+        "lower": 1.0036521302070072,
+        "upper": 1.0214868118798308,
+        "tau2": 0.0003187496692436912,
+        "q": 136.18977890853176,
+        "i2": 0.16293277723458924,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 173278531530798.25
+      }
+    },
+    {
+      "outcome": "respiratory",
+      "age_group": "0-4",
+      "effect": {
+        "log_rr": 0.020377636264546996,
+        "se": 0.006223286848222163,
+        "rr": 1.0205866778040693,
+        "lower": 1.0082135416038593,
+        "upper": 1.0331116612996305,
+        "tau2": 0.0007927268580900133,
+        "q": 147.73030421514994,
+        "i2": 0.2283235277578942,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 163189820445301.28
+      },
+      "effect_hac": {
+        "log_rr": 0.021998240742996864,
+        "se": 0.006489672980140216,
+        "rr": 1.0222419860824834,
+        "lower": 1.0093216602537487,
+        "upper": 1.0353277049926255,
+        "tau2": 0.0010272603594560612,
+        "q": 154.2909911517728,
+        "i2": 0.2611363816578208,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 539889359450494.5
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.018635227913429493,
+        "se": 0.006023541844959643,
+        "rr": 1.0188099473980836,
+        "lower": 1.0068524572758317,
+        "upper": 1.0309094459834331,
+        "tau2": 0.0006507782067569336,
+        "q": 142.21775872478634,
+        "i2": 0.19841234299994928,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 163196476844708.94
+      }
+    },
+    {
+      "outcome": "respiratory",
+      "age_group": "60+",
+      "effect": {
+        "log_rr": 0.004769714352815407,
+        "se": 0.0061375627271697715,
+        "rr": 1.0047811075472113,
+        "lower": 0.992766380885741,
+        "upper": 1.0169412396731785,
+        "tau2": 0.0008935420062841833,
+        "q": 154.844432864173,
+        "i2": 0.26377721244909763,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 181064305140943.47
+      },
+      "effect_hac": {
+        "log_rr": 0.004905617143395623,
+        "se": 0.00623203749152327,
+        "rr": 1.0049176693830062,
+        "lower": 0.9927174707271653,
+        "upper": 1.0172678048049777,
+        "tau2": 0.0010899560417604306,
+        "q": 164.32509196390973,
+        "i2": 0.306253240831671,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 370773710157535.94
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.0048490501172462,
+        "se": 0.006106140037999863,
+        "rr": 1.004860825786676,
+        "lower": 0.9929062955871579,
+        "upper": 1.016959287788144,
+        "tau2": 0.0008668133535788591,
+        "q": 153.6674486694751,
+        "i2": 0.2581382655398687,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 183046972848599.28
+      }
+    },
+    {
+      "outcome": "respiratory",
+      "age_group": "all",
+      "effect": {
+        "log_rr": 0.015127102197406391,
+        "se": 0.004110890935485013,
+        "rr": 1.0152420959167547,
+        "lower": 1.0070948056855618,
+        "upper": 1.023455296862348,
+        "tau2": 0.0005391763352260004,
+        "q": 175.81697969047022,
+        "i2": 0.35159846221508534,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 178059140776901.7
+      },
+      "effect_hac": {
+        "log_rr": 0.015611341823916453,
+        "se": 0.0039419863181765534,
+        "rr": 1.0157338354203667,
+        "lower": 1.0079162175051335,
+        "upper": 1.023612088484442,
+        "tau2": 0.0004072179812360068,
+        "q": 156.97861806720306,
+        "i2": 0.2737864468191698,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 1229622913327843.0
+      },
+      "effect_with_lagged_outcome": {
+        "log_rr": 0.013814335670257425,
+        "se": 0.0037854823193696034,
+        "rr": 1.0139101945053564,
+        "lower": 1.006415280649765,
+        "upper": 1.0214609240215229,
+        "tau2": 0.0003476687119588487,
+        "q": 154.39428999928157,
+        "i2": 0.26163072481158167,
+        "regions": 115,
+        "rejected": 0,
+        "stratum_errors": 0,
+        "max_covariance_condition": 178162163161972.78
+      }
+    }
+  ]
+}
