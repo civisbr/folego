@@ -30,6 +30,14 @@ Excesso = Σ[E(Y | exposição prevista) − E(Y | cenário de referência)]. Va
 
 Sorteios conjuntos multivariados dos coeficientes, com semente fixa, geram um intervalo de 95% para o excesso médio condicional. Não se somam limites independentes de intervalos probabilísticos. O intervalo não inclui todo o erro de previsão de contagens, exposição, confundidores, especificação ou pagamento. **As faixas da demonstração visual são artificiais e não usam essa interpretação.**
 
+## Comparação com a literatura
+
+Rocha & Sant'Anna (2022, World Development 151, DOI 10.1016/j.worlddev.2021.105722; texto completo conferido) estimam, com efeitos fixos de município e mês em 2010–2019 na Amazônia Legal e PM2,5 do SISAM/INPE (CAMS), que +10 µg/m³ na média mensal de PM2,5 eleva a taxa mensal de internações respiratórias em 0,9% (coeficiente OLS 0,055 por 100 mil habitantes, média 63,5; seção 5.1). Por desvio-padrão (17,3 µg/m³) o efeito é 1,5% no total e, no 2SLS por idade, 1,5% em crianças e 2,5% em idosos; acima de 75 µg/m³ na média mensal chega a 14%. Doenças digestivas e neoplasias não respondem, e o efeito se concentra nas respiratórias (Tabela 3).
+
+O estudo combinado deste projeto (115 regiões, versão 7, meteorologia ERA5) dá +1,5% (IC 0,7–2,3%) nas internações respiratórias por +10 µg/m³ acima de 15, somando os dias 0–7, e +2,1% em 0–4 anos: mesma ordem de grandeza, um pouco acima de Rocha & Sant'Anna, o que é esperado porque a média mensal dilui picos diários e o erro de exposição puxa o efeito para zero. Os desenhos medem coisas diferentes (variação mensal entre municípios contra variação diária dentro da região), então a comparação é de ordem de grandeza, não de igualdade. A diferença está nos idosos: lá o efeito por desvio-padrão é o maior; aqui o RR de 60+ é 1,005 (IC 0,993–1,017), sem efeito claro. Como no artigo, o controle negativo (lesões) fica no nulo.
+
+Requia et al. (2021, Nature Communications 12:6555, DOI 10.1038/s41467-021-26822-7) usam outro contraste: dias de "onda de queimada" (fogo e PM2,5 acima do percentil 99 regional), com aumento de 23% (IC 12–33%) nas internações respiratórias em média móvel de 5 dias, em todo o Brasil de 2008 a 2018. Por medir dias extremos e não um incremento de 10 µg/m³, não entra na comparação numérica.
+
 ## Validação necessária
 
 A referência de aceitação é [docs/validation.md](validation.md). Origens móveis precisam usar somente dados disponíveis na origem e previsões ambientais arquivadas. O código reserva 62 dias para publicação clínica, mas isso é uma aproximação; um calendário real de disponibilidade por competência é preferível. MAE/MAPE são calculados após agregação semanal, excluindo semanas incompletas. MAPE exclui denominadores zero e informa quantos foram excluídos. Precisão/recall de picos exigem limiar de P90 definido no treino.
@@ -42,4 +50,4 @@ A referência de aceitação é [docs/validation.md](validation.md). Origens mó
 - [IBGE Localidades](https://servicodados.ibge.gov.br/api/docs/localidades).
 - [Resolução CIB/MT nº 507/2025](https://www.saude.mt.gov.br/storage/files/jlxe9jkkPp4k6viKKrRmoz1EGsHuGqETtZfc5cfA.pdf), usada no complemento de Boa Esperança do Norte.
 
-Os títulos, autores e anos de Rocha & Sant’Anna (DOI 10.1016/j.worlddev.2021.105722) e Tadano et al. (DOI 10.1016/j.chemosphere.2024.143688) foram conferidos nos metadados Crossref. A leitura e a revisão quantitativa dos artigos completos ainda são necessárias antes de calibrar ou comparar efeitos. Nenhum efeito publicado foi inserido como coeficiente fixo nesta implementação.
+Os títulos, autores e anos de Rocha & Sant’Anna (DOI 10.1016/j.worlddev.2021.105722) e Tadano et al. (DOI 10.1016/j.chemosphere.2024.143688) foram conferidos nos metadados Crossref; o texto completo de Rocha & Sant’Anna e o de Requia et al. foram lidos para a comparação acima. Tadano et al. ainda não foi revisado quantitativamente. Nenhum efeito publicado foi inserido como coeficiente fixo nesta implementação.

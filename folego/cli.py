@@ -80,11 +80,21 @@ def main():
         help="Nós da base de exposição em µg/m³ (padrão 15 35 75); iguais entre regiões"
         " para combinar estudos",
     )
+    study.add_argument(
+        "--backtest-only",
+        action="store_true",
+        help="Só o backtest, com e sem PM2,5; grava <região>-backtest*.json",
+    )
     pool = commands.add_parser(
         "pool", help="Meta-análise (DerSimonian-Laird) de relatórios de estudo por região"
     )
     pool.add_argument("reports", type=Path, nargs="+", help="Relatórios JSON de `study`")
     pool.add_argument("--output", type=Path, required=True)
+    skill = commands.add_parser(
+        "backtest-report", help="Resumir o backtest de várias regiões (com e sem PM2,5)"
+    )
+    skill.add_argument("reports", nargs="+", type=Path)
+    skill.add_argument("--output", type=Path, required=True)
     fires = commands.add_parser("fires", help="Focos de queimada FIRMS VIIRS por região e dia")
     fires.add_argument("--start", default="2012-01-20")
     fires.add_argument("--end", default="2025-12-31")
@@ -351,6 +361,16 @@ def main():
             args.exposure,
             None if basis is None else basis.knots,
         )
+        if args.backtest_only:
+            from .evaluate.study import region_backtest
+
+            name = f"{args.region}-backtest{suffix}.json"
+            output = args.output or Path("data/marts/backtests") / name
+            report = region_backtest(
+                args.panel, args.region, output, exposure=args.exposure, basis=basis
+            )
+            print(f"Backtest: {output}")
+            return
         output = args.output or Path("data/marts/studies") / f"{args.region}{suffix}.json"
         report = region_study(args.panel, args.region, output, exposure=args.exposure, basis=basis)
         summary = [
@@ -617,6 +637,29 @@ def main():
         print(
             f"{frame.height} linhas, {frame['health_region_code'].n_unique()} regiões: "
             f"{args.output}"
+        )
+    elif args.command == "backtest-report":
+        from .evaluate.backtest_report import backtest_report
+
+        try:
+            missing = [str(p) for p in args.reports if not p.is_file()]
+            if missing:
+                parser.exit(2, f"Relatório inexistente: {missing[0]}\n")
+            os.umask(0o077)
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            report = backtest_report(args.reports, args.output)
+        except OSError as error:
+            reason = error.strerror or str(error)
+            parser.exit(2, f"Falha de E/S em {repr(error.filename)[:200]}: {reason}\n")
+        except (ValueError, KeyError, TypeError, AttributeError) as error:
+            parser.exit(2, f"Relatórios incompatíveis ou inválidos: {error}\n")
+        print(
+            json.dumps(
+                [
+                    {k: r[k] for k in ("outcome", "regions", "median_mae_ratio")}
+                    for r in report["results"]
+                ]
+            )
         )
     elif args.command == "export-study":
         from .publish.export_web import export_study

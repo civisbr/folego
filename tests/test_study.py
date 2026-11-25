@@ -1,3 +1,4 @@
+import statistics
 from datetime import date
 
 import numpy as np
@@ -457,3 +458,30 @@ def test_missing_weather_fails_only_its_backtest_fold(tmp_path):
     by_year = {f["year"]: f for f in folds}
     assert "Confounder design" in by_year[2020]["error"]
     assert "error" not in by_year[2021]
+
+
+def test_backtest_only_scores_pm25_against_baseline(tmp_path):
+    import json
+
+    from folego.evaluate.backtest_report import backtest_report
+    from folego.evaluate.study import region_backtest
+    from folego.models.crossbasis import CrossBasis
+
+    output = tmp_path / "bt" / "11004-backtest.json"
+    report = region_backtest(
+        synthetic_panel(tmp_path / "panel.parquet"),
+        "11004",
+        output,
+        outcomes=("respiratory", "negative_control"),
+        basis=CrossBasis(knots=(15, 35)),
+    )
+    folds = {r["outcome"]: r["folds"] for r in report["results"]}
+    good = [f for f in folds["respiratory"] if "error" not in f]
+    assert good and all({"baseline", "peaks", "peak_threshold"} <= f.keys() for f in good)
+    # The synthetic admissions follow PM2.5, so dropping it must cost accuracy.
+    assert statistics.median(f["mae"] / f["baseline"]["mae"] for f in good) < 1
+    assert json.loads(output.read_text())["region"] == "11004"
+    summary = backtest_report([output], tmp_path / "bt" / "summary.json")
+    respiratory = next(r for r in summary["results"] if r["outcome"] == "respiratory")
+    assert respiratory["regions"] == 1 and respiratory["median_mae_ratio"] < 1
+    assert 0 <= respiratory["share_folds_pm25_better"] <= 1

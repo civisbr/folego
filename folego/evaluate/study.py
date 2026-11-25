@@ -270,19 +270,23 @@ def fit_stratum(
     }
 
 
-def backtest_stratum(series: pl.DataFrame, basis: CrossBasis, years=range(2019, 2025)):
+def backtest_stratum(
+    series: pl.DataFrame, basis: CrossBasis, years=range(2019, 2025), *, baseline=False
+):
     """Rolling origins: train on data up to origin − 62 days, predict Jul–Oct.
 
     Each fold is scored on its own, so one fold without enough history does not hide
-    the others.
+    the others. With ``baseline`` the same confounders are refitted without the
+    exposure, which shows whether PM2.5 improves the forecast at all.
     """
     full = series.filter(pl.col("admissions").is_not_null())
-    reports = []
-    for year in years:
 
+    def predictor(with_exposure: bool):
         def fit_predict(train: pl.DataFrame, test: pl.DataFrame):
             confounders = ConfounderDesign(include_srag="srag" in train.columns)
-            rows, design, _ = _design(train, basis, confounders, fit=True)
+            rows, design, width = _design(train, basis, confounders, fit=True)
+            if not with_exposure:
+                design = design[:, width:]
             model = fit_count_model(rows["admissions"].to_numpy(), design)
             # The lag basis needs the days before the test window; ``series`` is checked
             # to be contiguous, so its row order is the day order.
@@ -295,10 +299,22 @@ def backtest_stratum(series: pl.DataFrame, basis: CrossBasis, years=range(2019, 
             if keep.sum() != test.height or not np.isfinite(exposure[keep]).all():
                 raise ValueError("Backtest window misaligned with its lag context")
             z = confounders.transform(context.filter(pl.Series(keep)))
-            return predict_counts(model, np.column_stack([exposure[keep], z]))
+            columns = [exposure[keep], z] if with_exposure else [z]
+            return predict_counts(model, np.column_stack(columns))
 
+        return fit_predict
+
+    reports = []
+    for year in years:
         try:
-            reports.extend(rolling_backtest(full, fit_predict, [year]))
+            reports.extend(
+                rolling_backtest(
+                    full,
+                    predictor(True),
+                    [year],
+                    baseline=predictor(False) if baseline else None,
+                )
+            )
         except (ValueError, PerfectSeparationError) as error:
             reports.append({"year": year, "error": str(error)})
     return reports
@@ -343,19 +359,10 @@ def meteorology_source(panel_path: Path) -> str:
     return input_source(panel_path, "meteorology")
 
 
-def region_study(
-    panel_path: Path,
-    region: str,
-    output: Path,
-    *,
-    outcomes=("respiratory", "pneumonia", "asthma", "circulatory", NEGATIVE_CONTROL),
-    age_groups=(None, "0-4", "60+"),
-    basis: CrossBasis | None = None,
-    exposure: str = "pm25",
-    trend_df_per_year: float = TREND_DF_PER_YEAR,
-) -> dict:
-    basis = basis or CrossBasis()
-    requested_knots = basis.knots
+def load_region(
+    panel_path: Path, region: str, exposure: str, basis: CrossBasis
+) -> tuple[pl.DataFrame, CrossBasis]:
+    """One region of the panel, with ``exposure`` as "pm25" and unsupported knots dropped."""
     # A multi-region panel does not fit in memory several times over; read one region.
     panel = pl.scan_parquet(panel_path).filter(pl.col("health_region_code") == region).collect()
     if panel.is_empty():
@@ -375,6 +382,23 @@ def region_study(
         raise ValueError(f"PM2.5 rarely exceeds {basis.reference} µg/m³ in region {region}")
     if supported != basis.knots:
         basis = dataclasses.replace(basis, knots=supported)
+    return panel, basis
+
+
+def region_study(
+    panel_path: Path,
+    region: str,
+    output: Path,
+    *,
+    outcomes=("respiratory", "pneumonia", "asthma", "circulatory", NEGATIVE_CONTROL),
+    age_groups=(None, "0-4", "60+"),
+    basis: CrossBasis | None = None,
+    exposure: str = "pm25",
+    trend_df_per_year: float = TREND_DF_PER_YEAR,
+) -> dict:
+    basis = basis or CrossBasis()
+    requested_knots = basis.knots
+    panel, basis = load_region(panel_path, region, exposure, basis)
     results = []
     for outcome in outcomes:
         for age_group in age_groups:
@@ -448,6 +472,67 @@ def region_study(
     report = _finite(report)
     text = json.dumps(report, ensure_ascii=False, allow_nan=False, indent=2)
     # Every run is kept; the fixed name points at the latest one.
+    history = output.parent / "history"
+    history.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.fromisoformat(report["generated_at"]).strftime("%Y%m%dT%H%M%S%fZ")
+    atomic_write_text(history / f"{output.stem}-{stamp}.json", text)
+    atomic_write_text(output, text)
+    return report
+
+
+def region_backtest(
+    panel_path: Path,
+    region: str,
+    output: Path,
+    *,
+    outcomes=("respiratory", "pneumonia", "asthma", "circulatory", NEGATIVE_CONTROL),
+    basis: CrossBasis | None = None,
+    exposure: str = "pm25",
+) -> dict:
+    """Forecast skill only, with and without PM2.5; no inference, so it runs much faster."""
+    basis = basis or CrossBasis()
+    requested_knots = basis.knots
+    panel, basis = load_region(panel_path, region, exposure, basis)
+    results = []
+    for outcome in outcomes:
+        entry = {"outcome": outcome, "age_group": "all"}
+        try:
+            series = stratum_series(panel, region, outcome, None)
+            entry["mean_daily"] = series["admissions"].mean()
+            entry["folds"] = backtest_stratum(series, basis, baseline=True)
+        except (ValueError, PerfectSeparationError) as error:
+            entry["error"] = str(error)
+        results.append(entry)
+    report = _finite(
+        {
+            "generated_at": datetime.now(UTC).isoformat(),
+            "software": software_provenance(),
+            "inputs": {"panel": [describe_input(panel_path)]},
+            "mode": "research",
+            "validated": False,
+            "region": region,
+            "exposure": exposure,
+            "meteorology": meteorology_source(panel_path),
+            "exposure_source": input_source(
+                panel_path, "merra2" if exposure == "pm25_merra2" else "pm25"
+            ),
+            "basis": {
+                "max_lag": basis.max_lag,
+                "knots": list(basis.knots),
+                "requested_knots": list(requested_knots),
+                "reference": basis.reference,
+            },
+            "design": (
+                "rolling origins 1 July 2019-2024, train up to origin - 62 days, predict"
+                f" Jul-Oct; time spline {ConfounderDesign().trend_df} df"
+                f" + {ConfounderDesign().harmonics} harmonics; baseline refits the same"
+                " confounders without PM2.5; peaks are test weeks above the training P90"
+            ),
+            "backtest_inputs": "observed exposures (not archived forecasts): optimistic",
+            "results": results,
+        }
+    )
+    text = json.dumps(report, ensure_ascii=False, allow_nan=False, indent=2)
     history = output.parent / "history"
     history.mkdir(parents=True, exist_ok=True)
     stamp = datetime.fromisoformat(report["generated_at"]).strftime("%Y%m%dT%H%M%S%fZ")
