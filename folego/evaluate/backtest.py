@@ -34,7 +34,10 @@ def _peaks(observed, predicted) -> dict:
 
 
 def rolling_backtest(frame, fit_predict, years=range(2019, 2025), baseline=None):
-    """Callback must train from scratch. Inputs must use archived forecast vintages.
+    """Callback must train from scratch.
+
+    Only archived forecast vintages make the scores operational; observed exposures,
+    as the study uses today, make them optimistic, and reports must say so.
 
     Use a per-region/age/outcome frame with complete daily rows. Weekly totals
     are computed before scoring; partial edge weeks are excluded. ``baseline``, a

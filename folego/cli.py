@@ -366,9 +366,13 @@ def main():
 
             name = f"{args.region}-backtest{suffix}.json"
             output = args.output or Path("data/marts/backtests") / name
-            report = region_backtest(
-                args.panel, args.region, output, exposure=args.exposure, basis=basis
-            )
+            try:
+                report = region_backtest(
+                    args.panel, args.region, output, exposure=args.exposure, basis=basis
+                )
+            except OSError as error:
+                reason = error.strerror or str(error)
+                parser.exit(2, f"Falha de E/S em {repr(error.filename)[:200]}: {reason}\n")
             print(f"Backtest: {output}")
             return
         output = args.output or Path("data/marts/studies") / f"{args.region}{suffix}.json"
@@ -448,8 +452,8 @@ def main():
             # A whole file list quoted as one argument names a single huge path.
             reason = error.strerror or str(error)
             parser.exit(2, f"Falha de E/S em {repr(error.filename)[:200]}: {reason}\n")
-        except (ValueError, KeyError, TypeError, AttributeError) as error:
-            parser.exit(2, f"Relatórios incompatíveis ou inválidos: {error}\n")
+        except (ValueError, KeyError, TypeError, AttributeError, RecursionError) as error:
+            parser.exit(2, f"Relatórios incompatíveis ou inválidos: {repr(str(error))[:300]}\n")
         print(
             json.dumps(
                 [
@@ -651,8 +655,8 @@ def main():
         except OSError as error:
             reason = error.strerror or str(error)
             parser.exit(2, f"Falha de E/S em {repr(error.filename)[:200]}: {reason}\n")
-        except (ValueError, KeyError, TypeError, AttributeError) as error:
-            parser.exit(2, f"Relatórios incompatíveis ou inválidos: {error}\n")
+        except (ValueError, KeyError, TypeError, AttributeError, RecursionError) as error:
+            parser.exit(2, f"Relatórios incompatíveis ou inválidos: {repr(str(error))[:300]}\n")
         print(
             json.dumps(
                 [
@@ -661,6 +665,7 @@ def main():
                 ]
             )
         )
+        print(f"Exposição usada no backtest: {report['backtest_inputs']}")
     elif args.command == "export-study":
         from .publish.export_web import export_study
 

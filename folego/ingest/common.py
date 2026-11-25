@@ -103,6 +103,12 @@ def atomic_write_text(path: Path, text: str, mode: int = 0o600) -> None:
         raise
 
 
+def read_json_hashed(path: Path) -> tuple[object, str]:
+    """Parse and hash the same bytes, so recorded provenance matches what was used."""
+    data = path.read_bytes()
+    return json.loads(data), hashlib.sha256(data).hexdigest()
+
+
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as source:

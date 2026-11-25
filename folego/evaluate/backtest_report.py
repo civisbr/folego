@@ -1,16 +1,24 @@
 """Forecast skill across regions, from ``study --backtest-only`` reports."""
 
 import json
+import re
 import statistics
 from datetime import UTC, datetime
 from pathlib import Path
 
-from ..ingest.common import atomic_write_text, sha256_file
+from ..ingest.common import atomic_write_text, read_json_hashed
 from ..ingest.sih_national import software_provenance
 from ..transform.cams_exposure import _portable
 
 # Reports that differ in any of these measure different forecasts.
-SHARED_FIELDS = ("exposure", "meteorology", "exposure_source", "design", "backtest_inputs")
+SHARED_FIELDS = (
+    "exposure",
+    "meteorology",
+    "exposure_source",
+    "design",
+    "backtest_inputs",
+    "model_spec_version",
+)
 
 
 def _median(values):
@@ -23,8 +31,8 @@ def _ratio(numerator, denominator):
 
 def _check(reports: list[dict]) -> dict:
     for report in reports:
-        if not isinstance(report, dict) or not isinstance(report.get("region"), str):
-            raise ValueError("Not a backtest report (no region)")
+        if not isinstance(report, dict) or not re.fullmatch(r"\d{5}", str(report.get("region"))):
+            raise ValueError("Not a backtest report (no 5-digit region)")
         if not isinstance(report.get("results"), list) or "design" not in report:
             raise ValueError(f"Not a backtest report: region {report['region']}")
     regions = [r["region"] for r in reports]
@@ -35,6 +43,14 @@ def _check(reports: list[dict]) -> dict:
         if len({json.dumps(r.get(field)) for r in reports}) != 1:
             raise ValueError(f"Reports differ in {field}")
         shared[field] = reports[0].get(field)
+    # Effective knots differ by region by design; the rest of the basis must not.
+    bases = {
+        json.dumps({k: v for k, v in (r.get("basis") or {}).items() if k != "knots"})
+        for r in reports
+    }
+    if len(bases) != 1:
+        raise ValueError("Reports differ in basis")
+    shared["basis"] = {k: v for k, v in (reports[0].get("basis") or {}).items() if k != "knots"}
     panels = {json.dumps([p.get("sha256") for p in r["inputs"]["panel"]]) for r in reports}
     if len(panels) != 1:
         raise ValueError("Reports differ in panel_sha256")
@@ -56,7 +72,7 @@ def summarize(reports: list[dict]) -> dict:
                 slot["stratum_errors"] += 1
                 continue
             for fold in result["folds"]:
-                if "error" in fold or "baseline" not in fold:
+                if "error" in fold or "baseline" not in fold or fold.get("mae") is None:
                     slot["fold_errors"] += 1
                     continue
                 slot["regions"].add(report["region"])
@@ -77,6 +93,7 @@ def summarize(reports: list[dict]) -> dict:
             ),
             # Below 1 means PM2.5 lowered the weekly error against the same model without it.
             "median_mae_ratio": _median([f["mae"] / f["baseline"]["mae"] for f in paired]),
+            "paired_folds": len(paired),
             "share_folds_pm25_better": _ratio(
                 sum(f["mae"] < f["baseline"]["mae"] for f in paired), len(paired)
             ),
@@ -116,6 +133,10 @@ def summarize(reports: list[dict]) -> dict:
         ),
         **shared,
         "regions": sorted(r["region"] for r in reports),
+        # False when an older report checked only tracked files, so any_region_dirty is weaker.
+        "dirty_check_includes_untracked": all(
+            (r.get("software") or {}).get("git_dirty_includes_untracked") is True for r in reports
+        ),
         "any_region_dirty": any(
             (r.get("software") or {}).get("git_dirty") is not False for r in reports
         ),
@@ -127,7 +148,8 @@ def backtest_report(paths: list[Path], output: Path | None = None) -> dict:
     paths = [Path(p) for p in paths]
     if output is not None and output.resolve() in {p.resolve() for p in paths}:
         raise ValueError("Output would overwrite one of the backtest reports")
-    reports = [json.loads(p.read_text()) for p in paths]
+    loaded = [read_json_hashed(p) for p in paths]
+    reports = [report for report, _ in loaded]
     summary = summarize(reports)
     report = {
         "generated_at": datetime.now(UTC).isoformat(),
@@ -139,11 +161,11 @@ def backtest_report(paths: list[Path], output: Path | None = None) -> dict:
                 {
                     "region": r["region"],
                     "path": _portable(p),
-                    "sha256": sha256_file(p),
+                    "sha256": digest,
                     "git_commit": (r.get("software") or {}).get("git_commit"),
                     "git_dirty": (r.get("software") or {}).get("git_dirty"),
                 }
-                for p, r in zip(paths, reports, strict=True)
+                for p, (r, digest) in zip(paths, loaded, strict=True)
             ),
             key=lambda i: i["region"],
         ),

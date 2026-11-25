@@ -2,10 +2,11 @@
 
 import json
 import math
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 
-from ..ingest.common import atomic_write_text, sha256_file
+from ..ingest.common import atomic_write_text, read_json_hashed
 from ..ingest.sih_national import software_provenance
 from ..transform.cams_exposure import _portable
 
@@ -72,8 +73,8 @@ def _number(value) -> bool:
 
 def _check_compatible(reports: list[dict]) -> dict:
     for report in reports:
-        if not isinstance(report, dict) or not isinstance(report.get("region"), str):
-            raise ValueError("Not a study report (no region)")
+        if not isinstance(report, dict) or not re.fullmatch(r"\d{5}", str(report.get("region"))):
+            raise ValueError("Not a study report (no 5-digit region)")
         if not isinstance(report.get("results"), list) or not isinstance(
             report.get("inputs"), dict
         ):
@@ -169,17 +170,18 @@ def pool_studies(paths: list[Path], output: Path | None = None) -> dict:
     paths = [Path(p) for p in paths]
     if output is not None and output.resolve() in {p.resolve() for p in paths}:
         raise ValueError("Output would overwrite one of the study reports")
-    reports = [json.loads(p.read_text()) for p in paths]
+    loaded = [read_json_hashed(p) for p in paths]
+    reports = [report for report, _ in loaded]
     pooled = pool_reports(reports)
     inputs = []
-    for path, study in zip(paths, reports, strict=True):
+    for path, (study, digest) in zip(paths, loaded, strict=True):
         software = study.get("software") or {}
         inputs.append(
             {
                 "region": study["region"],
                 # Study reports keep a fixed name and are overwritten; the hash pins the run.
                 "path": _portable(path),
-                "sha256": sha256_file(path),
+                "sha256": digest,
                 "generated_at": study.get("generated_at"),
                 "git_commit": software.get("git_commit"),
                 "git_dirty": software.get("git_dirty"),

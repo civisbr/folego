@@ -529,6 +529,7 @@ def region_backtest(
                 " confounders without PM2.5; peaks are test weeks above the training P90"
             ),
             "backtest_inputs": "observed exposures (not archived forecasts): optimistic",
+            "model_spec_version": MODEL_SPEC_VERSION,
             "results": results,
         }
     )
