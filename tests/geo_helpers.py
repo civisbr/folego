@@ -3,11 +3,12 @@
 import json
 
 import numpy as np
-import rasterio
 
 
 def write_population(tmp_path, population, *, origin=(-0.375, 0.375), crs="EPSG:4326"):
     # 0.375 deg pixels: each 2x2 block falls on one CAMS point at 0.75 deg.
+    # Imported here so FIRMS tests, which only need polygons, run without rasterio.
+    import rasterio
     from rasterio.transform import from_origin
 
     population = np.asarray(population, dtype="float32")

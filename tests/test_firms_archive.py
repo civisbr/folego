@@ -3,14 +3,9 @@ from datetime import date
 
 import polars as pl
 import pytest
+from geo_helpers import write_regions
 
-pytest.importorskip("shapely")
-# geo_helpers writes rasters; rasterio comes only with the climate extra.
-pytest.importorskip("rasterio")
-
-from geo_helpers import write_regions  # noqa: E402
-
-from folego.ingest import firms_archive  # noqa: E402
+from folego.ingest import firms_archive
 
 HEADER = (
     "latitude,longitude,bright_ti4,scan,track,acq_date,acq_time,satellite,instrument,"
