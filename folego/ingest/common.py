@@ -87,11 +87,12 @@ def _https_only(response: httpx.Response) -> None:
         raise ValueError("Download redirected away from HTTPS")
 
 
-def atomic_write_text(path: Path, text: str) -> None:
+def atomic_write_text(path: Path, text: str, mode: int = 0o600) -> None:
     """Readers of the fixed name never see a half-written file after a crash or OOM kill."""
     # A unique O_EXCL name: concurrent runs do not share it and a planted symlink is not followed.
     fd, staged = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.", suffix=".partial")
     try:
+        os.fchmod(fd, mode)
         with os.fdopen(fd, "w") as handle:
             handle.write(text)
             handle.flush()

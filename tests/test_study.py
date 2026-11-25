@@ -120,6 +120,9 @@ def test_srag_adjusted_and_unadjusted_effects_and_per_fold_errors(tmp_path):
     folds = {f["year"]: f for f in result["backtest"]}
     assert "error" in folds[2019] and "mae" in folds[2020]
     assert len(list((tmp_path / "history").glob("study-*.json"))) == 1
+    # Written through the atomic helper: private, and no staging file left behind.
+    assert (tmp_path / "study.json").stat().st_mode & 0o077 == 0
+    assert not list(tmp_path.glob("*.partial")) and not list(tmp_path.glob(".*.partial"))
     assert report["inputs"]["panel"][0]["sha256"]
 
 
