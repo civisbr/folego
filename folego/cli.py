@@ -592,6 +592,7 @@ def main():
     elif args.command == "cams":
         from .ingest.cams import retrieve_cams
 
+        os.umask(0o077)
         print(retrieve_cams(args.dataset, json.loads(args.request.read_text())))
     elif args.command == "exposure":
         from .ingest.worldpop import WORLDPOP_ATTRIBUTION, download_worldpop

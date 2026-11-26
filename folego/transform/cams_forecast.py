@@ -33,6 +33,12 @@ MAX_MEMBERS = 4
 MAX_ARCHIVE_BYTES = 2 * 1024**3
 # Values held in memory at once (pm2p5 of one member): ~4 GB of float64 at most.
 MAX_FIELD_VALUES = 500_000_000
+# The ADS snaps the request area to the 0.4° grid, leaving Fernando de Noronha ~2 steps
+# past the east edge (~600 people). Two steps (0.8°) cover the same offset in degrees that
+# one 0.75° reanalysis step did. The population cap stops a badly cropped area from
+# passing as an island.
+MAX_SNAP_STEPS = 2.0
+MAX_SNAPPED_POPULATION = 5_000
 
 
 def _netcdf_members(archive: Path, directory: Path) -> list[Path]:
@@ -102,7 +108,7 @@ def regional_forecasts(paths: list[Path], population_raster: Path, regions_geojs
     import xarray as xr
 
     weights_by_grid: dict[tuple, pl.DataFrame] = {}
-    snapping: dict = {}
+    snapping: list[dict] = []
     frames = []
     for archive in paths:
         with tempfile.TemporaryDirectory() as directory:
@@ -120,13 +126,22 @@ def regional_forecasts(paths: list[Path], population_raster: Path, regions_geojs
                     )
                     if grid not in weights_by_grid:
                         # The forecast grid changes with system upgrades; weights follow it.
+                        report: dict = {}
                         weights_by_grid[grid] = population_cell_weights(
                             population_raster,
                             regions_geojson,
                             latitudes=daily["latitude"].values,
                             longitudes=daily["longitude"].values,
-                            max_snap_steps=1.0,
-                            report=snapping,
+                            max_snap_steps=MAX_SNAP_STEPS,
+                            report=report,
+                        )
+                        if report.get("snapped_population", 0) > MAX_SNAPPED_POPULATION:
+                            raise ValueError(
+                                f"{report['snapped_population']:.0f} people snapped onto the"
+                                f" forecast grid of {Path(archive).name}; enlarge the request area"
+                            )
+                        snapping.append(
+                            {"grid": len(snapping), "first_issue": str(issue), **report}
                         )
                     regional = regional_daily_means(
                         daily, weights_by_grid[grid], column="pm25_forecast", name="CAMS forecast"
@@ -178,6 +193,8 @@ def build_forecast_exposure(
             " minus the UTC date of the 00 UTC run",
             "issue_dates": [str(series["issue_date"].min()), str(series["issue_date"].max())],
             "grids": grids,
+            "max_snap_steps": MAX_SNAP_STEPS,
+            "max_snapped_population": MAX_SNAPPED_POPULATION,
             "snapped_beyond_grid": snapping,
             "attribution": [
                 FORECAST_ATTRIBUTION.format(year=datetime.now(UTC).year),

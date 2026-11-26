@@ -10,7 +10,14 @@ pytest.importorskip("rasterio")
 
 
 def _forecast_zip(
-    path, issues, *, steps=range(3, 121, 3), name="data_sfc.nc", hour=0, integer_steps=False
+    path,
+    issues,
+    *,
+    steps=range(3, 121, 3),
+    name="data_sfc.nc",
+    hour=0,
+    integer_steps=False,
+    longitudes=(0.0, 0.75),
 ):
     """ADS layout: pm2p5 over (forecast_period, forecast_reference_time, lat, lon)."""
     periods = np.array([np.timedelta64(h, "h") for h in steps], dtype="timedelta64[ns]")
@@ -29,7 +36,7 @@ def _forecast_zip(
             "forecast_period": periods,
             "forecast_reference_time": references,
             "latitude": [0.0, -0.75],
-            "longitude": [0.0, 0.75],
+            "longitude": list(longitudes),
             "valid_time": (
                 ("forecast_period", "forecast_reference_time"),
                 periods[:, None] + references[None, :],
@@ -147,3 +154,36 @@ def test_too_many_or_oversized_members_are_refused(tmp_path, monkeypatch):
     monkeypatch.setattr(cams_forecast, "MAX_ARCHIVE_BYTES", 10)
     with pytest.raises(ValueError, match="Oversized"):
         cams_forecast._netcdf_members(big, tmp_path)
+
+
+def test_island_two_steps_past_the_grid_edge_is_snapped_and_reported(tmp_path):
+    from folego.transform.cams_forecast import build_forecast_exposure
+
+    # Region B's eastern pixels sit 1.25 grid steps past the last column, as Fernando
+    # de Noronha does on the 0.4° forecast grid.
+    archive = _forecast_zip(tmp_path / "f.zip", ["2019-08-01"], longitudes=(-0.75, 0.0))
+    output = tmp_path / "o.parquet"
+    series = build_forecast_exposure([archive], *_inputs(tmp_path), output)
+    assert set(series["health_region_code"].to_list()) == {"A", "B"}
+    manifest = json.loads(output.with_suffix(".parquet.source.json").read_text())
+    (grid,) = manifest["snapped_beyond_grid"]
+    assert grid["snapped_regions"] == ["B"] and grid["first_issue"] == "2019-08-01"
+    assert manifest["max_snap_steps"] == 2.0
+
+
+def test_pixels_beyond_the_snap_limit_are_refused(tmp_path):
+    from folego.transform.cams_forecast import build_forecast_exposure
+
+    # Region B's eastern pixels now sit 2.25 steps past the last column.
+    archive = _forecast_zip(tmp_path / "f.zip", ["2019-08-01"], longitudes=(-1.5, -0.75))
+    with pytest.raises(ValueError, match="outside the CAMS grid"):
+        build_forecast_exposure([archive], *_inputs(tmp_path), tmp_path / "o.parquet")
+
+
+def test_too_many_snapped_people_are_refused(tmp_path, monkeypatch):
+    from folego.transform import cams_forecast
+
+    monkeypatch.setattr(cams_forecast, "MAX_SNAPPED_POPULATION", 10)
+    archive = _forecast_zip(tmp_path / "f.zip", ["2019-08-01"], longitudes=(-0.75, 0.0))
+    with pytest.raises(ValueError, match="people snapped"):
+        cams_forecast.build_forecast_exposure([archive], *_inputs(tmp_path), tmp_path / "o.parquet")
