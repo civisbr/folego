@@ -26,7 +26,7 @@ def _report(region, folds, **overrides):
         "exposure_source": "CAMS",
         "design": "rolling",
         "backtest_inputs": "observed",
-        "inputs": {"panel": [{"sha256": "abc"}]},
+        "inputs": {"panel": [{"sha256": "a" * 64}]},
         "basis": {"max_lag": 7, "reference": 15.0, "knots": [15.0, 35.0]},
         "software": {"git_commit": "c0ffee0", "git_dirty": False},
         "results": [{"outcome": "respiratory", "age_group": "all", "folds": folds}],
@@ -53,7 +53,10 @@ def test_summary_pools_peaks_and_compares_with_baseline():
             results=[{"outcome": "respiratory", "age_group": "all", "error": "no rows"}],
         ),
     ]
-    (entry,) = summarize(reports)["results"]
+    summary = summarize(reports)
+    # Ties the summary to the same panel a pooled effect was estimated on.
+    assert summary["panel_sha256"] == ["a" * 64]
+    (entry,) = summary["results"]
     assert entry["regions"] == 2 and entry["folds"] == 3
     assert entry["fold_errors"] == 2 and entry["stratum_errors"] == 1
     assert entry["median_mae_ratio"] == pytest.approx(0.8)
@@ -67,7 +70,7 @@ def test_summary_pools_peaks_and_compares_with_baseline():
     ("override", "message"),
     [
         ({"meteorology": "MERRA-2"}, "meteorology"),
-        ({"inputs": {"panel": [{"sha256": "other"}]}}, "panel_sha256"),
+        ({"inputs": {"panel": [{"sha256": "b" * 64}]}}, "panel_sha256"),
         ({"basis": {"max_lag": 14, "reference": 15.0, "knots": [15.0]}}, "basis"),
         ({"exposure_source": "MERRA-2"}, "exposure_source"),
         ({"design": "other"}, "design"),
@@ -126,3 +129,13 @@ def test_rolling_backtest_threshold_uses_complete_training_weeks_only():
     assert fold["observed_peaks"] == fold["weeks"]
     assert fold["peaks"]["recall"] == 1 and fold["baseline"]["peaks"]["hits"] == 0
     assert fold["mae"] == 0 and fold["baseline"]["mae"] == 7 * 13
+
+
+@pytest.mark.parametrize(
+    "inputs",
+    [None, {}, {"panel": []}, {"panel": [{}]}, {"panel": [{"sha256": "abc"}]}, {"panel": ["x"]}],
+)
+def test_missing_or_invalid_panel_hash_is_refused(inputs):
+    reports = [_report("11001", [_fold(2019, 1, 1)], inputs=inputs)]
+    with pytest.raises(ValueError, match="panel sha256"):
+        summarize(reports)

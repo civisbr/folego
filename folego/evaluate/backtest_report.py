@@ -9,6 +9,7 @@ from pathlib import Path
 from ..ingest.common import atomic_write_text, read_json_hashed
 from ..ingest.sih_national import software_provenance
 from ..transform.cams_exposure import _portable
+from .pool import panel_hashes
 
 # Reports that differ in any of these measure different forecasts.
 SHARED_FIELDS = (
@@ -51,9 +52,9 @@ def _check(reports: list[dict]) -> dict:
     if len(bases) != 1:
         raise ValueError("Reports differ in basis")
     shared["basis"] = {k: v for k, v in (reports[0].get("basis") or {}).items() if k != "knots"}
-    panels = {json.dumps([p.get("sha256") for p in r["inputs"]["panel"]]) for r in reports}
-    if len(panels) != 1:
+    if len({json.dumps(panel_hashes(r)) for r in reports}) != 1:
         raise ValueError("Reports differ in panel_sha256")
+    shared["panel_sha256"] = panel_hashes(reports[0])
     return shared
 
 

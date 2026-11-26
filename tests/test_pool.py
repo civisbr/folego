@@ -45,7 +45,7 @@ def _report(region, results, **overrides):
         "exposure": "pm25",
         "meteorology": "MERRA-2",
         "exposure_source": "CAMS",
-        "inputs": {"panel": [{"path": "p.parquet", "sha256": "abc"}]},
+        "inputs": {"panel": [{"path": "p.parquet", "sha256": "a" * 64}]},
         "basis": {"requested_knots": [15, 35], "reference": 15, "max_lag": 7},
         "confounders": {"inference": "spec"},
         "software": {"git_commit": "c0ffee", "git_dirty": False},
@@ -91,7 +91,7 @@ def test_all_rejected_stratum_has_no_estimate():
     ("override", "message"),
     [
         ({"model_spec_version": 6}, "model_spec_version"),
-        ({"inputs": {"panel": [{"path": "p.parquet", "sha256": "other"}]}}, "panel_sha256"),
+        ({"inputs": {"panel": [{"path": "p.parquet", "sha256": "b" * 64}]}}, "panel_sha256"),
         (
             {"basis": {"requested_knots": [15, 35, 75], "reference": 15, "max_lag": 7}},
             "basis",
@@ -249,3 +249,12 @@ def test_atomic_write_does_not_follow_planted_symlink(tmp_path):
     atomic_write_text(tmp_path / "out.json", "new")
     assert victim.read_text() == "keep"
     assert (tmp_path / "out.json").read_text() == "new"
+
+
+@pytest.mark.parametrize(
+    "panel", [[], [{"path": "p.parquet"}], [{"sha256": None}], [{"sha256": "A" * 64}]]
+)
+def test_missing_or_invalid_panel_hash_is_refused(panel):
+    report = _report("11001", [], inputs={"panel": panel})
+    with pytest.raises(ValueError, match="panel sha256"):
+        pool_reports([report])

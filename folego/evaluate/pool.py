@@ -71,6 +71,20 @@ def _number(value) -> bool:
     return isinstance(value, int | float) and not isinstance(value, bool) and math.isfinite(value)
 
 
+def panel_hashes(report: dict) -> list[str]:
+    """The panel hashes a report declares; a missing hash would make "same panel" vacuous."""
+    inputs = report.get("inputs")
+    panel = inputs.get("panel") if isinstance(inputs, dict) else None
+    hashes = [p.get("sha256") if isinstance(p, dict) else None for p in panel or []]
+    if (
+        not isinstance(panel, list)
+        or not hashes
+        or not all(isinstance(h, str) and re.fullmatch(r"[0-9a-f]{64}", h) for h in hashes)
+    ):
+        raise ValueError(f"Region {report.get('region')} has no valid panel sha256")
+    return hashes
+
+
 def _check_compatible(reports: list[dict]) -> dict:
     for report in reports:
         if not isinstance(report, dict) or not re.fullmatch(r"\d{5}", str(report.get("region"))):
@@ -91,7 +105,7 @@ def _check_compatible(reports: list[dict]) -> dict:
             raise ValueError(f"Reports differ in {field}")
         shared[field] = reports[0].get(field)
     for name, read in (
-        ("panel_sha256", lambda r: [p.get("sha256") for p in r["inputs"]["panel"]]),
+        ("panel_sha256", panel_hashes),
         (
             "basis",
             lambda r: {k: v for k, v in r["basis"].items() if k not in REGIONAL_BASIS_FIELDS},
