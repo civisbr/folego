@@ -540,3 +540,90 @@ def region_backtest(
     atomic_write_text(history / f"{output.stem}-{stamp}.json", text)
     atomic_write_text(output, text)
     return report
+
+
+def region_forecast_backtest(
+    panel_path: Path,
+    forecasts_path: Path,
+    region: str,
+    output: Path,
+    *,
+    outcomes=("respiratory", "pneumonia", "asthma", "circulatory", NEGATIVE_CONTROL),
+    basis: CrossBasis | None = None,
+) -> dict:
+    """Forecast skill with archived CAMS forecasts as the future PM2.5; see forecast_backtest."""
+    from .forecast_backtest import LEAD_DAYS, exposure_error, forecast_backtest_stratum
+
+    basis = basis or CrossBasis()
+    requested_knots = basis.knots
+    if input_source(panel_path, "pm25") != "CAMS":
+        # The oracle and the forecast must be the same product, or bias reads as skill.
+        raise ValueError("Forecast backtest needs a panel whose pm25 comes from CAMS")
+    panel, basis = load_region(panel_path, region, "pm25", basis)
+    forecasts = (
+        pl.scan_parquet(forecasts_path).filter(pl.col("health_region_code") == region).collect()
+    )
+    if forecasts.is_empty():
+        raise ValueError(f"Region {region} not in the forecasts")
+    years = range(2019, 2026)
+
+    def design(train, basis, confounders):
+        return _design(train, basis, confounders, fit=True)
+
+    results = []
+    for outcome in outcomes:
+        entry = {"outcome": outcome, "age_group": "all"}
+        try:
+            series = stratum_series(panel, region, outcome, None)
+            entry["mean_daily"] = series["admissions"].mean()
+            entry["folds"] = forecast_backtest_stratum(
+                series, forecasts, basis, years, design=design
+            )
+        except (ValueError, PerfectSeparationError) as error:
+            entry["error"] = str(error)
+        results.append(entry)
+    observed = panel.group_by("date").agg(pl.col("pm25").first())
+    report = _finite(
+        {
+            "generated_at": datetime.now(UTC).isoformat(),
+            "software": software_provenance(),
+            "inputs": {
+                "panel": [describe_input(panel_path)],
+                "forecasts": [describe_input(forecasts_path)],
+            },
+            "mode": "research",
+            "validated": False,
+            "region": region,
+            "exposure": "pm25",
+            "meteorology": meteorology_source(panel_path),
+            "exposure_source": input_source(panel_path, "pm25"),
+            "basis": {
+                "max_lag": basis.max_lag,
+                "knots": list(basis.knots),
+                "requested_knots": list(requested_knots),
+                "reference": basis.reference,
+            },
+            "design": (
+                f"issue days 1 Jul-31 Oct {years.start}-{years.stop - 1}, model trained up to"
+                f" 1 July - 62 days; lead days 0-{LEAD_DAYS - 1} of the 00 UTC CAMS forecast,"
+                " earlier lags observed; scored on daily counts per lead day and on each"
+                " issue's 5-day total; oracle = same model with observed PM2.5, baseline ="
+                f" refit without PM2.5; time spline {ConfounderDesign().trend_df} df +"
+                f" {ConfounderDesign().harmonics} harmonics; peaks are 5-day totals above"
+                " the training P90"
+            ),
+            "backtest_inputs": (
+                "archived CAMS PM2.5 forecasts; weather, holidays and SRAG observed"
+            ),
+            "model_spec_version": MODEL_SPEC_VERSION,
+            "exposure_error": exposure_error(observed, forecasts),
+            "results": results,
+        }
+    )
+    text = json.dumps(report, ensure_ascii=False, allow_nan=False, indent=2)
+    history = output.parent / "history"
+    history.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.fromisoformat(report["generated_at"]).strftime("%Y%m%dT%H%M%S%fZ")
+    atomic_write_text(history / f"{output.stem}-{stamp}.json", text)
+    atomic_write_text(output, text)
+    return report

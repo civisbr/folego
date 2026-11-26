@@ -14,11 +14,19 @@ def retrieve_cams(dataset: str, request: dict, root=Path("data")) -> Path:
     import cdsapi
 
     digest = hashlib.sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()[:20]
-    target = root / "raw" / "cams" / dataset / f"{digest}.nc"
+    # The forecast dataset only offers netcdf inside a zip; naming it .nc would mislead readers.
+    suffix = ".zip" if request.get("data_format") == "netcdf_zip" else ".nc"
+    target = root / "raw" / "cams" / dataset / f"{digest}{suffix}"
     if target.exists():
+        # A swapped or truncated cache file must not pass silently into a new analysis.
+        recorded = target.with_suffix(".source.json")
+        if recorded.exists():
+            expected = json.loads(recorded.read_text()).get("sha256")
+            if expected != hashlib.sha256(target.read_bytes()).hexdigest():
+                raise ValueError(f"Cached {target.name} does not match its recorded sha256")
         return target
     target.parent.mkdir(parents=True, exist_ok=True)
-    temporary = target.with_suffix(".tmp.nc")
+    temporary = target.with_suffix(f".tmp{suffix}")
     # ADS credentials belong in ~/.cdsapirc or environment, never in this repository.
     try:
         cdsapi.Client(url="https://ads.atmosphere.copernicus.eu/api").retrieve(

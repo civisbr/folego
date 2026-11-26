@@ -61,6 +61,9 @@ def _check(reports: list[dict]) -> dict:
 def summarize(reports: list[dict]) -> dict:
     if not reports:
         raise ValueError("No backtest reports")
+    if any(isinstance(r, dict) and "forecasts" in (r.get("inputs") or {}) for r in reports):
+        # Their folds have no top-level MAE; this summary would count them all as errors.
+        raise ValueError("Forecast backtest reports need backtest-report --forecast")
     shared = _check(reports)
     by_outcome: dict[str, dict] = {}
     for report in reports:
@@ -145,13 +148,13 @@ def summarize(reports: list[dict]) -> dict:
     }
 
 
-def backtest_report(paths: list[Path], output: Path | None = None) -> dict:
+def backtest_report(paths: list[Path], output: Path | None = None, *, forecast=False) -> dict:
     paths = [Path(p) for p in paths]
     if output is not None and output.resolve() in {p.resolve() for p in paths}:
         raise ValueError("Output would overwrite one of the backtest reports")
     loaded = [read_json_hashed(p) for p in paths]
     reports = [report for report, _ in loaded]
-    summary = summarize(reports)
+    summary = (summarize_forecast if forecast else summarize)(reports)
     report = {
         "generated_at": datetime.now(UTC).isoformat(),
         "software": software_provenance(),
@@ -180,3 +183,150 @@ def backtest_report(paths: list[Path], output: Path | None = None) -> dict:
         atomic_write_text(history / f"{output.stem}-{stamp}.json", text)
         atomic_write_text(output, text)
     return report
+
+
+def _forecast_hashes(report: dict) -> list:
+    inputs = report.get("inputs")
+    forecasts = inputs.get("forecasts") if isinstance(inputs, dict) else None
+    hashes = [f.get("sha256") if isinstance(f, dict) else None for f in forecasts or []]
+    if (
+        not isinstance(forecasts, list)
+        or not hashes
+        or not all(isinstance(h, str) and re.fullmatch(r"[0-9a-f]{64}", h) for h in hashes)
+    ):
+        raise ValueError(f"Region {report.get('region')} has no valid forecasts sha256")
+    return hashes
+
+
+def summarize_forecast(reports: list[dict]) -> dict:
+    """Operational backtest across regions: forecast PM2.5 against oracle and baseline."""
+    from .forecast_backtest import LEAD_DAYS, VARIANTS
+
+    if not reports:
+        raise ValueError("No forecast backtest reports")
+    shared = _check(reports)
+    if len({json.dumps(_forecast_hashes(r)) for r in reports}) != 1:
+        raise ValueError("Reports differ in forecasts_sha256")
+    shared["forecasts_sha256"] = _forecast_hashes(reports[0])
+    by_outcome: dict[str, dict] = {}
+    for report in reports:
+        for result in report["results"]:
+            slot = by_outcome.setdefault(
+                result["outcome"],
+                {"regions": set(), "stratum_errors": 0, "fold_errors": 0, "folds": []},
+            )
+            if "error" in result:
+                slot["stratum_errors"] += 1
+                continue
+            for fold in result["folds"]:
+                if "error" in fold or any(
+                    not isinstance(fold.get(v), dict) or fold[v].get("mae") is None
+                    for v in VARIANTS
+                ):
+                    slot["fold_errors"] += 1
+                    continue
+                slot["regions"].add(report["region"])
+                slot["folds"].append(fold)
+    summary = []
+    for outcome, slot in sorted(by_outcome.items()):
+        folds = slot["folds"]
+
+        def ratio(numerator, denominator, rows=folds):
+            return _median(
+                [f[numerator]["mae"] / f[denominator]["mae"] for f in rows if f[denominator]["mae"]]
+            )
+
+        entry = {
+            "outcome": outcome,
+            "regions": len(slot["regions"]),
+            "folds": len(folds),
+            "issue_days": sum(f["issue_days"] for f in folds),
+            "fold_errors": slot["fold_errors"],
+            "stratum_errors": slot["stratum_errors"],
+            # Each below 1 means the numerator's 5-day totals erred less.
+            "median_mae_ratio_forecast_baseline": ratio("forecast", "baseline"),
+            "median_mae_ratio_observed_baseline": ratio("observed", "baseline"),
+            "median_mae_ratio_forecast_observed": ratio("forecast", "observed"),
+            "share_folds_forecast_better_than_baseline": _ratio(
+                sum(f["forecast"]["mae"] < f["baseline"]["mae"] for f in folds), len(folds)
+            ),
+            **{
+                f"median_mape_{v}": _median(
+                    [f[v]["mape"] for f in folds if f[v]["mape"] is not None]
+                )
+                for v in VARIANTS
+            },
+            "observed_peaks": sum(f["observed_peaks"] for f in folds),
+        }
+        for variant in VARIANTS:
+            hits = sum(f[variant]["peaks"]["hits"] for f in folds)
+            entry[f"peaks_{variant}"] = {
+                "precision": _ratio(hits, sum(f[variant]["peaks"]["predicted"] for f in folds)),
+                "recall": _ratio(hits, entry["observed_peaks"]),
+                "hits": hits,
+            }
+        entry["by_lead"] = [
+            {
+                "lead_day": k,
+                "median_mae_ratio_forecast_baseline": _median(
+                    [
+                        lead["mae_forecast"] / lead["mae_baseline"]
+                        for f in folds
+                        for lead in f["by_lead"]
+                        if lead["lead_day"] == k and lead["mae_baseline"]
+                    ]
+                ),
+                "median_mae_ratio_forecast_observed": _median(
+                    [
+                        lead["mae_forecast"] / lead["mae_observed"]
+                        for f in folds
+                        for lead in f["by_lead"]
+                        if lead["lead_day"] == k and lead["mae_observed"]
+                    ]
+                ),
+            }
+            for k in range(LEAD_DAYS)
+        ]
+        summary.append(entry)
+    exposure = []
+    keys = sorted(
+        {(e["season"], e["lead_day"]) for r in reports for e in r.get("exposure_error") or []}
+    )
+    for season, lead in keys:
+        rows = [
+            e
+            for r in reports
+            for e in r.get("exposure_error") or []
+            if (e["season"], e["lead_day"]) == (season, lead)
+        ]
+        exposure.append(
+            {
+                "season": season,
+                "lead_day": lead,
+                "regions": len(rows),
+                **{
+                    f"median_{k}": _median([e[k] for e in rows if e.get(k) is not None])
+                    for k in ("mean_observed", "bias", "mae", "correlation")
+                },
+            }
+        )
+    return {
+        "method": (
+            "Per region and outcome (all ages), one fold per year; each issue day predicts"
+            " lead days 0-4 with the archived forecast as future PM2.5 (forecast), with the"
+            " observed PM2.5 (observed, an oracle) and without PM2.5 (baseline). MAE/MAPE of"
+            " each issue's 5-day total; peaks are 5-day totals above the training P90."
+            " Consecutive issues overlap by four days, so one high stretch can count as"
+            " several observed peaks and hits."
+        ),
+        **shared,
+        "regions": sorted(r["region"] for r in reports),
+        "dirty_check_includes_untracked": all(
+            (r.get("software") or {}).get("git_dirty_includes_untracked") is True for r in reports
+        ),
+        "any_region_dirty": any(
+            (r.get("software") or {}).get("git_dirty") is not False for r in reports
+        ),
+        "exposure_error": exposure,
+        "results": summary,
+    }

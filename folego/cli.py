@@ -85,6 +85,12 @@ def main():
         action="store_true",
         help="Só o backtest, com e sem PM2,5; grava <região>-backtest*.json",
     )
+    study.add_argument(
+        "--forecasts",
+        type=Path,
+        help="Com --backtest-only: PM2,5 futuro das previsões arquivadas do CAMS"
+        " (folego forecast-exposure); grava <região>-forecast-backtest*.json",
+    )
     pool = commands.add_parser(
         "pool", help="Meta-análise (DerSimonian-Laird) de relatórios de estudo por região"
     )
@@ -95,6 +101,20 @@ def main():
     )
     skill.add_argument("reports", nargs="+", type=Path)
     skill.add_argument("--output", type=Path, required=True)
+    skill.add_argument(
+        "--forecast", action="store_true", help="Relatórios de study --forecasts (fase 4)"
+    )
+    forecast_exposure = commands.add_parser(
+        "forecast-exposure",
+        help="Previsões arquivadas do CAMS → PM2,5 diário por região e dia de antecedência",
+    )
+    forecast_exposure.add_argument("zips", type=Path, nargs="+")
+    forecast_exposure.add_argument(
+        "--regions", type=Path, default=Path("web/public/data/regions.geojson")
+    )
+    forecast_exposure.add_argument(
+        "--output", type=Path, default=Path("data/marts/exposure/pm25-forecast-daily.parquet")
+    )
     fires = commands.add_parser("fires", help="Focos de queimada FIRMS VIIRS por região e dia")
     fires.add_argument("--start", default="2012-01-20")
     fires.add_argument("--end", default="2025-12-31")
@@ -361,15 +381,23 @@ def main():
             args.exposure,
             None if basis is None else basis.knots,
         )
+        if args.forecasts is not None and (not args.backtest_only or args.exposure != "pm25"):
+            parser.exit(2, "--forecasts exige --backtest-only e a exposição pm25 (CAMS).\n")
         if args.backtest_only:
-            from .evaluate.study import region_backtest
+            from .evaluate.study import region_backtest, region_forecast_backtest
 
-            name = f"{args.region}-backtest{suffix}.json"
+            kind = "backtest" if args.forecasts is None else "forecast-backtest"
+            name = f"{args.region}-{kind}{suffix}.json"
             output = args.output or Path("data/marts/backtests") / name
             try:
-                report = region_backtest(
-                    args.panel, args.region, output, exposure=args.exposure, basis=basis
-                )
+                if args.forecasts is None:
+                    report = region_backtest(
+                        args.panel, args.region, output, exposure=args.exposure, basis=basis
+                    )
+                else:
+                    report = region_forecast_backtest(
+                        args.panel, args.forecasts, args.region, output, basis=basis
+                    )
             except OSError as error:
                 reason = error.strerror or str(error)
                 parser.exit(2, f"Falha de E/S em {repr(error.filename)[:200]}: {reason}\n")
@@ -580,6 +608,30 @@ def main():
             f"{series.height} linhas, {series['health_region_code'].n_unique()} regiões: "
             f"{args.output}"
         )
+    elif args.command == "forecast-exposure":
+        import zipfile
+
+        from .ingest.worldpop import WORLDPOP_ATTRIBUTION, download_worldpop
+        from .transform.cams_forecast import build_forecast_exposure
+
+        os.umask(0o077)
+        try:
+            series = build_forecast_exposure(
+                args.zips,
+                download_worldpop(),
+                args.regions,
+                args.output,
+                attribution=(WORLDPOP_ATTRIBUTION,),
+            )
+        except OSError as error:
+            reason = error.strerror or str(error)
+            parser.exit(2, f"Falha de E/S em {repr(error.filename)[:200]}: {reason}\n")
+        except (ValueError, KeyError, zipfile.BadZipFile) as error:
+            parser.exit(2, f"Previsões inválidas: {repr(str(error))[:300]}\n")
+        print(
+            f"{series.height} linhas, {series['issue_date'].n_unique()} rodadas,"
+            f" {series['health_region_code'].n_unique()} regiões: {args.output}"
+        )
     elif args.command == "meteorology":
         from .ingest.worldpop import WORLDPOP_ATTRIBUTION, download_worldpop
         from .transform.meteorology import build_meteorology
@@ -651,7 +703,12 @@ def main():
                 parser.exit(2, f"Relatório inexistente: {missing[0]}\n")
             os.umask(0o077)
             args.output.parent.mkdir(parents=True, exist_ok=True)
-            report = backtest_report(args.reports, args.output)
+            report = backtest_report(args.reports, args.output, forecast=args.forecast)
+            ratios = (
+                ("median_mae_ratio_forecast_baseline", "median_mae_ratio_forecast_observed")
+                if args.forecast
+                else ("median_mae_ratio",)
+            )
         except OSError as error:
             reason = error.strerror or str(error)
             parser.exit(2, f"Falha de E/S em {repr(error.filename)[:200]}: {reason}\n")
@@ -659,10 +716,7 @@ def main():
             parser.exit(2, f"Relatórios incompatíveis ou inválidos: {repr(str(error))[:300]}\n")
         print(
             json.dumps(
-                [
-                    {k: r[k] for k in ("outcome", "regions", "median_mae_ratio")}
-                    for r in report["results"]
-                ]
+                [{k: r[k] for k in ("outcome", "regions", *ratios)} for r in report["results"]]
             )
         )
         print(f"Exposição usada no backtest: {report['backtest_inputs']}")

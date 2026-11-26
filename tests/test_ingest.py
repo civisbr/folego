@@ -111,3 +111,46 @@ def test_truncated_manifest_counts_as_missing(tmp_path):
     manifest.write_text('{"sha256": "ab')
     assert _recorded_sha256(manifest) is None
     assert _recorded_sha256(tmp_path / "absent.json") is None
+
+
+def test_cams_zip_request_is_saved_as_zip(tmp_path, monkeypatch):
+    import sys
+    import types
+
+    from folego.ingest.cams import retrieve_cams
+
+    class Client:
+        def __init__(self, url):
+            pass
+
+        def retrieve(self, dataset, request, target):
+            Path(target).write_bytes(b"PK")
+
+    monkeypatch.setitem(sys.modules, "cdsapi", types.SimpleNamespace(Client=Client))
+    request = {"variable": ["particulate_matter_2.5um"], "data_format": "netcdf_zip"}
+    target = retrieve_cams("cams-global-atmospheric-composition-forecasts", request, tmp_path)
+    assert target.suffix == ".zip" and target.read_bytes() == b"PK"
+    assert target.with_suffix(".source.json").exists()
+
+
+def test_cached_cams_file_with_wrong_hash_is_refused(tmp_path, monkeypatch):
+    import sys
+    import types
+
+    from folego.ingest.cams import retrieve_cams
+
+    class Client:
+        def __init__(self, url):
+            pass
+
+        def retrieve(self, dataset, request, target):
+            Path(target).write_bytes(b"PK")
+
+    monkeypatch.setitem(sys.modules, "cdsapi", types.SimpleNamespace(Client=Client))
+    request = {"variable": ["particulate_matter_2.5um"], "data_format": "netcdf_zip"}
+    dataset = "cams-global-atmospheric-composition-forecasts"
+    target = retrieve_cams(dataset, request, tmp_path)
+    assert retrieve_cams(dataset, request, tmp_path) == target
+    target.write_bytes(b"swapped")
+    with pytest.raises(ValueError, match="recorded sha256"):
+        retrieve_cams(dataset, request, tmp_path)
